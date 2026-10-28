@@ -689,7 +689,7 @@ function runSearch(){var q=nzs(SQ.trim()),terms=q.split(/\s+/).filter(Boolean),e
   o=(st>0?"…":"")+o+(st+64<ft.length?"…":"");
   h+='<button class="sr" data-k="'+a.k+'" data-w="'+(a.w==null?"":a.w)+'" data-i="'+(a.i==null?"":a.i)+'" data-bi="'+(a.bi==null?"":a.bi)+'" data-ui="'+(a.ui==null?"":a.ui)+'" data-rg="'+(f[2]||0)+'"><b>'+esc(a.tag)+(a.title?"・"+esc(a.title):"")+'</b><span class="sf">'+esc(f[0])+'</span><span class="sn">'+o+'</span></button>'});
  el.innerHTML=h}
-function renderSearch(){$("pg-search").innerHTML='<h2 class="ut">搜尋</h2><input id="sq" class="sin" type="search" placeholder="經文、故事、品名、巴利字詞…" autocomplete="off" value="'+esc(SQ)+'"><div id="sres"></div>';
+function renderSearch(){$("pg-search").innerHTML='<h2 class="ut">搜尋</h2><input id="sq" class="sin" type="search" placeholder="經文、故事、巴利字" autocomplete="off" value="'+esc(SQ)+'"><div id="sres"></div>';
  var el=$("sq");el.oninput=function(){SQ=this.value;runSearch()};runSearch();el.focus()}
 $("pg-search").onclick=function(e){var g=e.target.closest("[data-sg]");if(g){SQ=g.getAttribute("data-sg");$("sq").value=SQ;runSearch();return}
  var t=e.target.closest(".sr");if(!t)return;var k=t.getAttribute("data-k");
@@ -699,7 +699,7 @@ $("pg-search").onclick=function(e){var g=e.target.closest("[data-sg]");if(g){SQ=
 function renderHome(){
  var A=items(),it=A[today()%A.length],u=BU(),tot=0,dd=0,h="";
  BOOKS.forEach(function(b){b.u.forEach(function(x){tot++;if(dcount(x)==4)dd++})});
- h+='<div class="hero"><svg class="enso" viewBox="0 0 120 120" aria-hidden="true"><path d="M60 14 A46 46 0 1 1 28 26" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/></svg><div class="ht">法句經</div><div class="hs">DHAMMAPADA</div><p class="hp">熏習《法句經》，看見起心動念，言行漸趨清明。</p><button class="sbox" data-a="search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>搜尋經文、故事、品名、巴利字詞</button><button class="go" data-a="cont">繼續學習<span>'+BOOKS[cb].n+'・第 '+(cu+1)+' 則　'+u.t+'</span></button></div>';
+ h+='<div class="hero"><svg class="enso" viewBox="0 0 120 120" aria-hidden="true"><path d="M60 14 A46 46 0 1 1 28 26" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/></svg><div class="ht">法句經</div><div class="hs">DHAMMAPADA</div><p class="hp">熏習《法句經》，看見起心動念，言行漸趨清明。</p><button class="sbox" data-a="search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>搜尋經文、故事、巴利字</button><button class="go" data-a="cont">繼續學習<span>'+BOOKS[cb].n+'・第 '+(cu+1)+' 則　'+u.t+'</span></button></div>';
  h+='<div class="sec tap" data-a="today"><div class="lb">今日經文</div><p class="vs">'+it.k.h.join("<br>")+'</p><div class="ref">'+it.b.n+'　第 '+it.k.n+' 偈</div></div>';
  h+='<div class="sec"><div class="lb">各品・已完成 '+dd+'/'+tot+' 則</div>'+ordSeg()+ordIdx().map(function(i){var b=BOOKS[i],d1=0,pc=0;b.u.forEach(function(x){if(dcount(x)==4)d1++;pc+=dcount(x)});pc=Math.round(pc*100/(4*b.u.length));return '<button class="bk" data-bk="'+i+'"><span class="bkn">'+b.n+'<small>'+bkLabel(b)+'</small></span><span class="pb"><i style="width:'+pc+'%"></i></span><span class="bkc">'+d1+'/'+b.u.length+'</span></button>'}).join("")+'</div>';
  h+='<div class="qk"><button data-a="toc">目錄</button><button data-a="gold">金句圖卡</button><button data-a="media">影音</button></div>';
