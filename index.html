@@ -465,10 +465,10 @@ var MAPW={a:[1,0],y:[9,1],z:[10,2]};BOOKS.forEach(function(b){b.wno=MAPW[b.id][0
 var CAT=[[1,"無常品",21,0,""],[2,"教學品",29,0,""],[3,"多聞品",19,0,""],[4,"篤信品",18,0,""],[5,"戒慎品",16,0,""],[6,"惟念品",12,0,""],[7,"慈仁品",18,0,""],[8,"言語品",12,0,""],[9,"雙要品",22,1,"Yamakavagga"],[10,"放逸品",20,2,"Appamādavagga"],[11,"心意品",12,3,"Cittavagga"],[12,"華香品",17,4,"Pupphavagga"],[13,"愚闇品",21,5,"Bālavagga"],[14,"明哲品",17,6,"Paṇḍitavagga"],[15,"羅漢品",10,7,"Arahantavagga"],[16,"述千品",16,8,"Sahassavagga"],[17,"惡行品",22,9,"Pāpavagga"],[18,"刀杖品",14,10,"Daṇḍavagga"],[19,"老耗品",14,11,"Jarāvagga"],[20,"愛身品",13,12,"Attavagga"],[21,"世俗品",14,13,"Lokavagga"],[22,"述佛品",21,14,"Buddhavagga"],[23,"安寧品",14,15,"Sukhavagga"],[24,"好喜品",12,16,"Piyavagga"],[25,"忿怒品",26,17,"Kodhavagga"],[26,"塵垢品",19,18,"Malavagga"],[27,"奉持品",17,19,"Dhammaṭṭhavagga"],[28,"道行品",28,20,"Maggavagga"],[29,"廣衍品",14,21,"Pakiṇṇakavagga"],[30,"地獄品",16,22,"Nirayavagga"],[31,"象喻品",18,23,"Nāgavagga"],[32,"愛欲品",32,24,"Taṇhāvagga"],[33,"利養品",20,0,""],[34,"沙門品",32,25,"Bhikkhuvagga"],[35,"梵志品",40,26,"Brāhmaṇavagga"],[36,"泥洹品",36,0,""],[37,"生死品",18,0,""],[38,"道利品",19,0,""],[39,"吉祥品",19,0,""]].map(function(r){return {w:r[0],n:r[1],c:r[2],p:r[3],pn:r[4]}});
 function ordList(){return SET.ord=="wu"?CAT.slice():CAT.filter(function(r){return r.p}).sort(function(x,y){return x.p-y.p})}
 function bkNo(b){return SET.ord=="wu"?b.wno:b.pno}
-function bkLabel(b){if(SET.ord=="wu")return "《法句經》第 "+b.wno+" 品";return b.pno?"巴利第 "+b.pno+" 品":"《法句經》第 "+b.wno+" 品・巴利本無對應"}
+function bkLabel(b){if(SET.ord=="wu")return "漢傳《法句經》第 "+b.wno+" 品";return b.pno?"巴利第 "+b.pno+" 品":"漢傳第 "+b.wno+" 品・巴利無對應"}
 function bookOf(r){for(var i=0;i<BOOKS.length;i++)if(BOOKS[i].wno==r.w)return i;return -1}
 function ordIdx(){return BOOKS.map(function(b,i){return i}).filter(function(i){return bkNo(BOOKS[i])>0}).sort(function(x,y){return bkNo(BOOKS[x])-bkNo(BOOKS[y])})}
-function ordSeg(){return '<div class="seg"><button data-o="pali" class="'+(SET.ord!="wu"?"on":"")+'">巴利本順序</button><button data-o="wu" class="'+(SET.ord=="wu"?"on":"")+'">《法句經》順序</button></div>'}
+function ordSeg(){return '<div class="seg"><button data-o="pali" class="'+(SET.ord!="wu"?"on":"")+'">巴利</button><button data-o="wu" class="'+(SET.ord=="wu"?"on":"")+'">漢傳</button></div>'}
 function setOrd(o){SET.ord=o;W_("dhp2-set",SET);if(page=="home")renderHome();else if(page=="learn")renderLearn();else if(page=="set")renderSet();if(!$("toc").hidden)openToc()}
 function BU(){return BOOKS[cb].u[cu]}
 function dn(u,i){return !!(ST[u.id]&&ST[u.id]["d"+i])}
@@ -523,7 +523,7 @@ function openToc(){
   h+='<details'+(bi==cb?" open":"")+'><summary><b>'+no+'　'+b.n+'</b>　<span class="mut">'+b.p+'・導讀 '+dd+'/'+b.u.length+'</span></summary><p class="mut sm">'+b.d+'<br>'+b.note+'</p>';
   b.u.forEach(function(u,ui){h+='<button class="ti'+(bi==cb&&ui==cu?" cur":"")+'" data-b="'+bi+'" data-u="'+ui+'"><span class="no">'+(ui+1)+'</span><span class="tt">'+u.t+'</span><span class="pg">'+(dcount(u)==4?"✓":dcount(u)+"/4")+'</span></button>'});
   h+='<button class="ti" data-r="'+r.w+'"><span class="no">文</span><span class="tt">本品全文</span><span class="pg">›</span></button></details>'});
- if(SET.ord!="wu")h+='<p class="mut sm" style="margin-top:14px">《法句經》另有 13 品在巴利本中沒有對應，切換到「《法句經》順序」可看到。全文為維祇難等譯《法句經》。</p>';
+ if(SET.ord!="wu")h+='<p class="mut sm" style="margin-top:14px">《法句經》另有 13 品在巴利本中沒有對應，切換到「漢傳」可看到。全文為維祇難等譯《法句經》。</p>';
  h+='</div>';var el=$("toc");el.innerHTML=h;el.hidden=false;document.body.style.overflow="hidden"}
 $("toc").onclick=function(e){var t=e.target.closest("button");if(!t)return;
  if(t.hasAttribute("data-o")){setOrd(t.getAttribute("data-o"));return}
@@ -587,7 +587,7 @@ function renderSet(){
  var h='<h2 class="ut">設定</h2>';
  h+='<label class="row"><span>色系</span>'+sel("s_pal",Object.keys(PAL).map(function(k){return [k,PAL[k][0]]}),SET.pal)+'</label>';
  h+='<label class="row"><span>明暗</span>'+sel("s_mode",[["auto","跟隨系統"],["light","淺色"],["dark","深色"]],SET.mode)+'</label>';
- h+='<label class="row"><span>品序</span>'+sel("s_ord",[["pali","巴利本順序"],["wu","《法句經》順序"]],SET.ord)+'</label>';
+ h+='<label class="row"><span>品序</span>'+sel("s_ord",[["pali","巴利"],["wu","漢傳"]],SET.ord)+'</label>';
  h+='<label class="row"><span>字體</span>'+sel("s_ff",[["m","明體"],["k","楷體"],["h","黑體"]],SET.ff)+'</label>';
  h+='<label class="row"><span>字級</span><input type="range" id="s_fs" min="14" max="24" step="1" value="'+SET.fs+'"></label>';
  h+='<label class="row"><span>行距</span><input type="range" id="s_lh" min="1.5" max="2.5" step="0.1" value="'+SET.lh+'"></label>';
