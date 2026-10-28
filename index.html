@@ -421,14 +421,14 @@ var FULL={"0":{"n":"法句經序","p":["曇鉢偈者，眾經之要義；曇之�
 var MEDIA=[{id:"UKwpV733alg",t:"《法句經》講法 3-1"},{id:"4IngtIBKFG4",t:"《法句經》講法 3-2"},{id:"fMYoUrWXqpI",t:"《法句經》講法 3-3"}];
 var $=function(i){return document.getElementById(i)};
 var PAL={
- gray:["水墨灰",{bg:"#e2e2df",sf:"#eeeeeb",ink:"#2a2a2a",mut:"#6c6c67",acc:"#454545",line:"#cdcdc9",hi:"rgba(255,255,255,.9)",sh:"rgba(0,0,0,.16)",br:"#8c8c87"},{bg:"#181818",sf:"#242424",ink:"#e8e8e8",mut:"#8e8e8e",acc:"#d0d0d0",line:"#333333",hi:"rgba(255,255,255,.07)",sh:"rgba(0,0,0,.6)",br:"#777777"}],
- blue:["英倫藍",{bg:"#e5e3da",sf:"#f0eee6",ink:"#1c2838",mut:"#666a70",acc:"#2a3f63",line:"#c9c5b8",hi:"rgba(255,255,255,.85)",sh:"rgba(30,40,60,.18)",br:"#9a7b3f"},{bg:"#10161f",sf:"#19212d",ink:"#e4e1d6",mut:"#8b929c",acc:"#9db1cf",line:"#2b3544",hi:"rgba(255,255,255,.06)",sh:"rgba(0,0,0,.65)",br:"#c2a15e"}],
- brown:["茶褐",{bg:"#e8dfd0",sf:"#f3ece0",ink:"#3a2a1d",mut:"#7a644e",acc:"#7a5a3c",line:"#d3c5ae",hi:"rgba(255,255,255,.75)",sh:"rgba(60,40,20,.18)",br:"#a67c52"},{bg:"#1b1510",sf:"#251d16",ink:"#eadfcd",mut:"#a1907a",acc:"#c9a27a",line:"#3a2f25",hi:"rgba(255,255,255,.06)",sh:"rgba(0,0,0,.65)",br:"#c9a27a"}]};
+ gray:["水墨灰",{bg:"#ececea",sf:"#f6f6f4",ink:"#2a2a2a",mut:"#6c6c67",acc:"#454545",line:"#cdcdc9",hi:"rgba(255,255,255,.9)",sh:"rgba(0,0,0,.16)",br:"#8c8c87"},{bg:"#2a2a2a",sf:"#353535",ink:"#e8e8e8",mut:"#8e8e8e",acc:"#d0d0d0",line:"#333333",hi:"rgba(255,255,255,.07)",sh:"rgba(0,0,0,.6)",br:"#777777"}],
+ blue:["英倫藍",{bg:"#ecebe4",sf:"#f6f5ef",ink:"#1c2838",mut:"#666a70",acc:"#2a3f63",line:"#c9c5b8",hi:"rgba(255,255,255,.85)",sh:"rgba(30,40,60,.18)",br:"#9a7b3f"},{bg:"#1e2735",sf:"#283345",ink:"#e4e1d6",mut:"#8b929c",acc:"#9db1cf",line:"#2b3544",hi:"rgba(255,255,255,.06)",sh:"rgba(0,0,0,.65)",br:"#c2a15e"}],
+ brown:["茶褐",{bg:"#f0e8da",sf:"#f8f2e8",ink:"#3a2a1d",mut:"#7a644e",acc:"#7a5a3c",line:"#d3c5ae",hi:"rgba(255,255,255,.75)",sh:"rgba(60,40,20,.18)",br:"#a67c52"},{bg:"#2c241c",sf:"#382e24",ink:"#eadfcd",mut:"#a1907a",acc:"#c9a27a",line:"#3a2f25",hi:"rgba(255,255,255,.06)",sh:"rgba(0,0,0,.65)",br:"#c9a27a"}]};
 var FF={m:'"Noto Serif TC","Songti TC","PMingLiU",serif',k:'"DFKai-SB","Kaiti TC","BiauKai","Noto Serif TC",serif',h:'"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif'};
-var STY0=[{n:"水墨",bg1:"#2e2e2e",bg2:"#151515",wash:"215,215,215",wa:.1,mt:"0,0,0",mta:[.16,.26,.38],ink:"#ecece8",sub:"#9d9d98",seal:"#a8a8a2",ring:"rgba(210,210,210,.22)",vig:.5,nz:"255,255,255",tw:0},
- {n:"英倫",bg1:"#2c3f5f",bg2:"#121b2b",wash:"200,170,105",wa:.14,mt:"6,12,24",mta:[.18,.3,.42],ink:"#efe8d4",sub:"#bba468",seal:"#bba468",ring:"rgba(187,164,104,.34)",vig:.5,nz:"255,255,255",tw:1},
- {n:"茶褐",bg1:"#f6eddd",bg2:"#e0cfb3",wash:"140,105,70",wa:.1,mt:"110,82,55",mta:[.07,.1,.14],ink:"#3b2a1d",sub:"#7d6650",seal:"#7a5a3c",ring:"rgba(140,110,80,.32)",vig:.22,nz:"60,40,20",tw:0}];
-function themeStyle(){var P=PAL[SET.pal][dark()?2:1],d=dark();return {n:"主題",bg1:P.sf,bg2:P.bg,wash:d?"220,220,220":"90,80,70",wa:d?.08:.1,mt:d?"0,0,0":"70,60,50",mta:d?[.14,.24,.34]:[.05,.08,.12],ink:P.ink,sub:P.mut,seal:P.acc,ring:"rgba(128,128,128,.3)",vig:d?.45:.16,nz:d?"255,255,255":"40,30,20",tw:SET.pal=="blue"?1:0}}
+var STY0=[{n:"淡墨",bg1:"#f4f4f2",bg2:"#dcdcd8",wash:"120,120,120",wa:.09,mt:"90,90,90",mta:[.07,.1,.14],ink:"#2e2e2e",sub:"#7c7c77",seal:"#555555",ring:"rgba(110,110,110,.28)",vig:.1,nz:"60,60,60",tw:0},
+ {n:"英倫淡藍",bg1:"#eef1f6",bg2:"#cfd8e6",wash:"60,90,140",wa:.1,mt:"50,75,120",mta:[.07,.1,.14],ink:"#223552",sub:"#8a7640",seal:"#2f4a78",ring:"rgba(138,118,64,.32)",vig:.1,nz:"40,60,100",tw:1},
+ {n:"淡茶",bg1:"#faf3e6",bg2:"#ead9bd",wash:"150,115,75",wa:.1,mt:"120,90,60",mta:[.06,.09,.12],ink:"#42301f",sub:"#86705a",seal:"#85623f",ring:"rgba(150,120,85,.3)",vig:.1,nz:"70,50,30",tw:0}];
+function themeStyle(){var P=PAL[SET.pal][dark()?2:1],d=dark();return {n:"主題",bg1:P.sf,bg2:P.bg,wash:d?"220,220,220":"90,80,70",wa:d?.08:.1,mt:d?"0,0,0":"70,60,50",mta:d?[.1,.16,.22]:[.05,.08,.12],ink:P.ink,sub:P.mut,seal:P.acc,ring:"rgba(128,128,128,.3)",vig:d?.25:.1,nz:d?"255,255,255":"40,30,20",tw:SET.pal=="blue"?1:0}}
 function styList(){return [themeStyle()].concat(STY0)}
 var FC='"Noto Serif TC","Songti TC","PMingLiU","Noto Serif CJK TC",serif';
 var RN=["讀","詞","義","行"],RT=["讀懂","字詞與巴利","義理連結","實踐與回顧"];
