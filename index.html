@@ -49,7 +49,15 @@ textarea{width:100%;min-height:90px;font-size:.9em;background:var(--bg);border:1
 .acts,.qk{display:flex;gap:10px;justify-content:center;margin:10px 0}
 .row{display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--line);padding:10px 0;font-size:.92em}.row span{min-width:3em;color:var(--mut)}.row select{flex:1;background:var(--sf);border:1px solid var(--line);border-radius:8px;padding:5px;box-shadow:0 2px 5px var(--sh)}.row input{flex:1}
 .help{margin-top:18px;border-top:1px solid var(--line);padding-top:10px;font-size:.88em}.help summary{cursor:pointer}.help p{font-size:.95em;margin:8px 0}
-.gl{margin-top:18px;border-bottom:1px solid var(--line);padding-bottom:4px}
+.sgl{margin-top:18px;border-bottom:1px solid var(--line);padding-bottom:4px}
+.sbox{display:flex;align-items:center;gap:8px;width:100%;margin:12px 0;padding:10px 14px;border:1px solid var(--line);border-radius:12px;background:linear-gradient(145deg,var(--hi),var(--sf));color:var(--mut);font:inherit;font-size:.9em;box-shadow:0 3px 8px var(--sh);text-align:left}
+.sin{width:100%;box-sizing:border-box;padding:10px 12px;margin:6px 0 4px;border:1px solid var(--line);border-radius:12px;background:var(--sf);color:inherit;font:inherit}
+.sr{display:block;width:100%;text-align:left;border:none;border-bottom:1px solid var(--line);background:none;padding:10px 2px;color:inherit;font:inherit}
+.sr b{font-size:.85em}.sr .sf{margin-left:8px;font-size:.72em;color:var(--mut);border:1px solid var(--line);border-radius:8px;padding:0 6px}.sr .sn{display:block;margin-top:4px;font-size:.9em;line-height:1.7;color:var(--mut)}
+mark{background:rgba(190,160,80,.35);color:inherit;border-radius:3px}.hit{background:rgba(190,160,80,.18);border-radius:8px}
+.rc{font-size:.8em;color:var(--mut);margin:8px 0}.sgs{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}.sgs button{border:1px solid var(--line);background:linear-gradient(145deg,var(--hi),var(--sf));border-radius:16px;padding:4px 14px;font-size:.82em;color:var(--mut)}
+.hw{display:block;text-align:center}.hrt{border:none;background:none;color:var(--mut);font-size:1.15em;padding:2px 10px}.hrt.on{color:var(--acc)}
+.acts .hrt.hl{border:1px solid var(--line);background:linear-gradient(145deg,var(--hi),var(--sf));border-radius:18px;padding:4px 16px;font-size:.82em;box-shadow:0 3px 7px var(--sh)}
 .src{font-size:.72em;color:var(--mut);margin-top:26px;line-height:1.8}
 #tb{position:fixed;left:0;right:0;bottom:0;display:flex;background:var(--sf);border-top:1px solid var(--line);box-shadow:0 -6px 16px -8px var(--sh);padding-bottom:env(safe-area-inset-bottom,0);z-index:10}
 #tb button{flex:1;background:none;border:none;padding:12px 0;font-size:.8em;color:var(--mut);letter-spacing:.08em}#tb .on{color:var(--acc);font-weight:700;text-shadow:0 1px 0 var(--hi)}
@@ -98,6 +106,7 @@ html[data-pal=blue] .hs{color:var(--br)}
 <section id="pg-media" hidden></section>
 <section id="pg-set" hidden></section>
 <section id="pg-read" hidden></section>
+<section id="pg-search" hidden></section>
 </div>
 <nav id="tb"><button data-p="home" class="on">首頁</button><button data-p="learn">學習</button><button data-p="today">今日</button><button data-p="gold">金句</button><button data-p="media">影音</button><button data-p="set">設定</button></nav>
 <div class="toc" id="toc" hidden></div>
@@ -481,7 +490,7 @@ function dn(u,i){return !!(ST[u.id]&&ST[u.id]["d"+i])}
 function dcount(u){var n=0;for(var i=0;i<4;i++)if(dn(u,i))n++;return n}
 function sec(l,b){return '<div class="sec"><div class="lb">'+l+'</div>'+b+'</div>'}
 function flat(){var a=[];ordIdx().forEach(function(bi){BOOKS[bi].u.forEach(function(u,ui){a.push([bi,ui])})});return a}
-function go(bi,ui){cb=bi;cu=ui;rd=0;ST.last=[bi,ui];W_("dhp2",ST);show("learn")}
+function go(bi,ui,r){cb=bi;cu=ui;rd=r||0;ST.last=[bi,ui];W_("dhp2",ST);show("learn")}
 function step(d){var f=flat(),i=-1;f.forEach(function(p,k){if(p[0]==cb&&p[1]==cu)i=k});if(i<0){go(f[0][0],f[0][1]);return}i+=d;if(i<0||i>=f.length)return;go(f[i][0],f[i][1])}
 /* 學習 */
 function renderLearn(){
@@ -492,7 +501,7 @@ function renderLearn(){
  h+='<div class="rg">'+RN.map(function(n,i){return '<button class="'+(i==rd?"on ":"")+(dn(u,i)?"dn":"")+'" data-r="'+i+'" aria-label="'+RT[i]+'">'+n+'</button>'}).join("")+'</div><div class="rn">'+RT[rd]+'</div>';
  if(rd==0){
   h+=sec(u.sl||"故事",'<p>'+u.s+'</p>');h+=storyBox(b.wno);
-  u.k.forEach(function(k){h+=sec("原文・偈 "+k.n,(k.h?'<p class="vs">'+k.h.join("<br>")+'</p>':'<p class="hn">'+k.hn+'</p>')+(k.hm?'<p class="hn">'+k.hm+'</p>':'')+'<p>'+k.d+'</p>')});
+  u.k.forEach(function(k){h+=sec("原文・偈 "+k.n,(k.h?'<p class="vs">'+k.h.join("<br>")+'</p><div class="hw">'+heart(k.h.join(""),b.n+(/^\d/.test(k.n)?" 第"+k.n+"偈":" "+k.n+"偈"))+'</div>':'<p class="hn">'+k.hn+'</p>')+(k.hm?'<p class="hn">'+k.hm+'</p>':'')+'<p>'+k.d+'</p>')});
   h+=sec("想一想",'<p>'+u.q.q+'</p>'+u.q.o.map(function(o,i){return '<button class="opt" data-q="'+i+'">'+o[0]+'</button><div class="fb" id="fb'+i+'"></div>'}).join(""));
  }else if(rd==1){
   u.k.forEach(function(k){h+=sec((k.pl||"巴利原文")+"・偈 "+k.n,k.p?'<p class="pali">'+k.p.join("<br>")+'</p>':'<p class="hn">'+(k.pn||"")+'</p>')});
@@ -568,12 +577,16 @@ function renderToday(){
  cvD=makeCard(lb,it.k.h.join(""));
  var h='<h2 class="ut">今日經文</h2><div class="ref">'+t.getFullYear()+" 年 "+(t.getMonth()+1)+" 月 "+t.getDate()+" 日・"+lb+'</div>';
  h+=sec("原文",'<p class="vs">'+it.k.h.join("<br>")+'</p>')+sec("白話",'<p>'+it.k.d+'</p>')+sec("巴利",'<p class="pali sm">'+it.k.p.join("<br>")+'</p>');
- h+=styles("st1")+'<img class="cimg" id="cardimg" alt="今日經文圖卡" src="'+cvD.toDataURL("image/png")+'"><div class="acts"><button data-a="save">儲存圖卡</button><button data-a="share">分享</button><button data-a="other">換一句</button></div><button class="lnk" data-a="story">讀這一則的故事 →</button>';
+ h+=styles("st1")+'<img class="cimg" id="cardimg" alt="今日經文圖卡" src="'+cvD.toDataURL("image/png")+'"><div class="acts"><button data-a="save">儲存圖卡</button><button data-a="share">分享</button><button data-a="other">換一句</button>'+heart(it.k.h.join(""),lb,1)+'</div><button class="lnk" data-a="story">讀這一則的故事 →</button>';
  $("pg-today").innerHTML=h;window._it=it}
+function GL(){return gt=="f"?FAV.map(function(f){return [f.s,f.t]}):DAILY}
 function renderGold(){
- var g=DAILY[gi];cvG=makeCard(g[0],g[1]);
- var h='<h2 class="ut">金句圖卡</h2><div class="ref">選一句，再選風格，即可下載</div><div class="gl" id="gl">'+DAILY.map(function(d,i){return '<button class="'+(i==gi?"on":"")+'" data-g="'+i+'">'+d[1].split("，")[0]+'</button>'}).join("")+'</div>';
- h+=styles("st2")+'<img class="cimg" id="goldimg" alt="金句圖卡" src="'+cvG.toDataURL("image/png")+'"><div class="acts"><button data-a="gsave">儲存圖卡</button><button data-a="gshare">分享</button></div><p class="ref">按「儲存圖卡」會放大預覽，長按圖片即可存入相簿；若手機無法下載，這個方法一定可以。</p>';
+ var L=GL();if(gi>=L.length)gi=Math.max(0,L.length-1);
+ var h='<h2 class="ut">金句圖卡</h2><div class="seg"><button data-gt="d" class="'+(gt=="d"?"on":"")+'">精選</button><button data-gt="f" class="'+(gt=="f"?"on":"")+'">我的收藏 '+FAV.length+'</button></div>';
+ if(!L.length){h+='<p class="ref">還沒有收藏的句子。<br>在閱讀、學習、今日經文或精選金句按 ♡，就會收到這裡。</p>';$("pg-gold").innerHTML=h;return}
+ var g=L[gi];cvG=makeCard(g[0],g[1]);
+ h+='<div class="ref">選一句，再選風格，即可下載</div><div class="gl" id="gl">'+L.map(function(d,i){return '<button class="'+(i==gi?"on":"")+'" data-g="'+i+'">'+d[1].split(/[，。；、？！]/)[0]+'</button>'}).join("")+'</div>';
+ h+=styles("st2")+'<img class="cimg" id="goldimg" alt="金句圖卡" src="'+cvG.toDataURL("image/png")+'"><div class="acts"><button data-a="gsave">儲存圖卡</button><button data-a="gshare">分享</button>'+heart(g[1],g[0],1)+'</div><p class="ref">按「儲存圖卡」會放大預覽，長按圖片即可存入相簿；若手機無法下載，這個方法一定可以。</p>';
  $("pg-gold").innerHTML=h}
 function dl(cv){cv.toBlob(function(b){if(!b)return;var u=URL.createObjectURL(b),el=document.createElement("a");el.href=u;el.download="法句經_"+new Date().toISOString().slice(0,10)+".png";document.body.appendChild(el);el.click();el.remove()},"image/png")}
 function shareCv(cv){cv.toBlob(function(b){try{var f=new File([b],"法句經.png",{type:"image/png"});if(navigator.canShare&&navigator.canShare({files:[f]})){navigator.share({files:[f],title:"法句經"}).catch(function(){});return}}catch(e){}openOv(cv)},"image/png")}
@@ -581,6 +594,7 @@ var curCv=null;
 function openOv(cv){curCv=cv;$("ovimg").src=cv.toDataURL("image/png");$("ov").hidden=false}
 $("ov").onclick=function(e){var t=e.target.closest("button"),a=t&&t.getAttribute("data-a");if(a=="ovdl")dl(curCv);else if(a=="ovsh")shareCv(curCv);else if(a=="ovx"||e.target===$("ov"))$("ov").hidden=true};
 function cardClick(e){var t=e.target.closest("button");if(!t)return;
+ if(t.hasAttribute("data-gt")){gt=t.getAttribute("data-gt");gi=0;renderGold();return}
  if(t.hasAttribute("data-s")){SET.cs=+t.getAttribute("data-s");W_("dhp2-set",SET);renderToday();renderGold();return}
  if(t.hasAttribute("data-g")){gi=+t.getAttribute("data-g");renderGold();return}
  var a=t.getAttribute("data-a");
@@ -591,18 +605,18 @@ $("pg-today").onclick=cardClick;$("pg-gold").onclick=cardClick;
 function renderSet(){
  function sel(id,opts,v){return '<select id="'+id+'">'+opts.map(function(o){return '<option value="'+o[0]+'"'+(o[0]==v?" selected":"")+'>'+o[1]+'</option>'}).join("")+'</select>'}
  var h='<h2 class="ut">設定</h2>';
- h+='<div class="lb gl">外觀</div>';
+ h+='<div class="lb sgl">外觀</div>';
  h+='<label class="row"><span>色系</span>'+sel("s_pal",Object.keys(PAL).map(function(k){return [k,PAL[k][0]]}),SET.pal)+'</label>';
  h+='<label class="row"><span>明暗</span>'+sel("s_mode",[["auto","跟隨系統"],["light","淺色"],["dark","深色"]],SET.mode)+'</label>';
- h+='<div class="lb gl">文字</div>';
+ h+='<div class="lb sgl">文字</div>';
  h+='<label class="row"><span>字體</span>'+sel("s_ff",[["m","明體"],["k","楷體"],["h","黑體"]],SET.ff)+'</label>';
  h+='<label class="row"><span>字級</span><input type="range" id="s_fs" min="14" max="24" step="1" value="'+SET.fs+'"></label>';
  h+='<label class="row"><span>行距</span><input type="range" id="s_lh" min="1.5" max="2.5" step="0.1" value="'+SET.lh+'"></label>';
  h+='<label class="row"><span>段距</span><input type="range" id="s_gap" min="6" max="28" step="2" value="'+SET.gap+'"></label>';
- h+='<div class="lb gl">目錄</div>';
+ h+='<div class="lb sgl">目錄</div>';
  h+='<label class="row"><span>品序</span>'+sel("s_ord",[["pali","巴利"],["wu","漢傳"]],SET.ord)+'</label>';
- h+='<div class="lb gl">說明</div>';
- h+='<details class="help"><summary>怎麼使用</summary><p><b>用途</b>　用故事對照偈頌，熏習《法句經》：每日讀一則、反覆回顧，慢慢把經文用在生活裡。</p><p><b>設計邏輯</b>　一則故事配一首偈，逐步螺旋，加深加廣。同一則可以回來多次，每次多一圈。</p><p><b>四圈</b>　讀（故事、原文、白話）、詞（字詞與巴利對照）、義（義理連結）、行（實踐與回顧）。點上方圓圈切換，不必依序。</p><p><b>各頁</b>　目錄裡每一品都可讀全文；目前有導讀（四圈）的是無常品、雙要品、放逸品、心意品、華香品、愚闇品，其他品先提供全文，之後會一批一批補上。「今日」依日期顯示當日經文與圖卡，「金句」可挑十句選風格下載，「影音」收錄《法句經》講法。</p><p><b>資料</b>　進度與心得只存在這支手機的瀏覽器。</p></details>';
+ h+='<div class="lb sgl">說明</div>';
+ h+='<details class="help"><summary>怎麼使用</summary><p><b>用途</b>　用故事對照偈頌，熏習《法句經》：每日讀一則、反覆回顧，慢慢把經文用在生活裡。</p><p><b>設計邏輯</b>　一則故事配一首偈，逐步螺旋，加深加廣。同一則可以回來多次，每次多一圈。</p><p><b>四圈</b>　讀（故事、原文、白話）、詞（字詞與巴利對照）、義（義理連結）、行（實踐與回顧）。點上方圓圈切換，不必依序。</p><p><b>各頁</b>　目錄裡每一品都可讀全文；目前有導讀（四圈）的是無常品、雙要品、放逸品、心意品、華香品、愚闇品，其他品先提供全文，之後會一批一批補上。「今日」依日期顯示當日經文與圖卡，「金句」可挑精選十句，或你按 ♡ 收藏的句子，選風格下載；「影音」收錄《法句經》講法。</p><p><b>搜尋與收藏</b>　首頁的搜尋欄可找經文、故事、品名與巴利字詞（不必打符號）。在閱讀、學習、今日、金句頁，句子旁的 ♡ 一按，就收進「金句 → 我的收藏」。收藏只存在這支手機的瀏覽器。</p><p><b>資料</b>　進度與心得只存在這支手機的瀏覽器。</p></details>';
  h+='<details class="help"><summary>關於這部經文</summary><p><b>本工具的全文</b>　《法句經》，大正藏第 210 號，東吳天竺沙門維祇難等譯（署名暫定，見下一欄），二卷、39 品、758 偈。這是古代的漢譯本，不是現代人重新翻譯的作品；經文依 CBETA 電子佛典集成。「白話」是編者自己的意譯。</p><p><b>四種漢譯</b>　《法句經》只有短偈；《法句譬喻經》（西晉法炬、法立譯，四卷、39 品、284 偈）、《出曜經》（姚秦竺佛念譯，三十卷、34 品、934 偈）、《法集要頌經》（北宋天息災譯，四卷、33 品、933 偈）都是在譬喻中夾短偈。本工具的全文是第一種。依法鼓講堂課程投影片。</p></details>';
  h+='<details class="help"><summary>《法句經》的譯者署名（暫定，尚待考訂）</summary>'
  +'<p><b>【暫定，尚未確定】</b>大正藏署名為「東吳天竺沙門維祇難等譯」，但譯者其實有不同說法，這裡把資料並列，之後考訂有結果再修正。</p>'
@@ -620,9 +634,10 @@ function renderRead(){
  var d=FULL[readW],h="",prev=readW>0?readW-1:-1,next=readW<39?readW+1:-1;
  if(readW==0){h+='<h2 class="ut">法句經序</h2><div class="ref">《法句經》（大正藏第 210 號，維祇難等譯）</div>'+d.p.map(function(p){return '<p class="pre">'+p+'</p>'}).join("")}
  else{var b=null;BOOKS.forEach(function(x){if(x.wno==readW)b=x});
-  h+='<h2 class="ut">'+d.n+'</h2><div class="ref">《法句經》第 '+readW+' 品・'+(d.t.length)+' 段'+(b?'・<a href="#" data-a="gostudy">有導讀</a>':'')+'</div><p class="sm" style="text-align:center">'+d.s+'</p>'+d.t.map(function(t){return '<p class="rs">'+t.split("|").join("<br>")+'</p>'}).join("")+storyBox(readW)}
+  h+='<h2 class="ut">'+d.n+'</h2><div class="ref">《法句經》第 '+readW+' 品・'+(d.t.length)+' 段'+(b?'・<a href="#" data-a="gostudy">有導讀</a>':'')+'</div><p class="sm" style="text-align:center">'+d.s+'</p>'+d.t.map(function(t,i){var tx=t.split("|").join("");return '<p class="rs" id="rs'+i+'">'+t.split("|").join("<br>")+'<br><span class="hw">'+heart(tx,d.n+" 第"+(i+1)+"段")+'</span></p>'}).join("")+storyBox(readW)}
  h+='<div class="rnav"><button data-a="rprev"'+(prev<0?" disabled":"")+'>‹ '+(prev>=0?FULL[prev].n:"")+'</button><button data-a="rtoc">目錄</button><button data-a="rnext"'+(next<0?" disabled":"")+'>'+(next>=0?FULL[next].n:"")+' ›</button></div><p class="src" style="text-align:center">經文依 CBETA 電子佛典集成；分段為閱讀便利所設。</p>';
- $("pg-read").innerHTML=h}
+ $("pg-read").innerHTML=h;
+ if(window._seg!=null){var sg=window._seg;window._seg=null;setTimeout(function(){var el=$("rs"+sg);if(el){el.classList.add("hit");el.scrollIntoView({block:"center"})}},60)}}
 $("pg-read").onclick=function(e){var t=e.target.closest("[data-a]");if(!t)return;var a=t.getAttribute("data-a");
  if(a=="gostudy"){e.preventDefault();BOOKS.forEach(function(x,i){if(x.wno==readW)go(i,0)});return}
  if(a=="rprev"&&readW>0){readW--;renderRead();window.scrollTo(0,0)}else if(a=="rnext"&&readW<39){readW++;renderRead();window.scrollTo(0,0)}else if(a=="rtoc"){openToc()}};
@@ -634,11 +649,55 @@ function renderMedia(){
  $("pg-media").innerHTML=h}
 $("pg-media").onclick=function(e){var v=e.target.closest(".vp");if(!v||v.querySelector("iframe"))return;var m=MEDIA[+v.getAttribute("data-v")];
  v.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+m.id+'?autoplay=1&rel=0&playsinline=1" title="'+m.t+'" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe>'};
+/* 收藏 */
+var FAV=R_("dhp2-fav",[]),gt="d",SQ="",SIDX=null;
+function esc(x){return String(x).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
+function favHas(t){return FAV.some(function(f){return f.t==t})}
+function heart(t,s,l){var on=favHas(t);return '<button class="hrt'+(l?" hl":"")+(on?" on":"")+'" data-ft="'+esc(t)+'" data-fs="'+esc(s)+'" aria-label="收藏這一句">'+(on?"♥":"♡")+"︎"+(l?" 收藏":"")+'</button>'}
+document.addEventListener("click",function(e){var h=e.target.closest&&e.target.closest(".hrt");if(!h)return;e.stopPropagation();e.preventDefault();
+ var t=h.getAttribute("data-ft"),s=h.getAttribute("data-fs"),i=-1;FAV.forEach(function(f,k){if(f.t==t)i=k});
+ if(i>=0)FAV.splice(i,1);else FAV.push({t:t,s:s});W_("dhp2-fav",FAV);
+ if(page=="gold"&&gt=="f")renderGold();
+ else [].forEach.call(document.querySelectorAll(".hrt"),function(b){if(b.getAttribute("data-ft")==t){var on=i<0;b.classList.toggle("on",on);b.textContent=(on?"♥":"♡")+"︎"+(b.classList.contains("hl")?" 收藏":"")}})},true);
+/* 搜尋 */
+function nzs(x){var o="";for(var i=0;i<x.length;i++){var c=x.charAt(i).toLowerCase();o+=(c.normalize?c.normalize("NFD").charAt(0):c)}return o}
+function buildIdx(){var A=[];
+ CAT.forEach(function(r){A.push({k:"c",w:r.w,tag:"品名",title:"《法句經》第 "+r.w+" 品・"+r.n,f:[["品名",r.n+(r.pn?"　"+r.pn:"")]]})});
+ BOOKS.forEach(function(b,bi){b.u.forEach(function(u,ui){var f=[["標題",u.t],["故事",u.s]];
+  u.k.forEach(function(k){if(k.h)f.push(["原文",k.h.join("")]);if(k.d)f.push(["白話",k.d]);if(k.p)f.push(["巴利",k.p.join(" "),1])});
+  f.push(["字詞",u.g.map(function(x){return x.join(" ")}).join("；")+"；"+u.w.map(function(x){return x.join(" ")}).join("；"),1]);
+  u.i.forEach(function(x){f.push(["義理",x[0]+"　"+x[1],2])});f.push(["實踐",u.x,3]);
+  A.push({k:"u",bi:bi,ui:ui,tag:b.n+"・導讀",title:u.t,f:f})})});
+ FULL[0].p.forEach(function(t){A.push({k:"r",w:0,i:-1,tag:"法句經序",title:"",f:[["序",t]]})});
+ for(var w=1;w<=39;w++)FULL[w].t.forEach(function(t,i){A.push({k:"r",w:w,i:i,tag:FULL[w].n+"・全文",title:"",f:[["原文",t.split("|").join("")]]})});
+ A.forEach(function(a){a.n=a.f.map(function(x){return nzs(x[1])})});return A}
+function runSearch(){var q=nzs(SQ.trim()),terms=q.split(/\s+/).filter(Boolean),el=$("sres");
+ if(!terms.length){el.innerHTML='<p class="ref">可以搜尋任何字詞：經文、故事、品名，也可以輸入巴利字（例如 mano、cittaṃ，不必打符號）。</p><div class="sgs">'+["少水魚","不放逸","諸惡莫作","怨","mano","蓮花"].map(function(x){return '<button data-sg="'+x+'">'+x+'</button>'}).join("")+'</div>';return}
+ if(!SIDX)SIDX=buildIdx();var R=[];
+ SIDX.forEach(function(a){var all=a.n.join("\n");for(var i=0;i<terms.length;i++)if(all.indexOf(terms[i])<0)return;
+  var fi=0;for(var j=0;j<a.n.length;j++){if(terms.some(function(t){return a.n[j].indexOf(t)>=0})){fi=j;break}}
+  R.push({a:a,fi:fi,sc:(a.k=="c"?0:a.k=="u"?1:2)})});
+ R.sort(function(x,y){return x.sc-y.sc});var tot=R.length;R=R.slice(0,60);
+ var h='<div class="rc">共 '+tot+' 筆'+(tot>60?'，先顯示前 60 筆':'')+'</div>';
+ R.forEach(function(r){var a=r.a,f=a.f[r.fi],ft=f[1],nf=a.n[r.fi],pos=nf.length;terms.forEach(function(t){var p=nf.indexOf(t);if(p>=0&&p<pos)pos=p});
+  var st=Math.max(0,pos-14),sn=ft.substr(st,64),ns=nf.substr(st,64),mk=[];
+  terms.forEach(function(t){var p=-1;while((p=ns.indexOf(t,p+1))>=0)mk.push([p,p+t.length])});
+  var o="",c=0;mk.sort(function(x,y){return x[0]-y[0]});mk.forEach(function(m){if(m[0]<c)return;o+=esc(sn.slice(c,m[0]))+"<mark>"+esc(sn.slice(m[0],m[1]))+"</mark>";c=m[1]});o+=esc(sn.slice(c));
+  o=(st>0?"…":"")+o+(st+64<ft.length?"…":"");
+  h+='<button class="sr" data-k="'+a.k+'" data-w="'+(a.w==null?"":a.w)+'" data-i="'+(a.i==null?"":a.i)+'" data-bi="'+(a.bi==null?"":a.bi)+'" data-ui="'+(a.ui==null?"":a.ui)+'" data-rg="'+(f[2]||0)+'"><b>'+esc(a.tag)+(a.title?"・"+esc(a.title):"")+'</b><span class="sf">'+esc(f[0])+'</span><span class="sn">'+o+'</span></button>'});
+ el.innerHTML=h}
+function renderSearch(){$("pg-search").innerHTML='<h2 class="ut">搜尋</h2><input id="sq" class="sin" type="search" placeholder="經文、故事、品名、巴利字詞…" autocomplete="off" value="'+esc(SQ)+'"><div id="sres"></div>';
+ var el=$("sq");el.oninput=function(){SQ=this.value;runSearch()};runSearch();el.focus()}
+$("pg-search").onclick=function(e){var g=e.target.closest("[data-sg]");if(g){SQ=g.getAttribute("data-sg");$("sq").value=SQ;runSearch();return}
+ var t=e.target.closest(".sr");if(!t)return;var k=t.getAttribute("data-k");
+ if(k=="u"){var bi=+t.getAttribute("data-bi"),ui=+t.getAttribute("data-ui");cb=bi;cu=ui;rd=+t.getAttribute("data-rg");ST.last=[bi,ui];W_("dhp2",ST);show("learn")}
+ else{readW=+t.getAttribute("data-w");var i=t.getAttribute("data-i");window._seg=(i===""||+i<0)?null:+i;show("read")}};
 /* 首頁 */
 function renderHome(){
  var A=items(),it=A[today()%A.length],u=BU(),tot=0,dd=0,h="";
  BOOKS.forEach(function(b){b.u.forEach(function(x){tot++;if(dcount(x)==4)dd++})});
  h+='<div class="hero"><svg class="enso" viewBox="0 0 120 120" aria-hidden="true"><path d="M60 14 A46 46 0 1 1 28 26" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/></svg><div class="ht">法句經</div><div class="hs">DHAMMAPADA</div><p class="hp">熏習《法句經》，看見起心動念，言行漸趨清明。</p><button class="go" data-a="cont">繼續學習<span>'+BOOKS[cb].n+'・第 '+(cu+1)+' 則　'+u.t+'</span></button></div>';
+ h+='<button class="sbox" data-a="search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>搜尋經文、故事、品名、巴利字詞</button>';
  h+='<div class="sec tap" data-a="today"><div class="lb">今日經文</div><p class="vs">'+it.k.h.join("<br>")+'</p><div class="ref">'+it.b.n+'　第 '+it.k.n+' 偈</div></div>';
  h+='<div class="sec"><div class="lb">各品・已完成 '+dd+'/'+tot+' 則</div>'+ordSeg()+ordIdx().map(function(i){var b=BOOKS[i],d1=0,pc=0;b.u.forEach(function(x){if(dcount(x)==4)d1++;pc+=dcount(x)});pc=Math.round(pc*100/(4*b.u.length));return '<button class="bk" data-bk="'+i+'"><span class="bkn">'+b.n+'<small>'+bkLabel(b)+'</small></span><span class="pb"><i style="width:'+pc+'%"></i></span><span class="bkc">'+d1+'/'+b.u.length+'</span></button>'}).join("")+'</div>';
  h+='<div class="qk"><button data-a="toc">目錄</button><button data-a="gold">金句圖卡</button><button data-a="media">影音</button></div>';
@@ -647,10 +706,10 @@ $("pg-home").onclick=function(e){var t=e.target.closest("[data-a],[data-bk],[dat
  if(t.hasAttribute("data-o")){setOrd(t.getAttribute("data-o"));return}
  if(t.hasAttribute("data-bk")){var bi=+t.getAttribute("data-bk"),b=BOOKS[bi],k=0;for(var i=0;i<b.u.length;i++){if(dcount(b.u[i])<4){k=i;break}}go(bi,k);return}
  var a=t.getAttribute("data-a");
- if(a=="cont")show("learn");else if(a=="today")show("today");else if(a=="toc"){show("learn");openToc()}else if(a=="gold")show("gold");else if(a=="media")show("media")};
+ if(a=="cont")show("learn");else if(a=="today")show("today");else if(a=="toc"){show("learn");openToc()}else if(a=="gold")show("gold");else if(a=="media")show("media");else if(a=="search")show("search")};
 /* 頁面 */
-function show(p){page=p;["home","learn","today","gold","media","set","read"].forEach(function(k){$("pg-"+k).hidden=(k!=p);var b=document.querySelector('[data-p="'+k+'"]');if(b)b.className=((k==p||(p=="read"&&k=="learn"))?"on":"")});
- if(p=="home")renderHome();else if(p=="learn")renderLearn();else if(p=="today")renderToday();else if(p=="gold")renderGold();else if(p=="media")renderMedia();else if(p=="read")renderRead();else renderSet();window.scrollTo(0,0)}
+function show(p){page=p;["home","learn","today","gold","media","set","read","search"].forEach(function(k){$("pg-"+k).hidden=(k!=p);var b=document.querySelector('[data-p="'+k+'"]');if(b)b.className=((k==p||(p=="read"&&k=="learn"))?"on":"")});
+ if(p=="home")renderHome();else if(p=="learn")renderLearn();else if(p=="today")renderToday();else if(p=="gold")renderGold();else if(p=="media")renderMedia();else if(p=="read")renderRead();else if(p=="search")renderSearch();else renderSet();window.scrollTo(0,0)}
 [].forEach.call(document.querySelectorAll("#tb button"),function(b){b.onclick=function(){show(b.getAttribute("data-p"))}});
 if(ST.last&&BOOKS[ST.last[0]]&&BOOKS[ST.last[0]].u[ST.last[1]]){cb=ST.last[0];cu=ST.last[1]}else{BOOKS.forEach(function(b,i){if(b.wno==1)cb=i})}
 apply();show("home");
