@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>法句經・故事與偈</title>
+<style>
+:root{--bg:#e2e2df;--sf:#eeeeeb;--ink:#2a2a2a;--mut:#6c6c67;--acc:#454545;--line:#cdcdc9;--hi:rgba(255,255,255,.9);--sh:rgba(0,0,0,.16);--br:#8c8c87;--fs:17px;--lh:1.9;--gap:14px;--ff:"Noto Serif TC","Songti TC","PMingLiU",serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);background-image:linear-gradient(180deg,var(--sf) 0,var(--bg) 220px);background-repeat:no-repeat;color:var(--ink);font:var(--fs)/var(--lh) var(--ff);padding:env(safe-area-inset-top,0) 0 calc(66px + env(safe-area-inset-bottom,0))}
+html[data-pal=blue] body{background-image:linear-gradient(180deg,var(--sf) 0,var(--bg) 220px),repeating-linear-gradient(45deg,rgba(30,50,90,.035) 0 5px,transparent 5px 10px),repeating-linear-gradient(-45deg,rgba(30,50,90,.035) 0 5px,transparent 5px 10px)}
+button,select,input,textarea{font-family:inherit;color:inherit}
+button{cursor:pointer;-webkit-tap-highlight-color:transparent}
+.w{max-width:560px;margin:0 auto;padding:12px 18px 30px}
+.bar{display:flex;align-items:center;justify-content:space-between;padding-bottom:8px}
+.bar button{background:none;border:none;font-size:28px;color:var(--mut);padding:0 12px;line-height:1}.bar button:disabled{opacity:.22}
+.bar .mid{flex:1;font-size:15px;line-height:1.5;text-align:center}.bn{display:block;letter-spacing:.25em;color:var(--ink)}.un{display:block;font-size:12px;color:var(--mut)}
+.ut{font-size:1.35em;letter-spacing:.18em;text-align:center;margin:18px 0 2px;font-weight:600;text-shadow:0 1px 0 var(--hi)}
+.ref{text-align:center;color:var(--mut);font-size:13px;margin-bottom:6px}
+.rg{display:flex;justify-content:center;gap:16px;margin:16px 0 6px}
+.rg button{width:48px;height:48px;border-radius:50%;border:1px solid var(--line);background:linear-gradient(145deg,var(--hi),var(--sf));color:var(--mut);font-size:17px;box-shadow:0 4px 10px var(--sh),0 1px 0 var(--hi) inset}
+.rg .on{border:2px solid var(--acc);color:var(--acc);background:var(--sf);box-shadow:inset 0 3px 7px var(--sh),0 1px 0 var(--hi)}
+.rg .dn{background:var(--acc);border-color:var(--acc);color:var(--sf);box-shadow:0 4px 10px var(--sh)}
+.rn{text-align:center;font-size:12px;letter-spacing:.3em;color:var(--mut);margin-bottom:8px}
+.sec{background:var(--sf);border:1px solid var(--line);border-radius:16px;padding:14px 18px 4px;margin-top:var(--gap);box-shadow:0 1px 0 var(--hi) inset,0 1px 2px var(--sh),0 10px 22px -10px var(--sh)}
+html[data-pal=blue] .sec{box-shadow:0 1px 0 var(--hi) inset,0 1px 2px var(--sh),0 10px 22px -10px var(--sh),0 0 0 3px var(--bg),0 0 0 4px var(--br)}
+.tap{cursor:pointer}
+.lb{font-size:12px;letter-spacing:.25em;color:var(--mut);margin-bottom:6px}
+html[data-pal=blue] .lb{color:var(--br)}
+p{margin:0 0 var(--gap);font-size:.94em}
+.vs{text-align:center;font-size:1.12em;line-height:2.2;letter-spacing:.06em}
+.hn,.sm{font-size:.82em;color:var(--mut)}.hn{text-align:center}
+.pali{font-style:italic;font-size:.88em;color:var(--mut);text-align:center}
+table{border-collapse:collapse;width:100%;font-size:.84em;margin-bottom:var(--gap)}td{border-bottom:1px solid var(--line);padding:4px 6px;vertical-align:top}td:first-child{white-space:nowrap;color:var(--acc)}.it{font-style:italic}
+.opt{display:block;width:100%;text-align:left;font-size:.88em;margin:8px 0;padding:9px 12px;border:1px solid var(--line);background:linear-gradient(145deg,var(--hi),var(--sf));border-radius:10px;box-shadow:0 3px 8px var(--sh)}
+.opt.ok{border-color:var(--acc);border-width:2px;box-shadow:inset 0 2px 6px var(--sh)}.opt.no{opacity:.5}
+.fb{font-size:.8em;color:var(--mut);margin:0 0 4px 4px}
+textarea{width:100%;min-height:90px;font-size:.9em;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:8px;box-shadow:inset 0 2px 5px var(--sh);margin-bottom:12px}
+.done{display:block;margin:22px auto 0;font-size:.9em;padding:9px 28px;border:1.5px solid var(--acc);background:linear-gradient(145deg,var(--hi),var(--sf));color:var(--acc);border-radius:24px;box-shadow:0 4px 10px var(--sh)}.done.d{background:var(--acc);color:var(--sf)}
+.lnk{display:block;margin:12px auto 0;background:none;border:none;color:var(--mut);font-size:.85em}
+.chips{display:flex;gap:8px;justify-content:center;margin:14px 0 8px}
+.chips button,.gl button,.acts button,.qk button{border:1px solid var(--line);background:linear-gradient(145deg,var(--hi),var(--sf));border-radius:18px;padding:4px 16px;font-size:.82em;color:var(--mut);box-shadow:0 3px 7px var(--sh)}
+.chips .on,.gl .on{border-color:var(--acc);color:var(--acc);font-weight:700;box-shadow:inset 0 2px 5px var(--sh)}
+.gl{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:12px 0}.gl button{border-radius:10px;padding:7px 4px}
+.cimg{display:block;margin:12px auto;width:min(100%,calc(50vh*.8));width:min(100%,calc(50dvh*.8));height:auto;border-radius:8px;box-shadow:0 12px 26px -8px var(--sh),0 2px 4px var(--sh)}
+.acts,.qk{display:flex;gap:10px;justify-content:center;margin:10px 0}
+.row{display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--line);padding:10px 0;font-size:.92em}.row span{min-width:3em;color:var(--mut)}.row select{flex:1;background:var(--sf);border:1px solid var(--line);border-radius:8px;padding:5px;box-shadow:0 2px 5px var(--sh)}.row input{flex:1}
+.help{margin-top:18px;border-top:1px solid var(--line);padding-top:10px;font-size:.88em}.help summary{cursor:pointer}.help p{font-size:.95em;margin:8px 0}
+.src{font-size:.72em;color:var(--mut);margin-top:26px;line-height:1.8}
+#tb{position:fixed;left:0;right:0;bottom:0;display:flex;background:var(--sf);border-top:1px solid var(--line);box-shadow:0 -6px 16px -8px var(--sh);padding-bottom:env(safe-area-inset-bottom,0);z-index:10}
+#tb button{flex:1;background:none;border:none;padding:12px 0;font-size:.85em;color:var(--mut);letter-spacing:.15em}#tb .on{color:var(--acc);font-weight:700;text-shadow:0 1px 0 var(--hi)}
+.toc{position:fixed;inset:0;background:var(--bg);overflow:auto;z-index:20;padding:env(safe-area-inset-top,0) 0 env(safe-area-inset-bottom,0)}.toc[hidden]{display:none}
+.tocin{max-width:560px;margin:0 auto;padding:12px 22px 40px}
+.tochd{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);font-size:1.1em;letter-spacing:.3em;padding-bottom:6px}.tochd button{background:none;border:none;font-size:28px;color:var(--mut)}
+details summary{cursor:pointer;padding:12px 0 4px;font-size:1.02em}.mut{color:var(--mut)}
+.ti{display:flex;gap:12px;align-items:baseline;width:100%;text-align:left;background:none;border:none;border-bottom:1px solid var(--line);padding:9px 2px;font-size:.92em}
+.ti .no{min-width:1.6em;color:var(--mut)}.ti .tt{flex:1}.ti .pg{font-size:.78em;color:var(--mut)}.ti.cur .tt{color:var(--acc);font-weight:700}
+.hero{text-align:center;padding:30px 20px 24px;margin-top:10px;border-radius:22px;border:1px solid var(--line);background:radial-gradient(ellipse at 50% 0%,var(--hi),var(--sf) 62%);box-shadow:0 1px 0 var(--hi) inset,0 16px 34px -14px var(--sh),0 2px 4px var(--sh);animation:rise .8s ease both}
+html[data-pal=blue] .hero{box-shadow:0 1px 0 var(--hi) inset,0 16px 34px -14px var(--sh),0 0 0 4px var(--bg),0 0 0 5px var(--br)}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.enso{width:92px;height:92px;color:var(--acc);opacity:.85;filter:drop-shadow(0 3px 3px var(--sh))}
+.ht{font-size:2.3em;letter-spacing:.4em;padding-left:.4em;font-weight:700;margin-top:-6px;text-shadow:0 2px 0 var(--hi),0 3px 6px var(--sh)}
+.hs{font-size:11px;letter-spacing:.5em;padding-left:.5em;color:var(--mut)}
+html[data-pal=blue] .hs{color:var(--br)}
+.hp{font-size:.88em;color:var(--mut);margin:14px 0 18px}
+.go{display:block;width:100%;border:none;border-radius:14px;padding:12px 10px;background:var(--acc);color:var(--sf);font-size:1em;letter-spacing:.2em;box-shadow:0 8px 16px -6px var(--sh),0 1px 0 rgba(255,255,255,.18) inset}
+.go span{display:block;font-size:.72em;letter-spacing:.05em;opacity:.8;margin-top:2px}
+.bk{display:flex;align-items:center;gap:10px;width:100%;background:none;border:none;border-bottom:1px solid var(--line);padding:10px 0;text-align:left;font-size:.95em}
+.bk:last-child{border-bottom:none}.bkn{min-width:5.2em}.bkn small{display:block;font-size:.7em;color:var(--mut);letter-spacing:.05em}
+.pb{flex:1;height:7px;border-radius:5px;background:var(--bg);box-shadow:inset 0 1px 3px var(--sh);overflow:hidden}.pb i{display:block;height:100%;background:var(--acc);border-radius:5px}
+.bkc{font-size:.8em;color:var(--mut);min-width:3em;text-align:right}
+.seg{display:flex;width:max-content;margin:8px auto 10px;border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 3px 8px var(--sh)}
+.seg button{background:linear-gradient(145deg,var(--hi),var(--sf));border:none;padding:5px 16px;font-size:.8em;color:var(--mut)}.seg button+button{border-left:1px solid var(--line)}.seg .on{background:var(--acc);color:var(--sf);box-shadow:inset 0 2px 5px rgba(0,0,0,.25)}
+.soon{display:flex;gap:12px;align-items:baseline;border-bottom:1px solid var(--line);padding:9px 2px;font-size:.92em;color:var(--mut);opacity:.7}.soon .no{min-width:1.6em}.soon .tt{flex:1}.soon .pg{font-size:.75em}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<!-- 維護說明：新增「品」請在 script 內以 BOOKS.push({...}) 加入同格式物件；新增金句請加到 DAILY 陣列。 -->
+<div class="w">
+<section id="pg-home"></section>
+<section id="pg-learn" hidden></section>
+<section id="pg-today" hidden></section>
+<section id="pg-gold" hidden></section>
+<section id="pg-set" hidden></section>
+</div>
+<nav id="tb"><button data-p="home" class="on">首頁</button><button data-p="learn">學習</button><button data-p="today">今日</button><button data-p="gold">金句</button><button data-p="set">設定</button></nav>
+<div class="toc" id="toc" hidden></div>
+<script>
+var BOOKS=[{id:"y",n:"雙要品",p:"Yamakavagga",d:"成對的偈頌，看心念如何帶來苦與樂。",note:"巴利本的第一品；在吳譯《法句經》中為第九品。",u:[
+{t:"盲眼長老與心念",
+s:"長老已證阿羅漢，雙眼卻失明。夜裡經行時，他不知道腳下踩死了小蟲，早上有比丘看見蟲屍，向佛陀告狀。佛陀問：你們看見他殺蟲嗎？答：沒有。佛陀說：他沒看見蟲，也沒有殺的意圖，所以無過。有人問他為何失明，佛陀說起前世：他曾是醫生，一位女病人答應治好眼睛就帶著孩子當他的奴隸，痊癒後她卻謊稱沒好；醫生知道她欺騙，故意換藥使她全盲。這份惡業讓他多世失明，像車輪跟著牛蹄。",
+k:[{n:"1",h:["心為法本，心尊心使，","中心念惡，即言即行，","罪苦自追，車轢于轍。"],p:["Manopubbaṅgamā dhammā, manoseṭṭhā manomayā;","manasā ce paduṭṭhena, bhāsati vā karoti vā;","tato naṃ dukkham anveti, cakkaṃ va vahato padaṃ."],d:"一切行為以心為先導，心是主，由心造作。若帶著染污的心說話或行動，苦就跟著來，像車輪緊隨牛蹄。"}],
+g:[["mano","心"],["pubbaṅgamā","為先導（漢譯「本」）"],["seṭṭhā","為主（漢譯「尊」）"],["manomayā","由心所造（漢譯「使」）"],["paduṭṭhena","染污的（漢譯「惡」）"],["dukkha / cakkaṃ","苦 / 輪"]],
+w:[["法","此處指一切現象與行為"],["中心","內心"],["轢","碾壓"],["轍","車輪的痕跡"]],
+i:[["思即是業","註釋說這裡的「心」主要指意志（cetanā）。佛陀也說：我說「思」就是業。決定業的是意圖，不只是動作。"],["八正道","正思惟、正語、正業一脈相連：念頭先正，言行才正。"]],
+x:"今天留意一次：說話或做事之前，心裡先起了什麼念頭？",
+q:{q:"長老踩死小蟲卻無過，前世的醫生卻有業果，關鍵差在哪？",o:[["小蟲有沒有死","結果相同，小蟲都死了，所以不是關鍵。"],["起心動念：有沒有惡意","對。同樣的動作，有無惡意，業就不同。",1],["是否已經出家","身分不是關鍵，偈頌講的是心。"]]}},
+{t:"淨信的少年",
+s:"少年是慳吝婆羅門的獨子，父親連兒子的金飾都自己打造以省工錢。兒子重病，父親捨不得請醫生，等到快不行了，才把他抬到外廊，免得訪客看見家裡的財物。清晨，佛陀以慈悲之眼看見他，托缽時站在門口，放光引他注視。少年虛弱得只能在心裡生起信心，命終後生到忉利天。後來他現身向父親說明，促成父親請佛陀應供。父親聽法證初果，並把大部分財產供養佛法。",
+k:[{n:"2",h:["心為法本，心尊心使，","中心念善，即言即行，","福樂自追，如影隨形。"],p:["Manopubbaṅgamā dhammā, manoseṭṭhā manomayā;","manasā ce pasannena, bhāsati vā karoti vā;","tato naṃ sukham anveti, chāyā va anapāyinī."],d:"一切行為以心為先導，心是主，由心造作。若帶著清淨的心說話或行動，樂就跟著來，像不離身的影子。"}],
+g:[["pasannena","清淨、澄明的（漢譯「善」）"],["sukha","樂"],["chāyā","影"],["anapāyinī","不離去的"]],
+w:[["如影隨形","影子一直跟著身體，形容福樂緊隨"]],
+i:[["淨信的力量","少年沒布施也沒持戒，卻因臨終一念淨信而生善處。這不是說不必布施持戒，而是說明心的力量。他的父親後來也大量布施。"],["與第 1 偈成對","同樣的開頭，只換了一個字：「染污」與「清淨」，苦與樂也跟著換。"]],
+x:"今天留意一次善意或感謝的念頭，看它帶來的感受。",
+q:{q:"少年沒有布施，仍生善處，故事想說明什麼？",o:[["財富決定來生","故事相反，父親有錢卻吝嗇。"],["清淨的心念有很大力量","對。臨終一念淨信，也能帶來善果。",1],["不必再持戒","故事沒有這個意思，父親後來仍大力布施修行。"]]}},
+{t:"恨意的反覆",
+s:"提舍長老是佛陀姨母之子，年老才出家，卻以資深比丘自居，既不做後進該做的事，還常和年輕比丘爭執。被人指正，他就哭著去向佛陀告狀。佛陀說：不要把「他罵我、打我、勝過我、搶我的東西」這些念頭一直放在心上，怨恨只有不再懷抱才能平息。",
+k:[{n:"3–4",h:["慍於怨者，未甞無怨；","不慍自除，是道可宗。"],p:["Akkocchi maṃ avadhi maṃ, ajini maṃ ahāsi me;","ye ca taṃ upanayhanti, veraṃ tesaṃ na sammati;","（第 4 偈前半同上）ye ca taṃ nupanayhanti, veraṃ tesūpasammati."],d:"「他罵我、打我、勝過我、搶了我」，把這些念頭一直放在心上的人，怨恨無法止息；不再放在心上的人，怨恨就平息。"}],
+g:[["akkocchi / avadhi","他罵我 / 他打我"],["ajini / ahāsi","他勝過我 / 他搶了我的"],["upanayhanti","把念頭一再繫著、反覆回想"],["na sammati","不止息"]],
+w:[["慍","含怒、懷恨"],["怨","怨恨、仇怨"],["道可宗","可作為準則的道路"]],
+i:[["恨是被「養」大的","原文 upanayhati 的意思是把念頭一再繫在心上。事件只發生一次，反覆回想卻能發生一百次。"],["吳譯對照","吳譯「不慍自除」與巴利「不懷此念，怨便平息」意思相近。"]],
+x:"今天若有人冒犯你，注意心裡是不是在反覆重播，重播時可以輕輕放下。",
+q:{q:"偈頌說怨恨如何平息？",o:[["讓對方先道歉","偈頌著重在自己的心，不是對方。"],["不再把那些念頭放在心上","對。不再反覆懷抱，怨恨便止息。",1],["報復回去","偈頌說的正好相反。"]]}},
+{t:"怨怨相報",
+s:"有位長者的妻子不孕，丈夫另娶；大房因嫉妒使二房流產，二房最後在生產中死去，臨終立願報復。兩人接著世世結怨：先是母雞與母貓，再是母鹿與母豹，最後一個成為舍衛城貴族之女，一個成為夜叉女迦利。夜叉追著抱孩子的母親，她逃到祇園精舍，把孩子放在佛陀腳前。佛陀請夜叉進來，說出兩人多世的怨仇，指出：恨以恨止，只會更恨；唯有以無恨、友善與理解才能止息。夜叉後來證初果。",
+k:[{n:"5",h:null,hn:"吳譯雙要品中，「慍於怨者……不慍自除」（見上一則）也涵蓋這一偈的意思。",p:["Na hi verena verāni, sammantīdha kudācanaṃ;","averena ca sammanti, esa dhammo sanantano."],d:"在這世間，怨恨從來不能以怨恨止息；只有以無怨才能止息。這是古老不變的法則。"}],
+g:[["vera","怨恨、仇怨"],["averena","以無怨、以慈愛"],["sanantano","古老的、恆常的"],["kudācanaṃ","任何時候"]],
+w:[],
+i:[["輪迴中的怨","故事用多世輪迴，說明怨怨相報如何一世接一世，正是「怨不止怨」的寫照。"],["慈心","這裡的「無怨」，傳統上理解為慈愛與不懷恨的心。"]],
+x:"想一個放不下的小怨，試著不回應、不加料，只當作練習。",
+q:{q:"兩人轉世多次仍互相仇視，佛陀指出的出路是？",o:[["讓強者獲勝","力量只會延續怨仇。"],["以無怨、友善來止息","對。這是佛陀教她們的做法。",1],["各自遠離，永不見面","故事中是面對並和解，而不是躲避。"]]}},
+{t:"憍賞彌的爭執",
+s:"憍賞彌的比丘分成兩派，一派跟隨持律者，一派跟隨說法者，不斷爭吵。佛陀勸不動，便獨自到林中度過雨安居，由大象侍奉。在家信眾得知後，不再供養那些比丘，他們才醒悟並彼此和解，卻仍得向佛陀認錯。雨安居結束，阿難與五百比丘迎請佛陀回舍衛城。佛陀責備他們不聽勸，提醒：人終將死，不要像永遠不死一樣爭吵。",
+k:[{n:"6",h:["不好責彼，務自省身，","如有知此，永滅無患。"],p:["Pare ca na vijānanti, mayamettha yamāmase;","ye ca tattha vijānanti, tato sammanti medhagā."],d:"不明理的人不明白「我們都將死去」，因此爭吵不休；明白這一點的智者，爭執就平息了。"}],
+g:[["pare","別人（不明理的人）"],["yamāmase","我們都將死去（註釋義）"],["medhagā","爭執、紛爭"],["sammanti","止息"]],
+w:[["務自省身","專心反省自己"],["無患","沒有禍患"]],
+i:[["無常止爭","死亡是共通的事實。想到這一點，許多非贏不可的爭執就變輕了。"],["退一步","佛陀自己先離開，也是一種示範：爭執升高時，暫時離開現場。"]],
+x:"下次爭論前，先問：十年後這件事還重要嗎？",
+q:{q:"偈頌認為智者的爭執為何止息？",o:[["贏了辯論","偈頌沒有談輸贏。"],["明白我們終將死去","對。看見無常，便少了爭執的力氣。",1],["找人評理","偈頌從內心的領悟談起。"]]}},
+{t:"兩兄弟的差別",
+s:"摩訶迦羅與周利迦羅是商人兄弟，聽佛陀說法後一起出家。兄長在墓地修頭陀行，觀照無常，證阿羅漢；弟弟出家，卻想著把哥哥也帶回家。後來周利迦羅被前妻們邀去，被換回在家衣。隔天輪到摩訶迦羅的前妻們邀請，希望如法炮製，並請佛陀留下他「隨喜」。比丘們為此擔心。佛陀說：兩人不同，一個耽於享樂、懈怠，像弱樹；一個精進、信心堅固，像岩山。摩訶迦羅被圍住要脫袈裟時，騰空而去，落在佛陀足前。",
+k:[{n:"7",h:["行見身淨，不攝諸根，","飲食不節，慢墮怯弱，","為邪所制，如風靡草；"],p:["Subhānupassiṃ viharantaṃ, indriyesu asaṃvutaṃ;","bhojanamhi cāmattaññuṃ, kusītaṃ hīnavīriyaṃ;","taṃ ve pasahati māro, vāto rukkhaṃva dubbalaṃ."],d:"只看事物美好的一面、不守護諸根、飲食不知節制、懈怠而缺乏精進的人，魔（煩惱）一定能制伏他，像大風吹倒弱樹。"},
+{n:"8",h:["觀身不淨，能攝諸根，","食知節度，常樂精進，","不為邪動，如風大山。"],p:["Asubhānupassiṃ viharantaṃ, indriyesu susaṃvutaṃ;","bhojanamhi ca mattaññuṃ, saddhaṃ āraddhavīriyaṃ;","taṃ ve nappasahati māro, vāto selaṃva pabbataṃ."],d:"觀察身體不淨、守護諸根、飲食知量、有信心又精進的人，魔無法制伏，像風吹不動岩山。"}],
+g:[["subha / asubha","淨、美好 / 不淨"],["indriya","根（感官）"],["matta-ññu","知量的人"],["Māra","魔，指煩惱"],["sela","岩石"]],
+w:[["攝諸根","守護、收攝感官"],["靡","倒伏"],["邪","此處指煩惱、誘惑"]],
+i:[["不淨觀是方法","觀身不淨是對治貪欲的修法，不是否定身體，而是看清貪著的虛妄。"],["兄弟對照","同樣出家，差別在於是否守護諸根、是否精進。"]],
+x:"今天挑一個容易讓你分心的「入口」，例如手機，伸手前先覺察一下。",
+q:{q:"兩兄弟一個像弱樹，一個像岩山，差別在哪？",o:[["年紀大小","與年紀無關。"],["有沒有守護諸根、精進修行","對。弱樹耽樂懈怠，岩山精進而信心堅固。",1],["財產多少","偈頌談的是修行態度。"]]}},
+{t:"不相稱的袈裟",
+s:"舍利弗與目犍連到王舍城，有人供養了一匹價值十萬的布，主辦人把布供養給常住當地的提婆達多。提婆達多立刻縫成袈裟，得意地穿著四處走。有比丘告訴佛陀，佛陀說這不是第一次：他前世是獵象人，偷了一件黃袈裟披在身上，裝成辟支佛，象群向他下跪，被他一頭頭殺害。象王發現後本想摔死他，看見袈裟而放過了他。",
+k:[{n:"9",h:["不吐毒態，欲心馳騁，","未能自調，不應法衣；"],p:["Anikkasāvo kāsāvaṃ, yo vatthaṃ paridahissati;","apeto damasaccena, na so kāsāvamarahati."],d:"自己的染污未除，卻披上袈裟；缺乏調御與真實，便不配穿這件法衣。"},
+{n:"10",h:["能吐毒態，戒意安靜，","降心已調，此應法衣。"],p:["Yo ca vantakasāvassa, sīlesu susamāhito;","upeto damasaccena, sa ve kāsāvamarahati."],d:"已吐盡染污、安住於戒、具足調御與真實的人，才真正配得這件袈裟。"}],
+g:[["kasāva","染污；袈裟（雙關語）"],["dama","自我調御"],["sacca","真實"],["vantakasāva","已吐盡染污"]],
+w:[["毒態","比喻煩惱的毒性"],["法衣","袈裟"]],
+i:[["外衣與內心","袈裟只是外衣，真正的條件是戒與調御。偈頌用「染污（kasāva）」與「袈裟（kāsāva）」玩了一個近音雙關。"]],
+x:"檢視今天一個外表與內心不一致的地方，不必責備，只是看見。",
+q:{q:"偈頌說真正配得袈裟的條件是？",o:[["昂貴的布料","故事中的布雖貴，卻不相稱。"],["戒、調御與真實","對。",1],["年資高低","偈頌沒有以年資論。"]]}},
+{t:"本質與非本質",
+s:"舍利弗與目犍連（原名優波底沙、拘律陀）早年隨外道刪闍耶學道，不滿意而各自尋求。優波底沙遇見阿說示比丘，聽到「諸法因緣生」的偈而證初果；告訴拘律陀後，拘律陀也證初果。兩人邀刪闍耶同往見佛，他卻因身為師長的自尊而拒絕，說做佛陀的弟子，就像水壺變成水杯，又說智者去找喬達摩，愚者仍會來找我。兩人帶著二百五十位弟子歸佛。佛陀指出：刪闍耶的我慢，讓他把非本質當成本質。",
+k:[{n:"11",h:["以真為偽、以偽為真，","是為邪計，不得真利；"],p:["Asāre sāramatino, sāre cāsāradassino;","te sāraṃ nādhigacchanti, micchāsaṅkappagocarā."],d:"把沒有本質的當作本質，把有本質的看成沒有本質，這些人落在邪思惟中，永遠得不到本質。"},
+{n:"12",h:["知真為真、見偽知偽，","是為正計，必得真利。"],p:["Sārañca sārato ñatvā, asārañca asārato;","te sāraṃ adhigacchanti, sammāsaṅkappagocarā."],d:"知道本質是本質，非本質是非本質，這些人安住於正思惟，必能得到本質。"}],
+g:[["sāra / asāra","本質、核心 / 非本質"],["micchā-saṅkappa","邪思惟"],["sammā-saṅkappa","正思惟"]],
+w:[["邪計","錯誤的想法與判斷"],["真利","真正的利益"]],
+i:[["正思惟","八正道裡的正見、正思惟，就是分辨什麼是本質、什麼不是。"],["我慢遮眼","故事裡刪闍耶並不是看不到真理，而是放不下身段。"]],
+x:"今天分辨一件事：我在意的，是本質，還是面子？",
+q:{q:"刪闍耶為何不肯跟隨弟子去見佛？",o:[["路途遙遠","故事的重點不在此。"],["身為老師的自尊與我慢","對。我慢讓他看不見真相。",1],["不知道佛陀是誰","兩位弟子已經告訴他了。"]]}},
+{t:"漏雨的屋頂",
+s:"佛陀回迦毗羅衛，在堂弟難陀的婚禮當天，把缽交給他便轉身離開，難陀只好捧著缽跟隨，新娘在後面喊他早點回來。難陀就這樣出了家，卻常想起新娘，不快樂。佛陀以神通讓他看到天上的天女，說只要努力修行便能得到。其他比丘笑他是為天女修行的雇工，他又羞又苦，獨自精進，終於證得阿羅漢。後來比丘們懷疑他的說法，佛陀說：他以前像漏雨的屋頂，現在像善蓋的屋子。",
+k:[{n:"13",h:["蓋屋不密，天雨則漏，","意不惟行，淫泆為穿；"],p:["Yathā agāraṃ ducchannaṃ, vuṭṭhī samativijjhati;","evaṃ abhāvitaṃ cittaṃ, rāgo samativijjhati."],d:"屋頂蓋得不好，雨就會滲進來；同樣，沒有修習的心，貪欲就會滲進來。"},
+{n:"14",h:["蓋屋善密，雨則不漏，","攝意惟行，淫泆不生。"],p:["Yathā agāraṃ suchannaṃ, vuṭṭhī na samativijjhati;","evaṃ subhāvitaṃ cittaṃ, rāgo na samativijjhati."],d:"屋頂蓋得好，雨就滲不進來；同樣，善加修習的心，貪欲便滲不進來。"}],
+g:[["agāra","房屋"],["ducchanna / suchanna","屋頂差 / 屋頂好"],["abhāvita / subhāvita","未修習 / 善修習"],["rāga","貪欲"]],
+w:[["淫泆","放縱的貪欲"],["攝意","收攝心念"],["惟行","思惟並實行"]],
+i:[["修心如補屋頂","修習不是等雨來了才補，而是平日就把屋頂蓋好。止（安定）與觀（洞察）就是兩項工具。"]],
+x:"每天固定幾分鐘靜坐或安靜呼吸，像是為心補屋頂。",
+q:{q:"偈頌用屋頂比喻什麼？",o:[["住家的安全","這是比喻，不是談房子。"],["心有沒有修習，貪欲能不能滲入","對。",1],["天氣的變化","天氣只是比喻的一部分。"]]}},
+{t:"屠夫的憂苦",
+s:"王舍城附近有個屠豬人準提，五十五年來殺豬為業，從未做過一件善事。臨終前七天，他像豬一樣嚎叫，用手腳在地上爬行，彷彿已先受地獄的煎熬，死後墮入阿鼻地獄。佛陀因此說了這首偈。",
+k:[{n:"15",h:["造憂後憂，行惡兩憂，","彼憂惟懼，見罪心懅；"],p:["Idha socati pecca socati, pāpakārī ubhayattha socati;","so socati so vihaññati, disvā kammakiliṭṭhamattano."],d:"作惡的人今生憂愁，來世也憂愁；他看見自己污濁的行為，便憂愁、苦惱。"}],
+g:[["socati","憂愁、悲傷"],["pecca","死後、來世"],["kammakiliṭṭha","行為污濁"],["vihaññati","苦惱、受折磨"]],
+w:[["懅","畏懼不安"]],
+i:[["此世與來世","偈頌說果報不只在死後，面對自己行為時內心的不安，本身就已是苦。"]],
+x:"今天睡前回想：有哪件事做完讓自己不安？下次想怎麼做不同？",
+q:{q:"偈頌認為作惡者的憂苦何時開始？",o:[["只有死後","偈頌說「此世、彼世皆憂」。"],["今生看見自己行為時就開始","對。"  ,1],["只有被發現才會","偈頌談的是自己的內心。"]]}},
+{t:"歡喜的在家弟子",
+s:"舍衛城的達摩迦居士持戒樂施，是五百位在家弟子的領袖，七子七女也都樂善好施。他臨終時請僧團到床邊誦經，誦到《大念處經》時，六座天界的天車前來迎接。他請他們等一下，免得打斷誦經；比丘們誤以為他要他們停下，便離開了。他告訴孩子們天車的事，選了兜率天的車，請孩子把花環拋上去，隨即命終，生到兜率天。",
+k:[{n:"16",h:["造喜後喜，行善兩喜，","彼喜惟歡，見福心安；"],p:["Idha modati pecca modati, katapuñño ubhayattha modati;","so modati so pamodati, disvā kammavisuddhimattano."],d:"行善的人今生歡喜，來世也歡喜；他看見自己行為清淨，便歡喜、更加歡喜。"}],
+g:[["modati","歡喜"],["katapuñña","作過福德的人"],["kammavisuddhi","行為的清淨"],["pamodati","更加歡喜"]],
+w:[["見福心安","看見自己的善行，內心安穩"]],
+i:[["與上一偈對照","第 15 偈是「憂」，這一偈是「喜」。同一個結構，只因為所作的行為不同。"]],
+x:"今天做一件小善事，事後留意心的感受。",
+q:{q:"達摩迦的歡喜來自哪裡？",o:[["財富與名聲","偈頌談的是行為的清淨。"],["看見自己行為清淨而心安","對。",1],["他人的稱讚","偈頌談的是內在的喜悅。"]]}},
+{t:"提婆達多的悔恨",
+s:"提婆達多見佛陀受人敬重，起了嫉妒，想取代佛陀領導僧團，被拒絕後懷恨，三度想害佛陀：派弓箭手、從山上推落大石、放醉象，都沒成功；又設法分裂僧團，但舍利弗與目犍連把多數比丘帶回。後來他重病，要被抬去見佛，到祇園水池邊，腳一落地便陷入地中，被大地吞沒，死後墮入阿鼻地獄。",
+k:[{n:"17",h:["今悔後悔，為惡兩悔，","厥為自殃，受罪熱惱；"],p:["Idha tappati pecca tappati, pāpakārī ubhayattha tappati;","“pāpaṃ me kata”nti tappati, bhiyyo tappati duggatiṃ gato."],d:"作惡的人今生灼惱，來世也灼惱；他悔恨「我造了惡」而灼惱，墮入惡趣後灼惱更甚。"}],
+g:[["tappati","灼惱、悔恨"],["pāpa","惡"],["duggati","惡趣"],["bhiyyo","更加"]],
+w:[["厥為自殃","這是自己招來的災殃"],["熱惱","如火灼燒般的苦惱"]],
+i:[["嫉妒的代價","故事裡的苦，起點是嫉妒與野心；偈頌把重點放在作惡者內心的懊悔。"]],
+x:"今天若起了嫉妒，先看見它，不要讓它推著你做事。",
+q:{q:"偈頌說作惡者最後的感受是？",o:[["得意","偈頌說的是灼惱與悔恨。"],["悔恨，而且更甚","對。",1],["毫無感覺","偈頌說是灼惱。"]]}},
+{t:"蘇摩那的歡喜",
+s:"給孤獨長者的幼女蘇摩那，與兩位姊姊一樣常護持供僧；兩位姊姊聽法證初果，蘇摩那更證得斯陀含。她重病臨終時叫父親來，稱他「小弟弟」後便去世。長者以為女兒神智不清，憂愁地請教佛陀。佛陀說她神智清明，之所以稱父親為弟弟，是因為她的證悟高於父親（父親是初果）；她已生到兜率天。佛陀因此說了這首偈。",
+k:[{n:"18",h:["今歡後歡，為善兩歡，","厥為自祐，受福悅豫。"],p:["Idha nandati pecca nandati, katapuñño ubhayattha nandati;","“puññaṃ me kata”nti nandati, bhiyyo nandati suggatiṃ gato."],d:"行善的人今生喜樂，來世也喜樂；他想著「我做了福德」而喜樂，生到善趣後更加喜樂。"}],
+g:[["nandati","喜樂"],["puñña","福德、善業"],["suggati","善趣"],["bhiyyo","更加"]],
+w:[["自祐","自己給自己的福佑"],["悅豫","愉悅安適"]],
+i:[["四偈成組","第 15–18 偈兩兩對照：憂與喜、悔與歡。吳譯把它們放在同一首偈裡。"]],
+x:"睡前說出今天做過的一件善事。",
+q:{q:"蘇摩那稱父親為「弟弟」，是因為？",o:[["她神智不清","佛陀說她神智清明。"],["她的證悟比父親高","對。她是斯陀含，父親是須陀洹。",1],["她年紀比父親大","故事並非如此。"]]}},
+{t:"多聞與實踐",
+s:"舍衛城兩位出身高貴的比丘是朋友：一位精通三藏，教導數百比丘；另一位專修觀禪，證得阿羅漢。有一次兩人在祇園相遇，學問比丘不知對方已證阿羅漢，輕視他，還想發問讓他難堪。佛陀為了保護他們，親自提問禪定與道的問題，學者答不出，修行者全部答出。佛陀稱讚實修者，沒有稱讚學者。弟子們不解，佛陀以牧牛人比喻：學者像替人數牛的牧人，實修者才是享用牛乳的主人。",
+k:[{n:"19",h:["巧言多求，放蕩無戒，","懷婬怒癡，不惟止觀，","聚如群牛，非佛弟子；"],p:["Bahumpi ce saṃhita bhāsamāno, na takkaro hoti naro pamatto;","gopova gāvo gaṇayaṃ paresaṃ, na bhāgavā sāmaññassa hoti."],d:"即使誦讀很多經典，卻放逸而不依法實行，像牧牛人替別人數牛，不能分享出家生活的果實。"},
+{n:"20",h:["時言少求，行道如法，","除婬怒癡，覺正意解，","見對不起，是佛弟子。"],p:["Appampi ce saṃhita bhāsamāno, dhammassa hoti anudhammacārī;","rāgañca dosañca pahāya mohaṃ, sammappajāno suvimuttacitto;","anupādiyāno idha vā huraṃ vā, sa bhāgavā sāmaññassa hoti."],d:"即使誦讀得少，卻依法而行，捨棄貪、瞋、癡，正知，心得解脫，不執取此世與來世，便能分享出家生活的果實。"}],
+g:[["saṃhitā","經典"],["pamatto","放逸、懈怠"],["gopa","牧牛人"],["anudhammacārī","隨順法而行的人"],["rāga / dosa / moha","貪 / 瞋 / 癡"]],
+w:[["止觀","止（安定）與觀（洞察）"],["群牛","此處比喻只是替人數牛"]],
+i:[["學與行並重","雙要品以「心」開頭，以實踐收尾：知道很多，不如親自落實。"],["回顧全品","從第 1 偈到第 20 偈，主線是：心念決定行為，行為決定苦樂，所以要修心。"]],
+x:"今天挑一句偈頌，實際做一次，而不只是讀一次。",
+q:{q:"牧牛人的比喻說明什麼？",o:[["學者比修行者更有福","佛陀沒有稱讚學者。"],["只讀不行，就像替別人數牛","對。",1],["不必讀經","偈頌的重點是讀了要實行。"]]}}
+]}];
+var DAILY=[["述佛品","諸惡莫作，諸善奉行，自淨其意，是諸佛教。"],["雙要品","心為法本，心尊心使，中心念善，即言即行，福樂自追，如影隨形。"],["述千品","自勝最賢，故曰人雄，護意調身，自損至終。"],["安寧品","勝則生怨，負則自鄙，去勝負心，無爭自安。"],["忿怒品","忍辱勝恚，善勝不善，勝者能施，至誠勝欺。"],["惡行品","莫輕小善，以為無福，水滴雖微，漸盈大器，凡福充滿，從纖纖積。"],["華香品","如蜂集華，不嬈色香，但取味去，仁入聚然。"],["羅漢品","不怒如地，不動如山，真人無垢，生死世絕。"],["華香品","旃檀多香，青蓮芳花，雖曰是真，不如戒香。"],["明哲品","譬如厚石，風不能移，智者意重，毀譽不傾。"]];
+
+BOOKS.push({id:"z",n:"放逸品",p:"Appamādavagga",d:"不放逸，是通往不死的路。",note:"巴利本的第二品；在吳譯《法句經》中為第十品。漢巴偈頌的對應為編者依內容比對。",u:[
+{t:"舍摩婆帝的不放逸",
+s:"憍賞彌的優填王有兩位王后：舍摩婆帝與摩犍提耶。舍摩婆帝的侍女屈屈多羅聽佛陀說法證初果，回宮轉述，王后與五百侍女也都證初果。摩犍提耶因父母求婚被佛陀婉拒而懷恨，屢次陷害：誣指她們私通外人，又在琵琶裡藏蛇，說王后要害王。王拉弓射向她們，她們心中只有慈心，沒有恨意，箭竟折返。最後摩犍提耶使人放火燒宮，舍摩婆帝與五百侍女在火中持續禪修，有人證斯陀含，有人證阿那含。佛陀說：不放逸的人不死，放逸的人雖活如死。",
+k:[{n:"21",h:["戒為甘露道，放逸為死徑，","不貪則不死，失道為自喪；"],p:["Appamādo amatapadaṃ, pamādo maccuno padaṃ;","appamattā na mīyanti, ye pamattā yathā matā."],d:"不放逸是通往不死的路，放逸是通往死亡的路。不放逸的人不死，放逸的人如同已死。"},
+{n:"22",h:["慧智守道勝，終不為放逸，","不貪致歡喜，從是得道樂。"],p:["Evaṃ visesato ñatvā, appamādamhi paṇḍitā;","appamāde pamodanti, ariyānaṃ gocare ratā."],d:"智者清楚明白這一點，便樂於不放逸，喜悅於聖者的境界。"},
+{n:"23",h:["常當惟念道，自強守正行，","健者得度世，吉祥無有上。"],p:["Te jhāyino sātatikā, niccaṃ daḷhaparakkamā;","phusanti dhīrā nibbānaṃ, yogakkhemaṃ anuttaraṃ."],d:"他們修習禪定與觀照，持續而堅定地精進；智者證得涅槃，那是無上、離一切繫縛的安穩。"}],
+g:[["appamāda","不放逸、警覺"],["pamāda","放逸、懈怠"],["amata","不死（指涅槃）"],["jhāyino","修禪定與觀照者"],["nibbāna","涅槃"],["yogakkhema","離繫縛的安穩"]],
+w:[["甘露","不死的比喻，指涅槃"],["死徑","通往死亡的路"],["惟念","思惟憶念"],["吉祥","最勝的安穩"]],
+i:[["不死的意思","註釋說「不死」不是肉身不老不死，而是不再輪迴，所以無論活著或死去，都不算「死」。"],["放逸為何如死","註釋說放逸的人不布施、不持戒、不盡本分，也不修習止觀，等於沒有真正活出生命。"]],
+x:"今天挑一件事，用全部的注意力做完，不分心。",
+q:{q:"偈頌說的「不死」是什麼意思？",o:[["肉體永遠不老不死","註釋明確說不是這個意思。"],["不再輪迴、證得涅槃","對。",1],["死後生到天上","天界仍在輪迴之中。"]]}},
+{t:"隱姓的富家子",
+s:"王舍城流行瘟疫，長者夫婦病重，叫兒子鳩槃吉離開，並告訴他埋有四十億財寶。他在森林住了十二年，回城時已無人認得。他知道寶藏還在，卻想到現在挖出來，可能被懷疑、沒收，便穿舊衣替人做事，負責清晨叫大家起床。頻婆娑羅王聽到他的聲音，說這是大富之人的聲音。王的侍女前往查訪，最後他在國王面前說出真相，寶藏取回，國王任命他為長者並嫁女給他。他聽佛陀說法，證得初果。",
+k:[{n:"24",h:["正念常興起，行淨惡易滅，","自制以法壽，不犯善名增。"],p:["Uṭṭhānavato satīmato, sucikammassa nisammakārino;","saññatassa dhammajīvino, appamattassa yasobhivaḍḍhati."],d:"勤奮、有正念、行為清淨、行事審慎、自制、依法而活、不放逸的人，名聲逐漸增長。"}],
+g:[["uṭṭhānavā","勤奮的"],["satīmā","有正念的"],["sucikamma","行為清淨"],["nisammakārī","審慎行事的人"],["saññata","自制的"],["yasa","名聲、聲譽"]],
+w:[["正念","時時覺察、不忘失"],["自制","約束自己"],["以法壽","依法而活"]],
+i:[["謹慎與時機","他不急著取回財富，而是先觀察處境、耐心做事，這就是「審慎行事」。"],["名聲如何增長","偈頌把名聲放在最後：先有勤奮、正念、清淨與自制，名聲只是結果。"]],
+x:"今天做一件事前，先停一息，想想怎麼做才穩妥。",
+q:{q:"偈頌認為名聲如何增長？",o:[["靠宣傳","偈頌沒有談宣傳。"],["靠勤奮、正念、清淨與依法生活","對。名聲是結果，不是目標。",1],["靠運氣","偈頌談的是行為。"]]}},
+{t:"愚鈍的周利槃特",
+s:"長者有兩個孫子，哥哥摩訶槃特後來證阿羅漢；弟弟周利槃特也出家，卻因前世嘲笑過愚鈍的比丘，今生十分遲鈍，四個月背不起一首偈。哥哥說他不配留在僧團，不再安排他去應供。他失望想還俗，佛陀帶他坐在香室前，給他一塊乾淨的白布，叫他一面搓一面念「除垢」。布漸漸髒了，他領悟一切有為法無常；佛陀以光明現前告訴他：塵垢不只在布上，也在心中，是貪、瞋、癡。他繼續修行，不久證阿羅漢。",
+k:[{n:"25",h:["發行不放逸，約以自調心，","慧能作定明，不返冥淵中。"],p:["Uṭṭhānenappamādena, saṃyamena damena ca;","dīpaṃ kayirātha medhāvī, yaṃ ogho nābhikīrati."],d:"以精進、不放逸、自制與調伏，智者為自己造一座洲島，任何洪水都無法淹沒。"}],
+g:[["uṭṭhāna","精進、起而行"],["appamāda","不放逸"],["saṃyama","自制、持戒"],["dama","調伏（感官）"],["dīpa","洲島（亦作燈）"],["ogha","洪水（比喻煩惱）"]],
+w:[["發行","發起行動"],["自調心","調伏自己的心"],["冥淵","黑暗的深淵"]],
+i:[["洲島與燈","巴利 dīpa 同時有「洲島」和「燈」兩義。吳譯寫作「定明」，取光明之意。"],["愚鈍不是障礙","周利槃特記不住偈，卻靠一塊布、一個動作，專注到底而開悟。"]],
+x:"選一件簡單的事，例如擦桌子，專心做到完，不想別的。",
+q:{q:"周利槃特最後如何開悟？",o:[["把經典背熟","他一直沒能背熟。"],["專心搓布，觀察布變髒","對。從一個動作領悟無常與心垢。",1],["靠哥哥的教導","哥哥反而曾經嫌棄他。"]]}},
+{t:"節慶的喧鬧",
+s:"舍衛城舉行愚人節慶，許多愚昧的青年身塗灰與牛糞，在街上喧嚷，到各家門口討錢。在家弟子請佛陀暫時別入城，七天後節慶結束，佛陀才入城。聽說青年們的行為，佛陀說：愚者本來就會無羞恥地放縱自己。",
+k:[{n:"26",h:["愚人意難解，貪亂好諍訟，","上智常重慎，護斯為寶尊。"],p:["Pamādamanuyuñjanti, bālā dummedhino janā;","appamādañca medhāvī, dhanaṃ seṭṭhaṃva rakkhati."],d:"愚昧無智的人沉溺於放逸；智者守護不放逸，如同守護最珍貴的財寶。"},
+{n:"27",h:["莫貪、莫好諍、亦莫嗜欲樂，","思心不放逸，可以獲大安。"],p:["Mā pamādamanuyuñjetha, mā kāmaratisanthavaṃ;","appamatto hi jhāyanto, pappoti vipulaṃ sukhaṃ."],d:"不要沉溺放逸，也不要貪著欲樂與親暱；不放逸而修習禪觀的人，得到廣大的安樂。"}],
+g:[["bāla","愚人"],["dummedha","缺乏智慧的"],["dhana seṭṭha","最勝的財寶"],["kāmarati","對欲樂的耽著"],["santhava","親暱、貪著"],["vipula sukha","廣大的安樂"]],
+w:[["意難解","心念難以明白"],["寶尊","最珍貴的寶"]],
+i:[["最好的財寶","智者守護的，不是金銀，而是「不放逸」本身。"],["面對喧鬧","佛陀選擇暫時不入城，等風頭過去。避開不是逃避，而是保護自己的心。"]],
+x:"今天找一個你最容易放縱的時段，先給自己一個小小的界線。",
+q:{q:"偈頌說智者視為最珍貴的是？",o:[["財富","偈頌用財寶作比喻，但指的是別的東西。"],["不放逸","對。",1],["名聲","偈頌沒有這樣說。"]]}},
+{t:"山頂看人間",
+s:"大迦葉住在畢缽羅窟，以天眼觀看眾生的生死，想分辨誰放逸、誰精進。佛陀在精舍看見，現出光明，彷彿坐在他面前，說：眾生的生死數不盡，這不是你該費心的事，完整知曉只在諸佛的境界。佛陀因此說了這首偈。",
+k:[{n:"28",h:["放逸如自禁，能却之為賢，","已昇智慧閣，去危為即安。","明智觀於愚，譬如山與地。"],hm:"吳譯把這一偈分成兩段，後半「居亂而身正……」見下一則。",p:["Pamādaṃ appamādena, yadā nudati paṇḍito;","paññāpāsādamāruyha, asoko sokiniṃ pajaṃ;","pabbataṭṭhova bhūmaṭṭhe, dhīro bāle avekkhati."],d:"智者以不放逸驅走放逸，登上智慧之樓，自己無憂，看著憂愁的眾生，如同山上的人看地上的人。"}],
+g:[["nudati","驅除"],["paññāpāsāda","智慧之樓"],["asoka","無憂"],["sokinī pajā","憂愁的眾生"],["pabbataṭṭha / bhūmaṭṭha","站在山上的人 / 站在地上的人"]],
+w:[["智慧閣","智慧的高樓"],["去危","離開危險"],["山與地","站在山上看地面的比喻"]],
+i:[["以不放逸驅走放逸","註釋用新水注入池塘，把舊水擠出去來比喻：不放逸增長時，放逸便沒有立足的地方。"],["高處的視角","站高處不是看不起人，而是看得更清楚；自己無憂，反而更能看見別人的憂愁。"]],
+x:"今天遇到煩事時，想像自己站在高處，看這件事十年後會變成什麼樣子。",
+q:{q:"佛陀對大迦葉說「這不是你該費心的事」，是因為？",o:[["他不夠聰明","不是能力問題。"],["眾生的生死無量，完整知曉屬於諸佛的領域","對。",1],["天眼沒有用","天眼本身是有用的，只是這件事不必耗神去數。"]]}},
+{t:"兩位同修",
+s:"兩位比丘向佛陀求得禪修題目後到森林修行。一位放逸，初夜烤火、與小沙彌聊天；另一位初夜經行、中夜休息、後夜再修，不久證阿羅漢。雨安居後兩人見佛，放逸者反說對方一直在睡覺。佛陀知道實情，說：你放逸卻自稱精進，反而把精進的比丘說成懈怠；你像弱馬，他像快馬。",
+k:[{n:"29",h:["居亂而身正，彼為獨覺悟，","是力過師子，棄惡為大智。"],hm:"對應為編者依內容比對：巴利第 29 偈說「在放逸者中不放逸，在昏睡者中警醒」，與吳譯此偈主旨相近。",p:["Appamatto pamattesu, suttesu bahujāgaro;","abalassaṃva sīghasso, hitvā yāti sumedhaso."],d:"在放逸的人之中保持不放逸，在昏睡的人之中保持警醒，智者像快馬，把劣馬拋在後面。"}],
+g:[["pamatta","放逸的人"],["sutta","睡著的人"],["bahujāgara","多多警醒"],["sīghassa","快馬"],["abala","弱的（劣馬）"],["sumedhasa","有智慧的人"]],
+w:[["獨覺悟","獨自清醒覺悟"],["師子","獅子"]],
+i:[["比較心","放逸的比丘不看自己，卻評論別人。偈頌提醒：與其比較，不如照顧自己的修行。"]],
+x:"今天不評論別人，只問自己：我今天有沒有做到該做的？",
+q:{q:"偈頌裡的「快馬」比喻什麼？",o:[["運動能力","這是比喻。"],["在眾人放逸時仍保持警醒的智者","對。",1],["修行速度的競賽","偈頌不是在比速度。"]]}},
+{t:"摩伽成為帝釋",
+s:"離車族王子摩訶離聽佛陀講《帝釋所問經》，問佛陀是否親見過帝釋。佛陀說：我知道帝釋，也知道他為何成為帝釋。他前世是摩遮羅村的青年摩伽，與三十二位同伴修路、建房舍，並立下七個誓願：奉養父母、敬重長輩、說話柔和、不說離間語、不吝嗇、說真話、不發怒。因這些善行，他轉生為諸天之主。摩訶離聽完證得初果。",
+k:[{n:"30",h:null,hn:"吳譯放逸品中沒有找到明顯對應的偈。",p:["Appamādena maghavā, devānaṃ seṭṭhataṃ gato;","appamādaṃ pasaṃsanti, pamādo garahito sadā."],d:"摩伽因為不放逸，成為諸天之首。人們讚歎不放逸，永遠指責放逸。"}],
+g:[["maghavā","摩伽（帝釋的別名）"],["devānaṃ seṭṭhataṃ","諸天之首"],["pasaṃsanti","讚歎"],["garahita","被指責"]],
+w:[],
+i:[["七個誓願","奉養父母、敬重長輩、柔和說話、不離間、不吝嗇、說真話、不發怒。每一條都是日常小事，積起來就是不放逸。"],["行善也要不放逸","註釋說，這裡的不放逸，是指在行善上不懈怠。"]],
+x:"從七個誓願中選一條，今天實踐。",
+q:{q:"摩伽故事裡的「不放逸」具體是指？",o:[["打坐","故事中他做的是修路與守誓。"],["持續不懈地行善與守誓","對。",1],["祭祀天神","故事不是這樣說。"]]}},
+{t:"火中的領悟",
+s:"一位比丘向佛陀求得禪修題目，到森林修行，卻進展很少，沮喪地返回祇園。途中遇見大火，他跑上山頂觀看，想到：就像這場火燒盡一切，聖道的智慧也會燒盡一切大小的束縛。佛陀在香室看見，現出光明對他說：你的想法是對的，繼續下去。比丘當下證得阿羅漢。",
+k:[{n:"31",nc:1,h:["比丘謹慎樂，放逸多憂𠎝，","變諍小致大，積惡入火焰。"],hm:"吳譯此偈從放逸的後果立論，與巴利「不放逸如火燒盡束縛」取向相反；對照為編者判斷。",p:["Appamādarato bhikkhu, pamāde bhayadassi vā;","saṃyojanaṃ aṇuṃ thūlaṃ, ḍahaṃ aggīva gacchati."],d:"樂於不放逸、看見放逸有危險的比丘，像火焰一樣，燒盡大大小小的一切束縛。"}],
+g:[["appamādarata","樂於不放逸"],["bhayadassī","見到危險的人"],["saṃyojana","束縛、結"],["aṇuṃ thūlaṃ","細的、粗的"],["ḍahaṃ aggīva","像火燃燒"]],
+w:[["憂𠎝","憂愁、煩惱（罕用字）"],["火焰","此處指放逸的苦果"]],
+i:[["觀察燃燒","他看著火，看見「燒盡」這個動作，並轉成對修行的洞察。修行的材料，往往就在眼前。"],["見危險","「見放逸的危險」不是恐懼，而是清楚看見放逸帶來的代價。"]],
+x:"今天觀察一個小習慣，如何一點一點把你的時間燒掉。",
+q:{q:"比丘從大火領悟到什麼？",o:[["要遠離火災","他是由火聯想到修行。"],["聖道智慧能像火一樣燒盡大小束縛","對。",1],["世界終將毀滅","故事重點不在這裡。"]]}},
+{t:"知足的提舍",
+s:"提舍出身舍衛城附近的小市鎮，出家後生活簡樸，托缽只回親戚所在的村子，大型供養（如給孤獨長者、波斯匿王的供養）也不參加。有比丘批評他。佛陀召問，他如實說明只是為了得食，夠了就不再去，也不計較食物好壞。佛陀反而稱讚他，說少欲知足正是佛與聖者的作風，又說起鸚鵡王的故事：樹上果實吃完，其他鸚鵡都離去，只有鸚鵡王為報答這棵樹，寧可靠剩下的嫩葉樹皮維生；帝釋考驗後，使枯樹重新結實。後來提舍證阿羅漢。",
+k:[{n:"32",h:["守戒福致善，犯戒有懼心，","能斷三界漏，此乃近泥洹。"],p:["Appamādarato bhikkhu, pamāde bhayadassi vā;","abhabbo parihānāya, nibbānasseva santike."],d:"樂於不放逸、看見放逸有危險的比丘，不會退失，他已經接近涅槃。"}],
+g:[["abhabba","不可能的"],["parihāna","退失"],["nibbānassa santike","在涅槃近處"],["bhayadassī","見到危險的人"]],
+w:[["三界漏","欲界、色界、無色界的煩惱"],["泥洹","涅槃"],["懼心","警惕之心"]],
+i:[["知足","鸚鵡王與提舍，都是少欲知足、不攀緣的典範。"],["回顧全品","放逸品從「不放逸是不死之道」開始，到「見放逸的危險，便近涅槃」結束。"]],
+x:"今天在飲食或用品上少要一點點，感受「夠了」的滋味。",
+q:{q:"佛陀為何稱讚提舍？",o:[["他最有名","故事中他並不出名。"],["他少欲知足、不攀緣","對。",1],["他最富有","他生活簡樸。"]]}}
+]});
+
+var $=function(i){return document.getElementById(i)};
+var PAL={
+ gray:["水墨灰",{bg:"#e2e2df",sf:"#eeeeeb",ink:"#2a2a2a",mut:"#6c6c67",acc:"#454545",line:"#cdcdc9",hi:"rgba(255,255,255,.9)",sh:"rgba(0,0,0,.16)",br:"#8c8c87"},{bg:"#181818",sf:"#242424",ink:"#e8e8e8",mut:"#8e8e8e",acc:"#d0d0d0",line:"#333333",hi:"rgba(255,255,255,.07)",sh:"rgba(0,0,0,.6)",br:"#777777"}],
+ blue:["英倫藍",{bg:"#e5e3da",sf:"#f0eee6",ink:"#1c2838",mut:"#666a70",acc:"#2a3f63",line:"#c9c5b8",hi:"rgba(255,255,255,.85)",sh:"rgba(30,40,60,.18)",br:"#9a7b3f"},{bg:"#10161f",sf:"#19212d",ink:"#e4e1d6",mut:"#8b929c",acc:"#9db1cf",line:"#2b3544",hi:"rgba(255,255,255,.06)",sh:"rgba(0,0,0,.65)",br:"#c2a15e"}],
+ brown:["茶褐",{bg:"#e8dfd0",sf:"#f3ece0",ink:"#3a2a1d",mut:"#7a644e",acc:"#7a5a3c",line:"#d3c5ae",hi:"rgba(255,255,255,.75)",sh:"rgba(60,40,20,.18)",br:"#a67c52"},{bg:"#1b1510",sf:"#251d16",ink:"#eadfcd",mut:"#a1907a",acc:"#c9a27a",line:"#3a2f25",hi:"rgba(255,255,255,.06)",sh:"rgba(0,0,0,.65)",br:"#c9a27a"}]};
+var FF={m:'"Noto Serif TC","Songti TC","PMingLiU",serif',k:'"DFKai-SB","Kaiti TC","BiauKai","Noto Serif TC",serif',h:'"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif'};
+var STY=[{n:"水墨",bg:"#232323",ink:"#e8e8e8",sub:"#9a9a9a",seal:"#9a9a9a",ring:"rgba(200,200,200,.2)"},
+ {n:"英倫",bg:"#1f2d44",ink:"#ece6d4",sub:"#b59c62",seal:"#b59c62",ring:"rgba(181,156,98,.3)"},
+ {n:"茶褐",bg:"#efe6d8",ink:"#3b2a1d",sub:"#7d6650",seal:"#7a5a3c",ring:"rgba(140,110,80,.3)"}];
+var FC='"Noto Serif TC","Songti TC","PMingLiU","Noto Serif CJK TC",serif';
+var RN=["讀","詞","義","行"],RT=["讀懂","字詞與巴利","義理連結","實踐與回顧"];
+var SET={ord:"pali",ff:"m",fs:17,lh:1.9,gap:14,pal:"gray",mode:"auto",cs:0},ST={},mem={};
+var cb=0,cu=0,rd=0,di=0,gi=0,cvD,cvG,page="learn";
+function R_(k,d){try{return JSON.parse(localStorage.getItem(k)||"null")||d}catch(e){return mem[k]||d}}
+function W_(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){mem[k]=v}}
+ST=R_("dhp2",{});var s0=R_("dhp2-set",{});for(var q in s0)SET[q]=s0[q];
+BOOKS.forEach(function(b){b.u.forEach(function(u,i){u.id=b.id+(i+1)})});
+function dark(){return SET.mode=="dark"||(SET.mode=="auto"&&window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches)}
+function apply(){
+ var r=document.documentElement.style,P=PAL[SET.pal][dark()?2:1];
+ for(var k in P)r.setProperty("--"+k,P[k]);
+ document.documentElement.setAttribute("data-pal",SET.pal);r.setProperty("--ff",FF[SET.ff]);r.setProperty("--fs",SET.fs+"px");r.setProperty("--lh",SET.lh);r.setProperty("--gap",SET.gap+"px");
+ W_("dhp2-set",SET)}
+if(window.matchMedia)try{matchMedia("(prefers-color-scheme: dark)").addEventListener("change",function(){apply()})}catch(e){}
+var MAPW={y:[9,1],z:[10,2]};BOOKS.forEach(function(b){b.wno=MAPW[b.id][0];b.pno=MAPW[b.id][1]});
+var CAT=[[1,"無常品",21,0,""],[2,"教學品",29,0,""],[3,"多聞品",19,0,""],[4,"篤信品",18,0,""],[5,"戒慎品",16,0,""],[6,"惟念品",12,0,""],[7,"慈仁品",18,0,""],[8,"言語品",12,0,""],[9,"雙要品",22,1,"Yamakavagga"],[10,"放逸品",20,2,"Appamādavagga"],[11,"心意品",12,3,"Cittavagga"],[12,"華香品",17,4,"Pupphavagga"],[13,"愚闇品",21,5,"Bālavagga"],[14,"明哲品",17,6,"Paṇḍitavagga"],[15,"羅漢品",10,7,"Arahantavagga"],[16,"述千品",16,8,"Sahassavagga"],[17,"惡行品",22,9,"Pāpavagga"],[18,"刀杖品",14,10,"Daṇḍavagga"],[19,"老耗品",14,11,"Jarāvagga"],[20,"愛身品",13,12,"Attavagga"],[21,"世俗品",14,13,"Lokavagga"],[22,"述佛品",21,14,"Buddhavagga"],[23,"安寧品",14,15,"Sukhavagga"],[24,"好喜品",12,16,"Piyavagga"],[25,"忿怒品",26,17,"Kodhavagga"],[26,"塵垢品",19,18,"Malavagga"],[27,"奉持品",17,19,"Dhammaṭṭhavagga"],[28,"道行品",28,20,"Maggavagga"],[29,"廣衍品",14,21,"Pakiṇṇakavagga"],[30,"地獄品",16,22,"Nirayavagga"],[31,"象喻品",18,23,"Nāgavagga"],[32,"愛欲品",32,24,"Taṇhāvagga"],[33,"利養品",20,0,""],[34,"沙門品",32,25,"Bhikkhuvagga"],[35,"梵志品",40,26,"Brāhmaṇavagga"],[36,"泥洹品",36,0,""],[37,"生死品",18,0,""],[38,"道利品",19,0,""],[39,"吉祥品",19,0,""]].map(function(r){return {w:r[0],n:r[1],c:r[2],p:r[3],pn:r[4]}});
+function ordList(){return SET.ord=="wu"?CAT.slice():CAT.filter(function(r){return r.p}).sort(function(x,y){return x.p-y.p})}
+function bkNo(b){return SET.ord=="wu"?b.wno:b.pno}
+function bkLabel(b){return (SET.ord=="wu"?"吳譯第 "+b.wno:"巴利第 "+b.pno)+" 品"}
+function bookOf(r){for(var i=0;i<BOOKS.length;i++)if(BOOKS[i].wno==r.w)return i;return -1}
+function ordIdx(){return BOOKS.map(function(b,i){return i}).sort(function(x,y){return bkNo(BOOKS[x])-bkNo(BOOKS[y])})}
+function ordSeg(){return '<div class="seg"><button data-o="pali" class="'+(SET.ord!="wu"?"on":"")+'">巴利本順序</button><button data-o="wu" class="'+(SET.ord=="wu"?"on":"")+'">吳譯本順序</button></div>'}
+function setOrd(o){SET.ord=o;W_("dhp2-set",SET);if(page=="home")renderHome();else if(page=="learn")renderLearn();else if(page=="set")renderSet();if(!$("toc").hidden)openToc()}
+function BU(){return BOOKS[cb].u[cu]}
+function dn(u,i){return !!(ST[u.id]&&ST[u.id]["d"+i])}
+function dcount(u){var n=0;for(var i=0;i<4;i++)if(dn(u,i))n++;return n}
+function sec(l,b){return '<div class="sec"><div class="lb">'+l+'</div>'+b+'</div>'}
+function flat(){var a=[];ordIdx().forEach(function(bi){BOOKS[bi].u.forEach(function(u,ui){a.push([bi,ui])})});return a}
+function go(bi,ui){cb=bi;cu=ui;rd=0;ST.last=[bi,ui];W_("dhp2",ST);show("learn")}
+function step(d){var f=flat(),i=0;f.forEach(function(p,k){if(p[0]==cb&&p[1]==cu)i=k});i+=d;if(i<0||i>=f.length)return;go(f[i][0],f[i][1])}
+/* 學習 */
+function renderLearn(){
+ var b=BOOKS[cb],u=BU(),h="",f=flat(),pos=0;
+ f.forEach(function(p,k){if(p[0]==cb&&p[1]==cu)pos=k});
+ h+='<div class="bar"><button data-a="prev"'+(pos==0?" disabled":"")+' aria-label="上一則">‹</button><button class="mid" data-a="toc"><span class="bn">'+b.n+'</span><span class="un">'+bkLabel(b)+'・第 '+(cu+1)+' 則 / '+b.u.length+' ▾</span></button><button data-a="next"'+(pos==f.length-1?" disabled":"")+' aria-label="下一則">›</button></div>';
+ h+='<h2 class="ut">'+u.t+'</h2><div class="ref">'+b.n+'　偈 '+u.k.map(function(k){return k.n}).join("、")+'</div>';
+ h+='<div class="rg">'+RN.map(function(n,i){return '<button class="'+(i==rd?"on ":"")+(dn(u,i)?"dn":"")+'" data-r="'+i+'" aria-label="'+RT[i]+'">'+n+'</button>'}).join("")+'</div><div class="rn">'+RT[rd]+'</div>';
+ if(rd==0){
+  h+=sec("故事",'<p>'+u.s+'</p>');
+  u.k.forEach(function(k){h+=sec("原文・偈 "+k.n,(k.h?'<p class="vs">'+k.h.join("<br>")+'</p>':'<p class="hn">'+k.hn+'</p>')+(k.hm?'<p class="hn">'+k.hm+'</p>':'')+'<p>'+k.d+'</p>')});
+  h+=sec("想一想",'<p>'+u.q.q+'</p>'+u.q.o.map(function(o,i){return '<button class="opt" data-q="'+i+'">'+o[0]+'</button><div class="fb" id="fb'+i+'"></div>'}).join(""));
+ }else if(rd==1){
+  u.k.forEach(function(k){h+=sec("巴利原文・偈 "+k.n,'<p class="pali">'+k.p.join("<br>")+'</p>')});
+  h+=sec("逐字對照",'<table>'+u.g.map(function(g){return '<tr><td class="it">'+g[0]+'</td><td>'+g[1]+'</td></tr>'}).join("")+'</table>');
+  if(u.w.length)h+=sec("古文字詞",'<table>'+u.w.map(function(g){return '<tr><td>'+g[0]+'</td><td>'+g[1]+'</td></tr>'}).join("")+'</table>');
+ }else if(rd==2){
+  h+=u.i.map(function(x){return sec(x[0],'<p>'+x[1]+'</p>')}).join("");
+ }else{
+  h+=sec("今天試試",'<p>'+u.x+'</p>');
+  h+=sec("我的心得",'<textarea id="ref" placeholder="寫下你的觀察…"></textarea>');
+ }
+ h+='<button class="done'+(dn(u,rd)?" d":"")+'" data-a="done">'+(dn(u,rd)?"✓ 已完成這一圈":"完成這一圈")+'</button>';
+ if(rd==3&&pos<f.length-1)h+='<button class="lnk" data-a="next">下一則 →</button>';
+ $("pg-learn").innerHTML=h;
+ var t=$("ref");if(t){t.value=(ST[u.id]&&ST[u.id].note)||"";t.oninput=function(){(ST[u.id]=ST[u.id]||{}).note=t.value;W_("dhp2",ST)}}
+}
+$("pg-learn").onclick=function(e){
+ var t=e.target.closest("button");if(!t)return;var u=BU();
+ if(t.hasAttribute("data-r")){rd=+t.getAttribute("data-r");renderLearn();return}
+ if(t.hasAttribute("data-q")){var i=+t.getAttribute("data-q"),o=u.q.o[i];t.className="opt "+(o[2]?"ok":"no");$("fb"+i).textContent=o[1];return}
+ var a=t.getAttribute("data-a");
+ if(a=="prev")step(-1);else if(a=="next")step(1);else if(a=="toc")openToc();
+ else if(a=="done"){var s=(ST[u.id]=ST[u.id]||{});s["d"+rd]=!s["d"+rd];W_("dhp2",ST);if(s["d"+rd]&&rd<3)rd++;renderLearn();window.scrollTo(0,0)}
+};
+/* 目錄 */
+function openToc(){
+ var h='<div class="tocin"><div class="tochd"><span>目錄</span><button data-a="x" aria-label="關閉">×</button></div>'+ordSeg();
+ ordList().forEach(function(r){
+  var bi=bookOf(r),no=(SET.ord=="wu"?r.w:r.p);
+  if(bi<0){h+='<div class="soon"><span class="no">'+no+'</span><span class="tt">'+r.n+'</span><span class="pg">尚未製作</span></div>';return}
+  var b=BOOKS[bi],dd=b.u.filter(function(u){return dcount(u)==4}).length;
+  h+='<details'+(bi==cb?" open":"")+'><summary><b>'+no+'　'+b.n+'</b>　<span class="mut">'+b.p+'・'+dd+'/'+b.u.length+'</span></summary><p class="mut sm">'+b.d+'<br>'+b.note+'</p>';
+  b.u.forEach(function(u,ui){h+='<button class="ti'+(bi==cb&&ui==cu?" cur":"")+'" data-b="'+bi+'" data-u="'+ui+'"><span class="no">'+(ui+1)+'</span><span class="tt">'+u.t+'</span><span class="pg">'+(dcount(u)==4?"✓":dcount(u)+"/4")+'</span></button>'});
+  h+='</details>'});
+ if(SET.ord!="wu")h+='<p class="mut sm" style="margin-top:14px">吳譯本另有 13 品在巴利本中沒有對應，切換到「吳譯本順序」可看到。</p>';
+ h+='</div>';var el=$("toc");el.innerHTML=h;el.hidden=false;document.body.style.overflow="hidden"}
+$("toc").onclick=function(e){var t=e.target.closest("button");if(!t)return;
+ if(t.hasAttribute("data-o")){setOrd(t.getAttribute("data-o"));return}
+ if(t.getAttribute("data-a")=="x"){$("toc").hidden=true;document.body.style.overflow="";return}
+ if(t.hasAttribute("data-b")){$("toc").hidden=true;document.body.style.overflow="";go(+t.getAttribute("data-b"),+t.getAttribute("data-u"))}};
+/* 圖卡 */
+function today(){var d=new Date();return Math.floor(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate())/864e5)}
+function makeCard(label,text){
+ var s=STY[SET.cs],W=1080,H=1350,c=document.createElement("canvas");c.width=W;c.height=H;var x=c.getContext("2d");
+ x.fillStyle=s.bg;x.fillRect(0,0,W,H);
+ x.strokeStyle=s.ring;x.lineWidth=14;x.beginPath();x.arc(W/2,640,380,0,7);x.stroke();
+ x.strokeStyle=s.sub;x.globalAlpha=.45;x.lineWidth=2;x.strokeRect(40,40,W-80,H-80);x.globalAlpha=.25;x.strokeRect(54,54,W-108,H-108);x.globalAlpha=1;
+ var cl=text.split(/[，。；、？！]/).filter(Boolean),n=cl.length,fs=n<=4?96:80,gap=fs*1.5,st=fs*1.18,mx=Math.max.apply(null,cl.map(function(a){return a.length}));
+ var x0=W/2+gap*(n-1)/2,y0=640-mx*st/2+fs*.1;
+ x.fillStyle=s.ink;x.font=fs+"px "+FC;x.textAlign="center";x.textBaseline="top";
+ cl.forEach(function(a,k){for(var j=0;j<a.length;j++)x.fillText(a[j],x0-k*gap,y0+j*st)});
+ x.fillStyle=s.seal;var sz=96,sx=W/2-sz/2,sy=1070;if(x.roundRect){x.beginPath();x.roundRect(sx,sy,sz,sz,8);x.fill()}else x.fillRect(sx,sy,sz,sz);
+ x.fillStyle=s.bg;x.font="700 38px "+FC;x.fillText("法",W/2,sy+8);x.fillText("句",W/2,sy+48);
+ x.fillStyle=s.sub;x.font="30px "+FC;x.fillText("法句經　"+label,W/2,1200);
+ var t=new Date();x.font="26px "+FC;x.fillText(t.getFullYear()+" · "+(t.getMonth()+1)+" · "+t.getDate(),W/2,1244);
+ return c}
+function styles(id){return '<div class="chips" id="'+id+'">'+STY.map(function(s,i){return '<button class="'+(i==SET.cs?"on":"")+'" data-s="'+i+'">'+s.n+'</button>'}).join("")+'</div>'}
+function items(){var a=[];BOOKS.forEach(function(b,bi){b.u.forEach(function(u,ui){u.k.forEach(function(k){if(k.h&&!k.nc)a.push({b:b,bi:bi,u:u,ui:ui,k:k})})})});return a}
+function renderToday(){
+ var A=items(),it=A[(today()+di)%A.length],t=new Date(),lb=it.b.n+" 第"+it.k.n+"偈";
+ cvD=makeCard(lb,it.k.h.join(""));
+ var h='<h2 class="ut">今日經文</h2><div class="ref">'+t.getFullYear()+" 年 "+(t.getMonth()+1)+" 月 "+t.getDate()+" 日・"+lb+'</div>';
+ h+=sec("原文",'<p class="vs">'+it.k.h.join("<br>")+'</p>')+sec("白話",'<p>'+it.k.d+'</p>')+sec("巴利",'<p class="pali sm">'+it.k.p.join("<br>")+'</p>');
+ h+=styles("st1")+'<img class="cimg" id="cardimg" alt="今日經文圖卡" src="'+cvD.toDataURL("image/png")+'"><div class="acts"><button data-a="save">儲存圖卡</button><button data-a="share">分享</button><button data-a="other">換一句</button></div><button class="lnk" data-a="story">讀這一則的故事 →</button>';
+ $("pg-today").innerHTML=h;window._it=it}
+function renderGold(){
+ var g=DAILY[gi];cvG=makeCard(g[0],g[1]);
+ var h='<h2 class="ut">金句圖卡</h2><div class="ref">選一句，再選風格，即可下載</div><div class="gl" id="gl">'+DAILY.map(function(d,i){return '<button class="'+(i==gi?"on":"")+'" data-g="'+i+'">'+d[1].split("，")[0]+'</button>'}).join("")+'</div>';
+ h+=styles("st2")+'<img class="cimg" id="goldimg" alt="金句圖卡" src="'+cvG.toDataURL("image/png")+'"><div class="acts"><button data-a="gsave">儲存圖卡</button><button data-a="gshare">分享</button></div><p class="ref">若儲存沒反應，長按圖卡即可存入相簿。</p>';
+ $("pg-gold").innerHTML=h}
+function out(cv,share){cv.toBlob(function(b){var f=new File([b],"法句經.png",{type:"image/png"});
+ if(share&&navigator.canShare&&navigator.canShare({files:[f]})){navigator.share({files:[f],title:"法句經"}).catch(function(){});return}
+ var a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="法句經_"+new Date().toISOString().slice(0,10)+".png";document.body.appendChild(a);a.click();a.remove()},"image/png")}
+function cardClick(e){var t=e.target.closest("button");if(!t)return;
+ if(t.hasAttribute("data-s")){SET.cs=+t.getAttribute("data-s");W_("dhp2-set",SET);renderToday();renderGold();return}
+ if(t.hasAttribute("data-g")){gi=+t.getAttribute("data-g");renderGold();return}
+ var a=t.getAttribute("data-a");
+ if(a=="save")out(cvD,0);else if(a=="share")out(cvD,1);else if(a=="gsave")out(cvG,0);else if(a=="gshare")out(cvG,1);
+ else if(a=="other"){di++;renderToday()}else if(a=="story"){go(window._it.bi,window._it.ui)}}
+$("pg-today").onclick=cardClick;$("pg-gold").onclick=cardClick;
+/* 設定 */
+function renderSet(){
+ function sel(id,opts,v){return '<select id="'+id+'">'+opts.map(function(o){return '<option value="'+o[0]+'"'+(o[0]==v?" selected":"")+'>'+o[1]+'</option>'}).join("")+'</select>'}
+ var h='<h2 class="ut">設定</h2>';
+ h+='<label class="row"><span>色系</span>'+sel("s_pal",Object.keys(PAL).map(function(k){return [k,PAL[k][0]]}),SET.pal)+'</label>';
+ h+='<label class="row"><span>明暗</span>'+sel("s_mode",[["auto","跟隨系統"],["light","淺色"],["dark","深色"]],SET.mode)+'</label>';
+ h+='<label class="row"><span>品序</span>'+sel("s_ord",[["pali","巴利本順序"],["wu","吳譯本順序"]],SET.ord)+'</label>';
+ h+='<label class="row"><span>字體</span>'+sel("s_ff",[["m","明體"],["k","楷體"],["h","黑體"]],SET.ff)+'</label>';
+ h+='<label class="row"><span>字級</span><input type="range" id="s_fs" min="14" max="24" step="1" value="'+SET.fs+'"></label>';
+ h+='<label class="row"><span>行距</span><input type="range" id="s_lh" min="1.5" max="2.5" step="0.1" value="'+SET.lh+'"></label>';
+ h+='<label class="row"><span>段距</span><input type="range" id="s_gap" min="6" max="28" step="2" value="'+SET.gap+'"></label>';
+ h+='<details class="help"><summary>使用說明</summary><p><b>用途</b>　用故事對照偈頌，幫你熏習《法句經》：每日讀一則、反覆回顧，慢慢把經文用在生活裡。</p><p><b>設計邏輯</b>　一則故事配一首偈，逐步螺旋，加深加廣。同一則可以回來多次，每次多一圈。</p><p><b>四圈</b>　讀（故事、原文、白話）、詞（字詞與巴利對照）、義（義理連結）、行（實踐與回顧）。點上方圓圈切換，不必依序。</p><p><b>今日・金句</b>　「今日」依日期顯示當日經文，附白話與巴利，並有同一句的圖卡；「金句」可挑十句選風格下載。</p><p><b>資料</b>　進度與心得只存在這支手機的瀏覽器。</p></details>';
+ h+='<p class="src">偈頌原文：大正藏第 210 號《法句經》（維祇難等譯），依 CBETA 電子佛典集成。巴利文：Dhammapada。故事：依 Dhammapada 註釋的傳統說法概述，參考 Daw Mya Tin 英譯。漢譯與巴利偈的對應，由編者依內容比對，供學習參考。</p>';
+ $("pg-set").innerHTML=h;
+ [["s_ord","ord"],["s_pal","pal"],["s_mode","mode"],["s_ff","ff"],["s_fs","fs"],["s_lh","lh"],["s_gap","gap"]].forEach(function(p){var el=$(p[0]);el.oninput=function(){SET[p[1]]=(p[1]=="pal"||p[1]=="mode"||p[1]=="ff"||p[1]=="ord")?this.value:+this.value;apply()}})}
+/* 首頁 */
+function renderHome(){
+ var A=items(),it=A[today()%A.length],u=BU(),tot=0,dd=0,h="";
+ BOOKS.forEach(function(b){b.u.forEach(function(x){tot++;if(dcount(x)==4)dd++})});
+ h+='<div class="hero"><svg class="enso" viewBox="0 0 120 120" aria-hidden="true"><path d="M60 14 A46 46 0 1 1 28 26" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/></svg><div class="ht">法句經</div><div class="hs">DHAMMAPADA</div><p class="hp">熏習《法句經》，看見起心動念，言行漸趨清明。</p><button class="go" data-a="cont">繼續學習<span>'+BOOKS[cb].n+'・第 '+(cu+1)+' 則　'+u.t+'</span></button></div>';
+ h+='<div class="sec tap" data-a="today"><div class="lb">今日經文</div><p class="vs">'+it.k.h.join("<br>")+'</p><div class="ref">'+it.b.n+'　第 '+it.k.n+' 偈</div></div>';
+ h+='<div class="sec"><div class="lb">各品・已完成 '+dd+'/'+tot+' 則</div>'+ordSeg()+ordIdx().map(function(i){var b=BOOKS[i],d1=0,pc=0;b.u.forEach(function(x){if(dcount(x)==4)d1++;pc+=dcount(x)});pc=Math.round(pc*100/(4*b.u.length));return '<button class="bk" data-bk="'+i+'"><span class="bkn">'+b.n+'<small>'+bkLabel(b)+'</small></span><span class="pb"><i style="width:'+pc+'%"></i></span><span class="bkc">'+d1+'/'+b.u.length+'</span></button>'}).join("")+'</div>';
+ h+='<div class="qk"><button data-a="toc">目錄</button><button data-a="gold">金句圖卡</button></div>';
+ $("pg-home").innerHTML=h}
+$("pg-home").onclick=function(e){var t=e.target.closest("[data-a],[data-bk],[data-o]");if(!t)return;
+ if(t.hasAttribute("data-o")){setOrd(t.getAttribute("data-o"));return}
+ if(t.hasAttribute("data-bk")){var bi=+t.getAttribute("data-bk"),b=BOOKS[bi],k=0;for(var i=0;i<b.u.length;i++){if(dcount(b.u[i])<4){k=i;break}}go(bi,k);return}
+ var a=t.getAttribute("data-a");
+ if(a=="cont")show("learn");else if(a=="today")show("today");else if(a=="toc"){show("learn");openToc()}else if(a=="gold")show("gold")};
+/* 頁面 */
+function show(p){page=p;["home","learn","today","gold","set"].forEach(function(k){$("pg-"+k).hidden=(k!=p);var b=document.querySelector('[data-p="'+k+'"]');if(b)b.className=(k==p?"on":"")});
+ if(p=="home")renderHome();else if(p=="learn")renderLearn();else if(p=="today")renderToday();else if(p=="gold")renderGold();else renderSet();window.scrollTo(0,0)}
+[].forEach.call(document.querySelectorAll("#tb button"),function(b){b.onclick=function(){show(b.getAttribute("data-p"))}});
+if(ST.last&&BOOKS[ST.last[0]]&&BOOKS[ST.last[0]].u[ST.last[1]]){cb=ST.last[0];cu=ST.last[1]}
+apply();show("home");
+
+</script>
+</body>
+</html>
