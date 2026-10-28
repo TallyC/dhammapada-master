@@ -49,6 +49,7 @@ textarea{width:100%;min-height:90px;font-size:.9em;background:var(--bg);border:1
 .acts,.qk{display:flex;gap:10px;justify-content:center;margin:10px 0}
 .row{display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--line);padding:10px 0;font-size:.92em}.row span{min-width:3em;color:var(--mut)}.row select{flex:1;background:var(--sf);border:1px solid var(--line);border-radius:8px;padding:5px;box-shadow:0 2px 5px var(--sh)}.row input{flex:1}
 .help{margin-top:18px;border-top:1px solid var(--line);padding-top:10px;font-size:.88em}.help summary{cursor:pointer}.help p{font-size:.95em;margin:8px 0}
+.gl{margin-top:18px;border-bottom:1px solid var(--line);padding-bottom:4px}
 .src{font-size:.72em;color:var(--mut);margin-top:26px;line-height:1.8}
 #tb{position:fixed;left:0;right:0;bottom:0;display:flex;background:var(--sf);border-top:1px solid var(--line);box-shadow:0 -6px 16px -8px var(--sh);padding-bottom:env(safe-area-inset-bottom,0);z-index:10}
 #tb button{flex:1;background:none;border:none;padding:12px 0;font-size:.8em;color:var(--mut);letter-spacing:.08em}#tb .on{color:var(--acc);font-weight:700;text-shadow:0 1px 0 var(--hi)}
@@ -585,14 +586,19 @@ $("pg-today").onclick=cardClick;$("pg-gold").onclick=cardClick;
 function renderSet(){
  function sel(id,opts,v){return '<select id="'+id+'">'+opts.map(function(o){return '<option value="'+o[0]+'"'+(o[0]==v?" selected":"")+'>'+o[1]+'</option>'}).join("")+'</select>'}
  var h='<h2 class="ut">設定</h2>';
+ h+='<div class="lb gl">外觀</div>';
  h+='<label class="row"><span>色系</span>'+sel("s_pal",Object.keys(PAL).map(function(k){return [k,PAL[k][0]]}),SET.pal)+'</label>';
  h+='<label class="row"><span>明暗</span>'+sel("s_mode",[["auto","跟隨系統"],["light","淺色"],["dark","深色"]],SET.mode)+'</label>';
- h+='<label class="row"><span>品序</span>'+sel("s_ord",[["pali","巴利"],["wu","漢傳"]],SET.ord)+'</label>';
+ h+='<div class="lb gl">文字</div>';
  h+='<label class="row"><span>字體</span>'+sel("s_ff",[["m","明體"],["k","楷體"],["h","黑體"]],SET.ff)+'</label>';
  h+='<label class="row"><span>字級</span><input type="range" id="s_fs" min="14" max="24" step="1" value="'+SET.fs+'"></label>';
  h+='<label class="row"><span>行距</span><input type="range" id="s_lh" min="1.5" max="2.5" step="0.1" value="'+SET.lh+'"></label>';
  h+='<label class="row"><span>段距</span><input type="range" id="s_gap" min="6" max="28" step="2" value="'+SET.gap+'"></label>';
- h+='<details class="help"><summary>使用說明</summary><p><b>用途</b>　用故事對照偈頌，幫你熏習《法句經》：每日讀一則、反覆回顧，慢慢把經文用在生活裡。</p><p><b>設計邏輯</b>　一則故事配一首偈，逐步螺旋，加深加廣。同一則可以回來多次，每次多一圈。</p><p><b>四圈</b>　讀（故事、原文、白話）、詞（字詞與巴利對照）、義（義理連結）、行（實踐與回顧）。點上方圓圈切換，不必依序。</p><p><b>全文與影音</b>　目錄裡每一品都可讀《法句經》全文；目前有導讀的是無常品、雙要品、放逸品，其他品先提供全文。「影音」收錄《法句經》講法。</p><p><b>今日・金句</b>　「今日」依日期顯示當日經文，附白話與巴利，並有同一句的圖卡；「金句」可挑十句選風格下載。</p><p><b>本工具的全文</b>　《法句經》，大正藏第 210 號，東吳天竺沙門維祇難等譯（署名暫定，詳見下方「譯者署名」），二卷、39 品、758 偈。這是古代的漢譯本，不是現代人重新翻譯的作品；經文依 CBETA 電子佛典集成。「白話」是編者自己的意譯。</p><p><b>四種漢譯</b>　《法句經》（東吳維祇難等譯，上下二卷、39 品、758 偈）只有短偈；《法句譬喻經》（西晉法炬、法立譯，四卷、39 品、284 偈）、《出曜經》（姚秦竺佛念譯，三十卷、34 品、934 偈）、《法集要頌經》（北宋天息災譯，四卷、33 品、933 偈）都是在譬喻中夾短偈。本工具的全文是第一種。依法鼓講堂課程投影片。</p><p><b>資料</b>　進度與心得只存在這支手機的瀏覽器。</p></details>';
+ h+='<div class="lb gl">目錄</div>';
+ h+='<label class="row"><span>品序</span>'+sel("s_ord",[["pali","巴利"],["wu","漢傳"]],SET.ord)+'</label>';
+ h+='<div class="lb gl">說明</div>';
+ h+='<details class="help"><summary>怎麼使用</summary><p><b>用途</b>　用故事對照偈頌，熏習《法句經》：每日讀一則、反覆回顧，慢慢把經文用在生活裡。</p><p><b>設計邏輯</b>　一則故事配一首偈，逐步螺旋，加深加廣。同一則可以回來多次，每次多一圈。</p><p><b>四圈</b>　讀（故事、原文、白話）、詞（字詞與巴利對照）、義（義理連結）、行（實踐與回顧）。點上方圓圈切換，不必依序。</p><p><b>各頁</b>　目錄裡每一品都可讀全文；目前有導讀（四圈）的是無常品、雙要品、放逸品，其他品先提供全文。「今日」依日期顯示當日經文與圖卡，「金句」可挑十句選風格下載，「影音」收錄《法句經》講法。</p><p><b>資料</b>　進度與心得只存在這支手機的瀏覽器。</p></details>';
+ h+='<details class="help"><summary>關於這部經文</summary><p><b>本工具的全文</b>　《法句經》，大正藏第 210 號，東吳天竺沙門維祇難等譯（署名暫定，見下一欄），二卷、39 品、758 偈。這是古代的漢譯本，不是現代人重新翻譯的作品；經文依 CBETA 電子佛典集成。「白話」是編者自己的意譯。</p><p><b>四種漢譯</b>　《法句經》只有短偈；《法句譬喻經》（西晉法炬、法立譯，四卷、39 品、284 偈）、《出曜經》（姚秦竺佛念譯，三十卷、34 品、934 偈）、《法集要頌經》（北宋天息災譯，四卷、33 品、933 偈）都是在譬喻中夾短偈。本工具的全文是第一種。依法鼓講堂課程投影片。</p></details>';
  h+='<details class="help"><summary>《法句經》的譯者署名（暫定，尚待考訂）</summary>'
  +'<p><b>【暫定，尚未確定】</b>大正藏署名為「東吳天竺沙門維祇難等譯」，但譯者其實有不同說法，這裡把資料並列，之後考訂有結果再修正。</p>'
  +'<p><b>序文怎麼說</b>　支謙〈法句經序〉：維祇難於黃武三年（224）到武昌，帶來五百偈本，請同道竺將炎翻譯（初譯，約 26 品）。後來將炎再來，又得 13 品，支謙「并挍往故有所增定，第其品目，合為一部」，共 39 品。</p>'
@@ -601,7 +607,7 @@ function renderSet(){
  +'<p><b>本工具暫時的寫法</b>　採用大正藏與法鼓講堂投影片的「維祇難等譯」。若你的課本寫「支謙譯」，兩者都有依據，只是看的是署名還是實際編訂者。</p>'
  +'<p><b>參考連結</b><br>'
  +'<a href="https://ntireader.org/taisho/t0210.html" target="_blank" rel="noopener">大正藏第 210 號（CBETA 內容）</a><br><a href="https://tt034.org.tw/index.php?i=1&id=1236&lang=cht&option=module&task=dfile" target="_blank" rel="noopener">蘇錦坤〈法句序〉與《法句經》（PDF）</a><br><a href="https://yifertw.blogspot.com/2014/06/blog-post_13.html" target="_blank" rel="noopener">《法句經》四言偈頌與五言偈頌（蘇錦坤部落格）</a></p></details>';
- h+='<p class="src">偈頌原文：大正藏第 210 號《法句經》（維祇難等譯），依 CBETA 電子佛典集成。巴利文：Dhammapada。故事：雙要品、放逸品依巴利 Dhammapada 註釋（Dhammapada-aṭṭhakathā）的傳統說法概述，參考 Daw Mya Tin 英譯；無常品只在有確切出處時附故事。《法句譬喻經》（T211）的故事目前只整理了第 1–15 品的目錄與要點，其餘品尚未收入。漢譯與巴利偈的對應，由編者依內容比對，供學習參考。</p>';
+ h+='<details class="help"><summary>資料來源</summary><p><b>偈頌原文</b>　大正藏第 210 號《法句經》，依 CBETA 電子佛典集成。</p><p><b>巴利文</b>　Dhammapada。</p><p><b>故事</b>　雙要品、放逸品依巴利 Dhammapada 註釋（Dhammapada-aṭṭhakathā）的傳統說法概述，參考 Daw Mya Tin 英譯；無常品只在有確切出處時附故事。《法句譬喻經》（T211）目前只整理了第 1–15 品的目錄與要點，其餘尚未收入。</p><p><b>漢巴對應</b>　漢譯與巴利偈的對應由編者依內容比對，供學習參考。</p></details>';
  $("pg-set").innerHTML=h;
  [["s_ord","ord"],["s_pal","pal"],["s_mode","mode"],["s_ff","ff"],["s_fs","fs"],["s_lh","lh"],["s_gap","gap"]].forEach(function(p){var el=$(p[0]);el.oninput=function(){SET[p[1]]=(p[1]=="pal"||p[1]=="mode"||p[1]=="ff"||p[1]=="ord")?this.value:+this.value;apply()}})}
 /* 全文閱讀 */
