@@ -61,7 +61,7 @@ mark{background:rgba(190,160,80,.35);color:inherit;border-radius:3px}.hit{backgr
 .rc{font-size:.8em;color:var(--mut);margin:8px 0}.sgs{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}.sgs button{border:1px solid var(--line);background:linear-gradient(145deg,var(--hi),var(--sf));border-radius:16px;padding:4px 14px;font-size:.82em;color:var(--mut)}
 .hw{display:block;text-align:center}.hrt{border:none;background:none;color:var(--mut);font-size:1.15em;padding:2px 10px}.hrt.on{color:var(--acc)}
 .acts .hrt.hl{border:1px solid var(--line);background:linear-gradient(145deg,var(--hi),var(--sf));border-radius:18px;padding:4px 16px;font-size:.82em;box-shadow:0 3px 7px var(--sh)}
-.src{font-size:.72em;color:var(--mut);margin-top:26px;line-height:1.8}
+.src{font-size:.72em;color:var(--mut);margin-top:26px;line-height:1.8}.src a{color:var(--acc);text-decoration:underline;text-underline-offset:2px}.src.in{margin:2px 0 12px}.cbl{font-size:.7em;color:var(--mut);margin-left:6px;text-decoration:underline;text-underline-offset:2px}
 #tb{position:fixed;left:0;right:0;bottom:0;display:flex;background:var(--sf);border-top:1px solid var(--line);box-shadow:0 -6px 16px -8px var(--sh);padding-bottom:env(safe-area-inset-bottom,0);z-index:10}
 #tb button{flex:1;background:none;border:none;padding:12px 0;font-size:.8em;color:var(--mut);letter-spacing:.08em}#tb .on{color:var(--acc);font-weight:700;text-shadow:0 1px 0 var(--hi)}
 .toc{position:fixed;inset:0;background:var(--bg);overflow:auto;z-index:20;padding:env(safe-area-inset-top,0) 0 env(safe-area-inset-bottom,0)}.toc[hidden]{display:none}
@@ -503,17 +503,17 @@ function renderLearn(){
  h+='<h2 class="ut">'+u.t+'</h2><div class="ref">'+b.n+'　偈 '+u.k.map(function(k){return k.n}).join("、")+'</div>';
  h+='<div class="rg">'+RN.map(function(n,i){return '<button class="'+(i==rd?"on ":"")+(dn(u,i)?"dn":"")+'" data-r="'+i+'" aria-label="'+RT[i]+'">'+n+'</button>'}).join("")+'</div><div class="rn">'+RT[rd]+'</div>';
  if(rd==0){
-  h+=sec(u.sl||"故事",'<p>'+u.s+'</p>');h+=storyBox(b.wno);
-  u.k.forEach(function(k){h+=sec("原文・偈 "+k.n,(k.h?'<p class="vs">'+k.h.join("<br>")+'</p><div class="hw">'+heart(k.h.join(""),b.n+(/^\d/.test(k.n)?" 第"+k.n+"偈":" "+k.n+"偈"))+'</div>':'<p class="hn">'+k.hn+'</p>')+(k.hm?'<p class="hn">'+k.hm+'</p>':'')+'<p>'+k.d+'</p>')});
+  h+=sec(u.sl||"故事",'<p>'+u.s+'</p>'+srcS(b));h+=storyBox(b.wno);
+  u.k.forEach(function(k){h+=sec("原文・偈 "+k.n,(k.h?'<p class="vs">'+k.h.join("<br>")+'</p><div class="hw">'+heart(k.h.join(""),b.n+(/^\d/.test(k.n)?" 第"+k.n+"偈":" "+k.n+"偈"))+'</div>':'<p class="hn">'+k.hn+'</p>')+(k.hm?'<p class="hn">'+k.hm+'</p>':'')+'<p>'+k.d+'</p>'+srcH(b,k))});
   h+=sec("想一想",'<p>'+u.q.q+'</p>'+u.q.o.map(function(o,i){return '<button class="opt" data-q="'+i+'">'+o[0]+'</button><div class="fb" id="fb'+i+'"></div>'}).join(""));
  }else if(rd==1){
-  u.k.forEach(function(k){h+=sec((k.pl||"巴利原文")+"・偈 "+k.n,k.p?'<p class="pali">'+k.p.join("<br>")+'</p>':'<p class="hn">'+(k.pn||"")+'</p>')});
+  u.k.forEach(function(k){h+=sec((k.pl||"巴利原文")+"・偈 "+k.n,(k.p?'<p class="pali">'+k.p.join("<br>")+'</p>':'<p class="hn">'+(k.pn||"")+'</p>')+srcP(b,k))});
   if(u.g.length)h+=sec("逐字對照",'<table>'+u.g.map(function(g){return '<tr><td class="it">'+g[0]+'</td><td>'+g[1]+'</td></tr>'}).join("")+'</table>');
   if(u.w.length)h+=sec("古文字詞",'<table>'+u.w.map(function(g){return '<tr><td>'+g[0]+'</td><td>'+g[1]+'</td></tr>'}).join("")+'</table>');
  }else if(rd==2){
-  h+=u.i.map(function(x){return sec(x[0],'<p>'+x[1]+'</p>')}).join("");
+  h+=u.i.map(function(x){return sec(x[0],'<p>'+x[1]+'</p>')}).join("")+'<p class="src in">「義理連結」是編者的整理與說明，不是經文原文。</p>';
  }else{
-  h+=sec("今天試試",'<p>'+u.x+'</p>');
+  h+=sec("今天試試",'<p>'+u.x+'</p><p class="src in">這是編者設計的練習，不是經文內容。</p>');
   h+=sec("我的心得",'<textarea id="ref" placeholder="寫下你的觀察…"></textarea>');
  }
  h+='<button class="done'+(dn(u,rd)?" d":"")+'" data-a="done">'+(dn(u,rd)?"✓ 已完成這一圈":"完成這一圈")+'</button>';
@@ -637,7 +637,7 @@ function renderRead(){
  var d=FULL[readW],h="",prev=readW>0?readW-1:-1,next=readW<39?readW+1:-1;
  if(readW==0){h+='<h2 class="ut">法句經序</h2><div class="ref">《法句經》（大正藏第 210 號，維祇難等譯）</div>'+d.p.map(function(p){return '<p class="pre">'+p+'</p>'}).join("")}
  else{var b=null;BOOKS.forEach(function(x){if(x.wno==readW)b=x});
-  h+='<h2 class="ut">'+d.n+'</h2><div class="ref">《法句經》第 '+readW+' 品・'+(d.t.length)+' 段'+(b?'・<a href="#" data-a="gostudy">有導讀</a>':'')+'</div><p class="sm" style="text-align:center">'+d.s+'</p>'+d.t.map(function(t,i){var tx=t.split("|").join("");return '<p class="rs" id="rs'+i+'">'+t.split("|").join("<br>")+'<br><span class="hw">'+heart(tx,d.n+" 第"+(i+1)+"段")+'</span></p>'}).join("")+storyBox(readW)}
+  h+='<h2 class="ut">'+d.n+'</h2><div class="ref">《法句經》第 '+readW+' 品・'+(d.t.length)+' 段'+(b?'・<a href="#" data-a="gostudy">有導讀</a>':'')+'</div><p class="sm" style="text-align:center">'+d.s+'</p>'+d.t.map(function(t,i){var tx=t.split("|").join("");return '<p class="rs" id="rs'+i+'">'+t.split("|").join("<br>")+'<br><span class="hw">'+heart(tx,d.n+" 第"+(i+1)+"段")+'<a class="cbl" href="'+cbU(tx)+'" target="_blank" rel="noopener">查 CBETA ↗</a></span></p>'}).join("")+storyBox(readW)}
  h+='<div class="rnav"><button data-a="rprev"'+(prev<0?" disabled":"")+'>‹ '+(prev>=0?FULL[prev].n:"")+'</button><button data-a="rtoc">目錄</button><button data-a="rnext"'+(next<0?" disabled":"")+'>'+(next>=0?FULL[next].n:"")+' ›</button></div><p class="src" style="text-align:center">經文依 CBETA 電子佛典集成；分段為閱讀便利所設。</p>';
  $("pg-read").innerHTML=h;
  if(window._seg!=null){var sg=window._seg;window._seg=null;setTimeout(function(){var el=$("rs"+sg);if(el){el.classList.add("hit");el.scrollIntoView({block:"center"})}},60)}}
@@ -652,6 +652,17 @@ function renderMedia(){
  $("pg-media").innerHTML=h}
 $("pg-media").onclick=function(e){var v=e.target.closest(".vp");if(!v||v.querySelector("iframe"))return;var m=MEDIA[+v.getAttribute("data-v")];
  v.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+m.id+'?autoplay=1&rel=0&playsinline=1" title="'+m.t+'" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe>'};
+/* 出處 */
+var PNO={y:1,z:2,c:3,p:4,b:5};
+function lk(u,t){return '<a href="'+u+'" target="_blank" rel="noopener">'+t+'</a>'}
+function cbU(t){return "https://cbetaonline.dila.edu.tw/zh/search?q="+encodeURIComponent(t.replace(/[，。；、？！：「」\s]/g,"").slice(0,12))}
+function zU(n){return "https://zugangzureinsicht.org/tipitaka/kn/dhp/dhp."+(n<10?"0":"")+n+".bpit.html"}
+function cU(n){return "https://nanda.online-dhamma.net/tipitaka/sutta/khuddaka/dhammapada/dhp-contrast-reading/dhp-contrast-reading-chap"+(n<10?"0":"")+n+"/"}
+function srcH(b,k){return k.h?'<p class="src in">出處　《法句經》（大正藏 T210）〈'+b.n+'〉，經文依 CBETA。'+lk(cbU(k.h.join("")),"在 CBETA 查這一句 ↗")+'</p>':""}
+function srcP(b,k){if(!k.p)return "";var n=PNO[b.id];
+ if(n)return '<p class="src in">出處　Dhammapada 第 '+k.n+' 偈（巴利）。'+lk(zU(n),"Daw Mya Tin 譯本・"+b.p+" ↗")+"　"+lk(cU(n),"蘇錦坤對讀表 ↗")+'</p>';
+ return '<p class="src in">出處　'+(k.pl||"梵文對應")+'；對應依蘇錦坤對照表。</p>'}
+function srcS(b){var n=PNO[b.id];return n?'<p class="src in">故事出處　巴利註釋（Dhammapada-aṭṭhakathā）傳統說法，依 Daw Mya Tin 英譯，由編者摘要。'+lk(zU(n),"英譯原頁 ↗")+'</p>':""}
 /* 收藏 */
 var FAV=R_("dhp2-fav",[]),gt="d",SQ="",SIDX=null;
 function esc(x){return String(x).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
