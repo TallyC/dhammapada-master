@@ -11,7 +11,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="法句經">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="app-ver" content="20261029-1718">
+<meta name="app-ver" content="20261029-1723">
 <title>法句經・故事與偈</title>
 <style>
 :root{--bg:#e2e2df;--sf:#eeeeeb;--ink:#2a2a2a;--mut:#6c6c67;--acc:#454545;--line:#cdcdc9;--hi:rgba(255,255,255,.9);--sh:rgba(0,0,0,.16);--br:#8c8c87;--fs:17px;--lh:1.9;--gap:14px;--ff:"Noto Serif TC","Songti TC","PMingLiU",serif}
@@ -545,7 +545,7 @@ $("pg-learn").onclick=function(e){
  if(t.hasAttribute("data-r")){rd=+t.getAttribute("data-r");renderLearn();return}
  if(t.hasAttribute("data-q")){var i=+t.getAttribute("data-q"),o=u.q.o[i];t.className="opt "+(o[2]?"ok":"no");$("fb"+i).textContent=o[1];return}
  var a=t.getAttribute("data-a");
- if(a=="prev")step(-1);else if(a=="next")step(1);else if(a=="toc")openToc();else if(a=="read"){readW=BOOKS[cb].wno;show("read")}
+ if(a=="prev")step(-1);else if(a=="next")step(1);else if(a=="toc")openToc();else if(a=="read"){readW=BOOKS[cb].wno;readBack=1;show("read")}
  else if(a=="done"){var s=(ST[u.id]=ST[u.id]||{});s["d"+rd]=!s["d"+rd];W_("dhp2",ST);if(s["d"+rd]&&rd<3)rd++;renderLearn();window.scrollTo(0,0)}
 };
 /* 左右滑動換則 */
@@ -777,8 +777,9 @@ function renderSet(){
  $("pg-set").innerHTML=h;
  [["s_rem","rem"],["s_ord","ord"],["s_pal","pal"],["s_mode","mode"],["s_ff","ff"],["s_fs","fs"],["s_lh","lh"],["s_gap","gap"]].forEach(function(p){var el=$(p[0]);el.oninput=function(){SET[p[1]]=(p[1]=="pal"||p[1]=="mode"||p[1]=="ff"||p[1]=="ord"||p[1]=="rem")?this.value:+this.value;apply()}})}
 /* 全文閱讀 */
+var readBack=0;
 function renderRead(){
- var d=FULL[readW],h="",prev=readW>0?readW-1:-1,next=readW<39?readW+1:-1;
+ var d=FULL[readW],h=readBack?'<button class="lnk" data-a="rback" style="margin:0 0 8px">‹ 回到導讀</button>':"",prev=readW>0?readW-1:-1,next=readW<39?readW+1:-1;
  if(readW==0){h+='<h2 class="ut">法句經序</h2><div class="ref">《法句經》（大正藏第 210 號，維祇難等譯）</div>'+d.p.map(function(p){return '<p class="pre">'+p+'</p>'}).join("")}
  else{var b=null;BOOKS.forEach(function(x){if(x.wno==readW)b=x});
   h+='<h2 class="ut">'+d.n+'</h2><div class="ref">《法句經》第 '+readW+' 品・'+(d.t.length)+' 段'+(b?'・<a href="#" data-a="gostudy">有導讀</a>':'')+'</div><p class="sm" style="text-align:center">'+d.s+'</p>'+d.t.map(function(t,i){var tx=t.split("|").join("");return '<p class="rs" id="rs'+i+'">'+t.split("|").join("<br>")+'<br><span class="hw">'+heart(tx,d.n+" 第"+(i+1)+"段")+'<a class="cbl" href="'+cbU(tx)+'" target="_blank" rel="noopener">查 CBETA ↗</a></span></p>'}).join("")+storyBox(readW)}
@@ -786,6 +787,7 @@ function renderRead(){
  $("pg-read").innerHTML=h;
  if(window._seg!=null){var sg=window._seg;window._seg=null;setTimeout(function(){var el=$("rs"+sg);if(el){el.classList.add("hit");el.scrollIntoView({block:"center"})}},60)}}
 $("pg-read").onclick=function(e){var t=e.target.closest("[data-a]");if(!t)return;var a=t.getAttribute("data-a");
+ if(a=="rback"){readBack=0;show("learn");window.scrollTo(0,0);return}
  if(a=="gostudy"){e.preventDefault();BOOKS.forEach(function(x,i){if(x.wno==readW)go(i,0)});return}
  if(a=="rprev"&&readW>0){readW--;renderRead();window.scrollTo(0,0)}else if(a=="rnext"&&readW<39){readW++;renderRead();window.scrollTo(0,0)}else if(a=="rtoc"){openToc()}};
 /* 影音 */
@@ -864,7 +866,7 @@ $("pg-home").onclick=function(e){var t=e.target.closest("[data-a],[data-bk],[dat
  var a=t.getAttribute("data-a");
  if(a=="cont")show("learn");else if(a=="today")show("today");else if(a=="toc"){show("learn");openToc()}else if(a=="gold")show("gold");else if(a=="media")show("media");else if(a=="search")show("search")};
 /* 頁面 */
-function show(p){page=p;["home","learn","today","gold","media","set","read","search"].forEach(function(k){$("pg-"+k).hidden=(k!=p);var b=document.querySelector('[data-p="'+k+'"]');if(b)b.className=((k==p||(p=="read"&&k=="learn"))?"on":"")});
+function show(p){page=p;if(p!="read")readBack=0;["home","learn","today","gold","media","set","read","search"].forEach(function(k){$("pg-"+k).hidden=(k!=p);var b=document.querySelector('[data-p="'+k+'"]');if(b)b.className=((k==p||(p=="read"&&k=="learn"))?"on":"")});
  if(p=="home")renderHome();else if(p=="learn")renderLearn();else if(p=="today")renderToday();else if(p=="gold")renderGold();else if(p=="media")renderMedia();else if(p=="read")renderRead();else if(p=="search")renderSearch();else renderSet();window.scrollTo(0,0)}
 [].forEach.call(document.querySelectorAll("#tb button"),function(b){b.onclick=function(){show(b.getAttribute("data-p"))}});
 if(ST.last&&BOOKS[ST.last[0]]&&BOOKS[ST.last[0]].u[ST.last[1]]){cb=ST.last[0];cu=ST.last[1]}else{BOOKS.forEach(function(b,i){if(b.wno==1)cb=i})}
