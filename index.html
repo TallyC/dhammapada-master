@@ -11,7 +11,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="法句經">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="app-ver" content="20261029-1311">
+<meta name="app-ver" content="20261029-1314">
 <title>法句經・故事與偈</title>
 <style>
 :root{--bg:#e2e2df;--sf:#eeeeeb;--ink:#2a2a2a;--mut:#6c6c67;--acc:#454545;--line:#cdcdc9;--hi:rgba(255,255,255,.9);--sh:rgba(0,0,0,.16);--br:#8c8c87;--fs:17px;--lh:1.9;--gap:14px;--ff:"Noto Serif TC","Songti TC","PMingLiU",serif}
@@ -601,7 +601,7 @@ function renderGold(){
  if(!L.length){h+='<p class="ref">還沒有收藏的句子。<br>在閱讀、學習、今日經文或精選金句按 ♡，就會收到這裡。</p>';$("pg-gold").innerHTML=h;return}
  var g=L[gi];cvG=makeCard(g[0],g[1]);
  h+='<div class="ref">選一句，再選風格，即可下載</div><div class="gl" id="gl">'+L.map(function(d,i){return '<button class="'+(i==gi?"on":"")+'" data-g="'+i+'">'+d[1].split(/[，。；、？！]/)[0]+'</button>'}).join("")+'</div>';
- h+=styles("st2")+'<img class="cimg" id="goldimg" alt="金句圖卡" src="'+cvG.toDataURL("image/png")+'"><div class="acts"><button data-a="gsave">儲存圖卡</button><button data-a="gshare">分享</button>'+heart(g[1],g[0],1)+'</div><p class="ref">按「儲存圖卡」會放大預覽，長按圖片即可存入相簿；若手機無法下載，這個方法一定可以。</p>';
+ h+=styles("st2")+'<img class="cimg" id="goldimg" alt="金句圖卡" src="'+cvG.toDataURL("image/png")+'"><div class="acts"><button data-a="gsave">儲存圖卡</button><button data-a="gshare">分享</button></div><div class="acts">'+heart(g[1],g[0],1)+'</div><p class="ref" id="unfavtip" hidden>已取消收藏，離開此頁後會從清單移除；再按一次 ♥ 可恢復。</p><p class="ref">按「儲存圖卡」會放大預覽，長按圖片即可存入相簿；若手機無法下載，這個方法一定可以。</p>';
  $("pg-gold").innerHTML=h}
 function dl(cv){cv.toBlob(function(b){if(!b)return;var u=URL.createObjectURL(b),el=document.createElement("a");el.href=u;el.download="法句經_"+new Date().toISOString().slice(0,10)+".png";document.body.appendChild(el);el.click();el.remove()},"image/png")}
 function shareCv(cv){cv.toBlob(function(b){try{var f=new File([b],"法句經.png",{type:"image/png"});if(navigator.canShare&&navigator.canShare({files:[f]})){navigator.share({files:[f],title:"法句經"}).catch(function(){});return}}catch(e){}openOv(cv)},"image/png")}
@@ -701,8 +701,8 @@ function heart(t,s,l){var on=favHas(t);return '<button class="hrt'+(l?" hl":"")+
 document.addEventListener("click",function(e){var h=e.target.closest&&e.target.closest(".hrt");if(!h)return;e.stopPropagation();e.preventDefault();
  var t=h.getAttribute("data-ft"),s=h.getAttribute("data-fs"),i=-1;FAV.forEach(function(f,k){if(f.t==t)i=k});
  if(i>=0)FAV.splice(i,1);else FAV.push({t:t,s:s});W_("dhp2-fav",FAV);
- if(page=="gold"&&gt=="f")renderGold();
- else [].forEach.call(document.querySelectorAll(".hrt"),function(b){if(b.getAttribute("data-ft")==t){var on=i<0;b.classList.toggle("on",on);b.textContent=(on?"♥":"♡")+"︎"+(b.classList.contains("hl")?" 收藏":"")}})},true);
+ if(page=="gold"&&gt=="f"){var tp=document.getElementById("unfavtip");if(tp)tp.hidden=(i<0)}
+ [].forEach.call(document.querySelectorAll(".hrt"),function(b){if(b.getAttribute("data-ft")==t){var on=i<0;b.classList.toggle("on",on);b.textContent=(on?"♥":"♡")+"︎"+(b.classList.contains("hl")?" 收藏":"")}})},true);
 /* 搜尋 */
 function nzs(x){var o="";for(var i=0;i<x.length;i++){var c=x.charAt(i).toLowerCase();o+=(c.normalize?c.normalize("NFD").charAt(0):c)}return o}
 function buildIdx(){var A=[];
