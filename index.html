@@ -11,7 +11,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="法句經">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="app-ver" content="20261029-1730">
+<meta name="app-ver" content="20261029-1753">
 <title>法句經・故事與偈</title>
 <style>
 :root{--bg:#e2e2df;--sf:#eeeeeb;--ink:#2a2a2a;--mut:#6c6c67;--acc:#454545;--line:#cdcdc9;--hi:rgba(255,255,255,.9);--sh:rgba(0,0,0,.16);--br:#8c8c87;--fs:17px;--lh:1.9;--gap:14px;--ff:"Noto Serif TC","Songti TC","PMingLiU",serif}
@@ -51,6 +51,7 @@ table{border-collapse:collapse;width:100%;font-size:.84em;margin-bottom:var(--ga
 .fb{font-size:.8em;color:var(--mut);margin:0 0 4px 4px}
 textarea{width:100%;min-height:90px;font-size:.9em;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:8px;box-shadow:inset 0 2px 5px var(--sh);margin-bottom:12px}
 .done{display:block;margin:22px auto 0;font-size:.9em;padding:9px 28px;border:1.5px solid var(--acc);background:linear-gradient(145deg,var(--hi),var(--sf));color:var(--acc);border-radius:24px;box-shadow:0 4px 10px var(--sh)}.done.d{background:var(--acc);color:var(--sf)}
+.vn{display:inline-block;font-size:.72em;letter-spacing:.1em;color:var(--bt);border:1px solid var(--bt);border-radius:10px;padding:0 8px;margin-bottom:3px}
 .rbk{position:sticky;top:8px;z-index:20;display:block;margin:0 auto 10px;padding:8px 18px;border-radius:20px;border:1px solid var(--bt);background:var(--bg);color:var(--bt);font-size:.9em;box-shadow:0 2px 8px rgba(0,0,0,.18)}
 .lnk{display:block;margin:12px auto 0;background:none;border:none;color:var(--mut);font-size:.85em}
 .chips{display:flex;gap:8px;justify-content:center;margin:14px 0 8px}.xbk{flex-wrap:wrap}
@@ -783,8 +784,8 @@ function renderRead(){
  var d=FULL[readW],h=readBack?'<button class="rbk" data-a="rback">‹ 回到導讀・偈 '+readBack.n+'</button>':"",prev=readW>0?readW-1:-1,next=readW<39?readW+1:-1;
  if(readW==0){h+='<h2 class="ut">法句經序</h2><div class="ref">《法句經》（大正藏第 210 號，維祇難等譯）</div>'+d.p.map(function(p){return '<p class="pre">'+p+'</p>'}).join("")}
  else{var b=null;BOOKS.forEach(function(x){if(x.wno==readW)b=x});
-  h+='<h2 class="ut">'+d.n+'</h2><div class="ref">《法句經》第 '+readW+' 品・'+(d.t.length)+' 段'+(b?'・<a href="#" data-a="gostudy">有導讀</a>':'')+'</div><p class="sm" style="text-align:center">'+d.s+'</p>'+d.t.map(function(t,i){var tx=t.split("|").join("");return '<p class="rs" id="rs'+i+'">'+t.split("|").join("<br>")+'<br><span class="hw">'+heart(tx,d.n+" 第"+(i+1)+"段")+'<a class="cbl" href="'+cbU(tx)+'" target="_blank" rel="noopener">查 CBETA ↗</a></span></p>'}).join("")+storyBox(readW)}
- h+='<div class="rnav"><button data-a="rprev"'+(prev<0?" disabled":"")+'>‹ '+(prev>=0?FULL[prev].n:"")+'</button><button data-a="rtoc">目錄</button><button data-a="rnext"'+(next<0?" disabled":"")+'>'+(next>=0?FULL[next].n:"")+' ›</button></div><p class="src" style="text-align:center">經文依 CBETA 電子佛典集成；分段為閱讀便利所設。</p>';
+  h+='<h2 class="ut">'+d.n+'</h2><div class="ref">《法句經》第 '+readW+' 品・共 '+(d.t.length)+' 偈'+(b?'・<a href="#" data-a="gostudy">有導讀</a>':'')+'</div><p class="sm" style="text-align:center">'+d.s+'</p>'+d.t.map(function(t,i){var tx=t.split("|").join("");return '<p class="rs" id="rs'+i+'"><span class="vn">第 '+(i+1)+' 偈</span><br>'+t.split("|").join("<br>")+'<br><span class="hw">'+heart(tx,d.n+" 第"+(i+1)+"段")+'<a class="cbl" href="'+cbU(tx)+'" target="_blank" rel="noopener">查 CBETA ↗</a></span></p>'}).join("")+storyBox(readW)}
+ h+='<div class="rnav"><button data-a="rprev"'+(prev<0?" disabled":"")+'>‹ '+(prev>=0?FULL[prev].n:"")+'</button><button data-a="rtoc">目錄</button><button data-a="rnext"'+(next<0?" disabled":"")+'>'+(next>=0?FULL[next].n:"")+' ›</button></div><p class="src" style="text-align:center">經文依 CBETA 電子佛典集成；偈的序號是本工具依段落從 1 起算，與其他版本的編號可能不同。</p>';
  $("pg-read").innerHTML=h;
  if(window._seg!=null){var sg=window._seg;window._seg=null;setTimeout(function(){var el=$("rs"+sg);if(el){el.classList.add("hit");el.scrollIntoView({block:"center"})}},60)}}
 $("pg-read").onclick=function(e){var t=e.target.closest("[data-a]");if(!t)return;var a=t.getAttribute("data-a");
