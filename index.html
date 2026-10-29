@@ -11,7 +11,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="法句經">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="app-ver" content="20261029-1757">
+<meta name="app-ver" content="20261029-1853">
 <title>法句經・故事與偈</title>
 <style>
 :root{--bg:#e2e2df;--sf:#eeeeeb;--ink:#2a2a2a;--mut:#6c6c67;--acc:#454545;--line:#cdcdc9;--hi:rgba(255,255,255,.9);--sh:rgba(0,0,0,.16);--br:#8c8c87;--fs:17px;--lh:1.9;--gap:14px;--ff:"Noto Serif TC","Songti TC","PMingLiU",serif}
@@ -805,7 +805,10 @@ $("pg-media").onclick=function(e){var v=e.target.closest(".vp");if(!v||v.querySe
 /* 出處 */
 var PNO={y:1,z:2,c:3,p:4,b:5,m:6,r:7,s:8};
 function lk(u,t){return '<a href="'+u+'" target="_blank" rel="noopener">'+t+'</a>'}
-function cbU(t){return "https://cbetaonline.dila.edu.tw/zh/search?q="+encodeURIComponent(t.replace(/[，。；、？！：「」\s]/g,"").slice(0,12))}
+var CBQ={};
+function cbU(t){var f=t.replace(/[，。；、？！：「」\s]/g,""),q=f.slice(0,12);CBQ[q]=f;return "https://cbetaonline.dila.edu.tw/zh/search?q="+encodeURIComponent(q)}
+function toast(m){var d=document.getElementById("toast");if(!d){d=document.createElement("div");d.id="toast";d.style.cssText="position:fixed;left:50%;bottom:90px;transform:translateX(-50%);max-width:86%;padding:10px 16px;border-radius:14px;background:rgba(30,30,30,.92);color:#fff;font-size:14px;line-height:1.5;z-index:9999;text-align:center;pointer-events:none";document.body.appendChild(d)}d.textContent=m;d.style.display="block";clearTimeout(d._t);d._t=setTimeout(function(){d.style.display="none"},3500)}
+document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest('a[href*="cbetaonline.dila.edu.tw/zh/search"]');if(!a)return;var q="";try{q=decodeURIComponent(a.href.split("q=")[1]||"")}catch(x){}var f=CBQ[q]||q;if(!f)return;var ok=function(){toast("已複製「"+f.slice(0,14)+(f.length>14?"…":"")+"」（已去標點）。若搜尋框是空的，長按貼上即可")};try{navigator.clipboard.writeText(f).then(ok,function(){})}catch(x){}},true);
 function zU(n){return "https://zugangzureinsicht.org/tipitaka/kn/dhp/dhp."+(n<10?"0":"")+n+".bpit.html"}
 function cU(n){return "https://nanda.online-dhamma.net/tipitaka/sutta/khuddaka/dhammapada/dhp-contrast-reading/dhp-contrast-reading-chap"+(n<10?"0":"")+n+"/"}
 function srcH(b,k,last){if(!k.h)return "";return '<p class="src in">'+lk(cbU(k.h.join("")),"在 CBETA 查這一句 ↗")+'</p>'+(last?'<p class="src in">出處　《法句經》（大正藏 T210）〈'+b.n+'〉，經文依 CBETA。</p>':"")}
