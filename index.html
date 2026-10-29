@@ -11,7 +11,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="法句經">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="app-ver" content="20261029-1753">
+<meta name="app-ver" content="20261029-1757">
 <title>法句經・故事與偈</title>
 <style>
 :root{--bg:#e2e2df;--sf:#eeeeeb;--ink:#2a2a2a;--mut:#6c6c67;--acc:#454545;--line:#cdcdc9;--hi:rgba(255,255,255,.9);--sh:rgba(0,0,0,.16);--br:#8c8c87;--fs:17px;--lh:1.9;--gap:14px;--ff:"Noto Serif TC","Songti TC","PMingLiU",serif}
@@ -504,6 +504,8 @@ var CAT=[[1,"無常品",21,0,""],[2,"教學品",29,0,""],[3,"多聞品",19,0,""]
 function ordList(){return SET.ord=="wu"?CAT.slice():CAT.filter(function(r){return r.p}).sort(function(x,y){return x.p-y.p})}
 function bkNo(b){return SET.ord=="wu"?b.wno:b.pno}
 function bkLabel(b){if(SET.ord=="wu")return "漢傳《法句經》第 "+b.wno+" 品";return b.pno?"巴利第 "+b.pno+" 品":"漢傳第 "+b.wno+" 品・巴利無對應"}
+function segOf(b,k){if(!k||!k.h||!FULL[b.wno]||!FULL[b.wno].t)return -1;var f=k.h.join("").replace(/[，。；、？！：]/g,""),t=FULL[b.wno].t.map(function(x){return x.replace(/[|，。；、？！：]/g,"")});for(var L=f.length;L>=4;L--){var key=f.slice(0,L);for(var i=0;i<t.length;i++)if(t[i].indexOf(key)>=0)return i}return -1}
+function vLabel(b,k){var i=segOf(b,k),pl=/^\d/.test(k.n);if(!k.h)return "原文・"+(pl?"巴利偈 "+k.n+"（漢譯無對應）":"偈 "+k.n);if(i<0)return "原文・偈 "+k.n;return "原文・"+(pl?"巴利偈 "+k.n+"・":"")+"漢譯全文第 "+(i+1)+" 偈"}
 function bookOf(r){for(var i=0;i<BOOKS.length;i++)if(BOOKS[i].wno==r.w)return i;return -1}
 function ordIdx(){return BOOKS.map(function(b,i){return i}).filter(function(i){return bkNo(BOOKS[i])>0}).sort(function(x,y){return bkNo(BOOKS[x])-bkNo(BOOKS[y])})}
 function ordSeg(){return '<div class="seg"><button data-o="pali" class="'+(SET.ord!="wu"?"on":"")+'">巴利</button><button data-o="wu" class="'+(SET.ord=="wu"?"on":"")+'">漢傳</button></div>'}
@@ -524,7 +526,7 @@ function renderLearn(){
  h+='<div class="rg">'+RN.map(function(n,i){return '<button class="'+(i==rd?"on ":"")+(dn(u,i)?"dn":"")+'" data-r="'+i+'" aria-label="'+RT[i]+'">'+n+'</button>'}).join("")+'</div><div class="rn">'+RT[rd]+'</div>';
  if(rd==0){
   h+=sec(u.sl||"故事",'<p>'+u.s+'</p>'+srcS(b));h+=storyBox(b.wno);
-  u.k.forEach(function(k,ki){h+=sec("原文・偈 "+k.n,(k.h?'<p class="vs">'+k.h.join("<br>")+'</p><div class="hw">'+heart(k.h.join(""),b.n+(/^\d/.test(k.n)?" 第"+k.n+"偈":" "+k.n+"偈"))+'</div>':'<p class="hn">'+k.hn+'</p>')+(k.hm?'<p class="hn">'+k.hm+'</p>':'')+'<p>'+k.d+'</p>'+srcH(b,k,ki==u.k.length-1))});
+  u.k.forEach(function(k,ki){h+=sec(vLabel(b,k),(k.h?'<p class="vs">'+k.h.join("<br>")+'</p><div class="hw">'+heart(k.h.join(""),b.n+(/^\d/.test(k.n)?" 第"+k.n+"偈":" "+k.n+"偈"))+'</div>':'<p class="hn">'+k.hn+'</p>')+(k.hm?'<p class="hn">'+k.hm+'</p>':'')+'<p>'+k.d+'</p>'+srcH(b,k,ki==u.k.length-1))});
   h+=sec("想一想",'<p>'+u.q.q+'</p>'+u.q.o.map(function(o,i){return '<button class="opt" data-q="'+i+'">'+o[0]+'</button><div class="fb" id="fb'+i+'"></div>'}).join(""));
  }else if(rd==1){
   u.k.forEach(function(k){h+=sec((k.pl||"巴利原文")+"・偈 "+k.n,(k.p?'<p class="pali">'+k.p.join("<br>")+'</p>':'<p class="hn">'+(k.pn||"")+'</p>')+srcP(b,k))});h+=srcPN(b,u);
@@ -547,7 +549,7 @@ $("pg-learn").onclick=function(e){
  if(t.hasAttribute("data-r")){rd=+t.getAttribute("data-r");renderLearn();return}
  if(t.hasAttribute("data-q")){var i=+t.getAttribute("data-q"),o=u.q.o[i];t.className="opt "+(o[2]?"ok":"no");$("fb"+i).textContent=o[1];return}
  var a=t.getAttribute("data-a");
- if(a=="prev")step(-1);else if(a=="next")step(1);else if(a=="toc")openToc();else if(a=="read"){readW=BOOKS[cb].wno;var ss=[].slice.call(document.querySelectorAll("#pg-learn .sec")).filter(function(e){return /^原文/.test((e.querySelector(".lb")||{}).textContent||"")}),ki=0;ss.forEach(function(e,i){if(e.getBoundingClientRect().top<=200)ki=i});var kk=u.k[ki]||u.k[0],key=kk&&kk.h?kk.h.join("").replace(/[，。；、？！：]/g,"").slice(0,4):"",sg=null;if(key&&FULL[readW]&&FULL[readW].t)FULL[readW].t.forEach(function(t,i){if(sg==null&&t.replace(/[|，。；、？！：]/g,"").indexOf(key)>=0)sg=i});readBack={b:cb,u:cu,r:rd,y:window.pageYOffset,n:kk?kk.n:""};window._seg=sg;show("read")}
+ if(a=="prev")step(-1);else if(a=="next")step(1);else if(a=="toc")openToc();else if(a=="read"){readW=BOOKS[cb].wno;var ss=[].slice.call(document.querySelectorAll("#pg-learn .sec")).filter(function(e){return /^原文/.test((e.querySelector(".lb")||{}).textContent||"")}),ki=0;ss.forEach(function(e,i){if(e.getBoundingClientRect().top<=200)ki=i});var kk=u.k[ki]||u.k[0],sg=segOf(BOOKS[cb],kk);if(sg<0)sg=null;readBack={b:cb,u:cu,r:rd,y:window.pageYOffset,n:kk?kk.n:""};window._seg=sg;show("read")}
  else if(a=="done"){var s=(ST[u.id]=ST[u.id]||{});s["d"+rd]=!s["d"+rd];W_("dhp2",ST);if(s["d"+rd]&&rd<3)rd++;renderLearn();window.scrollTo(0,0)}
 };
 /* 左右滑動換則 */
