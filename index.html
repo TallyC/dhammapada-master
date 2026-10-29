@@ -11,7 +11,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="法句經">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="app-ver" content="20261029-1314">
+<meta name="app-ver" content="20261029-1415">
 <title>法句經・故事與偈</title>
 <style>
 :root{--bg:#e2e2df;--sf:#eeeeeb;--ink:#2a2a2a;--mut:#6c6c67;--acc:#454545;--line:#cdcdc9;--hi:rgba(255,255,255,.9);--sh:rgba(0,0,0,.16);--br:#8c8c87;--fs:17px;--lh:1.9;--gap:14px;--ff:"Noto Serif TC","Songti TC","PMingLiU",serif}
@@ -627,7 +627,14 @@ function installH(){
  var d=ph('<rect x="14" y="16" width="20" height="20" rx="5" fill="var(--sf)" stroke="var(--line)"/><rect x="40" y="16" width="20" height="20" rx="5" fill="var(--sf)" stroke="var(--line)"/><rect x="66" y="16" width="20" height="20" rx="5" fill="var(--sf)" stroke="var(--line)"/><rect x="14" y="52" width="20" height="20" rx="5" fill="var(--ink)"/><text x="24" y="67" text-anchor="middle" font-size="12" fill="var(--bg)" font-family="serif">句</text><circle cx="24" cy="62" r="16" '+hi+'/><text x="24" y="86" text-anchor="middle" font-size="6" font-family="sans-serif" fill="var(--ink)">法句經</text>','主畫面出現圖示，之後從這裡開啟','④');
  var u=location.href.split('#')[0].split('?')[0].replace(/index\.html$/,'');
  var h='<details class="help" open><summary>iPhone：加到主畫面（約 1 分鐘）</summary><div class="steps">'+a+b+c+d+'</div><ul><li>一定要用 <b>Safari</b> 開啟（用 LINE、Chrome 內建瀏覽器看不到「加入主畫面」）。</li><li>目前網址：<span class="url">'+esc(u)+'</span></li><li>若主畫面已有舊的法句經圖示，請先長按刪除，再照上面步驟重加。刪除前，進度可能一併清除。</li></ul></details>';
- h+='<details class="help"><summary>Android：安裝應用程式</summary><ul><li>用 <b>Chrome</b> 開啟網址。</li><li>點右上角「⋮」選單，選「安裝應用程式」或「加到主畫面」，再按「安裝」。</li><li>之後從桌面圖示開啟，就是全螢幕的 App。</li></ul></details>';
+ var ic='<rect x="{x}" y="{y}" width="20" height="20" rx="10" fill="var(--ink)"/><text x="{cx}" y="{ty}" text-anchor="middle" font-size="11" fill="var(--bg)" font-family="serif">句</text>';
+ function icn(x,y){return ic.replace('{x}',x).replace('{y}',y).replace('{cx}',x+10).replace('{ty}',y+14.5)}
+ var dots='<circle cx="86" cy="14" r="1.6" fill="var(--ink)"/><circle cx="86" cy="19" r="1.6" fill="var(--ink)"/><circle cx="86" cy="24" r="1.6" fill="var(--ink)"/>';
+ var A1=ph('<rect x="10" y="10" width="64" height="16" rx="8" fill="var(--sf)" stroke="var(--line)"/><text x="42" y="21" text-anchor="middle" '+tx+'>你的網址</text>'+dots+'<circle cx="86" cy="19" r="11" '+hi+'/><rect x="12" y="36" width="76" height="80" rx="6" fill="var(--sf)"/><text x="50" y="80" text-anchor="middle" '+tx+'>法句經</text>','用 Chrome 開啟網址，點右上角「⋮」','①');
+ var A2=ph('<rect x="26" y="8" width="66" height="104" rx="8" fill="var(--sf)" stroke="var(--line)"/><text x="32" y="26" '+tx+'>新增分頁</text><text x="32" y="44" '+tx+'>書籤</text><text x="32" y="62" '+tx+'>加到主畫面</text><text x="32" y="80" '+tx+'>分享…</text><text x="32" y="98" '+tx+'>設定</text><rect x="28" y="50" width="62" height="18" rx="5" '+hi+'/>','選「安裝應用程式」或「加到主畫面」','②');
+ var A3=ph('<rect x="12" y="38" width="76" height="76" rx="12" fill="var(--sf)" stroke="var(--line)"/><text x="50" y="56" text-anchor="middle" '+tx+'>安裝應用程式？</text>'+icn(24,64)+'<text x="50" y="78" '+tx+'>法句經</text><text x="42" y="92" font-size="5.5" font-family="sans-serif" fill="var(--mut)">你的網址</text><text x="30" y="106" '+tx+'>取消</text><rect x="62" y="96" width="22" height="14" rx="7" fill="var(--bt)"/><text x="73" y="106" text-anchor="middle" font-size="7" font-family="sans-serif" fill="var(--bg)">安裝</text><rect x="59" y="93" width="28" height="20" rx="8" '+hi+'/>','在視窗中按「安裝」','③');
+ var A4=ph('<rect x="14" y="16" width="20" height="20" rx="10" fill="var(--sf)" stroke="var(--line)"/><rect x="40" y="16" width="20" height="20" rx="10" fill="var(--sf)" stroke="var(--line)"/><rect x="66" y="16" width="20" height="20" rx="10" fill="var(--sf)" stroke="var(--line)"/>'+icn(14,52)+'<circle cx="24" cy="62" r="16" '+hi+'/><text x="24" y="86" text-anchor="middle" font-size="6" font-family="sans-serif" fill="var(--ink)">法句經</text>','桌面或應用程式列表出現圖示，之後從這裡開啟','④');
+ h+='<details class="help"><summary>Android：安裝應用程式</summary><div class="steps">'+A1+A2+A3+A4+'</div><ul><li>請用 <b>Chrome</b> 開啟；不同手機的選單文字略有差異，可能叫「安裝應用程式」或「加到主畫面」。</li><li>若選單沒有這一項，先重新整理頁面，再等幾秒。</li><li>之後從桌面圖示開啟，就是全螢幕的 App，更新也會自動同步。</li></ul></details>';
  h+='<details class="help"><summary>更新會自動同步嗎？</summary><ul><li><span class="tag">會</span>開啟 App 時會自動抓最新版；網路不通時用上次存的版本。</li><li>發現新版會在畫面下方出現「有新版本，點此更新」，點一下即可，進度與收藏都保留。</li><li>你不必手動更新任何檔案，也不用重新加到主畫面。</li></ul></details>';
  return h}
 function renderSet(){
