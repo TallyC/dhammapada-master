@@ -11,7 +11,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="法句經">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="app-ver" content="20261029-1644">
+<meta name="app-ver" content="20261029-1706">
 <title>法句經・故事與偈</title>
 <style>
 :root{--bg:#e2e2df;--sf:#eeeeeb;--ink:#2a2a2a;--mut:#6c6c67;--acc:#454545;--line:#cdcdc9;--hi:rgba(255,255,255,.9);--sh:rgba(0,0,0,.16);--br:#8c8c87;--fs:17px;--lh:1.9;--gap:14px;--ff:"Noto Serif TC","Songti TC","PMingLiU",serif}
@@ -536,7 +536,7 @@ function renderLearn(){
  }
  h+='<button class="done'+(dn(u,rd)?" d":"")+'" data-a="done">'+(dn(u,rd)?"✓ 已完成這一圈":"完成這一圈")+'</button>';
  if(rd==3&&pos<f.length-1)h+='<button class="lnk" data-a="next">下一則 →</button>';
- h+='<button class="lnk" data-a="read">讀本品全文</button>';
+ if(SHOWFULL)h+='<button class="lnk" data-a="read">讀本品全文</button>';
  $("pg-learn").innerHTML=h;
  var t=$("ref");if(t){t.value=(ST[u.id]&&ST[u.id].note)||"";t.oninput=function(){(ST[u.id]=ST[u.id]||{}).note=t.value;W_("dhp2",ST)}}
 }
@@ -548,6 +548,11 @@ $("pg-learn").onclick=function(e){
  if(a=="prev")step(-1);else if(a=="next")step(1);else if(a=="toc")openToc();else if(a=="read"){readW=b.wno;show("read")}
  else if(a=="done"){var s=(ST[u.id]=ST[u.id]||{});s["d"+rd]=!s["d"+rd];W_("dhp2",ST);if(s["d"+rd]&&rd<3)rd++;renderLearn();window.scrollTo(0,0)}
 };
+/* 左右滑動換則 */
+(function(){var sx=0,sy=0,st=0,ok=false;
+ document.addEventListener("touchstart",function(e){var t=e.target;ok=!!(!e.touches||e.touches.length==1)&&!(t.closest&&t.closest("input,textarea,select,table,.ov,.rem,.cimg,.chips,.gl,iframe,.rg"));sx=e.touches[0].clientX;sy=e.touches[0].clientY;st=Date.now()},{passive:true});
+ document.addEventListener("touchend",function(e){if(!ok)return;var c=e.changedTouches[0],dx=c.clientX-sx,dy=c.clientY-sy;if(Date.now()-st>700||Math.abs(dx)<70||Math.abs(dy)>45||Math.abs(dx)<Math.abs(dy)*2)return;
+  var sel=page=="learn"?(dx<0?'[data-a="next"]':'[data-a="prev"]'):page=="read"?(dx<0?'[data-a="rnext"]':'[data-a="rprev"]'):null;if(!sel)return;var b=document.querySelector("#pg-"+page+" "+sel);if(b&&!b.disabled)b.click()},{passive:true})})();
 /* 目錄 */
 function openToc(){
  var h='<div class="tocin"><div class="tochd"><span>目錄</span><button data-a="x" aria-label="關閉">×</button></div>'+ordSeg();
@@ -570,8 +575,9 @@ $("toc").onclick=function(e){var t=e.target.closest("button");if(!t)return;
 function today(){var d=new Date();return Math.floor(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate())/864e5)}
 function rng(s){s=s>>>0||1;return function(){s=(Math.imul(s,1664525)+1013904223)>>>0;return s/4294967296}}
 function hstr(t){var h=2166136261;for(var i=0;i<t.length;i++){h^=t.charCodeAt(i);h=Math.imul(h,16777619)}return h>>>0}
+var SHOWFULL=false;
 var RTS=[["貼文 4:5",1080,1350,.474],["正方 1:1",1080,1080,.5],["手機桌布",1080,2340,.56],["橫式 16:9",1920,1080,.5]];
-function makeCard(label,text){
+function makeCard(label,text,ex){
  var s=styList()[SET.cs]||styList()[0],RD=RTS[SET.rt]||RTS[0],W=RD[1],H=RD[2],c=document.createElement("canvas");c.width=W;c.height=H;var x=c.getContext("2d"),R=rng(hstr(label+text)),i,g;
  g=x.createLinearGradient(0,0,0,H);g.addColorStop(0,s.bg1);g.addColorStop(1,s.bg2);x.fillStyle=g;x.fillRect(0,0,W,H);
  for(i=0;i<6;i++){var cx=R()*W,cy=R()*H*.8,r=260+R()*340;g=x.createRadialGradient(cx,cy,0,cx,cy,r);g.addColorStop(0,"rgba("+s.wash+","+(s.wa*(.5+R()*.7))+")");g.addColorStop(1,"rgba("+s.wash+",0)");x.fillStyle=g;x.fillRect(0,0,W,H)}
@@ -581,6 +587,7 @@ function makeCard(label,text){
  var nc=document.createElement("canvas");nc.width=nc.height=220;var nx=nc.getContext("2d"),id=nx.createImageData(220,220),rgb=s.nz.split(",");for(i=0;i<id.data.length;i+=4){id.data[i]=+rgb[0];id.data[i+1]=+rgb[1];id.data[i+2]=+rgb[2];id.data[i+3]=R()*255}nx.putImageData(id,0,0);x.globalAlpha=.055;x.fillStyle=x.createPattern(nc,"repeat");x.fillRect(0,0,W,H);x.globalAlpha=1;
  g=x.createRadialGradient(W/2,H/2,H*.28,W/2,H/2,H*.78);g.addColorStop(0,"rgba(0,0,0,0)");g.addColorStop(1,"rgba(0,0,0,"+s.vig+")");x.fillStyle=g;x.fillRect(0,0,W,H);
  x.strokeStyle=s.sub;x.globalAlpha=.5;x.lineWidth=2;x.strokeRect(40,40,W-80,H-80);x.globalAlpha=.28;x.strokeRect(54,54,W-108,H-108);x.globalAlpha=1;
+ if(ex){drawX(x,s,W,H,ex);return c}
  x.save();x.translate(W/2,RD[3]*H);var ks=Math.min(W/1080,H/1350);x.scale(ks,ks);x.translate(-540,-640);
  x.strokeStyle=s.ring;x.lineWidth=14;x.beginPath();x.arc(540,640,380,0,7);x.stroke();
  var cl=text.split(/[，。；、？！]/).filter(Boolean),n=cl.length,fs=n<=4?96:80,gap=fs*1.5,st=fs*1.18,mx=Math.max.apply(null,cl.map(function(a){return a.length}));
@@ -652,6 +659,23 @@ function showRem(){
  d.innerHTML='<div class="remc"><div class="ref">今日一句　'+lb+'</div><p class="vs">'+it.k.h.join("<br>")+'</p><div class="acts"><button data-r="go">進入學習</button><button data-r="card">看圖卡</button></div><div class="acts">'+heart(it.k.h.join(""),lb,1)+'</div><p class="src" style="text-align:center">可在「設定 → 開啟提醒」調整</p></div>';
  d.onclick=function(e){var t=e.target.closest("[data-r]");if(t&&t.getAttribute("data-r")=="card"){d.remove();show("today");return}if(t||e.target===d)d.remove()};
  document.body.appendChild(d)}
+/* 日行一問 */
+var xb=-1;
+function xList(){var a=[];BOOKS.forEach(function(b,bi){if(xb>=0&&bi!=xb)return;b.u.forEach(function(u){if(!u.x)return;var k=null;for(var i=0;i<u.k.length;i++){if(u.k[i].h&&!u.k[i].nc){k=u.k[i];break}}if(!k)return;
+ var cl=k.h.join("").split(/[，。；、？！]/).filter(Boolean),ls=[];for(var j=0;j<cl.length;j+=2)ls.push(cl[j]+"，"+(cl[j+1]?cl[j+1]+(j+2>=cl.length?"。":"，"):""));if(ls.length&&!/[。]$/.test(ls[ls.length-1]))ls[ls.length-1]=ls[ls.length-1].replace(/，$/,"。");
+ a.push([b.n,u.x,{p:u.x,v:ls,r:b.n+(/^\d/.test(k.n)?" 第"+k.n+"偈":" "+k.n+"偈")}])})});return a}
+function drawX(x,s,W,H,ex){
+ var k=Math.min(W/1080,H/1350),KF='"Kaiti TC","BiauKai","STKaiti","KaiTi","DFKai-SB","AR PL UKai TW","Noto Serif TC","Songti TC",serif',R=rng(hstr(ex.p)),fs=Math.round(66*k),lh=fs*1.65,maxW=W*.70,x0=W*.13,cy=H*.40;
+ x.font=fs+"px "+KF;var ch=Array.from(ex.p),lines=[],cur="";
+ ch.forEach(function(c){if(x.measureText(cur+c).width>maxW){lines.push(cur);cur=c}else cur+=c});if(cur)lines.push(cur);
+ for(var i=1;i<lines.length;i++){var m=lines[i].match(/^[，。、；：？！」）]+/);if(m){lines[i-1]+=m[0];lines[i]=lines[i].slice(m[0].length)}}
+ var y0=cy-(lines.length-1)*lh/2;x.fillStyle=s.ink;x.textBaseline="middle";x.textAlign="center";
+ lines.forEach(function(ln,i){var xx=x0;Array.from(ln).forEach(function(c){var w=x.measureText(c).width;x.save();x.translate(xx+w/2+(R()-.5)*2,y0+i*lh+(R()-.5)*fs*.12);x.rotate((R()-.5)*.07);var z=1+(R()-.5)*.08;x.scale(z,z);x.shadowColor="rgba(0,0,0,.18)";x.shadowBlur=3;x.fillText(c,0,0);x.restore();xx+=w*(1+(R()-.5)*.03)})});
+ var xr=W*.88,vf=Math.round(40*k),vy=H*.70,vl=vf*1.7;
+ x.strokeStyle=s.sub;x.globalAlpha=.5;x.lineWidth=2*k;x.beginPath();x.moveTo(xr-130*k,vy-vf*1.1);x.lineTo(xr,vy-vf*1.1);x.stroke();x.globalAlpha=1;
+ x.textAlign="right";x.font=vf+"px "+KF;x.fillStyle=s.ink;ex.v.forEach(function(l,i){x.fillText(l,xr,vy+i*vl)});
+ x.fillStyle=s.sub;x.font=Math.round(27*k)+"px "+KF;x.fillText("（法句經　"+ex.r+"）",xr,vy+ex.v.length*vl+vf*.4);
+ var sg=(SET.sig||"").trim();if(sg){x.textAlign="left";x.fillText("— "+sg,x0,H*.9)}}
 function styles(id){return '<div class="chips" id="'+id+'">'+styList().map(function(s,i){return '<button class="'+(i==SET.cs?"on":"")+'" data-s="'+i+'">'+s.n+'</button>'}).join("")+'</div><div class="chips rts">'+RTS.map(function(r,i){return '<button class="'+(i==(SET.rt||0)?"on":"")+'" data-rt="'+i+'">'+r[0]+'</button>'}).join("")+'</div>'
  +'<details class="help cmsg"><summary>送人關懷：加寄語與署名</summary><div class="cin"><label>寄語<input class="cdin" data-f="msg" maxlength="28" placeholder="例：天涼了，願你平安自在" value="'+esc(SET.msg||"")+'"></label><label>署名<input class="cdin" data-f="sig" maxlength="12" placeholder="你的名字" value="'+esc(SET.sig||"")+'"></label><p class="src">署名會記住，下次直接帶入；清空欄位就不會出現在圖卡上。</p></div></details>'}
 function items(){var a=[];BOOKS.forEach(function(b,bi){b.u.forEach(function(u,ui){u.k.forEach(function(k){if(k.h&&!k.nc)a.push({b:b,bi:bi,u:u,ui:ui,k:k})})})});return a}
@@ -662,14 +686,15 @@ function renderToday(){
  h+=sec("原文",'<p class="vs">'+it.k.h.join("<br>")+'</p>')+sec("白話",'<p>'+it.k.d+'</p>')+sec("巴利",'<p class="pali sm">'+it.k.p.join("<br>")+'</p>');
  h+=styles("st1")+'<img class="cimg" id="cardimg" alt="今日經文圖卡" src="'+cvD.toDataURL("image/png")+'"><div class="acts"><button data-a="save">儲存圖卡</button><button data-a="share">分享</button><button data-a="other">換一句</button>'+heart(it.k.h.join(""),lb,1)+'</div><button class="lnk" data-a="story">讀這一則的故事 →</button>';
  $("pg-today").innerHTML=h;window._it=it}
-function GL(){return gt=="f"?FAV.map(function(f){return [f.s,f.t]}):DAILY}
+function GL(){return gt=="f"?FAV.map(function(f){return [f.s,f.t]}):gt=="x"?xList():DAILY}
 function renderGold(){
  var L=GL();if(gi>=L.length)gi=Math.max(0,L.length-1);
- var h='<h2 class="ut">金句圖卡</h2><div class="seg"><button data-gt="d" class="'+(gt=="d"?"on":"")+'">精選</button><button data-gt="f" class="'+(gt=="f"?"on":"")+'">我的收藏 '+FAV.length+'</button></div>';
+ var h='<h2 class="ut">金句圖卡</h2><div class="seg"><button data-gt="d" class="'+(gt=="d"?"on":"")+'">精選</button><button data-gt="f" class="'+(gt=="f"?"on":"")+'">我的收藏 '+FAV.length+'</button><button data-gt="x" class="'+(gt=="x"?"on":"")+'">日行一問</button></div>';
+ if(gt=="x")h+='<div class="chips xbk"><button class="'+(xb<0?"on":"")+'" data-xb="-1">全部</button>'+BOOKS.map(function(b,i){return '<button class="'+(xb==i?"on":"")+'" data-xb="'+i+'">'+b.n.replace("品","")+'</button>'}).join("")+'</div>';
  if(!L.length){h+='<p class="ref">還沒有收藏的句子。<br>在閱讀、學習、今日經文或精選金句按 ♡，就會收到這裡。</p>';$("pg-gold").innerHTML=h;return}
- var g=L[gi];cvG=makeCard(g[0],g[1]);
- h+='<div class="ref">選一句，再選風格，即可下載</div><div class="gl" id="gl">'+L.map(function(d,i){return '<button class="'+(i==gi?"on":"")+'" data-g="'+i+'">'+d[1].split(/[，。；、？！]/)[0]+'</button>'}).join("")+'</div>';
- h+=styles("st2")+'<img class="cimg" id="goldimg" alt="金句圖卡" src="'+cvG.toDataURL("image/png")+'"><div class="acts"><button data-a="gsave">儲存圖卡</button><button data-a="gshare">分享</button></div><div class="acts">'+heart(g[1],g[0],1)+'</div><p class="ref" id="unfavtip" hidden>已取消收藏，離開此頁後會從清單移除；再按一次 ♥ 可恢復。</p><p class="ref">按「儲存圖卡」會放大預覽，長按圖片即可存入相簿；若手機無法下載，這個方法一定可以。</p>'+pdfPanel();
+ var g=L[gi];cvG=makeCard(g[0],g[1],g[2]);
+ h+='<div class="ref">'+(gt=="x"?"每一則「行」的小練習，配上對應的經句。選一則，再選風格與比例，即可下載":"選一句，再選風格，即可下載")+'</div><div class="gl" id="gl">'+L.map(function(d,i){return '<button class="'+(i==gi?"on":"")+'" data-g="'+i+'">'+(gt=="x"?d[1].slice(0,10):d[1].split(/[，。；、？！]/)[0])+'</button>'}).join("")+'</div>';
+ h+=styles("st2")+'<img class="cimg" id="goldimg" alt="金句圖卡" src="'+cvG.toDataURL("image/png")+'"><div class="acts"><button data-a="gsave">儲存圖卡</button><button data-a="gshare">分享</button></div>'+(gt=="x"?"":'<div class="acts">'+heart(g[1],g[0],1)+'</div>')+'<p class="ref" id="unfavtip" hidden>已取消收藏，離開此頁後會從清單移除；再按一次 ♥ 可恢復。</p><p class="ref">按「儲存圖卡」會放大預覽，長按圖片即可存入相簿；若手機無法下載，這個方法一定可以。</p>'+pdfPanel();
  $("pg-gold").innerHTML=h}
 function dl(cv){cv.toBlob(function(b){if(!b)return;var u=URL.createObjectURL(b),el=document.createElement("a");el.href=u;el.download="法句經_"+new Date().toISOString().slice(0,10)+".png";document.body.appendChild(el);el.click();el.remove()},"image/png")}
 function shareCv(cv){cv.toBlob(function(b){try{var f=new File([b],"法句經.png",{type:"image/png"});if(navigator.canShare&&navigator.canShare({files:[f]})){navigator.share({files:[f],title:"法句經"}).catch(function(){});return}}catch(e){}openOv(cv)},"image/png")}
@@ -678,6 +703,7 @@ function openOv(cv){curCv=cv;$("ovimg").src=cv.toDataURL("image/png");$("ov").hi
 $("ov").onclick=function(e){var t=e.target.closest("button"),a=t&&t.getAttribute("data-a");if(a=="ovdl")dl(curCv);else if(a=="ovsh")shareCv(curCv);else if(a=="ovx"||e.target===$("ov"))$("ov").hidden=true};
 function cardClick(e){var t=e.target.closest("button");if(!t)return;
  if(t.hasAttribute("data-gt")){gt=t.getAttribute("data-gt");gi=0;renderGold();return}
+ if(t.hasAttribute("data-xb")){xb=+t.getAttribute("data-xb");gi=0;renderGold();return}
  if(t.hasAttribute("data-rt")){SET.rt=+t.getAttribute("data-rt");W_("dhp2-set",SET);renderToday();renderGold();return}
  if(t.hasAttribute("data-pdfs")){pdfSrc=t.getAttribute("data-pdfs");renderGold();return}
  if(t.hasAttribute("data-s")){SET.cs=+t.getAttribute("data-s");W_("dhp2-set",SET);renderToday();renderGold();return}
@@ -687,7 +713,7 @@ function cardClick(e){var t=e.target.closest("button");if(!t)return;
  else if(a=="pdf"){mkPdf(t)}else if(a=="other"){di++;renderToday()}else if(a=="story"){go(window._it.bi,window._it.ui)}}
 $("pg-today").onclick=cardClick;$("pg-gold").onclick=cardClick;
 var cdT=0;document.addEventListener("input",function(e){var t=e.target;if(!t.classList||!t.classList.contains("cdin"))return;SET[t.getAttribute("data-f")]=t.value;W_("dhp2-set",SET);
- clearTimeout(cdT);cdT=setTimeout(function(){if(page=="today"&&window._it){cvD=makeCard(window._lb,window._it.k.h.join(""));$("cardimg").src=cvD.toDataURL("image/png")}else if(page=="gold"&&cvG){var L=GL(),g=L[gi];if(g){cvG=makeCard(g[0],g[1]);$("goldimg").src=cvG.toDataURL("image/png")}}},250)});
+ clearTimeout(cdT);cdT=setTimeout(function(){if(page=="today"&&window._it){cvD=makeCard(window._lb,window._it.k.h.join(""));$("cardimg").src=cvD.toDataURL("image/png")}else if(page=="gold"&&cvG){var L=GL(),g=L[gi];if(g){cvG=makeCard(g[0],g[1],g[2]);$("goldimg").src=cvG.toDataURL("image/png")}}},250)});
 /* 設定 */
 function installH(){
  function ph(inner,cap,n){return '<figure class="stp"><svg viewBox="0 0 100 150" role="img" aria-label="'+cap+'"><rect x="4" y="2" width="92" height="146" rx="12" fill="var(--bg)" stroke="var(--br)" stroke-width="2"/>'+inner+'</svg><figcaption><b>'+n+'</b> '+cap+'</figcaption></figure>'}
@@ -729,7 +755,7 @@ function renderSet(){
  h+=installH();
  h+='<div class="grp">使用說明<small>怎麼用這個學習頁</small></div>';
  h+='<details class="help" open><summary>學習方式：四圈螺旋</summary><ul><li><b>用途</b>　用故事對照偈頌，熏習《法句經》，每日讀一則，慢慢把經文用在生活裡。</li><li><b>設計</b>　一則故事配一首偈；同一則可以回來多次，每次多一圈。</li><li><b>四圈</b>　<span class="tag">讀</span>故事、原文、白話　<span class="tag">詞</span>字詞與巴利對照　<span class="tag">義</span>義理連結　<span class="tag">行</span>實踐與回顧。點上方圓圈切換，不必依序。</li></ul></details>';
- h+='<details class="help"><summary>各頁功能</summary><ul><li><b>學習</b>　目錄每一品都可讀全文；有導讀（四圈）的是無常品、雙要品、放逸品、心意品、華香品、愚闇品、明哲品、羅漢品、述千品，其他品先提供全文，之後一批一批補上。</li><li><b>今日</b>　依日期顯示當日經文與圖卡。</li><li><b>金句</b>　精選十句，或你收藏的句子；選風格後下載圖卡。</li><li><b>影音</b>　收錄《法句經》講法。</li></ul></details>';
+ h+='<details class="help"><summary>各頁功能</summary><ul><li><b>學習</b>　目錄每一品都可讀全文；有導讀（四圈）的是無常品、雙要品、放逸品、心意品、華香品、愚闇品、明哲品、羅漢品、述千品，其他品先提供全文，之後一批一批補上。在學習頁左右滑動，可換上一則、下一則。</li><li><b>今日</b>　依日期顯示當日經文與圖卡。</li><li><b>金句</b>　精選十句、你收藏的句子，以及「日行一問」（每一則「行」的小練習，配上對應的經句）；選風格與比例後下載圖卡。</li><li><b>影音</b>　收錄《法句經》講法。</li></ul></details>';
  h+='<details class="help"><summary>搜尋與收藏</summary><ul><li><b>搜尋</b>　首頁搜尋欄可找經文、故事、品名與巴利字詞，不必打符號。</li><li><b>收藏</b>　在閱讀、學習、今日、金句頁，句子旁按 ♡，就收進「金句 → 我的收藏」。</li><li><b>資料存放</b>　進度、收藏與心得只存在這支手機的瀏覽器；清除瀏覽資料或刪除主畫面圖示，可能會一併清掉。</li></ul></details>';
  h+='<div class="grp">經文與來源<small>版本、譯者、出處</small></div>';
  h+='<details class="help"><summary>關於這部經文</summary><ul><li><b>本工具的全文</b>　《法句經》，大正藏第 210 號，東吳天竺沙門維祇難等譯，二卷、39 品、758 偈。<span class="tag warn">署名暫定</span>見下一欄。</li><li>這是古代的漢譯本，不是現代人重新翻譯的作品；經文依 CBETA 電子佛典集成。「白話」是編者自己的意譯。</li><li><b>四種漢譯</b>　本工具採用只有短偈的《法句經》；另三種是在譬喻中夾短偈：《法句譬喻經》（西晉法炬、法立譯，四卷、39 品、284 偈）、《出曜經》（姚秦竺佛念譯，三十卷、34 品、934 偈）、《法集要頌經》（北宋天息災譯，四卷、33 品、933 偈）。</li><li>依法鼓講堂課程投影片。</li></ul></details>';
