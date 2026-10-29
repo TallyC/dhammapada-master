@@ -11,7 +11,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="法句經">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="app-ver" content="20261029-1939">
+<meta name="app-ver" content="20261029-1955">
 <title>法句經・故事與偈</title>
 <style>
 :root{--bg:#e2e2df;--sf:#eeeeeb;--ink:#2a2a2a;--mut:#6c6c67;--acc:#454545;--line:#cdcdc9;--hi:rgba(255,255,255,.9);--sh:rgba(0,0,0,.16);--br:#8c8c87;--fs:17px;--lh:1.9;--gap:14px;--ff:"Noto Serif TC","Songti TC","PMingLiU",serif}
@@ -779,7 +779,7 @@ function renderSet(){
  +'<p><b>本工具暫時的寫法</b>　採用大正藏與法鼓講堂投影片的「維祇難等譯」。若你的課本寫「支謙譯」，兩者都有依據，只是看的是署名還是實際編訂者。</p>'
  +'<p><b>參考連結</b><br>'
  +'<a href="https://ntireader.org/taisho/t0210.html" target="_blank" rel="noopener">大正藏第 210 號（CBETA 內容）</a><br><a href="https://tt034.org.tw/index.php?i=1&id=1236&lang=cht&option=module&task=dfile" target="_blank" rel="noopener">蘇錦坤〈法句序〉與《法句經》（PDF）</a><br><a href="https://yifertw.blogspot.com/2014/06/blog-post_13.html" target="_blank" rel="noopener">《法句經》四言偈頌與五言偈頌（蘇錦坤部落格）</a></p></details>';
- h+='<details class="help"><summary>延伸閱讀：聖嚴法師與法句經</summary><ul><li><b>法鼓全集 2020 紀念版</b>　聖嚴法師著作的官方電子版。進去後在「第七輯 經典釋義類」可找到《智慧一○○》，「第三輯 文集類」可找文集文章。<br>'+lk("https://ddc.shengyen.org/?doc=main","打開法鼓全集 ↗")+'</li><li><b>《智慧100》有聲書</b>　聖嚴法師把佛經中的偈語轉成簡短易讀的篇章，法鼓山全球資訊網提供有聲書。<br>'+lk("https://www.ddm.org.tw/xmnews/cont?xsmsid=0L161385102037075741&sid=0L181376035449890964","法鼓山網站・智慧100 ↗")+'</li><li><b>《真理的語言：法句經》</b>　淨海法師由巴利文原典譯成中文詩句，法鼓文化 2012 年出版。<br>'+lk("https://www.ddc.com.tw/product/book/prod.php?id=1809&type=b","法鼓文化書店 ↗")+'</li></ul><p class="src">這裡只放連結，不複製書中內容；各連結的書名與內容以對方網站為準。</p></details>';
+ h+='<details class="help"><summary>延伸閱讀：聖嚴法師與法句經</summary><ul><li><b>法鼓全集 2020 紀念版</b>　聖嚴法師著作的官方電子版。進去後請用站內搜尋或目錄，找《智慧一○○》與文集文章（書的位置以該站為準）。<br>'+lk("https://ddc.shengyen.org/?doc=main","打開法鼓全集 ↗")+'</li><li><b>《智慧100》有聲書</b>　聖嚴法師把佛經中的偈語轉成簡短易讀的篇章，法鼓山全球資訊網提供有聲書。<br>'+lk("https://www.ddm.org.tw/xmnews/cont?xsmsid=0L161385102037075741&sid=0L181376035449890964","法鼓山網站・智慧100 ↗")+'</li><li><b>《真理的語言：法句經》</b>　淨海法師由巴利文原典譯成中文詩句，法鼓文化 2012 年出版。<br>'+lk("https://www.ddc.com.tw/product/book/prod.php?id=1809&type=b","法鼓文化書店 ↗")+'</li></ul><p class="src">這裡只放連結，不複製書中內容；各連結的書名與內容以對方網站為準。</p></details>';
  h+='<details class="help"><summary>資料來源</summary><ul><li><b>偈頌原文</b>　大正藏第 210 號《法句經》，依 CBETA 電子佛典集成。</li><li><b>巴利文</b>　Dhammapada。</li><li><b>故事</b>　雙要品、放逸品、心意品、華香品、愚闇品、明哲品、羅漢品、述千品依巴利 Dhammapada 註釋（Dhammapada-aṭṭhakathā）的傳統說法概述，參考 Daw Mya Tin 英譯；無常品只在有確切出處時附故事。</li><li><b>《法句譬喻經》（T211）</b>　目前只整理了第 1–15 品的目錄與要點，其餘尚未收入。</li><li><b>漢巴對應</b>　心意、華香、愚闇、明哲、羅漢、述千六品，依蘇錦坤《法句經》對讀表（nanda.online-dhamma.net），其中述千品第 112–115 偈由編者依內容與順序比對；其餘由編者依內容比對，供學習參考。對應不到的偈，頁面上都會標明。</li></ul></details>';
  $("pg-set").innerHTML=h;
  [["s_rem","rem"],["s_ord","ord"],["s_pal","pal"],["s_mode","mode"],["s_ff","ff"],["s_fs","fs"],["s_lh","lh"],["s_gap","gap"]].forEach(function(p){var el=$(p[0]);el.oninput=function(){SET[p[1]]=(p[1]=="pal"||p[1]=="mode"||p[1]=="ff"||p[1]=="ord"||p[1]=="rem")?this.value:+this.value;apply()}})}
