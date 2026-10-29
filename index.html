@@ -11,7 +11,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="法句經">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="app-ver" content="20261029-1302">
+<meta name="app-ver" content="20261029-1311">
 <title>法句經・故事與偈</title>
 <style>
 :root{--bg:#e2e2df;--sf:#eeeeeb;--ink:#2a2a2a;--mut:#6c6c67;--acc:#454545;--line:#cdcdc9;--hi:rgba(255,255,255,.9);--sh:rgba(0,0,0,.16);--br:#8c8c87;--fs:17px;--lh:1.9;--gap:14px;--ff:"Noto Serif TC","Songti TC","PMingLiU",serif}
@@ -59,7 +59,11 @@ textarea{width:100%;min-height:90px;font-size:.9em;background:var(--bg);border:1
 .cimg{display:block;margin:12px auto;width:min(100%,calc(50vh*.8));width:min(100%,calc(50dvh*.8));height:auto;border-radius:8px;box-shadow:0 12px 26px -8px var(--sh),0 2px 4px var(--sh)}
 .acts,.qk{display:flex;gap:10px;justify-content:center;margin:10px 0}
 .row{display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--line);padding:10px 0;font-size:.92em}.row span{min-width:3em;color:var(--mut)}.row select{flex:1;background:var(--sf);border:1px solid var(--line);border-radius:8px;padding:5px;box-shadow:0 2px 5px var(--sh)}.row input{flex:1}
-.help{margin-top:18px;border-top:1px solid var(--line);padding-top:10px;font-size:.88em}.help summary{cursor:pointer}.help p{font-size:.95em;margin:8px 0}
+.grp{display:flex;align-items:baseline;gap:8px;margin:28px 0 10px;font-size:16px;letter-spacing:.2em;color:var(--ink)}.grp:before{content:"";align-self:center;width:4px;height:1.1em;background:var(--bt);border-radius:2px}.grp small{font-size:12px;color:var(--mut);letter-spacing:.04em;margin-left:auto}
+.help{margin-top:10px;border:1px solid var(--line);border-radius:12px;padding:10px 14px;background:var(--sf)}.help[open]{box-shadow:0 2px 8px -4px var(--sh)}.help summary{font-weight:600}.help ul{padding-left:1.1em;margin:8px 0 2px}.help li{margin:7px 0;line-height:1.75}.help li b{color:var(--ink)}
+.tag{display:inline-block;font-size:11px;line-height:1.5;padding:0 7px;border-radius:9px;border:1px solid var(--bt);color:var(--bt);margin-right:5px;letter-spacing:.08em;white-space:nowrap}.tag.warn{border-style:dashed}
+.steps{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0}.stp{margin:0}.stp svg{width:100%;height:auto;display:block}.stp figcaption{font-size:12.5px;line-height:1.5;margin-top:4px;color:var(--mut)}.stp figcaption b{color:var(--bt)}.url{word-break:break-all;color:var(--bt)}
+.help summary{cursor:pointer}.help{font-size:.9em}.help p{font-size:.95em;margin:8px 0}
 .sgl{margin-top:18px;border-bottom:1px solid var(--line);padding-bottom:4px}
 .sbox{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin:0 0 12px;padding:11px 14px;border:none;border-radius:12px;background:var(--bg);color:var(--bt);font:inherit;font-size:.9em;box-shadow:0 2px 5px var(--sh) inset,0 1px 0 var(--hi)}
 .sin{width:100%;box-sizing:border-box;padding:10px 12px;margin:6px 0 4px;border:1px solid var(--line);border-radius:12px;background:var(--sf);color:inherit;font:inherit}
@@ -613,10 +617,23 @@ function cardClick(e){var t=e.target.closest("button");if(!t)return;
  else if(a=="other"){di++;renderToday()}else if(a=="story"){go(window._it.bi,window._it.ui)}}
 $("pg-today").onclick=cardClick;$("pg-gold").onclick=cardClick;
 /* 設定 */
+function installH(){
+ function ph(inner,cap,n){return '<figure class="stp"><svg viewBox="0 0 100 150" role="img" aria-label="'+cap+'"><rect x="4" y="2" width="92" height="146" rx="12" fill="var(--bg)" stroke="var(--br)" stroke-width="2"/>'+inner+'</svg><figcaption><b>'+n+'</b> '+cap+'</figcaption></figure>'}
+ var hi='fill="none" stroke="var(--bt)" stroke-width="2.2" stroke-dasharray="4 2"',tx='fill="var(--ink)" font-size="7" font-family="sans-serif"';
+ var shareI='<g transform="translate(46 124)" fill="none" stroke="var(--ink)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M0 4V-8M-4 -4L0 -8L4 -4M-6 0V8H6V0"/></g>';
+ var a=ph('<rect x="12" y="12" width="76" height="12" rx="6" fill="var(--sf)" stroke="var(--line)"/><text x="50" y="21" text-anchor="middle" '+tx+'>你的網址</text><rect x="12" y="34" width="76" height="70" rx="6" fill="var(--sf)"/><text x="50" y="72" text-anchor="middle" '+tx+'>法句經</text><line x1="4" y1="112" x2="96" y2="112" stroke="var(--line)"/>'+shareI+'<circle cx="46" cy="123" r="13" '+hi+'/>','用 Safari 開啟網址，點下方「分享」','①');
+ var b=ph('<rect x="10" y="50" width="80" height="92" rx="10" fill="var(--sf)" stroke="var(--line)"/><text x="18" y="68" '+tx+'>拷貝</text><line x1="14" y1="74" x2="86" y2="74" stroke="var(--line)"/><text x="18" y="90" '+tx+'>加入書籤</text><line x1="14" y1="96" x2="86" y2="96" stroke="var(--line)"/><text x="18" y="112" '+tx+'>加入主畫面</text><rect x="12" y="99" width="76" height="18" rx="5" '+hi+'/><text x="18" y="132" '+tx+'>⋯</text>','往下滑，選「加入主畫面」','②');
+ var c=ph('<rect x="10" y="16" width="80" height="116" rx="10" fill="var(--sf)" stroke="var(--line)"/><text x="50" y="32" text-anchor="middle" '+tx+'>加入主畫面</text><rect x="16" y="42" width="22" height="22" rx="5" fill="var(--ink)"/><text x="27" y="58" text-anchor="middle" font-size="12" fill="var(--bg)" font-family="serif">句</text><rect x="44" y="45" width="40" height="16" rx="4" fill="var(--bg)" stroke="var(--line)"/><text x="48" y="56" '+tx+'>法句經</text><rect x="16" y="106" width="68" height="16" rx="8" fill="var(--bt)"/><text x="50" y="117" text-anchor="middle" font-size="7.5" font-family="sans-serif" fill="var(--bg)">加入</text><rect x="14" y="103" width="72" height="22" rx="8" '+hi+'/>','名稱保留「法句經」，點右上或下方「加入」','③');
+ var d=ph('<rect x="14" y="16" width="20" height="20" rx="5" fill="var(--sf)" stroke="var(--line)"/><rect x="40" y="16" width="20" height="20" rx="5" fill="var(--sf)" stroke="var(--line)"/><rect x="66" y="16" width="20" height="20" rx="5" fill="var(--sf)" stroke="var(--line)"/><rect x="14" y="52" width="20" height="20" rx="5" fill="var(--ink)"/><text x="24" y="67" text-anchor="middle" font-size="12" fill="var(--bg)" font-family="serif">句</text><circle cx="24" cy="62" r="16" '+hi+'/><text x="24" y="86" text-anchor="middle" font-size="6" font-family="sans-serif" fill="var(--ink)">法句經</text>','主畫面出現圖示，之後從這裡開啟','④');
+ var u=location.href.split('#')[0].split('?')[0].replace(/index\.html$/,'');
+ var h='<details class="help" open><summary>iPhone：加到主畫面（約 1 分鐘）</summary><div class="steps">'+a+b+c+d+'</div><ul><li>一定要用 <b>Safari</b> 開啟（用 LINE、Chrome 內建瀏覽器看不到「加入主畫面」）。</li><li>目前網址：<span class="url">'+esc(u)+'</span></li><li>若主畫面已有舊的法句經圖示，請先長按刪除，再照上面步驟重加。刪除前，進度可能一併清除。</li></ul></details>';
+ h+='<details class="help"><summary>Android：安裝應用程式</summary><ul><li>用 <b>Chrome</b> 開啟網址。</li><li>點右上角「⋮」選單，選「安裝應用程式」或「加到主畫面」，再按「安裝」。</li><li>之後從桌面圖示開啟，就是全螢幕的 App。</li></ul></details>';
+ h+='<details class="help"><summary>更新會自動同步嗎？</summary><ul><li><span class="tag">會</span>開啟 App 時會自動抓最新版；網路不通時用上次存的版本。</li><li>發現新版會在畫面下方出現「有新版本，點此更新」，點一下即可，進度與收藏都保留。</li><li>你不必手動更新任何檔案，也不用重新加到主畫面。</li></ul></details>';
+ return h}
 function renderSet(){
  function sel(id,opts,v){return '<select id="'+id+'">'+opts.map(function(o){return '<option value="'+o[0]+'"'+(o[0]==v?" selected":"")+'>'+o[1]+'</option>'}).join("")+'</select>'}
  var h='<h2 class="ut">設定</h2>';
- h+='<div class="lb sgl">外觀</div>';
+ h+='<div class="grp">外觀與文字<small>即時生效</small></div><div class="lb sgl">外觀</div>';
  h+='<label class="row"><span>色系</span>'+sel("s_pal",Object.keys(PAL).map(function(k){return [k,PAL[k][0]]}),SET.pal)+'</label>';
  h+='<label class="row"><span>明暗</span>'+sel("s_mode",[["auto","跟隨系統"],["light","淺色"],["dark","深色"]],SET.mode)+'</label>';
  h+='<div class="lb sgl">文字</div>';
@@ -626,10 +643,15 @@ function renderSet(){
  h+='<label class="row"><span>段距</span><input type="range" id="s_gap" min="6" max="28" step="2" value="'+SET.gap+'"></label>';
  h+='<div class="lb sgl">目錄</div>';
  h+='<label class="row"><span>品序</span>'+sel("s_ord",[["pali","巴利"],["wu","漢傳"]],SET.ord)+'</label>';
- h+='<div class="lb sgl">說明</div>';
- h+='<details class="help"><summary>怎麼使用</summary><p><b>用途</b>　用故事對照偈頌，熏習《法句經》：每日讀一則、反覆回顧，慢慢把經文用在生活裡。</p><p><b>設計邏輯</b>　一則故事配一首偈，逐步螺旋，加深加廣。同一則可以回來多次，每次多一圈。</p><p><b>四圈</b>　讀（故事、原文、白話）、詞（字詞與巴利對照）、義（義理連結）、行（實踐與回顧）。點上方圓圈切換，不必依序。</p><p><b>各頁</b>　目錄裡每一品都可讀全文；目前有導讀（四圈）的是無常品、雙要品、放逸品、心意品、華香品、愚闇品，其他品先提供全文，之後會一批一批補上。「今日」依日期顯示當日經文與圖卡，「金句」可挑精選十句，或你按 ♡ 收藏的句子，選風格下載；「影音」收錄《法句經》講法。</p><p><b>搜尋與收藏</b>　首頁的搜尋欄可找經文、故事、品名與巴利字詞（不必打符號）。在閱讀、學習、今日、金句頁，句子旁的 ♡ 一按，就收進「金句 → 我的收藏」。收藏只存在這支手機的瀏覽器。</p><p><b>資料</b>　進度與心得只存在這支手機的瀏覽器。</p></details>';
- h+='<details class="help"><summary>關於這部經文</summary><p><b>本工具的全文</b>　《法句經》，大正藏第 210 號，東吳天竺沙門維祇難等譯（署名暫定，見下一欄），二卷、39 品、758 偈。這是古代的漢譯本，不是現代人重新翻譯的作品；經文依 CBETA 電子佛典集成。「白話」是編者自己的意譯。</p><p><b>四種漢譯</b>　《法句經》只有短偈；《法句譬喻經》（西晉法炬、法立譯，四卷、39 品、284 偈）、《出曜經》（姚秦竺佛念譯，三十卷、34 品、934 偈）、《法集要頌經》（北宋天息災譯，四卷、33 品、933 偈）都是在譬喻中夾短偈。本工具的全文是第一種。依法鼓講堂課程投影片。</p></details>';
- h+='<details class="help"><summary>《法句經》的譯者署名（暫定，尚待考訂）</summary>'
+ h+='<div class="grp">安裝到手機<small>一次設定，之後自動更新</small></div>';
+ h+=installH();
+ h+='<div class="grp">使用說明<small>怎麼用這個學習頁</small></div>';
+ h+='<details class="help" open><summary>學習方式：四圈螺旋</summary><ul><li><b>用途</b>　用故事對照偈頌，熏習《法句經》，每日讀一則，慢慢把經文用在生活裡。</li><li><b>設計</b>　一則故事配一首偈；同一則可以回來多次，每次多一圈。</li><li><b>四圈</b>　<span class="tag">讀</span>故事、原文、白話　<span class="tag">詞</span>字詞與巴利對照　<span class="tag">義</span>義理連結　<span class="tag">行</span>實踐與回顧。點上方圓圈切換，不必依序。</li></ul></details>';
+ h+='<details class="help"><summary>各頁功能</summary><ul><li><b>學習</b>　目錄每一品都可讀全文；有導讀（四圈）的是無常品、雙要品、放逸品、心意品、華香品、愚闇品，其他品先提供全文，之後一批一批補上。</li><li><b>今日</b>　依日期顯示當日經文與圖卡。</li><li><b>金句</b>　精選十句，或你收藏的句子；選風格後下載圖卡。</li><li><b>影音</b>　收錄《法句經》講法。</li></ul></details>';
+ h+='<details class="help"><summary>搜尋與收藏</summary><ul><li><b>搜尋</b>　首頁搜尋欄可找經文、故事、品名與巴利字詞，不必打符號。</li><li><b>收藏</b>　在閱讀、學習、今日、金句頁，句子旁按 ♡，就收進「金句 → 我的收藏」。</li><li><b>資料存放</b>　進度、收藏與心得只存在這支手機的瀏覽器；清除瀏覽資料或刪除主畫面圖示，可能會一併清掉。</li></ul></details>';
+ h+='<div class="grp">經文與來源<small>版本、譯者、出處</small></div>';
+ h+='<details class="help"><summary>關於這部經文</summary><ul><li><b>本工具的全文</b>　《法句經》，大正藏第 210 號，東吳天竺沙門維祇難等譯，二卷、39 品、758 偈。<span class="tag warn">署名暫定</span>見下一欄。</li><li>這是古代的漢譯本，不是現代人重新翻譯的作品；經文依 CBETA 電子佛典集成。「白話」是編者自己的意譯。</li><li><b>四種漢譯</b>　本工具採用只有短偈的《法句經》；另三種是在譬喻中夾短偈：《法句譬喻經》（西晉法炬、法立譯，四卷、39 品、284 偈）、《出曜經》（姚秦竺佛念譯，三十卷、34 品、934 偈）、《法集要頌經》（北宋天息災譯，四卷、33 品、933 偈）。</li><li>依法鼓講堂課程投影片。</li></ul></details>';
+ h+='<details class="help"><summary>譯者署名 <span class="tag warn">暫定・待考訂</span></summary>'
  +'<p><b>【暫定，尚未確定】</b>大正藏署名為「東吳天竺沙門維祇難等譯」，但譯者其實有不同說法，這裡把資料並列，之後考訂有結果再修正。</p>'
  +'<p><b>序文怎麼說</b>　支謙〈法句經序〉：維祇難於黃武三年（224）到武昌，帶來五百偈本，請同道竺將炎翻譯（初譯，約 26 品）。後來將炎再來，又得 13 品，支謙「并挍往故有所增定，第其品目，合為一部」，共 39 品。</p>'
  +'<p><b>僧祐的記載</b>　《出三藏記集》記為竺將炎共支謙譯出。</p>'
@@ -637,7 +659,7 @@ function renderSet(){
  +'<p><b>本工具暫時的寫法</b>　採用大正藏與法鼓講堂投影片的「維祇難等譯」。若你的課本寫「支謙譯」，兩者都有依據，只是看的是署名還是實際編訂者。</p>'
  +'<p><b>參考連結</b><br>'
  +'<a href="https://ntireader.org/taisho/t0210.html" target="_blank" rel="noopener">大正藏第 210 號（CBETA 內容）</a><br><a href="https://tt034.org.tw/index.php?i=1&id=1236&lang=cht&option=module&task=dfile" target="_blank" rel="noopener">蘇錦坤〈法句序〉與《法句經》（PDF）</a><br><a href="https://yifertw.blogspot.com/2014/06/blog-post_13.html" target="_blank" rel="noopener">《法句經》四言偈頌與五言偈頌（蘇錦坤部落格）</a></p></details>';
- h+='<details class="help"><summary>資料來源</summary><p><b>偈頌原文</b>　大正藏第 210 號《法句經》，依 CBETA 電子佛典集成。</p><p><b>巴利文</b>　Dhammapada。</p><p><b>故事</b>　雙要品、放逸品、心意品、華香品、愚闇品依巴利 Dhammapada 註釋（Dhammapada-aṭṭhakathā）的傳統說法概述，參考 Daw Mya Tin 英譯；無常品只在有確切出處時附故事。《法句譬喻經》（T211）目前只整理了第 1–15 品的目錄與要點，其餘尚未收入。</p><p><b>漢巴對應</b>　心意、華香、愚闇三品，依蘇錦坤《法句經》對讀表（nanda.online-dhamma.net）；其餘由編者依內容比對，供學習參考。對應不到的偈，頁面上都會標明。</p></details>';
+ h+='<details class="help"><summary>資料來源</summary><ul><li><b>偈頌原文</b>　大正藏第 210 號《法句經》，依 CBETA 電子佛典集成。</li><li><b>巴利文</b>　Dhammapada。</li><li><b>故事</b>　雙要品、放逸品、心意品、華香品、愚闇品依巴利 Dhammapada 註釋（Dhammapada-aṭṭhakathā）的傳統說法概述，參考 Daw Mya Tin 英譯；無常品只在有確切出處時附故事。</li><li><b>《法句譬喻經》（T211）</b>　目前只整理了第 1–15 品的目錄與要點，其餘尚未收入。</li><li><b>漢巴對應</b>　心意、華香、愚闇三品，依蘇錦坤《法句經》對讀表（nanda.online-dhamma.net）；其餘由編者依內容比對，供學習參考。對應不到的偈，頁面上都會標明。</li></ul></details>';
  $("pg-set").innerHTML=h;
  [["s_ord","ord"],["s_pal","pal"],["s_mode","mode"],["s_ff","ff"],["s_fs","fs"],["s_lh","lh"],["s_gap","gap"]].forEach(function(p){var el=$(p[0]);el.oninput=function(){SET[p[1]]=(p[1]=="pal"||p[1]=="mode"||p[1]=="ff"||p[1]=="ord")?this.value:+this.value;apply()}})}
 /* 全文閱讀 */
