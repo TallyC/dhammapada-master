@@ -11,7 +11,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="法句經">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="app-ver" content="20261031-0732">
+<meta name="app-ver" content="20261031-0736">
 <title>法句經・故事與偈</title>
 <style>
 :root{--bg:#e2e2df;--sf:#eeeeeb;--ink:#2a2a2a;--mut:#6c6c67;--acc:#454545;--line:#cdcdc9;--hi:rgba(255,255,255,.9);--sh:rgba(0,0,0,.16);--br:#8c8c87;--fs:17px;--lh:1.9;--gap:18px;--ff:"Noto Serif TC","Songti TC","PMingLiU",serif}
@@ -1011,6 +1011,7 @@ function renderSet(){
  h+='<label class="row"><span>開啟</span>'+sel("s_rem",[["day","每天第一次開啟"],["every","每次開啟"],["off","不提醒"]],SET.rem||"day")+'</label><p class="src">開啟 App 時，跳出今日一句。網頁無法像一般 App 在手機上定時推播，所以提醒在開啟時出現。</p>';
  h+='<div class="lb sgl">目錄</div>';
  h+='<label class="row"><span>品序</span>'+sel("s_ord",[["pali","巴利"],["wu","漢傳"]],SET.ord)+'</label>';
+ h+='<div class="grp">備份與搬移<small>換手機、清除資料前</small></div><div class="sec"><p class="src" style="margin:0 0 8px">學習進度、收藏與設定只存在這支手機的瀏覽器裡。換手機或清除資料前，先複製備份碼，到新手機貼上即可還原。</p><div class="acts"><button id="bk_make">產生備份碼</button><button id="bk_load">貼上還原</button></div><textarea id="bk_ta" rows="4" placeholder="備份碼會出現在這裡；要還原時，把備份碼貼進來" style="width:100%;box-sizing:border-box;margin-top:8px;font-size:12px"></textarea><p class="src" id="bk_msg" style="margin:4px 0 0"></p></div>';
  h+='<div class="grp">安裝到手機<small>一次設定，之後自動更新</small></div>';
  h+=installH();
  h+='<div class="grp">使用說明<small>怎麼用這個學習頁</small></div>';
@@ -1046,10 +1047,18 @@ $("pg-read").onclick=function(e){var t=e.target.closest("[data-a]");if(!t)return
  if(a=="gostudy"){e.preventDefault();BOOKS.forEach(function(x,i){if(x.wno==readW)go(i,0)});return}
  if(a=="rprev"&&readW>0){readW--;renderRead();window.scrollTo(0,0)}else if(a=="rnext"&&readW<39){readW++;renderRead();window.scrollTo(0,0)}else if(a=="rtoc"){openToc()}};
 /* 影音 */
+var BK=["dhp2","dhp2-fav","dhp2-remd","dhp2-set"];
+document.addEventListener("click",function(e){var t=e.target.closest("button");if(!t||(t.id!="bk_make"&&t.id!="bk_load"))return;var ta=$("bk_ta"),ms=$("bk_msg");
+ if(t.id=="bk_make"){var o={v:1,t:new Date().toISOString().slice(0,10)};BK.forEach(function(k){o[k]=R_(k,null)});var c=btoa(unescape(encodeURIComponent(JSON.stringify(o))));ta.value=c;ta.focus();ta.select();var ok=false;try{ok=document.execCommand("copy")}catch(x){}try{if(navigator.clipboard)navigator.clipboard.writeText(c).then(function(){},function(){})}catch(x){}ms.textContent=ok?"已複製備份碼，請貼到備忘錄或傳給自己保存。":"請長按上方備份碼全選、拷貝，貼到備忘錄保存。";return}
+ var v=ta.value.trim();if(!v){ms.textContent="請先把備份碼貼進上面的框。";return}
+ try{var o=JSON.parse(decodeURIComponent(escape(atob(v))));if(o.v!==1)throw 0;if(!confirm("還原會覆蓋這支手機目前的進度、收藏與設定，確定嗎？"))return;BK.forEach(function(k){if(o[k]!=null)W_(k,o[k])});ms.textContent="已還原，重新載入中…";setTimeout(function(){location.reload()},600)}catch(x){ms.textContent="備份碼無法辨識，請確認完整貼上。"}});
 function renderMedia(){
  var h='<h2 class="ut">延伸</h2><div class="ref">《法句經》講法影音</div>';
  MEDIA.forEach(function(m,i){h+='<div class="sec"><div class="lb">'+m.t+'</div><div class="vp" data-v="'+i+'"><img src="https://i.ytimg.com/vi/'+m.id+'/hqdefault.jpg" alt="" loading="lazy" onerror="this.hidden=true"><span class="pl">▶</span></div><a class="ext" href="https://www.youtube.com/watch?v='+m.id+'" target="_blank" rel="noopener">在 YouTube 開啟 ↗</a></div>'});
  h+='<p class="src" style="text-align:center">點縮圖即可在這裡播放；若無法播放，請按「在 YouTube 開啟」。影音內容與版權屬原作者。</p>';
+ h+='<div class="ref" style="margin-top:22px">相關文獻</div>';
+ [["《法句經》大正藏 T0210（漢譯全文）","https://deerpark.app/cbeta/T0210/1","本 app 偈文所依的吳．支謙等譯本，全文可連續閱讀（CBETA 電子佛典）。"],["CBETA 電子佛典集成","https://cbetaonline.dila.edu.tw/","官方線上閱讀，可搜尋、查校勘與註腳。"],["巴利《法句經》多譯本對照","https://nanda.online-dhamma.net/tipitaka/sutta/khuddaka/dhammapada/old-3versions-para/dhp-chap06/","巴利文與兩種漢譯、英譯逐偈對照，可用來比對白話。"]].forEach(function(l){h+='<div class="sec"><a class="ext" href="'+l[1]+'" target="_blank" rel="noopener"><b>'+l[0]+' ↗</b></a><p class="src" style="margin:4px 0 0">'+l[2]+'</p></div>'});
+ h+='<p class="src" style="text-align:center">連結為外部網站，內容與版權屬各站所有。</p>';
  $("pg-media").innerHTML=h}
 $("pg-media").onclick=function(e){var v=e.target.closest(".vp");if(!v||v.querySelector("iframe"))return;var m=MEDIA[+v.getAttribute("data-v")];
  v.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+m.id+'?autoplay=1&rel=0&playsinline=1" title="'+m.t+'" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe>'};
