@@ -11,7 +11,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="法句經">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="app-ver" content="20261030-2130">
+<meta name="app-ver" content="20261030-2141">
 <title>法句經・故事與偈</title>
 <style>
 :root{--bg:#e2e2df;--sf:#eeeeeb;--ink:#2a2a2a;--mut:#6c6c67;--acc:#454545;--line:#cdcdc9;--hi:rgba(255,255,255,.9);--sh:rgba(0,0,0,.16);--br:#8c8c87;--fs:17px;--lh:1.9;--gap:18px;--ff:"Noto Serif TC","Songti TC","PMingLiU",serif}
@@ -851,7 +851,9 @@ function drawEnso(x,cx,cy,R,lw,col,seal,sealBg,ch,fs){var sc=R/44,D=Math.PI/180,
  if(ch){x.font="700 "+fs+'px "Noto Serif TC","Songti TC","PMingLiU",serif';x.textAlign="center";x.textBaseline="middle";x.fillText(ch,cx,cy+fs*.06)}
  if(seal){x.translate(cx+37*sc,cy-37*sc);x.rotate(6*D);x.fillStyle=seal;var z=Math.min(22*sc,64);x.fillRect(-z/2,-z/2,z,z);x.fillStyle=sealBg;x.font="700 "+(Math.min(22*sc,64)*.68)+'px "Noto Serif TC","Songti TC",serif';x.textAlign="center";x.textBaseline="middle";x.fillText("法",0,sc*.6)}
  x.restore()}
-function drawQ(x,s,W,H,ex){
+function colLum(c){var m=String(c).match(/#([0-9a-f]{6})/i),r,g,b;if(m){r=parseInt(m[1].slice(0,2),16);g=parseInt(m[1].slice(2,4),16);b=parseInt(m[1].slice(4,6),16)}else{m=String(c).match(/(\d+)[ ,]+(\d+)[ ,]+(\d+)/);if(!m)return .5;r=+m[1];g=+m[2];b=+m[3]}return [r,g,b].map(function(v){v/=255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)}).reduce(function(a,v,i){return a+v*[.2126,.7152,.0722][i]},0)}
+function accOf(s){var a=colLum(s.seal)+.05,b=colLum(s.bg1)+.05,cr=Math.max(a,b)/Math.min(a,b);return cr>=4.2?s.seal:s.ink}
+function drawQ(x,s,W,H,ex){var AC=accOf(s);
  var KF='"Kaiti TC","BiauKai","STKaiti","KaiTi","DFKai-SB","AR PL UKai TW","Noto Serif TC","Songti TC",serif',k=Math.min(W/1080,H/1350),L=W*.11,mw=W*.78,top=H*.14,bot=H*.76,ys=top+205*k,av=bot-ys;
  function wrap1(t,fs,lim){var ls=[],cur="";Array.from(t).forEach(function(c){if(x.measureText(cur+c).width>lim){ls.push(cur);cur=c}else cur+=c});if(cur)ls.push(cur);return ls}
  function wrap(t,fs){x.font=fs+"px "+KF;var out=[];t.split(/(?<=：)/).forEach(function(seg){var ls=wrap1(seg,fs,mw);if(ls.length>1){var n=ls.length,tot=Array.from(seg).length,tg=Math.ceil(tot/n)+1,lim=Math.min(mw,x.measureText(seg.slice(0,tg)).width*1.01);var l2=wrap1(seg,fs,lim);if(l2.length==n)ls=l2}out=out.concat(ls)});var ls=out;for(var i=1;i<ls.length;i++){var m=ls[i].match(/^[，。、；：？！」）的]+/);if(m){ls[i-1]+=m[0];ls[i]=ls[i].slice(m[0].length)}}return ls.filter(Boolean)}
@@ -863,8 +865,8 @@ function drawQ(x,s,W,H,ex){
  x.textAlign="left";var y=ys+Math.max(0,(av-P.h)*.4);x.fillStyle=s.sub;x.font=Math.round(26*k)+"px "+KF;x.fillText("依偈意的叮嚀",L,y);y+=44*k;x.fillStyle=s.ink;x.font=P.hs+"px "+KF;
  P.H.forEach(function(l,i){x.fillText(l,L,y+P.hs*.75+i*P.hs*1.5)});y+=P.H.length*P.hs*1.5+40*k;
  x.globalAlpha=.85;x.font=P.ps+"px "+KF;P.P.forEach(function(l,i){x.fillText(l,L,y+P.ps*.8+i*P.ps*1.75)});x.globalAlpha=1;y+=P.P.length*P.ps*1.75+46*k;
- if(P.A.length){x.fillStyle=s.sub;x.font=Math.round(26*k)+"px "+KF;x.fillText("今天怎麼做",L,y+8*k);y+=44*k;x.fillStyle=s.ink;x.font=P.ps+"px "+KF;P.A.forEach(function(l,i){x.fillText(l,L,y+P.ps*.8+i*P.ps*1.75)});y+=P.A.length*P.ps*1.75+30*k}
- var R=W-L,vy=top+4*k;x.textAlign="right";x.font=P.vs+"px "+KF;x.fillStyle=s.ink;ex.v.forEach(function(l,i){x.fillText(l,R,vy+P.vs*.8+i*P.vs*1.7)});vy+=ex.v.length*P.vs*1.7;
+ if(P.A.length){x.fillStyle=AC;x.globalAlpha=.8;x.font=Math.round(26*k)+"px "+KF;x.fillText("今天怎麼做",L,y+8*k);y+=44*k;x.globalAlpha=1;x.fillStyle=AC;x.font="600 "+P.ps+"px "+KF;P.A.forEach(function(l,i){x.fillText(l,L,y+P.ps*.8+i*P.ps*1.75)});y+=P.A.length*P.ps*1.75+30*k}
+ var R=W-L,vy=top+4*k;x.textAlign="right";x.font=P.vs+"px "+KF;x.fillStyle=AC;ex.v.forEach(function(l,i){x.fillText(l,R,vy+P.vs*.8+i*P.vs*1.7)});vy+=ex.v.length*P.vs*1.7;
  x.fillStyle=s.sub;x.font=Math.round(26*k)+"px "+KF;x.fillText("《法句經》"+ex.r.replace(/^法句經\s*/,""),R,vy+P.ps*.5);x.textAlign="left";
  var sg=(SET.sig||"").trim();x.font=Math.round(24*k)+"px "+KF;x.fillText(sg?"— "+sg:"#法句叮嚀",L,H*.93);
  x.restore()}
