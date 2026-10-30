@@ -11,7 +11,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="法句經">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="app-ver" content="20261030-2152">
+<meta name="app-ver" content="20261031-0607">
 <title>法句經・故事與偈</title>
 <style>
 :root{--bg:#e2e2df;--sf:#eeeeeb;--ink:#2a2a2a;--mut:#6c6c67;--acc:#454545;--line:#cdcdc9;--hi:rgba(255,255,255,.9);--sh:rgba(0,0,0,.16);--br:#8c8c87;--fs:17px;--lh:1.9;--gap:18px;--ff:"Noto Serif TC","Songti TC","PMingLiU",serif}
@@ -1107,7 +1107,7 @@ function tdyHtml(){var A=items(),it=A[(today()+di)%A.length];if(!it)return "";
  var src="《法句經》"+it.b.n+" "+kLab(it.b,it.k),U=it.u,K=null;for(var i=0;i<U.k.length;i++){if(U.k[i].h&&!U.k[i].nc&&U.k[i].d){K=U.k[i];break}}
  var ci=null,m=TL[U.id];if(m&&K){var cs=Object.keys(m),c=cs[today()%cs.length],ar=m[c],e=ar[today()%ar.length];ci={b:it.b,bi:it.bi,u:U,ui:it.ui,k:K,t:c,line:e[0],act:e[1]}}
  if(!ci){try{ci=dingPick("*",1)}catch(x){}}
- window._hfi=ci;window._hmn=(ci&&CATART[ci.t])||ARTN[hstr(U.id)%ARTN.length];if(AMUL[window._hmn]>1.2){var DN=["山","月","松","竹","蓮"];window._hmn=DN[hstr(U.id)%DN.length]}
+ window._hfi=ci;window._hmn=(ci&&CATART[ci.t])||ARTN[hstr(U.id)%ARTN.length];if(ci&&ALTART[ci.t]&&hstr(U.id+dayKey())%2)window._hmn=ALTART[ci.t];if(AMUL[window._hmn]>1.2){var DN=["山","月","松","竹","蓮"];window._hmn=DN[hstr(U.id)%DN.length]}
  var P1='<p class="vs2">'+ls.map(esc).join("<br>")+'</p><p class="sc">'+esc(src)+'</p><p class="sm2">'+it.k.d.replace(/<[^>]+>/g,"")+'</p>',
  P2=ci?'<p class="big">'+esc(ci.line)+'</p><p class="sm2">今天怎麼做：'+esc(ci.act)+'</p><p class="sc">依《法句經》'+esc(ci.b.n)+'的偈意所寫</p>':'<p class="big">今天還沒有叮嚀。</p>';
  return '<div class="tdy sec" id="tdy"><i class="mo"></i><div class="tb"><button class="on" data-hs="0">今日經文</button><button data-hs="1">今日叮嚀</button></div><div class="sl on" data-a="tdy"><div class="tx">'+P1+'</div></div><div class="sl" data-a="tdy2"><div class="tx">'+P2+'</div></div></div>'}
