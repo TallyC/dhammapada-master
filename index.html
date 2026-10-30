@@ -11,7 +11,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="法句經">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="app-ver" content="20261030-2147">
+<meta name="app-ver" content="20261030-2151">
 <title>法句經・故事與偈</title>
 <style>
 :root{--bg:#e2e2df;--sf:#eeeeeb;--ink:#2a2a2a;--mut:#6c6c67;--acc:#454545;--line:#cdcdc9;--hi:rgba(255,255,255,.9);--sh:rgba(0,0,0,.16);--br:#8c8c87;--fs:17px;--lh:1.9;--gap:18px;--ff:"Noto Serif TC","Songti TC","PMingLiU",serif}
@@ -912,7 +912,7 @@ function drawX(x,s,W,H,ex){
  x.strokeStyle=s.sub;x.globalAlpha=.5;x.lineWidth=2*k;x.beginPath();x.moveTo(xr-130*k,vy-vf*1.1);x.lineTo(xr,vy-vf*1.1);x.stroke();x.globalAlpha=1;
  x.textAlign="right";x.font=vf+"px "+KF;x.fillStyle=s.ink;ex.v.forEach(function(l,i){x.fillText(l,xr,vy+i*vl)});
  x.fillStyle=s.sub;x.font=Math.round(27*k)+"px "+KF;x.fillText("（法句經　"+ex.r+"）",xr,vy+ex.v.length*vl+vf*.4);
- var sg=(SET.sig||"").trim();if(sg){x.textAlign="left";x.fillText("— "+sg,x0,H*.9)}}
+ }
 function styles(id){return '<div class="chips" id="'+id+'">'+styList().map(function(s,i){return '<button class="'+(i==SET.cs?"on":"")+'" data-s="'+i+'">'+s.n+'</button>'}).join("")+'</div>'+(SET.cs==styList().length-1?wheel():"")+artChips()+'<div class="chips rts">'+RTS.map(function(r,i){return '<button class="'+(i==(SET.rt||0)?"on":"")+'" data-rt="'+i+'">'+r[0]+'</button>'}).join("")+'</div>'
  }
 function care(){return '<details class="help cmsg"><summary>送人關懷：加寄語與署名</summary><div class="cin"><label>寄語<input class="cdin" data-f="msg" maxlength="28" placeholder="例：天涼了，願你平安自在" value="'+esc(SET.msg||"")+'"></label><label>署名<input class="cdin" data-f="sig" maxlength="12" placeholder="你的名字" value="'+esc(SET.sig||"")+'"></label><p class="src">署名會記住，下次直接帶入；清空欄位就不會出現在圖卡上。</p></div></details>'}
@@ -934,7 +934,7 @@ function renderGold(){
  var g=L[gi];cvG=makeCard(g[0],g[1],g[2]);
  h+='<img class="cimg stk" id="goldimg" alt="金句圖卡" src="'+cvG.toDataURL("image/png")+'">'+styles("st2");
  h+='<div class="nav2"><button data-gn="-1" aria-label="上一則">‹</button><select class="slt" id="gsel" aria-label="選一則">'+L.map(function(d,i){return '<option value="'+i+'"'+(i==gi?" selected":"")+'>'+(i+1)+'／'+L.length+'　'+(gt=="x"?d[1]:d[1].split(/[，。；、？！]/)[0])+'</option>'}).join("")+'</select><button data-gn="1" aria-label="下一則">›</button></div>';
- h+='<div class="acts"><button data-a="gsave">儲存圖卡</button><button data-a="gshare">分享</button>'+(gt=="x"?"":heart(g[1],g[0],1))+'</div><p class="ref" id="unfavtip" hidden>已取消收藏，離開此頁後會從清單移除；再按一次 ♥ 可恢復。</p>'+care()+'<p class="src" style="text-align:center">按「儲存圖卡」會放大預覽，長按圖片即可存入相簿。</p>'+pdfPanel();
+ h+='<div class="acts"><button data-a="gsave">儲存圖卡</button><button data-a="gshare">分享</button>'+(gt=="x"?"":heart(g[1],g[0],1))+'</div><p class="ref" id="unfavtip" hidden>已取消收藏，離開此頁後會從清單移除；再按一次 ♥ 可恢復。</p>'+(gt=="x"?"":care())+'<p class="src" style="text-align:center">按「儲存圖卡」會放大預覽，長按圖片即可存入相簿。</p>'+(gt=="x"?"":pdfPanel());
  $("pg-gold").innerHTML=h}
 function dl(cv){cv.toBlob(function(b){if(!b)return;var u=URL.createObjectURL(b),el=document.createElement("a");el.href=u;el.download="法句經_"+new Date().toISOString().slice(0,10)+".png";document.body.appendChild(el);el.click();el.remove()},"image/png")}
 function shareCv(cv){cv.toBlob(function(b){try{var f=new File([b],"法句經.png",{type:"image/png"});if(navigator.canShare&&navigator.canShare({files:[f]})){navigator.share({files:[f],title:"法句經"}).catch(function(){});return}}catch(e){}openOv(cv)},"image/png")}
