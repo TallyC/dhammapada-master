@@ -11,7 +11,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="法句經">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="app-ver" content="20261030-2115">
+<meta name="app-ver" content="20261030-2123">
 <title>法句經・故事與偈</title>
 <style>
 :root{--bg:#e2e2df;--sf:#eeeeeb;--ink:#2a2a2a;--mut:#6c6c67;--acc:#454545;--line:#cdcdc9;--hi:rgba(255,255,255,.9);--sh:rgba(0,0,0,.16);--br:#8c8c87;--fs:17px;--lh:1.9;--gap:18px;--ff:"Noto Serif TC","Songti TC","PMingLiU",serif}
@@ -201,6 +201,8 @@ details.sec{padding:0 24px}details.sec>summary{font-size:13px;letter-spacing:.2e
 .tdy .vs2,.tdy .sc{text-align:left!important}
 .tdy .vs2{font-size:1.18em!important;letter-spacing:.06em!important;line-height:1.85!important}
 .tdy .sc{margin-top:-2px}
+.tdy .mo{height:120px!important;width:80%!important;opacity:.75!important;right:8px!important}
+.tdy .sl{padding-bottom:132px!important}.tdy{min-height:380px!important}
 </style>
 </head>
 <body>
@@ -1095,11 +1097,11 @@ function tdyHtml(){var A=items(),it=A[(today()+di)%A.length];if(!it)return "";
  var src="《法句經》"+it.b.n+" "+kLab(it.b,it.k),U=it.u,K=null;for(var i=0;i<U.k.length;i++){if(U.k[i].h&&!U.k[i].nc&&U.k[i].d){K=U.k[i];break}}
  var ci=null,m=TL[U.id];if(m&&K){var cs=Object.keys(m),c=cs[today()%cs.length],ar=m[c],e=ar[today()%ar.length];ci={b:it.b,bi:it.bi,u:U,ui:it.ui,k:K,t:c,line:e[0],act:e[1]}}
  if(!ci){try{ci=dingPick("*",1)}catch(x){}}
- window._hfi=ci;window._hmn=(ci&&CATART[ci.t])||ARTN[hstr(U.id)%ARTN.length];
+ window._hfi=ci;window._hmn=(ci&&CATART[ci.t])||ARTN[hstr(U.id)%ARTN.length];if(AMUL[window._hmn]>1.2){var DN=["山","月","松","竹","蓮"];window._hmn=DN[hstr(U.id)%DN.length]}
  var P1='<p class="vs2">'+ls.map(esc).join("<br>")+'</p><p class="sc">'+esc(src)+'</p><p class="sm2">'+it.k.d.replace(/<[^>]+>/g,"")+'</p>',
  P2=ci?'<p class="big">'+esc(ci.line)+'</p><p class="sm2">今天怎麼做：'+esc(ci.act)+'</p><p class="sc">依《法句經》'+esc(ci.b.n)+'的偈意所寫</p>':'<p class="big">今天還沒有叮嚀。</p>';
  return '<div class="tdy sec" id="tdy"><i class="mo"></i><div class="tb"><button class="on" data-hs="0">今日經文</button><button data-hs="1">今日叮嚀</button></div><div class="sl on" data-a="tdy"><div class="tx">'+P1+'</div></div><div class="sl" data-a="tdy2"><div class="tx">'+P2+'</div></div></div>'}
-function homeArt(){var el=document.querySelector("#tdy .mo");if(!el||!window._hmn)return;var m=ARTM[window._hmn];if(!m)return;var u="url("+m.toDataURL()+")";el.style.webkitMaskImage=u;el.style.maskImage=u}
+function homeArt(){var el=document.querySelector("#tdy .mo");if(!el||!window._hmn)return;var m=ARTM[window._hmn];if(!m)return;var c=document.createElement("canvas");c.width=m.width;c.height=m.height;var q=c.getContext("2d"),n=2;for(var i=0;i<n;i++)q.drawImage(m,0,0);var u="url("+c.toDataURL()+")";el.style.webkitMaskImage=u;el.style.maskImage=u}
 function homeTab(n){var s=document.querySelectorAll("#tdy .sl"),d=document.querySelectorAll("#tdy .tb button");for(var i=0;i<s.length;i++){s[i].classList.toggle("on",i==n);d[i].classList.toggle("on",i==n)}}
 function tdyInit(){homeArt()}
 function openHelp(){var d=document.createElement("div");d.className="hlp";d.innerHTML='<div class="hlc"><h3>使用說明</h3>'+
@@ -1116,8 +1118,8 @@ function renderHome(){
  BOOKS.forEach(function(b){b.u.forEach(function(x){tot++;if(dcount(x)==4)dd++})});
  h+='<div class="hero"><svg class="enso" viewBox="0 0 120 120" role="img" aria-label="法句經標誌"><defs><filter id="rgh" filterUnits="userSpaceOnUse" x="-10" y="-10" width="140" height="140"><feTurbulence type="fractalNoise" baseFrequency="0.09" numOctaves="2" seed="4" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="1.6"/></filter></defs><g filter="url(#rgh)"><path d="M101.8 46.4 A44 44 0 1 1 76.5 19.2" fill="none" stroke="currentColor" stroke-width="5.6" stroke-linecap="round"/><path d="M100.8 56 A40.8 40.8 0 1 1 66 19.2" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" opacity=".38"/><path d="M47.7 36C45.5 45.1 40.9 54 36.4 59.5L36.8 59.9C39.6 58.5 42.3 56.8 44.8 54.8V74.3H45.8C48.6 74.3 51.6 72.8 51.6 72.1V67.7H58.8V71.7H60C62.2 71.7 65.8 70.5 65.8 70.2V56.3C66.8 56.1 67.5 55.6 67.8 55.2L61.4 50.4L58.3 53.8H51.9L47.6 52.1C49.2 50.5 50.8 48.5 52.2 46.4H73.7C73.2 62.9 72.4 73.4 70.3 75.2C69.8 75.7 69.2 75.9 68.2 75.9C66.7 75.9 62.4 75.6 59.2 75.4L59.2 76C62.2 76.5 64.5 77.6 65.7 78.8C66.8 79.8 67.2 81.5 67.2 83.8C71.6 83.9 74 83 76.1 80.9C79.3 77.7 80.3 67.8 80.8 47.8C82.1 47.6 82.8 47.2 83.2 46.7L77 41.1L73.1 45H53.2C54 43.6 54.8 42.2 55.6 40.6C56.8 40.7 57.5 40.3 57.7 39.7ZM51.6 66.3V55.2H58.8V66.3Z" fill="currentColor"/><g transform="rotate(6 91 29)"><rect x="80" y="18" width="22" height="22" rx="2.5" fill="var(--bt)"/><path d="M84.1 30.5C83.9 30.5 83.3 30.5 83.3 30.5V30.8C83.7 30.9 84 30.9 84.3 31.1C84.7 31.4 84.7 33.1 84.4 34.9C84.6 35.6 85.1 35.8 85.5 35.8C86.5 35.8 87.1 35.2 87.2 34.3C87.2 32.7 86.4 32.2 86.4 31.2C86.4 30.7 86.5 30 86.6 29.4C86.9 28.4 88 24.2 88.7 22L88.5 21.9C85.1 29.5 85.1 29.5 84.7 30.2C84.5 30.5 84.4 30.5 84.1 30.5ZM83 23.8 82.9 23.9C83.4 24.5 84 25.5 84.2 26.5C86.3 27.8 88 24 83 23.8ZM84.5 19.9 84.4 20C84.9 20.7 85.5 21.7 85.7 22.7C87.8 24.2 89.7 20.2 84.5 19.9ZM96.3 21.6 95.1 23.3H94.3V20.4C94.8 20.4 94.9 20.2 94.9 20L91.8 19.7V23.3H88.7L88.9 23.7H91.8V27.4H87.5L87.7 27.9H91.5C91 29.4 89.5 31.9 88.5 32.5C88.3 32.7 87.8 32.8 87.8 32.8L89 35.6C89.1 35.5 89.3 35.4 89.4 35.2C92.2 34.4 94.5 33.7 96 33.1C96.3 33.8 96.5 34.5 96.6 35.1C99.1 37.1 101.2 31.9 94.5 30L94.3 30C94.9 30.8 95.4 31.7 95.8 32.6C93.5 32.7 91.4 32.8 89.8 32.8C91.4 31.9 93.3 30.5 94.3 29.3C94.7 29.3 94.8 29.2 94.9 29L92.3 27.9H98.9C99.1 27.9 99.3 27.8 99.4 27.6C98.5 26.8 97 25.7 97 25.7L95.7 27.4H94.3V23.7H98C98.3 23.7 98.5 23.6 98.5 23.5C97.7 22.7 96.3 21.6 96.3 21.6Z" fill="var(--bg)"/></g></g></svg><div class="hd"><div class="ht">法句經</div><div class="hs">DHAMMAPADA</div></div><button class="sico hp" data-a="help" aria-label="使用說明"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.4a2.5 2.5 0 1 1 3.6 2.2c-.8.4-1.2 1-1.2 1.9"/><path d="M12 17h.01"/></svg></button><button class="sico" data-a="search" aria-label="搜尋"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></button></div>';
  var L0=ST.last,lu=L0&&BOOKS[L0[0]]&&BOOKS[L0[0]].u[L0[1]],jt,jc;
- if(!lu){jt="從第一則開始";jc="n"}else{var dc=dcount(lu);jt=esc(BOOKS[L0[0]].n)+" 第 "+(L0[1]+1)+" 則・"+(dc<4?"還差 "+(4-dc)+" 步":"已完成");jc=dc<4?"p":"d"}
- h+='<button class="jx" data-a="cont"><span class="jg"><i class="jd '+jc+'"></i>精進</span><span class="jm"><b>'+jt+'</b><small>已完成 '+dd+'/'+tot+' 則</small></span><span class="jc">›</span></button>';
+ if(!lu){jt="從第一則開始";jc="n";jx2=""}else{var dc=dcount(lu);jt=esc(BOOKS[L0[0]].n)+" 第 "+(L0[1]+1)+" 則";jx2=(dc<4?"還差 "+(4-dc)+" 步・":"本則已完成・");jc=dc<4?"p":"d"}
+ h+='<button class="jx" data-a="cont"><span class="jg"><i class="jd '+jc+'"></i>精進</span><span class="jm"><b>'+jt+'</b><small>'+(typeof jx2!=="undefined"?jx2:"")+'已完成 '+dd+'/'+tot+' 則</small></span><span class="jc">›</span></button>';
  h+=tdyHtml();h+='<button class="sec ding row" data-dt="*">'+ensoSvg("叮","dz2")+'<span class="dtx"><b>法句叮嚀</b><small>心中默想，讀一句經中的提醒</small></span><span class="dc">›</span></button>';
  h+='<details class="sec bks"><summary>看看法句經</summary>'+ordSeg()+ordIdx().map(function(i){var b=BOOKS[i],d1=0,pc=0;b.u.forEach(function(x){if(dcount(x)==4)d1++;pc+=dcount(x)});pc=Math.round(pc*100/(4*b.u.length));return '<button class="bk" data-bk="'+i+'"><span class="bkn">'+b.n+'<small>'+bkLabel(b)+'</small></span><span class="pb"><i style="width:'+pc+'%"></i></span><span class="bkc">'+d1+'/'+b.u.length+'</span></button>'}).join("")+'</details>';
   $("pg-home").innerHTML=h;tdyInit()}
