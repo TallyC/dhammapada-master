@@ -11,7 +11,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="法句經">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="app-ver" content="20261030-0711">
+<meta name="app-ver" content="20261030-0817">
 <title>法句經・故事與偈</title>
 <style>
 :root{--bg:#e2e2df;--sf:#eeeeeb;--ink:#2a2a2a;--mut:#6c6c67;--acc:#454545;--line:#cdcdc9;--hi:rgba(255,255,255,.9);--sh:rgba(0,0,0,.16);--br:#8c8c87;--fs:17px;--lh:1.9;--gap:18px;--ff:"Noto Serif TC","Songti TC","PMingLiU",serif}
@@ -98,9 +98,9 @@ details summary{cursor:pointer;padding:12px 0 4px;font-size:1.02em}.mut{color:va
 .hero{grid-template-columns:auto 1fr auto!important;grid-template-areas:"i t c" "s s s"!important;align-items:center}
 .hero .hs{font-size:9px;letter-spacing:.38em}
 .hero .rb{grid-area:c;border:none;border-radius:9px;padding:5px 10px;background:var(--acc);color:var(--sf);font-size:.74em;letter-spacing:.08em;box-shadow:0 2px 5px -1px var(--sh);white-space:nowrap}
-.ding.row{display:flex;align-items:center;gap:14px;width:100%;text-align:left;padding:14px 16px;font:inherit;color:var(--ink);background:linear-gradient(145deg,var(--hi),var(--sf))}
+.ding.row{position:relative;overflow:hidden;display:flex;align-items:center;gap:14px;width:100%;text-align:left;padding:16px 18px;font:inherit;color:var(--ink);background:radial-gradient(ellipse at 100% 0%,var(--hi),transparent 60%),linear-gradient(135deg,var(--hi),var(--sf));border:1px solid var(--line);box-shadow:0 1px 0 var(--hi) inset,0 10px 22px -12px var(--sh)}.ding.row::after{content:"";position:absolute;right:-38px;top:-34px;width:118px;height:118px;border:11px solid var(--ink);border-radius:50%;opacity:.06;pointer-events:none}.ding.row .dz2{flex:none;width:46px;height:46px;color:var(--ink);filter:drop-shadow(0 2px 2px var(--sh))}
 .ding.row .dz{flex:none;width:38px;min-width:38px;height:38px;padding:0;box-sizing:border-box;border-radius:50%;border:1.5px solid var(--ink);display:flex;align-items:center;justify-content:center;font-size:1.1em;font-weight:700;box-shadow:inset 0 0 0 3px var(--sf),inset 0 0 0 4px var(--line)}
-.ding.row .dtx{flex:1;display:flex;flex-direction:column;gap:2px}.ding.row b{font-size:1.02em;letter-spacing:.2em}.ding.row small{font-size:.78em;color:var(--mut)}.ding.row .dc{font-size:1.4em;color:var(--mut)}
+.ding.row .dtx{flex:1;display:flex;flex-direction:column;gap:2px}.ding.row b{font-size:1.02em;letter-spacing:.2em}.ding.row small{font-size:.78em;color:var(--mut)}.ding.row .dc{position:relative;z-index:1;flex:none;width:30px;min-width:30px;height:30px;padding:0;box-sizing:border-box;border-radius:50%;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:1.15em;color:var(--mut);background:var(--sf)}
 .tps{justify-content:flex-start!important}
 @keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 .enso{width:62px;height:62px;color:var(--ink);opacity:1;filter:drop-shadow(0 3px 3px var(--sh))}
@@ -242,12 +242,12 @@ w:[["見福心安","看見自己的善行，內心安穩"]],
 i:[["與上一偈對照","第 15 偈是「憂」，這一偈是「喜」。同一個結構，只因為所作的行為不同。"]],
 x:"今天做一件小善事，事後留意心的感受。",
 q:{q:"達摩迦的歡喜來自哪裡？",o:[["財富與名聲","偈頌談的是行為的清淨。"],["看見自己行為清淨而心安","對。",1],["他人的稱讚","偈頌談的是內在的喜悅。"]]}},
-{t:"提婆達多的悔恨",
-s:"提婆達多見佛陀受人敬重，起了嫉妒，想取代佛陀領導僧團，被拒絕後懷恨，三度想害佛陀：派弓箭手、從山上推落大石、放醉象，都沒成功；又設法分裂僧團，但舍利弗與目犍連把多數比丘帶回。後來他重病，要被抬去見佛，到祇園水池邊，腳一落地便陷入地中，被大地吞沒，死後墮入阿鼻地獄。",
+{t:"提婆達多的灼惱",
+s:"提婆達多出家後得了神通，卻沒有證得聖果。他看見佛陀與兩位上首弟子受人敬重，心生嫉妒，結交阿闍世王子，唆使他殺害父王，自己好殺佛陀取而代之。派去的刺客聽法後都成了須陀洹，不敢下手；他自己從靈鷲山推下大石，只傷到佛陀的腳；又放出醉象那爛祇厘，被佛陀降伏。他要求佛陀把僧團交給他，被責備後轉為怨恨；又提出五條嚴苛的戒行要求，被拒絕後帶走約五百位比丘，另立僧團；舍利弗與目犍連把比丘們帶回，他當場吐血。重病九個月後，他想見佛陀，被抬到祇園，腳一落地便陷入地中，死後墮入阿鼻地獄。佛陀因此說了這首偈。註釋指出：他今生已先嘗到失去供養、被人指責、重病的苦，來世的苦更甚。",
 k:[{n:"17",h:["今悔後悔，為惡兩悔，","厥為自殃，受罪熱惱；"],p:["Idha tappati pecca tappati, pāpakārī ubhayattha tappati;","“pāpaṃ me kata”nti tappati, bhiyyo tappati duggatiṃ gato."],d:"作惡的人今生灼惱，來世也灼惱；他悔恨「我造了惡」而灼惱，墮入惡趣後灼惱更甚。"}],
 g:[["tappati","灼惱、悔恨"],["pāpa","惡"],["duggati","惡趣"],["bhiyyo","更加"]],
 w:[["厥為自殃","這是自己招來的災殃"],["熱惱","如火灼燒般的苦惱"]],
-i:[["嫉妒的代價","故事裡的苦，起點是嫉妒與野心；偈頌把重點放在作惡者內心的懊悔。"]],
+i:[["嫉妒的代價","故事裡的苦，起點是嫉妒與野心；偈頌把重點放在作惡者內心的懊悔。"],["故事與偈的連結","註釋用這個故事說明：作惡的人今生就先受苦，來世更苦。偈中的「悔」（tappati）原意是像被灼燒般的痛苦，不只是事後的後悔；所以這一則的標題用「灼惱」。"]],
 x:"今天若做了讓自己後悔的事，別逃開：當天就補一句道歉或改正。",
 q:{q:"偈頌說作惡者最後的感受是？",o:[["得意","偈頌說的是灼惱與悔恨。"],["悔恨，而且更甚","對。",1],["毫無感覺","偈頌說是灼惱。"]]}},
 {t:"蘇摩那的歡喜",
@@ -255,7 +255,7 @@ s:"給孤獨長者的幼女蘇摩那，與兩位姊姊一樣常護持供僧；�
 k:[{n:"18",h:["今歡後歡，為善兩歡，","厥為自祐，受福悅豫。"],p:["Idha nandati pecca nandati, katapuñño ubhayattha nandati;","“puññaṃ me kata”nti nandati, bhiyyo nandati suggatiṃ gato."],d:"行善的人今生喜樂，來世也喜樂；他想著「我做了福德」而喜樂，生到善趣後更加喜樂。"}],
 g:[["nandati","喜樂"],["puñña","福德、善業"],["suggati","善趣"],["bhiyyo","更加"]],
 w:[["自祐","自己給自己的福佑"],["悅豫","愉悅安適"]],
-i:[["四偈成組","第 15–18 偈兩兩對照：憂與喜、悔與歡。《法句經》把它們放在同一首偈裡。"]],
+i:[["四偈成組","第 15–18 偈兩兩對照：憂與喜、悔與歡。《法句經》把它們放在同一首偈裡。"],["故事與偈的連結","註釋把這首偈放在蘇摩那的故事裡：她行善、護持供僧，命終生到兜率天（善趣），正是「今世喜、來世更喜」。故事的情節（稱父親為弟弟）其實在說明她的證悟，與偈中「想著我做了福德而歡喜」只是間接相連；這是註釋配故事的方式，不是偈本身的意思。"]],
 x:"睡前說出今天做過的一件善事。",
 q:{q:"蘇摩那稱父親為「弟弟」，是因為？",o:[["她神智不清","佛陀說她神智清明。"],["她的證悟比父親高","對。她是斯陀含，父親是須陀洹。",1],["她年紀比父親大","故事並非如此。"]]}},
 {t:"多聞與實踐",
@@ -743,8 +743,8 @@ function mkPdf(btn){
 /* 開啟提醒 */
 function showRem(){
  var A=items(),it=A[today()%A.length],lb=it.b.n+" "+kLab(it.b,it.k),d=document.createElement("div");d.className="rem";
- d.innerHTML='<div class="remc"><div class="ref">今日一句　'+lb+'</div><p class="vs">'+it.k.h.join("<br>")+'</p><div class="acts"><button data-r="go">進入學習</button><button data-r="card">看圖卡</button></div><div class="acts">'+heart(it.k.h.join(""),lb,1)+'</div><p class="src" style="text-align:center">可在「設定 → 開啟提醒」調整</p></div>';
- d.onclick=function(e){var t=e.target.closest("[data-r]");if(t&&t.getAttribute("data-r")=="card"){d.remove();show("today");return}if(t||e.target===d)d.remove()};
+ d.innerHTML='<div class="remc"><div class="ref">今日一句　'+lb+'</div><p class="vs">'+it.k.h.join("<br>")+'</p><div class="acts"><button data-r="go">回到進度</button><button data-r="card">看圖卡</button><button data-r="home">回首頁</button></div><div class="acts">'+heart(it.k.h.join(""),lb,1)+'</div><p class="src" style="text-align:center">可在「設定 → 開啟提醒」調整</p></div>';
+ d.onclick=function(e){var t=e.target.closest("[data-r]"),r=t&&t.getAttribute("data-r");if(r=="card"){d.remove();show("today");return}if(r=="go"){d.remove();show("learn");return}if(r=="home"||e.target===d){d.remove();show("home");return}};
  document.body.appendChild(d)}
 /* 日行一問 */
 var XC={f1:"人",f2:"善",f3:"說",f4:"常",f5:"省",f6:"說",f7:"省",f8:"省",f9:"人",f10:"習",e1:"善",e2:"省",e3:"習",e4:"善",e5:"習",e6:"善",e7:"省",e8:"省",e9:"說",e10:"省",e11:"省",y1:"專",y2:"善",y3:"情",y4:"情",y5:"說",y6:"專",y7:"省",y8:"省",y9:"專",y10:"省",y11:"善",y12:"省",y13:"善",y14:"省",z1:"專",z2:"專",z3:"專",z4:"習",z5:"情",z6:"省",z7:"習",z8:"習",z9:"習",a1:"常",a2:"常",a3:"習",a4:"足",a5:"常",a6:"善",a7:"習",a8:"習",a9:"習",a10:"善",a11:"省",a12:"常",a13:"專",c1:"專",c2:"專",c3:"情",c4:"專",c5:"習",c6:"專",c7:"習",c8:"情",c9:"善",p1:"省",p2:"常",p3:"足",p4:"足",p5:"人",p6:"省",p7:"習",p8:"善",p9:"習",p10:"善",p11:"習",p12:"說",b1:"專",b2:"人",b3:"足",b4:"說",b5:"省",b6:"專",b7:"省",b8:"省",b9:"省",b10:"省",b11:"專",b12:"人",b13:"善",b14:"說",b15:"善",m1:"省",m2:"善",m3:"人",m4:"省",m5:"情",m6:"情",m7:"情",m8:"情",m9:"省",m10:"省",m11:"習",r1:"情",r2:"足",r3:"足",r4:"專",r5:"專",r6:"情",r7:"說",r8:"足",r9:"足",r10:"專",s1:"專",s2:"專",s3:"說",s4:"習",s5:"專",s6:"善",s7:"省",s8:"專",s9:"習",s10:"專",s11:"善",s12:"省"},XCN={專:'專注',情:'情緒',說:'說話',人:'人際',習:'習慣',足:'知足',常:'無常',善:'感恩善意',省:'自省'},xc="";
@@ -994,7 +994,7 @@ function renderHome(){
  var u=BU(),tot=0,dd=0,h="";
  BOOKS.forEach(function(b){b.u.forEach(function(x){tot++;if(dcount(x)==4)dd++})});
  h+='<div class="hero"><svg class="enso" viewBox="0 0 120 120" role="img" aria-label="法句經標誌"><defs><filter id="rgh" filterUnits="userSpaceOnUse" x="-10" y="-10" width="140" height="140"><feTurbulence type="fractalNoise" baseFrequency="0.09" numOctaves="2" seed="4" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="1.6"/></filter></defs><g filter="url(#rgh)"><path d="M101.8 46.4 A44 44 0 1 1 76.5 19.2" fill="none" stroke="currentColor" stroke-width="5.6" stroke-linecap="round"/><path d="M100.8 56 A40.8 40.8 0 1 1 66 19.2" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" opacity=".38"/><path d="M47.7 36C45.5 45.1 40.9 54 36.4 59.5L36.8 59.9C39.6 58.5 42.3 56.8 44.8 54.8V74.3H45.8C48.6 74.3 51.6 72.8 51.6 72.1V67.7H58.8V71.7H60C62.2 71.7 65.8 70.5 65.8 70.2V56.3C66.8 56.1 67.5 55.6 67.8 55.2L61.4 50.4L58.3 53.8H51.9L47.6 52.1C49.2 50.5 50.8 48.5 52.2 46.4H73.7C73.2 62.9 72.4 73.4 70.3 75.2C69.8 75.7 69.2 75.9 68.2 75.9C66.7 75.9 62.4 75.6 59.2 75.4L59.2 76C62.2 76.5 64.5 77.6 65.7 78.8C66.8 79.8 67.2 81.5 67.2 83.8C71.6 83.9 74 83 76.1 80.9C79.3 77.7 80.3 67.8 80.8 47.8C82.1 47.6 82.8 47.2 83.2 46.7L77 41.1L73.1 45H53.2C54 43.6 54.8 42.2 55.6 40.6C56.8 40.7 57.5 40.3 57.7 39.7ZM51.6 66.3V55.2H58.8V66.3Z" fill="currentColor"/><g transform="rotate(6 91 29)"><rect x="80" y="18" width="22" height="22" rx="2.5" fill="var(--bt)"/><path d="M84.1 30.5C83.9 30.5 83.3 30.5 83.3 30.5V30.8C83.7 30.9 84 30.9 84.3 31.1C84.7 31.4 84.7 33.1 84.4 34.9C84.6 35.6 85.1 35.8 85.5 35.8C86.5 35.8 87.1 35.2 87.2 34.3C87.2 32.7 86.4 32.2 86.4 31.2C86.4 30.7 86.5 30 86.6 29.4C86.9 28.4 88 24.2 88.7 22L88.5 21.9C85.1 29.5 85.1 29.5 84.7 30.2C84.5 30.5 84.4 30.5 84.1 30.5ZM83 23.8 82.9 23.9C83.4 24.5 84 25.5 84.2 26.5C86.3 27.8 88 24 83 23.8ZM84.5 19.9 84.4 20C84.9 20.7 85.5 21.7 85.7 22.7C87.8 24.2 89.7 20.2 84.5 19.9ZM96.3 21.6 95.1 23.3H94.3V20.4C94.8 20.4 94.9 20.2 94.9 20L91.8 19.7V23.3H88.7L88.9 23.7H91.8V27.4H87.5L87.7 27.9H91.5C91 29.4 89.5 31.9 88.5 32.5C88.3 32.7 87.8 32.8 87.8 32.8L89 35.6C89.1 35.5 89.3 35.4 89.4 35.2C92.2 34.4 94.5 33.7 96 33.1C96.3 33.8 96.5 34.5 96.6 35.1C99.1 37.1 101.2 31.9 94.5 30L94.3 30C94.9 30.8 95.4 31.7 95.8 32.6C93.5 32.7 91.4 32.8 89.8 32.8C91.4 31.9 93.3 30.5 94.3 29.3C94.7 29.3 94.8 29.2 94.9 29L92.3 27.9H98.9C99.1 27.9 99.3 27.8 99.4 27.6C98.5 26.8 97 25.7 97 25.7L95.7 27.4H94.3V23.7H98C98.3 23.7 98.5 23.6 98.5 23.5C97.7 22.7 96.3 21.6 96.3 21.6Z" fill="var(--bg)"/></g></g></svg><div class="hd"><div class="ht">法句經</div><div class="hs">DHAMMAPADA</div></div><button class="rb" data-a="cont">回到進度</button><button class="sbox" data-a="search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>搜尋經文、故事、巴利字</button></div>';
- h+='<button class="sec ding row" data-dt="*"><span class="dz">叮</span><span class="dtx"><b>法句叮嚀</b><small>心中默想，請一句經中的提醒</small></span><span class="dc">›</span></button>';
+ h+='<button class="sec ding row" data-dt="*">'+ensoSvg("叮","dz2")+'<span class="dtx"><b>法句叮嚀</b><small>心中默想，請一句經中的提醒</small></span><span class="dc">›</span></button>';
  h+='<details class="sec bks"><summary>各品・已完成 '+dd+'/'+tot+' 則</summary>'+ordSeg()+ordIdx().map(function(i){var b=BOOKS[i],d1=0,pc=0;b.u.forEach(function(x){if(dcount(x)==4)d1++;pc+=dcount(x)});pc=Math.round(pc*100/(4*b.u.length));return '<button class="bk" data-bk="'+i+'"><span class="bkn">'+b.n+'<small>'+bkLabel(b)+'</small></span><span class="pb"><i style="width:'+pc+'%"></i></span><span class="bkc">'+d1+'/'+b.u.length+'</span></button>'}).join("")+'</details>';
  h+='<div class="qk"><button data-a="toc">目錄</button><button data-a="gold">金句圖卡</button><button data-a="media">影音</button></div>';
  $("pg-home").innerHTML=h}
