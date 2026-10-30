@@ -11,7 +11,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="法句經">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="app-ver" content="20261031-0727">
+<meta name="app-ver" content="20261031-0732">
 <title>法句經・故事與偈</title>
 <style>
 :root{--bg:#e2e2df;--sf:#eeeeeb;--ink:#2a2a2a;--mut:#6c6c67;--acc:#454545;--line:#cdcdc9;--hi:rgba(255,255,255,.9);--sh:rgba(0,0,0,.16);--br:#8c8c87;--fs:17px;--lh:1.9;--gap:18px;--ff:"Noto Serif TC","Songti TC","PMingLiU",serif}
@@ -646,6 +646,8 @@ BOOKS.push({"id": "f", "n": "刀杖品", "p": "Daṇḍavagga", "d": "從「我�
  for(var key in M){var q=key.split(":"),kk=K(q[0],+q[1]);if(M[key]==="")delete kk.hm;else kk.hm=M[key]}
  delete b13.k[0].hm;
  K("b13",0).hm="";delete K("b13",0).hm;
+ /* 漢譯與巴利對應偈說法不同者：提示白話依巴利偈譯出 */
+ [["雙要品","6","漢譯此偈重在「少責備他人、多反省自己」；白話依巴利對應偈譯出（談爭執的止息），主題相近、說法不同。"],["放逸品","29","漢譯此偈以「居亂而身正」表現不放逸；白話依巴利對應偈譯出（以快馬超越劣馬為喻），喻象不同。"],["放逸品","32","漢譯此偈強調守戒、斷漏而近涅槃；白話依巴利對應偈譯出（樂於不放逸、見放逸有危險），重點略有差異。"],["愚闇品","75","漢譯此偈勸人出家、捨離愛染；白話依巴利對應偈譯出（求利養與求涅槃是兩條路），是同一主題的不同說法。"],["明哲品","76","漢譯此偈勸人深觀善惡、心知畏忌；白話依巴利對應偈譯出（遇到指出過失的智者如遇見寶藏），兩者為鬆散對應。"],["明哲品","88","漢譯此偈為「抑制情欲，絕樂無為」；白話依巴利對應偈譯出（捨棄欲樂、從煩惱中清淨自己），文字不同、方向一致。"]].forEach(function(f){BOOKS.forEach(function(b){if(b.n!=f[0])return;b.u.forEach(function(u){u.k.forEach(function(k){if(String(k.n)==f[1])k.hm=(k.hm?k.hm+" ":"")+f[2]})})})});
  /* 巴利偈在漢譯另一偈（不另收錄），標題列提示 */
  K("f1",1).hr=[18,1,"與上一則同一偈"];K("f2",0).hr=[18,2,"與下一則同一偈"];
  K("f4",0).hr=[1,5,"說明見下"];K("f5",0).hr=[13,14,"說明見下"];K("f10",0).hr=[14,7,"說明見下"];K("e7",0).hr=[32,27,"說明見下"];
