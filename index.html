@@ -11,7 +11,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="法句經">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="app-ver" content="20261030-2151">
+<meta name="app-ver" content="20261030-2152">
 <title>法句經・故事與偈</title>
 <style>
 :root{--bg:#e2e2df;--sf:#eeeeeb;--ink:#2a2a2a;--mut:#6c6c67;--acc:#454545;--line:#cdcdc9;--hi:rgba(255,255,255,.9);--sh:rgba(0,0,0,.16);--br:#8c8c87;--fs:17px;--lh:1.9;--gap:18px;--ff:"Noto Serif TC","Songti TC","PMingLiU",serif}
@@ -745,6 +745,13 @@ function artPick(label,text){var a=SET.art;if(a=="0")return null;if(a&&a!="r")re
 var AMUL={"雁":1.9,"舟":1.8,"燈":1.3,"葉":1.3,"石":1.3};var ASC={"蓮":1.5,"雁":1.15,"舟":1.15},ASX={"蓮":70};
 function artDraw(x,s,W,H,m){var k=Math.min(W/1080,H/1350)*(H/W>1.6?1.45:1),sc=(ASC[m.nm]||1)*.85*(window._qa?1.05:1),w=Math.round(1080*k*sc),h=Math.round(648*k*sc),dk=s.vig>.2,t=document.createElement("canvas");t.width=w;t.height=h;var q=t.getContext("2d");q.drawImage(m,0,0,w,h);q.globalCompositeOperation="source-in";q.fillStyle=s.ink;q.fillRect(0,0,w,h);x.save();x.globalAlpha=Math.min(.85,(dk?.4:.38)*(AMUL[m.nm]||1));x.drawImage(t,Math.round((ASX[m.nm]||0)*k),H-h+Math.round((window._qa?90:14)*k)-(H/W>1.6?Math.round(60*k):0));x.restore()}
 var ARTO=[["r","依意思"],["0","原始"]].concat(ARTN.map(function(n){return [n,n]}));
+var PYL=["偏上","稍上","預設","稍下","偏下"],PYV=[.3,.4,.5,.56,.64];
+function pyIdx(){return SET.pi==null?3:SET.pi}
+function pyF(RD){return (RD&&RD[0]=="手機桌布")?PYV[pyIdx()]:null}
+function pyDy(RD,H){var f=pyF(RD);return f==null?0:(f-.56)*H}
+function posChips(){if((SET.rt||0)!=2)return "";return '<div class="arts"><span class="lb2">文字位置</span><div class="slid" id="pslid">'+sdrHtml(PYL,pyIdx(),"pslide")+'</div></div>'}
+document.addEventListener("input",function(e){var t=e.target;if(t.id!="pslide")return;var i=+t.value,b=t.closest(".slid");b.querySelector(".sl-c").textContent=PYL[i];var ps=b.querySelectorAll(".sl-p");ps[0].textContent=i>0?PYL[i-1]:"";ps[1].textContent=i<PYL.length-1?PYL[i+1]:""});
+document.addEventListener("change",function(e){var t=e.target;if(t.id!="pslide")return;SET.pi=+t.value;W_("dhp2-set",SET);if($("pg-ding").contains(t))renderDing(1);else{renderToday();renderGold()}});
 function sdrHtml(L,i,id){var n=L.length,t="";if(n<2)return "";for(var j=0;j<n;j++)t+='<i style="left:'+(j/(n-1)*100)+'%"></i>';
  return '<div class="sl-lb"><span class="sl-p">'+(i>0?L[i-1]:"")+'</span><b class="sl-c">'+L[i]+'</b><span class="sl-p">'+(i<n-1?L[i+1]:"")+'</span></div><div class="sl-tr"><div class="sl-tk">'+t+'</div><input type="range" class="sdr" id="'+id+'" min="0" max="'+(n-1)+'" step="1" value="'+i+'"></div>'}
 function artChips(){var cur=SET.art||"r",i=0;ARTO.forEach(function(a,j){if(a[0]==cur)i=j});return '<div class="arts"><span class="lb2">底圖</span><div class="slid" id="aslid">'+sdrHtml(ARTO.map(function(a){return a[1]}),i,"aslide")+'</div></div>'}
@@ -761,7 +768,7 @@ function makeCard(label,text,ex){
  g=x.createRadialGradient(W/2,H/2,H*.28,W/2,H/2,H*.78);g.addColorStop(0,"rgba(0,0,0,0)");g.addColorStop(1,"rgba(0,0,0,"+s.vig+")");x.fillStyle=g;x.fillRect(0,0,W,H);
  x.strokeStyle=s.sub;x.globalAlpha=.5;x.lineWidth=2;x.strokeRect(40,40,W-80,H-80);x.globalAlpha=.28;x.strokeRect(54,54,W-108,H-108);x.globalAlpha=1;
  if(ex){drawX(x,s,W,H,ex);return c}
- x.save();x.translate(W/2,RD[3]*H);var ks=Math.min(W/1080,H/1350);x.scale(ks,ks);x.translate(-540,-640);
+ x.save();x.translate(W/2,(pyF(RD)||RD[3])*H);var ks=Math.min(W/1080,H/1350);x.scale(ks,ks);x.translate(-540,-640);
  x.globalAlpha=.55;drawEnso(x,540,640,380,16,s.ink,s.seal,s.bg1,"",0);x.globalAlpha=1;
  var cl=text.split(/[，。；、？！]/).filter(Boolean),n=cl.length,fs=n<=4?96:80,gap=fs*1.5,st=fs*1.18,mx=Math.max.apply(null,cl.map(function(a){return a.length}));
  var x0=540+gap*(n-1)/2,y0=640-mx*st/2+fs*.1;
@@ -854,7 +861,7 @@ function drawEnso(x,cx,cy,R,lw,col,seal,sealBg,ch,fs){var sc=R/44,D=Math.PI/180,
 function colLum(c){var m=String(c).match(/#([0-9a-f]{6})/i),r,g,b;if(m){r=parseInt(m[1].slice(0,2),16);g=parseInt(m[1].slice(2,4),16);b=parseInt(m[1].slice(4,6),16)}else{m=String(c).match(/(\d+)[ ,]+(\d+)[ ,]+(\d+)/);if(!m)return .5;r=+m[1];g=+m[2];b=+m[3]}return [r,g,b].map(function(v){v/=255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)}).reduce(function(a,v,i){return a+v*[.2126,.7152,.0722][i]},0)}
 function accOf(s){var a=colLum(s.seal)+.05,b=colLum(s.bg1)+.05,cr=Math.max(a,b)/Math.min(a,b);return cr>=4.2?s.seal:s.ink}
 function drawQ(x,s,W,H,ex){var AC=accOf(s);
- var KF='"Kaiti TC","BiauKai","STKaiti","KaiTi","DFKai-SB","AR PL UKai TW","Noto Serif TC","Songti TC",serif',k=Math.min(W/1080,H/1350),L=W*.11,mw=W*.78,top=H*.14,bot=H*.77,ys=top+185*k,av=bot-ys;
+ var KF='"Kaiti TC","BiauKai","STKaiti","KaiTi","DFKai-SB","AR PL UKai TW","Noto Serif TC","Songti TC",serif',k=Math.min(W/1080,H/1350),L=W*.11,mw=W*.78,top=H*.14,DYq=Math.max(0,pyDy(RTS[SET.rt||0],H)),bot=H*.77+DYq,ys=top+185*k+DYq,av=bot-ys;
  function wrap1(t,fs,lim){var ls=[],cur="";Array.from(t).forEach(function(c){if(x.measureText(cur+c).width>lim){ls.push(cur);cur=c}else cur+=c});if(cur)ls.push(cur);return ls}
  function wrap(t,fs){x.font=fs+"px "+KF;var out=[];t.split(/(?<=：)/).forEach(function(seg){var ls=wrap1(seg,fs,mw);if(ls.length>1){var n=ls.length,tot=Array.from(seg).length,tg=Math.ceil(tot/n)+1,lim=Math.min(mw,x.measureText(seg.slice(0,tg)).width*1.01);var l2=wrap1(seg,fs,lim);if(l2.length==n)ls=l2}out=out.concat(ls)});var ls=out;for(var i=1;i<ls.length;i++){var m=ls[i].match(/^[，。、；：？！」）的]+/);if(m){ls[i-1]+=m[0];ls[i]=ls[i].slice(m[0].length)}}return ls.filter(Boolean)}
  var f=1,P;
@@ -897,9 +904,9 @@ $("pg-ding").onclick=function(e){var t=e.target.closest("button");if(!t)return;
 
  if(t.hasAttribute("data-s")||t.hasAttribute("data-rt")){if(t.hasAttribute("data-s"))SET.cs=+t.getAttribute("data-s");else SET.rt=+t.getAttribute("data-rt");W_("dhp2-set",SET);renderDing(1);return}
  var a=t.getAttribute("data-a");if(a=="nmore"){dsel=0;renderDing();window.scrollTo(0,0)}else if(a=="nsave")openOv(cvN);else if(a=="nshare")shareCv(cvN);else if(a=="nstory")go(window._dn.bi,window._dn.ui)};
-function drawX(x,s,W,H,ex){
+function drawX(x,s,W,H,ex){var DY=pyDy(RTS[SET.rt||0],H);
  if(ex.q)return drawQ(x,s,W,H,ex);
- var k=Math.min(W/1080,H/1350),KF='"Kaiti TC","BiauKai","STKaiti","KaiTi","DFKai-SB","AR PL UKai TW","Noto Serif TC","Songti TC",serif',R=rng(hstr(ex.p)),fs=Math.round(66*k),lh=fs*1.65,maxW=W*.70,x0=W*.13,cy=H*.40;
+ var k=Math.min(W/1080,H/1350),KF='"Kaiti TC","BiauKai","STKaiti","KaiTi","DFKai-SB","AR PL UKai TW","Noto Serif TC","Songti TC",serif',R=rng(hstr(ex.p)),fs=Math.round(66*k),lh=fs*1.65,maxW=W*.70,x0=W*.13,cy=H*.40+DY;
  x.font=fs+"px "+KF;
  function w1(t,lim){var ls=[],cur="";Array.from(t).forEach(function(c){if(x.measureText(cur+c).width>lim){ls.push(cur);cur=c}else cur+=c});if(cur)ls.push(cur);return ls}
  var lines=[];ex.p.split(/(?<=：)/).forEach(function(seg){var ls=w1(seg,maxW);if(ls.length>1){var tg=Math.ceil(Array.from(seg).length/ls.length)+1,l2=w1(seg,Math.min(maxW,x.measureText(seg.slice(0,tg)).width*1.01));if(l2.length==ls.length)ls=l2}lines=lines.concat(ls)});
@@ -908,12 +915,12 @@ function drawX(x,s,W,H,ex){
  var y0=cy-(lines.length-1)*lh/2;x.fillStyle=s.ink;x.textBaseline="middle";x.textAlign="center";
  lines.forEach(function(ln,i){var xx=x0;Array.from(ln).forEach(function(c){var w=x.measureText(c).width;x.save();x.translate(xx+w/2+(R()-.5)*2,y0+i*lh+(R()-.5)*fs*.12);x.rotate((R()-.5)*.07);var z=1+(R()-.5)*.08;x.scale(z,z);x.shadowColor="rgba(0,0,0,.18)";x.shadowBlur=3;x.fillText(c,0,0);x.restore();xx+=w*(1+(R()-.5)*.03)})});
  x.save();x.globalAlpha=.8;drawEnso(x,W/2,H*.13,34*k,5*k,s.ink,s.seal,s.bg1,"句",34*k);x.restore();
- var xr=W*.88,vf=Math.round(40*k),vy=H*.70,vl=vf*1.7;
+ var xr=W*.88,vf=Math.round(40*k),vy=H*.70+DY,vl=vf*1.7;
  x.strokeStyle=s.sub;x.globalAlpha=.5;x.lineWidth=2*k;x.beginPath();x.moveTo(xr-130*k,vy-vf*1.1);x.lineTo(xr,vy-vf*1.1);x.stroke();x.globalAlpha=1;
  x.textAlign="right";x.font=vf+"px "+KF;x.fillStyle=s.ink;ex.v.forEach(function(l,i){x.fillText(l,xr,vy+i*vl)});
  x.fillStyle=s.sub;x.font=Math.round(27*k)+"px "+KF;x.fillText("（法句經　"+ex.r+"）",xr,vy+ex.v.length*vl+vf*.4);
  }
-function styles(id){return '<div class="chips" id="'+id+'">'+styList().map(function(s,i){return '<button class="'+(i==SET.cs?"on":"")+'" data-s="'+i+'">'+s.n+'</button>'}).join("")+'</div>'+(SET.cs==styList().length-1?wheel():"")+artChips()+'<div class="chips rts">'+RTS.map(function(r,i){return '<button class="'+(i==(SET.rt||0)?"on":"")+'" data-rt="'+i+'">'+r[0]+'</button>'}).join("")+'</div>'
+function styles(id){return '<div class="chips" id="'+id+'">'+styList().map(function(s,i){return '<button class="'+(i==SET.cs?"on":"")+'" data-s="'+i+'">'+s.n+'</button>'}).join("")+'</div>'+(SET.cs==styList().length-1?wheel():"")+artChips()+'<div class="chips rts">'+RTS.map(function(r,i){return '<button class="'+(i==(SET.rt||0)?"on":"")+'" data-rt="'+i+'">'+r[0]+'</button>'}).join("")+'</div>'+posChips()
  }
 function care(){return '<details class="help cmsg"><summary>送人關懷：加寄語與署名</summary><div class="cin"><label>寄語<input class="cdin" data-f="msg" maxlength="28" placeholder="例：天涼了，願你平安自在" value="'+esc(SET.msg||"")+'"></label><label>署名<input class="cdin" data-f="sig" maxlength="12" placeholder="你的名字" value="'+esc(SET.sig||"")+'"></label><p class="src">署名會記住，下次直接帶入；清空欄位就不會出現在圖卡上。</p></div></details>'}
 function items(){var a=[];BOOKS.forEach(function(b,bi){b.u.forEach(function(u,ui){u.k.forEach(function(k){if(k.h&&!k.nc)a.push({b:b,bi:bi,u:u,ui:ui,k:k})})})});return a}
