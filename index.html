@@ -11,7 +11,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="法句經">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="app-ver" content="20261030-1744">
+<meta name="app-ver" content="20261030-1751">
 <title>法句經・故事與偈</title>
 <style>
 :root{--bg:#e2e2df;--sf:#eeeeeb;--ink:#2a2a2a;--mut:#6c6c67;--acc:#454545;--line:#cdcdc9;--hi:rgba(255,255,255,.9);--sh:rgba(0,0,0,.16);--br:#8c8c87;--fs:17px;--lh:1.9;--gap:18px;--ff:"Noto Serif TC","Songti TC","PMingLiU",serif}
@@ -670,7 +670,7 @@ var ART={"蓮":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAtAAAAGwCAAAAAClIA
 var ARTM={};
 (function(){ARTN.forEach(function(n){var im=new Image();im.onload=function(){var c=document.createElement("canvas");c.width=im.width;c.height=im.height;var q=c.getContext("2d");q.drawImage(im,0,0);var d=q.getImageData(0,0,c.width,c.height),p=d.data;for(var i=0;i<p.length;i+=4){var a=255-p[i];if(a<8)a=0;p[i]=p[i+1]=p[i+2]=255;p[i+3]=a}q.putImageData(d,0,0);var x0=c.width,y0=c.height,x1=0,y1=0,W2=c.width;for(var j=0;j<c.height;j++)for(var i=0;i<W2;i++)if(p[(j*W2+i)*4+3]>30){if(i<x0)x0=i;if(i>x1)x1=i;if(j<y0)y0=j;if(j>y1)y1=j}c.bb=[x0,y0,x1-x0+1,y1-y0+1];ARTM[n]=c};im.src=ART[n]})})();
 function artPick(label,text){var a=SET.art;if(a=="0")return null;if(a&&a!="r")return ARTM[a]||null;var n=ARTN[hstr(label+text)%ARTN.length];return ARTM[n]||null}
-function artDraw(x,s,W,H,m){var k=Math.min(W/1080,H/1350),dk=s.vig>.2,bb=m.bb||[0,0,m.width,m.height],r=Math.min(1,Math.min(520*k/bb[2],300*k/bb[3])/k)*k,w=Math.max(1,Math.round(bb[2]*r)),h=Math.max(1,Math.round(bb[3]*r)),t=document.createElement("canvas");t.width=w;t.height=h;var q=t.getContext("2d");q.drawImage(m,bb[0],bb[1],bb[2],bb[3],0,0,w,h);q.globalCompositeOperation="source-in";q.fillStyle=s.ink;q.fillRect(0,0,w,h);x.save();x.globalAlpha=dk?.42:.4;x.drawImage(t,W-w-Math.round(80*k),Math.round(80*k));x.restore()}
+function artDraw(x,s,W,H,m){var k=Math.min(W/1080,H/1350),w=Math.round(1080*k),h=Math.round(648*k),dk=s.vig>.2,t=document.createElement("canvas");t.width=w;t.height=h;var q=t.getContext("2d");q.drawImage(m,0,0,w,h);q.globalCompositeOperation="source-in";q.fillStyle=s.ink;q.fillRect(0,0,w,h);x.save();x.globalAlpha=dk?.34:.3;x.drawImage(t,0,H-h);x.restore()}
 function artChips(){var cur=SET.art||"r";return '<div class="chips xbk tps arts">'+[["r","隨機"],["0","無"]].concat(ARTN.map(function(n){return [n,n]})).map(function(a){return '<button class="'+(a[0]==cur?"on":"")+'" data-art="'+a[0]+'">'+a[1]+'</button>'}).join("")+'</div>'}
 function makeCard(label,text,ex){
  var s=styList()[SET.cs]||styList()[0],RD=RTS[SET.rt]||RTS[0],W=RD[1],H=RD[2],c=document.createElement("canvas");c.width=W;c.height=H;var x=c.getContext("2d"),R=rng(hstr(label+text)),i,g;
@@ -775,16 +775,15 @@ function drawQ(x,s,W,H,ex){
  var KF='"Kaiti TC","BiauKai","STKaiti","KaiTi","DFKai-SB","AR PL UKai TW","Noto Serif TC","Songti TC",serif',k=Math.min(W/1080,H/1350),L=W*.11,mw=W*.78,top=H*.14,bot=H*.9;
  function wrap(t,fs){x.font=fs+"px "+KF;var ls=[],cur="";Array.from(t).forEach(function(c){if(x.measureText(cur+c).width>mw){ls.push(cur);cur=c}else cur+=c});if(cur)ls.push(cur);for(var i=1;i<ls.length;i++){var m=ls[i].match(/^[，。、；：？！」）]+/);if(m){ls[i-1]+=m[0];ls[i]=ls[i].slice(m[0].length)}}return ls}
  var f=1,P;
- function plan(f){var hs=Math.round(60*k*f),ps=Math.round(35*k*f),vs=Math.round(34*k*f),r={hs:hs,ps:ps,vs:vs};r.H=wrap(ex.p,hs);r.P=wrap(ex.m,ps);r.h=r.H.length*hs*1.5+40*k+r.P.length*ps*1.75+46*k+ex.v.length*vs*1.7+ps*2.2;return r}
+ function plan(f){var hs=Math.round(60*k*f),ps=Math.round(35*k*f),vs=Math.round(34*k*f),r={hs:hs,ps:ps,vs:vs};r.H=wrap(ex.p,hs);r.P=wrap(ex.m,ps);r.h=r.H.length*hs*1.5+40*k+r.P.length*ps*1.75+46*k+70*k;return r}
  for(;f>.5;f-=.05){P=plan(f);if(P.h<=bot-top-110*k)break}
  x.save();x.textBaseline="middle";x.textAlign="center";
  x.textAlign="center";drawEnso(x,L+50*k,top+54*k,46*k,7*k,s.ink,s.seal,s.bg1,"句",46*k);
- x.textAlign="left";var y=top+150*k+Math.max(0,(bot-top-110*k-P.h)*.4);x.fillStyle=s.ink;x.font=P.hs+"px "+KF;
+ x.textAlign="left";var y=top+250*k+Math.max(0,(bot-top-110*k-P.h-100*k)*.4);x.fillStyle=s.ink;x.font=P.hs+"px "+KF;
  P.H.forEach(function(l,i){x.fillText(l,L,y+P.hs*.75+i*P.hs*1.5)});y+=P.H.length*P.hs*1.5+40*k;
  x.globalAlpha=.85;x.font=P.ps+"px "+KF;P.P.forEach(function(l,i){x.fillText(l,L,y+P.ps*.8+i*P.ps*1.75)});x.globalAlpha=1;y+=P.P.length*P.ps*1.75+46*k;
- x.strokeStyle=s.sub;x.globalAlpha=.5;x.lineWidth=2*k;x.beginPath();x.moveTo(L,y-20*k);x.lineTo(L+90*k,y-20*k);x.stroke();x.globalAlpha=1;
- x.font=P.vs+"px "+KF;x.fillStyle=s.ink;ex.v.forEach(function(l,i){x.fillText(l,L,y+P.vs*.8+i*P.vs*1.7)});y+=ex.v.length*P.vs*1.7;
- x.fillStyle=s.sub;x.font=Math.round(26*k)+"px "+KF;x.fillText("《法句經》"+ex.r.replace(/^法句經\s*/,""),L,y+P.ps*.9);
+ var R=W-L,vy=top+4*k;x.textAlign="right";x.font=P.vs+"px "+KF;x.fillStyle=s.ink;ex.v.forEach(function(l,i){x.fillText(l,R,vy+P.vs*.8+i*P.vs*1.7)});vy+=ex.v.length*P.vs*1.7;
+ x.fillStyle=s.sub;x.font=Math.round(26*k)+"px "+KF;x.fillText("《法句經》"+ex.r.replace(/^法句經\s*/,""),R,vy+P.ps*.5);x.textAlign="left";
  var sg=(SET.sig||"").trim();x.font=Math.round(24*k)+"px "+KF;x.fillText(sg?"— "+sg:"#法句叮嚀",L,H*.93);
  x.restore()}
 var dsel=0;
