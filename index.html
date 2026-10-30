@@ -11,7 +11,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="法句經">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="app-ver" content="20261030-1751">
+<meta name="app-ver" content="20261030-1752">
 <title>法句經・故事與偈</title>
 <style>
 :root{--bg:#e2e2df;--sf:#eeeeeb;--ink:#2a2a2a;--mut:#6c6c67;--acc:#454545;--line:#cdcdc9;--hi:rgba(255,255,255,.9);--sh:rgba(0,0,0,.16);--br:#8c8c87;--fs:17px;--lh:1.9;--gap:18px;--ff:"Noto Serif TC","Songti TC","PMingLiU",serif}
@@ -670,7 +670,7 @@ var ART={"蓮":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAtAAAAGwCAAAAAClIA
 var ARTM={};
 (function(){ARTN.forEach(function(n){var im=new Image();im.onload=function(){var c=document.createElement("canvas");c.width=im.width;c.height=im.height;var q=c.getContext("2d");q.drawImage(im,0,0);var d=q.getImageData(0,0,c.width,c.height),p=d.data;for(var i=0;i<p.length;i+=4){var a=255-p[i];if(a<8)a=0;p[i]=p[i+1]=p[i+2]=255;p[i+3]=a}q.putImageData(d,0,0);var x0=c.width,y0=c.height,x1=0,y1=0,W2=c.width;for(var j=0;j<c.height;j++)for(var i=0;i<W2;i++)if(p[(j*W2+i)*4+3]>30){if(i<x0)x0=i;if(i>x1)x1=i;if(j<y0)y0=j;if(j>y1)y1=j}c.bb=[x0,y0,x1-x0+1,y1-y0+1];ARTM[n]=c};im.src=ART[n]})})();
 function artPick(label,text){var a=SET.art;if(a=="0")return null;if(a&&a!="r")return ARTM[a]||null;var n=ARTN[hstr(label+text)%ARTN.length];return ARTM[n]||null}
-function artDraw(x,s,W,H,m){var k=Math.min(W/1080,H/1350),w=Math.round(1080*k),h=Math.round(648*k),dk=s.vig>.2,t=document.createElement("canvas");t.width=w;t.height=h;var q=t.getContext("2d");q.drawImage(m,0,0,w,h);q.globalCompositeOperation="source-in";q.fillStyle=s.ink;q.fillRect(0,0,w,h);x.save();x.globalAlpha=dk?.34:.3;x.drawImage(t,0,H-h);x.restore()}
+function artDraw(x,s,W,H,m){var k=Math.min(W/1080,H/1350)*(H/W>1.6?1.45:1),w=Math.round(1080*k),h=Math.round(648*k),dk=s.vig>.2,t=document.createElement("canvas");t.width=w;t.height=h;var q=t.getContext("2d");q.drawImage(m,0,0,w,h);q.globalCompositeOperation="source-in";q.fillStyle=s.ink;q.fillRect(0,0,w,h);x.save();x.globalAlpha=dk?.34:.3;x.drawImage(t,0,H-h-(H/W>1.6?Math.round(60*k):0));x.restore()}
 function artChips(){var cur=SET.art||"r";return '<div class="chips xbk tps arts">'+[["r","隨機"],["0","無"]].concat(ARTN.map(function(n){return [n,n]})).map(function(a){return '<button class="'+(a[0]==cur?"on":"")+'" data-art="'+a[0]+'">'+a[1]+'</button>'}).join("")+'</div>'}
 function makeCard(label,text,ex){
  var s=styList()[SET.cs]||styList()[0],RD=RTS[SET.rt]||RTS[0],W=RD[1],H=RD[2],c=document.createElement("canvas");c.width=W;c.height=H;var x=c.getContext("2d"),R=rng(hstr(label+text)),i,g;
