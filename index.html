@@ -11,7 +11,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="法句經">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="app-ver" content="20261031-0726">
+<meta name="app-ver" content="20261031-0727">
 <title>法句經・故事與偈</title>
 <style>
 :root{--bg:#e2e2df;--sf:#eeeeeb;--ink:#2a2a2a;--mut:#6c6c67;--acc:#454545;--line:#cdcdc9;--hi:rgba(255,255,255,.9);--sh:rgba(0,0,0,.16);--br:#8c8c87;--fs:17px;--lh:1.9;--gap:18px;--ff:"Noto Serif TC","Songti TC","PMingLiU",serif}
@@ -780,16 +780,16 @@ function makeCard(label,text,ex){
  var cl=text.split(/[，。；、？！]/).filter(Boolean),n=cl.length,fs=n<=4?96:80,gap=fs*1.5,st=fs*1.18,mx=Math.max.apply(null,cl.map(function(a){return a.length}));
  var x0=540+gap*(n-1)/2,y0=640-mx*st/2+fs*.1;
  x.font=fs+"px "+FC;x.textAlign="center";x.textBaseline="top";
- x.save();x.shadowColor="rgba(0,0,0,.14)";x.shadowBlur=4;x.shadowOffsetY=2;x.fillStyle=s.ink;
+ x.save();x.shadowColor="rgba(0,0,0,.14)";x.shadowBlur=4;x.shadowOffsetY=2;x.fillStyle=accOf(s);
  cl.forEach(function(a,k){for(var j=0;j<a.length;j++)x.fillText(a[j],x0-k*gap,y0+j*st)});x.restore();
  var msg=(SET.msg||"").trim(),sig=(SET.sig||"").trim(),has=msg||sig;
  x.save();x.shadowColor="rgba(0,0,0,.3)";x.shadowBlur=8;x.shadowOffsetY=3;x.fillStyle=s.seal;var sz=96,sx=540-sz/2,sy=has?1030:1070;if(x.roundRect){x.beginPath();x.roundRect(sx,sy,sz,sz,8);x.fill()}else x.fillRect(sx,sy,sz,sz);x.restore();
  x.fillStyle=s.bg2;x.font="700 38px "+FC;x.fillText("法",540,sy+8);x.fillText("句",540,sy+48);
- x.fillStyle=s.sub;x.font=(has?"26px ":"30px ")+FC;x.fillText("法句經　"+label,540,has?1146:1200);
+ x.fillStyle=accOf(s);x.globalAlpha=.8;x.font=(has?"28px ":"34px ")+FC;x.fillText("法句經　"+label,540,has?1146:1200);
  if(has){var ml=[];if(msg){var cut=msg.length>14?Math.ceil(msg.length/2):msg.length;ml=msg.length>14?[msg.slice(0,cut),msg.slice(cut)]:[msg]}
   x.fillStyle=s.ink;x.font="36px "+FC;ml.forEach(function(m,q){x.fillText(m,540,1190+q*46)});
   if(sig){x.fillStyle=s.sub;x.font="30px "+FC;x.fillText("— "+sig,540,1190+ml.length*46+(ml.length?10:0))}}
- else{var t=new Date();x.font="26px "+FC;x.fillText(t.getFullYear()+" · "+(t.getMonth()+1)+" · "+t.getDate(),540,1244)}
+ else{var t=new Date();x.font="30px "+FC;x.fillText(t.getFullYear()+" · "+(t.getMonth()+1)+" · "+t.getDate(),540,1244)}
  x.restore();return c}
 /* 背誦字卡 PDF */
 var pdfSrc="",pdfOpen=false;
@@ -919,7 +919,7 @@ function drawX(x,s,W,H,ex){var DY=pyDy(RTS[SET.rt||0],H);
  var lines=[];ex.p.split(/(?<=：)/).forEach(function(seg){var ls=w1(seg,maxW);if(ls.length>1){var tg=Math.ceil(Array.from(seg).length/ls.length)+1,l2=w1(seg,Math.min(maxW,x.measureText(seg.slice(0,tg)).width*1.01));if(l2.length==ls.length)ls=l2}lines=lines.concat(ls)});
  for(var i=1;i<lines.length;i++){var m=lines[i].match(/^[，。、；：？！」）的]+/);if(m){lines[i-1]+=m[0];lines[i]=lines[i].slice(m[0].length)}}
  lines=lines.filter(Boolean);var R=rng(hstr(ex.p));
- var y0=cy-(lines.length-1)*lh/2;x.fillStyle=s.ink;x.textBaseline="middle";x.textAlign="center";
+ var y0=cy-(lines.length-1)*lh/2;x.fillStyle=accOf(s);x.textBaseline="middle";x.textAlign="center";
  lines.forEach(function(ln,i){var xx=x0;Array.from(ln).forEach(function(c){var w=x.measureText(c).width;x.save();x.translate(xx+w/2+(R()-.5)*2,y0+i*lh+(R()-.5)*fs*.12);x.rotate((R()-.5)*.07);var z=1+(R()-.5)*.08;x.scale(z,z);x.shadowColor="rgba(0,0,0,.18)";x.shadowBlur=3;x.fillText(c,0,0);x.restore();xx+=w*(1+(R()-.5)*.03)})});
  x.save();x.globalAlpha=.8;drawEnso(x,W/2,H*.13,34*k,5*k,s.ink,s.seal,s.bg1,"句",34*k);x.restore();
  var xr=W*.88,vf=Math.round(40*k),vy=H*.70+DY,vl=vf*1.7;
