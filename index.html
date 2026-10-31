@@ -11,7 +11,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="法句經">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="app-ver" content="20261031-1137">
+<meta name="app-ver" content="20261031-1242">
 <title>法句經・故事與偈</title>
 <style>
 :root{--bg:#e2e2df;--sf:#eeeeeb;--ink:#2a2a2a;--mut:#6c6c67;--acc:#454545;--line:#cdcdc9;--hi:rgba(255,255,255,.9);--sh:rgba(0,0,0,.16);--br:#8c8c87;--fs:17px;--lh:1.9;--gap:18px;--ff:"Noto Serif TC","Songti TC","PMingLiU",serif}
@@ -1071,12 +1071,12 @@ $("pg-media").onclick=function(e){var v=e.target.closest(".vp");if(!v||v.querySe
 var PNO={y:1,z:2,c:3,p:4,b:5,m:6,r:7,s:8,e:9,f:10};
 function lk(u,t){return '<a href="'+u+'" target="_blank" rel="noopener">'+t+'</a>'}
 var CBQ={};
-function cbU(t){var f=t.replace(/[，。；、？！：「」\s]/g,""),q=f.slice(0,12);CBQ[q]=f;return "https://cbetaonline.dila.edu.tw/zh/search?q="+encodeURIComponent(q)}
+function cbU(t){var f=t.replace(/[，。；、？！：「」\s]/g,""),q=f.slice(0,12);CBQ[q]=f;return "https://cbetaonline.dila.edu.tw/zh/T0210?q="+encodeURIComponent(q)}
 function toast(m){var d=document.getElementById("toast");if(!d){d=document.createElement("div");d.id="toast";d.style.cssText="position:fixed;left:50%;bottom:90px;transform:translateX(-50%);max-width:86%;padding:10px 16px;border-radius:14px;background:rgba(30,30,30,.92);color:#fff;font-size:14px;line-height:1.5;z-index:9999;text-align:center;pointer-events:none";document.body.appendChild(d)}d.textContent=m;d.style.display="block";clearTimeout(d._t);d._t=setTimeout(function(){d.style.display="none"},3500)}
-document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest('a[href*="cbetaonline.dila.edu.tw/zh/search"]');if(!a)return;var q="";try{q=decodeURIComponent(a.href.split("q=")[1]||"")}catch(x){}var f=CBQ[q]||q;if(!f)return;var ok=function(){toast("已複製「"+f.slice(0,14)+(f.length>14?"…":"")+"」（已去標點）。若搜尋框是空的，長按貼上即可")};try{navigator.clipboard.writeText(f).then(ok,function(){})}catch(x){}},true);
+document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest('a[href*="cbetaonline.dila.edu.tw/zh/T0210?q="]');if(!a)return;var q="";try{q=decodeURIComponent(a.href.split("q=")[1]||"")}catch(x){}var f=CBQ[q]||q;if(!f)return;var ok=function(){toast("已複製「"+f.slice(0,14)+(f.length>14?"…":"")+"」（已去標點）。到 CBETA 頁面的搜尋框長按貼上即可")};try{navigator.clipboard.writeText(f).then(ok,function(){})}catch(x){}},true);
 function zU(n){return "https://zugangzureinsicht.org/tipitaka/kn/dhp/dhp."+(n<10?"0":"")+n+".bpit.html"}
 function cU(n){return "https://nanda.online-dhamma.net/tipitaka/sutta/khuddaka/dhammapada/dhp-contrast-reading/dhp-contrast-reading-chap"+(n<10?"0":"")+n+"/"}
-function srcH(b,k,last){if(!k.h)return "";return '<p class="src in">'+lk(cbU(k.h.join("")),"在 CBETA 查這一句 ↗")+'</p>'+(last?'<p class="src in">出處　《法句經》（大正藏 T210）〈'+b.n+'〉，經文依 CBETA。</p>':"")}
+function srcH(b,k,last){if(!k.h)return "";return '<p class="src in">'+lk(cbU(k.h.join("")),"到 CBETA 看《法句經》全文 ↗")+'</p>'+(last?'<p class="src in">出處　《法句經》（大正藏 T210）〈'+b.n+'〉，經文依 CBETA。</p>':"")}
 function srcP(b,k){if(!k.p||PNO[b.id])return "";return '<p class="src in">出處　'+(k.pl||"梵文對應")+'</p>'}
 function srcPN(b,u){var n=PNO[b.id];if(n&&b.ps)return '<p class="src in">出處　Dhammapada 偈 '+u.k.filter(function(x){return /^\d/.test(x.n)}).map(function(x){return x.n}).join("、")+'（巴利）。巴利原文對照蘇錦坤對讀表所列 PTS 本核對。'+lk(cU(n),"蘇錦坤對讀表 ↗")+'</p>';if(n)return '<p class="src in">出處　Dhammapada 偈 '+u.k.filter(function(x){return /^\d/.test(x.n)}).map(function(x){return x.n}).join("、")+'（巴利）。'+lk(zU(n),"Daw Mya Tin 譯本・"+b.p+" ↗")+"　"+lk(cU(n),"蘇錦坤對讀表 ↗")+'</p>';return u.k.some(function(k){return k.p})?'<p class="src in">對應依蘇錦坤對照表。</p>':""}
 function srcS(b,u){var n=PNO[b.id];if(b.ss)return u&&u.su?'<p class="src in">故事出處　巴利註釋（Dhammapada-aṭṭhakathā）傳統說法，依 ancient-buddhist-texts.net 的英譯，由編者摘要。'+lk(u.su,"〈"+u.st+"〉 ↗")+'</p>':'<p class="src in">這一則的故事沒有找到可核對的來源，所以不附。</p>';return n?'<p class="src in">故事出處　巴利註釋（Dhammapada-aṭṭhakathā）傳統說法，依 Daw Mya Tin 英譯，由編者摘要。'+lk(zU(n),"英譯原頁 ↗")+'</p>':""}
