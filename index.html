@@ -11,7 +11,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="法句經">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="app-ver" content="20261031-0736">
+<meta name="app-ver" content="20261031-0819">
 <title>法句經・故事與偈</title>
 <style>
 :root{--bg:#e2e2df;--sf:#eeeeeb;--ink:#2a2a2a;--mut:#6c6c67;--acc:#454545;--line:#cdcdc9;--hi:rgba(255,255,255,.9);--sh:rgba(0,0,0,.16);--br:#8c8c87;--fs:17px;--lh:1.9;--gap:18px;--ff:"Noto Serif TC","Songti TC","PMingLiU",serif}
@@ -1057,8 +1057,9 @@ function renderMedia(){
  MEDIA.forEach(function(m,i){h+='<div class="sec"><div class="lb">'+m.t+'</div><div class="vp" data-v="'+i+'"><img src="https://i.ytimg.com/vi/'+m.id+'/hqdefault.jpg" alt="" loading="lazy" onerror="this.hidden=true"><span class="pl">▶</span></div><a class="ext" href="https://www.youtube.com/watch?v='+m.id+'" target="_blank" rel="noopener">在 YouTube 開啟 ↗</a></div>'});
  h+='<p class="src" style="text-align:center">點縮圖即可在這裡播放；若無法播放，請按「在 YouTube 開啟」。影音內容與版權屬原作者。</p>';
  h+='<div class="ref" style="margin-top:22px">相關文獻</div>';
- [["《法句經》大正藏 T0210（漢譯全文）","https://deerpark.app/cbeta/T0210/1","本 app 偈文所依的吳．支謙等譯本，全文可連續閱讀（CBETA 電子佛典）。"],["CBETA 電子佛典集成","https://cbetaonline.dila.edu.tw/","官方線上閱讀，可搜尋、查校勘與註腳。"],["巴利《法句經》多譯本對照","https://nanda.online-dhamma.net/tipitaka/sutta/khuddaka/dhammapada/old-3versions-para/dhp-chap06/","巴利文與兩種漢譯、英譯逐偈對照，可用來比對白話。"]].forEach(function(l){h+='<div class="sec"><a class="ext" href="'+l[1]+'" target="_blank" rel="noopener"><b>'+l[0]+' ↗</b></a><p class="src" style="margin:4px 0 0">'+l[2]+'</p></div>'});
- h+='<p class="src" style="text-align:center">連結為外部網站，內容與版權屬各站所有。</p>';
+ var LIT=[["經文原典",[["《法句經》大正藏 T0210（漢譯全文）","https://deerpark.app/cbeta/T0210/1","本 app 偈文所依的漢譯本，可連續閱讀。"],["CBETA 電子佛典集成","https://cbetaonline.dila.edu.tw/","官方線上閱讀，可搜尋、查校勘與註腳。"],["巴利《法句經》多譯本對照","https://nanda.online-dhamma.net/tipitaka/sutta/khuddaka/dhammapada/old-3versions-para/dhp-chap06/","巴利文與兩種漢譯、英譯逐偈對照。"]]],["法鼓山",[["法鼓山全球資訊網","https://www.ddm.org.tw/","聖嚴法師開示、活動與線上資源的入口。"],["法鼓文化","https://www.ddc.com.tw/","聖嚴法師著作（如《智慧100》）的出版社。"],["法鼓文理學院","https://www.dila.edu.tw/","佛學研究與課程資訊。"]]],["台大佛學數位圖書館（補充）",[["台大佛學數位圖書館暨博物館","https://buddhism.lib.ntu.edu.tw/","可檢索佛學期刊、論文與電子書，查《法句經》研究。"]]],["其他正信道場",[["佛光山","https://www.fgs.org.tw/","星雲大師與佛光山的佛學資源入口。"],["香光尼眾佛學院","https://www.gaya.org.tw/","《香光莊嚴》等佛學刊物。"]]]];
+ LIT.forEach(function(g){h+='<div class="lb sgl" style="margin:16px 0 4px">'+g[0]+'</div>';g[1].forEach(function(l){h+='<div class="sec"><a class="ext" href="'+l[1]+'" target="_blank" rel="noopener"><b>'+l[0]+' ↗</b></a><p class="src" style="margin:4px 0 0">'+l[2]+'</p></div>'})});
+ h+='<p class="src" style="text-align:center">外部網站的入口連結，內容與版權屬各站所有；之後會逐篇補上具體文章。</p>';
  $("pg-media").innerHTML=h}
 $("pg-media").onclick=function(e){var v=e.target.closest(".vp");if(!v||v.querySelector("iframe"))return;var m=MEDIA[+v.getAttribute("data-v")];
  v.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+m.id+'?autoplay=1&rel=0&playsinline=1" title="'+m.t+'" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe>'};
