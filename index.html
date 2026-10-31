@@ -11,7 +11,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="法句經">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="app-ver" content="20261031-1135">
+<meta name="app-ver" content="20261031-1137">
 <title>法句經・故事與偈</title>
 <style>
 :root{--bg:#e2e2df;--sf:#eeeeeb;--ink:#2a2a2a;--mut:#6c6c67;--acc:#454545;--line:#cdcdc9;--hi:rgba(255,255,255,.9);--sh:rgba(0,0,0,.16);--br:#8c8c87;--fs:17px;--lh:1.9;--gap:18px;--ff:"Noto Serif TC","Songti TC","PMingLiU",serif}
@@ -955,7 +955,9 @@ function renderGold(){
  $("pg-gold").innerHTML=h}
 function fname(cv){var n=(cv&&cv._nm)||"";n=n.replace(/[\\\/:*?"<>|\s]+/g,"");return "法句經"+(n?"_"+n:"")+"_"+new Date().toISOString().slice(0,10)+".png"}
 function dl(cv){cv.toBlob(function(b){if(!b)return;var u=URL.createObjectURL(b),el=document.createElement("a");el.href=u;el.download=fname(cv);document.body.appendChild(el);el.click();el.remove()},"image/png")}
-function shareCv(cv){cv.toBlob(function(b){try{var f=new File([b],fname(cv),{type:"image/png"});if(navigator.canShare&&navigator.canShare({files:[f]})){navigator.share({files:[f],title:"法句經"}).catch(function(){});return}}catch(e){}openOv(cv)},"image/png")}
+function appUrl(){return location.protocol=="file:"?"https://tallyc.github.io/dhammapada-master/":location.origin+location.pathname}
+function shareTxt(cv){var n=((cv&&cv._nm)||"").split("_")[0].replace(/\*/g,"");return "《法句經》"+(n&&n!="叮嚀"?"・"+n:"")+"　一起讀：\n"+appUrl()}
+function shareCv(cv){cv.toBlob(function(b){try{var f=new File([b],fname(cv),{type:"image/png"});if(navigator.canShare&&navigator.canShare({files:[f]})){navigator.share({files:[f],title:"法句經",text:shareTxt(cv)}).catch(function(){});return}}catch(e){}openOv(cv)},"image/png")}
 var curCv=null;
 function openOv(cv){curCv=cv;$("ovimg").src=cv.toDataURL("image/png");$("ov").hidden=false}
 $("ov").onclick=function(e){var t=e.target.closest("button"),a=t&&t.getAttribute("data-a");if(a=="ovdl")dl(curCv);else if(a=="ovsh")shareCv(curCv);else if(a=="ovx"||e.target===$("ov"))$("ov").hidden=true};
