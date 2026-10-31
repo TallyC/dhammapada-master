@@ -11,7 +11,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="法句經">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="app-ver" content="20261031-1257">
+<meta name="app-ver" content="20261031-2152">
 <title>法句經・故事與偈</title>
 <meta name="description" content="看叮嚀，學法句經。每天一則叮嚀、一句偈、一件今天就能做的小事。">
 <meta property="og:title" content="法句經・看叮嚀，學法句經">
@@ -1036,7 +1036,7 @@ function renderSet(){
  +'<p><b>參考連結</b><br>'
  +'<a href="https://ntireader.org/taisho/t0210.html" target="_blank" rel="noopener">大正藏第 210 號（CBETA 內容）</a><br><a href="https://tt034.org.tw/index.php?i=1&id=1236&lang=cht&option=module&task=dfile" target="_blank" rel="noopener">蘇錦坤〈法句序〉與《法句經》（PDF）</a><br><a href="https://yifertw.blogspot.com/2014/06/blog-post_13.html" target="_blank" rel="noopener">《法句經》四言偈頌與五言偈頌（蘇錦坤部落格）</a></p></details>';
  h+='<details class="help"><summary>延伸閱讀：聖嚴法師與法句經</summary><ul><li><b>法鼓全集 2020 紀念版</b>　聖嚴法師著作的官方電子版。進去後請用站內搜尋或目錄，找《智慧一○○》與文集文章（書的位置以該站為準）。<br>'+lk("https://ddc.shengyen.org/?doc=main","打開法鼓全集 ↗")+'</li><li><b>《智慧100》有聲書</b>　聖嚴法師把佛經中的偈語轉成簡短易讀的篇章，法鼓山全球資訊網提供有聲書。<br>'+lk("https://www.ddm.org.tw/xmnews/cont?xsmsid=0L161385102037075741&sid=0L181376035449890964","法鼓山網站・智慧100 ↗")+'</li><li><b>《真理的語言：法句經》</b>　淨海法師由巴利文原典譯成中文詩句，法鼓文化 2012 年出版。<br>'+lk("https://www.ddc.com.tw/product/book/prod.php?id=1809&type=b","法鼓文化書店 ↗")+'</li></ul><p class="src">這裡只放連結，不複製書中內容；各連結的書名與內容以對方網站為準。</p></details>';
- h+='<details class="help"><summary>資料來源</summary><ul><li><b>偈頌原文</b>　大正藏第 210 號《法句經》，依 CBETA 電子佛典集成。</li><li><b>巴利文</b>　Dhammapada。</li><li><b>故事</b>　雙要品、放逸品、心意品、華香品、愚闇品、明哲品、羅漢品、述千品依巴利 Dhammapada 註釋（Dhammapada-aṭṭhakathā）的傳統說法概述，參考 Daw Mya Tin 英譯；無常品只在有確切出處時附故事。</li><li><b>《法句譬喻經》（T211）</b>　目前只整理了第 1–15 品的目錄與要點，其餘尚未收入。</li><li><b>漢巴對應</b>　心意、華香、愚闇、明哲、羅漢、述千六品，依蘇錦坤《法句經》對讀表（nanda.online-dhamma.net），其中述千品第 112–115 偈由編者依內容與順序比對；其餘由編者依內容比對，供學習參考。對應不到的偈，頁面上都會標明。</li></ul></details>';
+ h+='<details class="help"><summary>資料來源</summary><ul><li><b>偈頌原文</b>　大正藏第 210 號《法句經》，依 CBETA 電子佛典集成。</li><li><b>巴利文</b>　Dhammapada。</li><li><b>故事</b>　雙要品、放逸品、心意品、華香品、愚闇品、明哲品、羅漢品、述千品、惡行品、刀杖品依巴利 Dhammapada 註釋（Dhammapada-aṭṭhakathā）的傳統說法概述，參考 Daw Mya Tin 與 ancient-buddhist-texts.net 的英譯；無常品只在有確切出處時附故事。</li><li><b>《法句譬喻經》（T211）</b>　目前只整理了第 1–15 品的目錄與要點，其餘尚未收入。</li><li><b>漢巴對應</b>　心意、華香、愚闇、明哲、羅漢、述千、惡行七品，依蘇錦坤《法句經》對讀表（nanda.online-dhamma.net），其中述千品第 112–115 偈由編者依內容與順序比對；刀杖品對讀表未能完整核對，由編者依內容與順序比對；其餘由編者依內容比對，供學習參考。對應不到的偈，頁面上都會標明。</li></ul></details>';
  $("pg-set").innerHTML=h;
  [["s_rem","rem"],["s_ord","ord"],["s_pal","pal"],["s_mode","mode"],["s_ff","ff"],["s_fs","fs"],["s_lh","lh"],["s_gap","gap"]].forEach(function(p){var el=$(p[0]);el.oninput=function(){SET[p[1]]=(p[1]=="pal"||p[1]=="mode"||p[1]=="ff"||p[1]=="ord"||p[1]=="rem")?this.value:+this.value;apply()}})}
 /* 全文閱讀 */
@@ -1064,7 +1064,7 @@ function renderMedia(){
  MEDIA.forEach(function(m,i){h+='<div class="sec"><div class="lb">'+m.t+'</div><div class="vp" data-v="'+i+'"><img src="https://i.ytimg.com/vi/'+m.id+'/hqdefault.jpg" alt="" loading="lazy" onerror="this.hidden=true"><span class="pl">▶</span></div><a class="ext" href="https://www.youtube.com/watch?v='+m.id+'" target="_blank" rel="noopener">在 YouTube 開啟 ↗</a></div>'});
  h+='<p class="src" style="text-align:center">點縮圖即可在這裡播放；若無法播放，請按「在 YouTube 開啟」。影音內容與版權屬原作者。</p>';
  h+='<div class="ref" style="margin-top:22px">相關文獻</div>';
- var LIT=[["經文原典",[["《法句經》大正藏 T0210（漢譯全文）","https://deerpark.app/cbeta/T0210/1","本 app 偈文所依的漢譯本，可連續閱讀。"],["CBETA 電子佛典集成","https://cbetaonline.dila.edu.tw/","官方線上閱讀，可搜尋、查校勘與註腳。"],["巴利《法句經》多譯本對照","https://nanda.online-dhamma.net/tipitaka/sutta/khuddaka/dhammapada/old-3versions-para/dhp-chap06/","巴利文與兩種漢譯、英譯逐偈對照。"]]],["法鼓山",[["法鼓山全球資訊網","https://www.ddm.org.tw/","聖嚴法師開示、活動與線上資源的入口。"],["法鼓文化","https://www.ddc.com.tw/","聖嚴法師著作（如《智慧100》）的出版社。"],["法鼓文理學院","https://www.dila.edu.tw/","佛學研究與課程資訊。"]]],["台大佛學數位圖書館（補充）",[["台大佛學數位圖書館暨博物館","https://buddhism.lib.ntu.edu.tw/","可檢索佛學期刊、論文與電子書，查《法句經》研究。"]]],["其他正信道場",[["佛光山","https://www.fgs.org.tw/","星雲大師與佛光山的佛學資源入口。"],["香光尼眾佛學院","https://www.gaya.org.tw/","《香光莊嚴》等佛學刊物。"]]]];
+ var LIT=[["經文原典",[["《法句經》大正藏 T0210（漢譯全文）","https://deerpark.app/cbeta/T0210/1","本 app 偈文所依的漢譯本，可連續閱讀。"],["CBETA 電子佛典集成","https://cbetaonline.dila.edu.tw/","官方線上閱讀，可搜尋、查校勘與註腳。"],["巴利《法句經》整部多譯本對讀（蘇錦坤）","https://nanda.online-dhamma.net/tipitaka/sutta/khuddaka/dhammapada/dhp-contrast-reading/dhp-contrast-reading-full/","整部巴利文與漢譯、英譯逐段對讀，各品都在同一頁。"]]],["法鼓山",[["法鼓山全球資訊網","https://www.ddm.org.tw/","聖嚴法師開示、活動與線上資源的入口。"],["法鼓文化","https://www.ddc.com.tw/","聖嚴法師著作（如《智慧100》）的出版社。"],["法鼓文理學院","https://www.dila.edu.tw/","佛學研究與課程資訊。"]]],["台大佛學數位圖書館（補充）",[["台大佛學數位圖書館暨博物館","https://buddhism.lib.ntu.edu.tw/","可檢索佛學期刊、論文與電子書，查《法句經》研究。"]]],["其他正信道場",[["佛光山","https://www.fgs.org.tw/","星雲大師與佛光山的佛學資源入口。"],["香光尼眾佛學院","https://www.gaya.org.tw/","《香光莊嚴》等佛學刊物。"]]]];
  LIT.forEach(function(g){h+='<div class="lb sgl" style="margin:16px 0 4px">'+g[0]+'</div>';g[1].forEach(function(l){h+='<div class="sec"><a class="ext" href="'+l[1]+'" target="_blank" rel="noopener"><b>'+l[0]+' ↗</b></a><p class="src" style="margin:4px 0 0">'+l[2]+'</p></div>'})});
  h+='<p class="src" style="text-align:center">外部網站的入口連結，內容與版權屬各站所有；之後會逐篇補上具體文章。</p>';
  $("pg-media").innerHTML=h}
