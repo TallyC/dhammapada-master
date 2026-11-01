@@ -891,8 +891,8 @@ function drawQ(x,s,W,H,ex){var AC=accOf(s);
  x.globalAlpha=.85;x.font=P.ps+"px "+KF;P.P.forEach(function(l,i){x.fillText(l,L,y+P.ps*.8+i*P.ps*1.75)});x.globalAlpha=1;y+=P.P.length*P.ps*1.75+46*k;
  if(P.A.length){x.fillStyle=AC;x.globalAlpha=.8;x.font=Math.round(26*k)+"px "+KF;x.fillText("今天怎麼做",L,y+8*k);y+=44*k;x.globalAlpha=1;x.fillStyle=AC;x.font="600 "+P.ps+"px "+KF;P.A.forEach(function(l,i){x.fillText(l,L,y+P.ps*.8+i*P.ps*1.75)});y+=P.A.length*P.ps*1.75+30*k}
  var R=W-L,vy=top+4*k;x.textAlign="right";x.font=P.vs+"px "+KF;x.fillStyle=AC;ex.v.forEach(function(l,i){x.fillText(l,R,vy+P.vs*.8+i*P.vs*1.7)});vy+=ex.v.length*P.vs*1.7;
- x.fillStyle=s.sub;x.font=Math.round(26*k)+"px "+KF;x.fillText("《法句經》"+ex.r.replace(/^法句經\s*/,""),R,vy+P.ps*.5);x.textAlign="left";
- var sg=(SET.sig||"").trim();x.font=Math.round(24*k)+"px "+KF;x.fillText(sg?"— "+sg:"#法句叮嚀",L,H*.93);
+ x.fillStyle=s.sub;x.font=Math.round(26*k)+"px "+KF;x.fillText("《法句經》"+ex.r.replace(/^法句經\s*/,""),R,vy+P.ps*.5);x.textAlign="right";
+ var sg=(SET.sig||"").trim();x.font=Math.round(24*k)+"px "+KF;x.fillText(sg?"— "+sg:"#法句叮嚀",R,H*.93);x.textAlign="left";
  x.restore()}
 var dsel=0;
 var TPG=[["隨順",["*"]],["日常",["事","情","學","友","人","家","健","財"]],["三生",["存","活","命"]],["三時",["過","現","未"]],["人生",["放","向"]]],dgr=0;
