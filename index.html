@@ -11,7 +11,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="法句經">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="app-ver" content="20261102-1226">
+<meta name="app-ver" content="20261102-1252">
 <title>法句經・故事與偈</title>
 <meta name="description" content="看叮嚀，學法句經。每天一則叮嚀、一句偈、一件今天就能做的小事。">
 <meta property="og:title" content="法句經・看叮嚀，學法句經">
@@ -177,6 +177,13 @@ details.sec{padding:0 24px}details.sec>summary{font-size:13px;letter-spacing:.2e
 .jd{width:8px;height:8px;border-radius:50%;background:#9a9a96;box-shadow:0 0 0 2px rgba(255,255,255,.55)}.jd.p{background:#e0873a}.jd.d{background:#5fa36a}
 .jm{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}.jm b{font-weight:600;font-size:.88em;letter-spacing:.04em}.jm small{font-size:.72em;color:var(--mut);letter-spacing:.08em}
 .jc{flex:none;color:var(--mut);font-size:1.3em}
+.fbc{background:var(--sf);border:1px solid var(--br);border-radius:20px;padding:20px 20px 16px;width:min(100%,380px);max-height:90vh;overflow:auto;box-shadow:0 16px 40px rgba(0,0,0,.35);color:var(--ink)}
+.fbc h3{margin:0 0 2px;letter-spacing:.3em;font-size:1.1em;font-weight:700;color:var(--hd,var(--ink))}.fbc .fs{color:var(--mut);font-size:.8em;margin:0 0 12px;line-height:1.7}
+.fbc label{display:block;font-size:.78em;color:var(--mut);letter-spacing:.2em;margin:12px 0 4px}
+.fbc .ft{display:flex;flex-wrap:wrap;gap:8px}.fbc .ft button{border:1px solid var(--line);background:linear-gradient(145deg,var(--hi),var(--sf));border-radius:16px;padding:6px 14px;font-size:.82em;color:var(--mut)}.fbc .ft .on{border-color:var(--hd,var(--acc));color:var(--hd,var(--acc));font-weight:700;box-shadow:inset 0 2px 5px var(--sh)}
+.fbc input,.fbc textarea{width:100%;box-sizing:border-box;border:1px solid var(--line);border-radius:12px;background:var(--hi);color:var(--ink);padding:9px 12px;font:inherit;font-size:.9em}.fbc textarea{min-height:110px;resize:vertical;line-height:1.7}
+.fbc .fx{display:flex;gap:10px;margin-top:16px}.fbc .fx button{flex:1;border:1px solid var(--line);border-radius:18px;padding:9px 0;background:linear-gradient(145deg,var(--hi),var(--sf));color:var(--mut)}.fbc .fx .go{background:var(--hd,var(--acc));border-color:var(--hd,var(--acc));color:#fff;font-weight:700;letter-spacing:.2em}
+.fbc .fm{margin-top:10px;font-size:.8em;line-height:1.7;color:var(--hd,var(--ink));min-height:1.2em}.fbc .fa{margin-top:8px;font-size:.76em;color:var(--mut);text-align:center}.fbc .fa a{color:var(--mut)}
 .hlp{position:fixed;inset:0;z-index:99;background:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;padding:18px}
 .hlc{background:var(--sf);border:1px solid var(--br);border-radius:18px;padding:18px 18px 14px;width:min(100%,380px);max-height:86vh;overflow:auto;box-shadow:0 16px 40px rgba(0,0,0,.35);color:var(--ink)}
 .hlc h3{margin:0 0 8px;letter-spacing:.3em;font-size:1.1em;font-weight:700;color:var(--hd,var(--ink))}.hlc p b{color:var(--hd,var(--ink))}.hlc p{margin:8px 0;font-size:.86em;line-height:1.8}.hlc .hn{color:var(--mut);font-size:.78em}.hlc button{display:block;margin:10px auto 2px;border:1px solid var(--line);border-radius:18px;padding:7px 26px;background:linear-gradient(145deg,var(--hi),var(--sf));color:var(--mut)}
@@ -705,6 +712,7 @@ function renderLearn(){
  h+='<button class="done'+(dn(u,rd)?" d":"")+'" data-a="done">'+(dn(u,rd)?"✓ 已完成這一圈":"完成這一圈")+'</button>';
  if(rd==3&&pos<f.length-1)h+='<button class="lnk" data-a="next">下一則 →</button>';
  if(SHOWFULL)h+='<button class="lnk" data-a="read">讀本品全文</button>';
+ h+='<button class="lnk fbl" data-a="fb">回報這一則・意見回饋</button>';
  $("pg-learn").innerHTML=h;
  var t=$("ref");if(t){t.value=(ST[u.id]&&ST[u.id].note)||"";t.oninput=function(){(ST[u.id]=ST[u.id]||{}).note=t.value;W_("dhp2",ST)}}
 }
@@ -713,7 +721,7 @@ $("pg-learn").onclick=function(e){
  if(t.hasAttribute("data-r")){rd=+t.getAttribute("data-r");renderLearn();return}
  if(t.hasAttribute("data-q")){var i=+t.getAttribute("data-q"),o=u.q.o[i];t.className="opt "+(o[2]?"ok":"no");$("fb"+i).textContent=o[1];return}
  var a=t.getAttribute("data-a");
- if(a=="prev")step(-1);else if(a=="next")step(1);else if(a=="toc")openToc();else if(a=="read"){readW=BOOKS[cb].wno;var ss=[].slice.call(document.querySelectorAll("#pg-learn .sec")).filter(function(e){return /^原文/.test((e.querySelector(".lb")||{}).textContent||"")}),ki=0;ss.forEach(function(e,i){if(e.getBoundingClientRect().top<=200)ki=i});var kk=u.k[ki]||u.k[0],fd=vFind(BOOKS[cb],kk),sg=fd?fd.i:null;if(fd)readW=fd.w;readBack={b:cb,u:cu,r:rd,y:window.pageYOffset,n:kk?kk.n:""};window._seg=sg;show("read")}
+ if(a=="fb"){openFb(fbCtx());return}if(a=="prev")step(-1);else if(a=="next")step(1);else if(a=="toc")openToc();else if(a=="read"){readW=BOOKS[cb].wno;var ss=[].slice.call(document.querySelectorAll("#pg-learn .sec")).filter(function(e){return /^原文/.test((e.querySelector(".lb")||{}).textContent||"")}),ki=0;ss.forEach(function(e,i){if(e.getBoundingClientRect().top<=200)ki=i});var kk=u.k[ki]||u.k[0],fd=vFind(BOOKS[cb],kk),sg=fd?fd.i:null;if(fd)readW=fd.w;readBack={b:cb,u:cu,r:rd,y:window.pageYOffset,n:kk?kk.n:""};window._seg=sg;show("read")}
  else if(a=="done"){var s=(ST[u.id]=ST[u.id]||{});s["d"+rd]=!s["d"+rd];W_("dhp2",ST);if(s["d"+rd]&&rd<3)rd++;renderLearn();window.scrollTo(0,0)}
 };
 /* 左右滑動換則 */
@@ -1032,6 +1040,7 @@ function renderSet(){
  h+='<details class="help" open><summary>學習方式：四圈螺旋</summary><ul><li><b>用途</b>　用故事對照偈頌，熏習《法句經》，每日讀一則，慢慢把經文用在生活裡。</li><li><b>設計</b>　一則故事配一首偈；同一則可以回來多次，每次多一圈。</li><li><b>四圈</b>　<span class="tag">讀</span>故事、原文、白話　<span class="tag">詞</span>字詞與巴利對照　<span class="tag">義</span>義理連結　<span class="tag">行</span>實踐與回顧。點上方圓圈切換，不必依序。</li></ul></details>';
  h+='<details class="help"><summary>各頁功能</summary><ul><li><b>學習</b>　目錄每一品都可讀全文；有導讀（四圈）的是無常品、雙要品、放逸品、心意品、華香品、愚闇品、明哲品、羅漢品、述千品、惡行品、刀杖品、老耗品、愛身品，其他品先提供全文，之後一批一批補上。在學習頁左右滑動，可換上一則、下一則。</li><li><b>今日</b>　依日期顯示當日經文與圖卡。</li><li><b>金句</b>　精選十句、你收藏的句子，以及「日行一問」（每一則「行」的小練習，配上對應的經句）；選風格與比例後下載圖卡。</li><li><b>影音</b>　收錄《法句經》講法。</li></ul></details>';
  h+='<details class="help"><summary>搜尋與收藏</summary><ul><li><b>搜尋</b>　首頁搜尋欄可找經文、故事、品名與巴利字詞，不必打符號。</li><li><b>收藏</b>　在閱讀、學習、今日、金句頁，句子旁按 ♡，就收進「金句 → 我的收藏」。</li><li><b>資料存放</b>　進度、收藏與心得只存在這支手機的瀏覽器；清除瀏覽資料或刪除主畫面圖示，可能會一併清掉。</li></ul></details>';
+ h+='<div class="grp">意見回饋<small>告訴我哪裡可以更好</small></div><button class="lnk" id="fbset">寫意見給製作者</button>';
  h+='<div class="grp">經文與來源<small>版本、譯者、出處</small></div>';
  h+='<details class="help"><summary>關於這部經文</summary><ul><li><b>本工具的全文</b>　《法句經》，大正藏第 210 號，東吳天竺沙門維祇難等譯，二卷、39 品、758 偈。<span class="tag warn">署名暫定</span>見下一欄。</li><li>這是古代的漢譯本，不是現代人重新翻譯的作品；經文依 CBETA 電子佛典集成。「白話」是編者自己的意譯。</li><li><b>四種漢譯</b>　本工具採用只有短偈的《法句經》；另三種是在譬喻中夾短偈：《法句譬喻經》（西晉法炬、法立譯，四卷、39 品、284 偈）、《出曜經》（姚秦竺佛念譯，三十卷、34 品、934 偈）、《法集要頌經》（北宋天息災譯，四卷、33 品、933 偈）。</li><li>依法鼓講堂課程投影片。</li></ul></details>';
  h+='<details class="help"><summary>譯者署名 <span class="tag warn">暫定・待考訂</span></summary>'
@@ -1045,7 +1054,7 @@ function renderSet(){
  h+='<details class="help"><summary>延伸閱讀：聖嚴法師與法句經</summary><ul><li><b>法鼓全集 2020 紀念版</b>　聖嚴法師著作的官方電子版。進去後請用站內搜尋或目錄，找《智慧一○○》與文集文章（書的位置以該站為準）。<br>'+lk("https://ddc.shengyen.org/?doc=main","打開法鼓全集 ↗")+'</li><li><b>《智慧100》有聲書</b>　聖嚴法師把佛經中的偈語轉成簡短易讀的篇章，法鼓山全球資訊網提供有聲書。<br>'+lk("https://www.ddm.org.tw/xmnews/cont?xsmsid=0L161385102037075741&sid=0L181376035449890964","法鼓山網站・智慧100 ↗")+'</li><li><b>《真理的語言：法句經》</b>　淨海法師由巴利文原典譯成中文詩句，法鼓文化 2012 年出版。<br>'+lk("https://www.ddc.com.tw/product/book/prod.php?id=1809&type=b","法鼓文化書店 ↗")+'</li></ul><p class="src">這裡只放連結，不複製書中內容；各連結的書名與內容以對方網站為準。</p></details>';
  h+='<details class="help"><summary>資料來源</summary><ul><li><b>偈頌原文</b>　大正藏第 210 號《法句經》，依 CBETA 電子佛典集成。</li><li><b>巴利文</b>　Dhammapada。</li><li><b>故事</b>　雙要品、放逸品、心意品、華香品、愚闇品、明哲品、羅漢品、述千品、惡行品、刀杖品、老耗品、愛身品依巴利 Dhammapada 註釋（Dhammapada-aṭṭhakathā）的傳統說法概述，參考 Daw Mya Tin 與 ancient-buddhist-texts.net 的英譯；無常品只在有確切出處時附故事。</li><li><b>《法句譬喻經》（T211）</b>　目前只整理了第 1–15 品的目錄與要點，其餘尚未收入。</li><li><b>漢巴對應</b>　心意、華香、愚闇、明哲、羅漢、述千、惡行七品，依蘇錦坤《法句經》對讀表（nanda.online-dhamma.net），其中述千品第 112–115 偈由編者依內容與順序比對；刀杖品對讀表未能完整核對，由編者依內容與順序比對；老耗品、愛身品依對讀表，其中漢譯無對應巴利偈的偈已在頁面標明；其餘由編者依內容比對，供學習參考。對應不到的偈，頁面上都會標明。</li></ul></details>';
  h+='<p class="src" style="text-align:center;margin-top:22px">製作者　Tally.C</p>';
- $("pg-set").innerHTML=h;
+ $("pg-set").innerHTML=h;var fbb=$("fbset");if(fbb)fbb.onclick=function(){openFb("")};
  [["s_rem","rem"],["s_ord","ord"],["s_pal","pal"],["s_mode","mode"],["s_ff","ff"],["s_fs","fs"],["s_lh","lh"],["s_gap","gap"]].forEach(function(p){var el=$(p[0]);el.oninput=function(){SET[p[1]]=(p[1]=="pal"||p[1]=="mode"||p[1]=="ff"||p[1]=="ord"||p[1]=="rem")?this.value:+this.value;apply()}})}
 /* 全文閱讀 */
 var readBack=null;
@@ -1148,6 +1157,27 @@ function tdyHtml(){var A=items(),it=A[(today()+di)%A.length];if(!it)return "";
 function homeArt(){var el=document.querySelector("#tdy .mo");if(!el||!window._hmn)return;var m=ARTM[window._hmn];if(!m)return;var c=document.createElement("canvas");c.width=m.width;c.height=m.height;var q=c.getContext("2d"),n=2;for(var i=0;i<n;i++)q.drawImage(m,0,0);var u="url("+c.toDataURL()+")";el.style.webkitMaskImage=u;el.style.maskImage=u}
 function homeTab(n){var s=document.querySelectorAll("#tdy .sl"),d=document.querySelectorAll("#tdy .tb button");for(var i=0;i<s.length;i++){s[i].classList.toggle("on",i==n);d[i].classList.toggle("on",i==n)}}
 function tdyInit(){homeArt()}
+var FB_KEY="",FB_MAIL="tally325@gmail.com",FBT=["內容有誤","看不懂","功能建議","其他"];
+function openFb(ctx){var d=document.createElement("div");d.className="hlp";var ty=0;
+ d.innerHTML='<div class="fbc"><h3>意見回饋</h3><p class="fs">哪裡看不懂、哪裡有錯、想要什麼，都請告訴我。每一則我都會看。</p>'+
+ '<label>類型</label><div class="ft">'+FBT.map(function(t,i){return '<button data-ty="'+i+'" class="'+(i?"":"on")+'">'+t+'</button>'}).join("")+'</div>'+
+ '<label>位置</label><input id="fbw" value="'+esc(ctx||"")+'" placeholder="例：放逸品 第 3 則">'+
+ '<label>想說的話</label><textarea id="fbm" placeholder="寫下你的發現或想法…"></textarea>'+
+ '<label>稱呼與聯絡方式（選填，想要回覆再填）</label><input id="fbc" placeholder="例：小明／信箱或 LINE">'+
+ '<div class="fm" id="fbs"></div><div class="fx"><button data-f="x">取消</button><button class="go" data-f="s">送出</button></div>'+
+ '<p class="fa">也可以到 <a href="https://github.com/TallyC/dhammapada-master/issues/new" target="_blank" rel="noopener">GitHub 留言</a></p></div>';
+ d.onclick=function(e){var t=e.target.closest("button");if(e.target==d){d.remove();return}if(!t)return;
+  if(t.hasAttribute("data-ty")){ty=+t.getAttribute("data-ty");[].forEach.call(d.querySelectorAll(".ft button"),function(b){b.className=(+b.getAttribute("data-ty")==ty)?"on":""});return}
+  var f=t.getAttribute("data-f");if(f=="x"){d.remove();return}if(f!="s")return;
+  var m=d.querySelector("#fbm").value.trim(),w=d.querySelector("#fbw").value.trim(),c=d.querySelector("#fbc").value.trim(),st=d.querySelector("#fbs");
+  if(!m){st.textContent="請先寫下想說的話。";return}
+  var sub="法句經回饋・"+FBT[ty]+(w?"・"+w:""),body="類型："+FBT[ty]+"\n位置："+w+"\n\n"+m+"\n\n稱呼／聯絡："+(c||"（未填）")+"\n版本："+((document.querySelector('meta[name="app-ver"]')||{}).content||"");
+  function viaMail(){location.href="mailto:"+FB_MAIL+"?subject="+encodeURIComponent(sub)+"&body="+encodeURIComponent(body);st.textContent="已開啟你的郵件程式，按送出即可。"}
+  if(!FB_KEY){viaMail();return}
+  t.disabled=true;st.textContent="送出中…";
+  fetch("https://api.web3forms.com/submit",{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify({access_key:FB_KEY,subject:sub,from_name:c||"法句經使用者",message:body})}).then(function(r){return r.json()}).then(function(j){if(j.success){d.querySelector(".fbc").innerHTML='<h3>謝謝你</h3><p class="fs">已收到，會慢慢看、慢慢改。</p><div class="fx"><button data-f="x">關閉</button></div>'}else throw 0}).catch(function(){t.disabled=false;st.textContent="沒有送成功，改用郵件寄出。";viaMail()})};
+ document.body.appendChild(d)}
+function fbCtx(){var b=BOOKS[cb],u=b&&b.u[cu];return u?b.n+" 第 "+(cu+1)+" 則（"+u.t+"）":""}
 function doneStat(){var hv=0,gu=0,gv=0;BOOKS.forEach(function(b){b.u.forEach(function(x){gu++;x.k.forEach(function(k){if(k.h&&!k.nc)hv++})})});return {n:BOOKS.length,hv:hv,pc:Math.round(hv*100/758)}}
 function openHelp(){var d=document.createElement("div");d.className="hlp";var DS=doneStat();d.innerHTML='<div class="hlc"><h3>使用說明</h3>'+
   '<p><b>先安裝，再使用</b>　請先把本工具加到手機主畫面（設定頁有圖解步驟）。從主畫面開啟才像 App，進度只記在同一個入口；用瀏覽器分頁開，和從主畫面開，記錄是分開的。</p>'+
@@ -1160,7 +1190,7 @@ function openHelp(){var d=document.createElement("div");d.className="hlp";var DS
  '<p><b>搜尋</b>　可搜經文、故事、品名，也可輸入巴利字（不必打符號）。</p>'+
  '<p><b>延伸</b>　講法影音。</p>'+
  '<p><b>備份</b>　進度與設定只存在這支手機裡；清除瀏覽器資料或換手機，會重新開始。換手機或清除資料前，請到「設定」→「備份與搬移」複製備份碼，存到備忘錄或傳給自己；新手機開啟後貼上，就能還原。建議偶爾備份一次。</p>'+
- '<button data-hc="1">關閉</button></div>';d.onclick=function(e){if(e.target==d||e.target.hasAttribute("data-hc"))d.remove()};document.body.appendChild(d)}
+ '<p><b>意見回饋</b>　發現錯字、看不懂、想要新功能，請到學習頁底部的「回報這一則」或設定頁的「意見回饋」告訴我。</p><button data-hc="1">關閉</button></div>';d.onclick=function(e){if(e.target==d||e.target.hasAttribute("data-hc"))d.remove()};document.body.appendChild(d)}
 function renderHome(){
  var u=BU(),tot=0,dd=0,h="";
  BOOKS.forEach(function(b){b.u.forEach(function(x){tot++;if(dcount(x)==4)dd++})});
