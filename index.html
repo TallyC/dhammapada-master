@@ -11,7 +11,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="法句經">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="app-ver" content="20261102-1429">
+<meta name="app-ver" content="20261102-1804">
 <title>法句經・故事與偈</title>
 <meta name="description" content="看叮嚀，學法句經。每天一則叮嚀、一句偈、一件今天就能做的小事。">
 <meta property="og:title" content="法句經・看叮嚀，學法句經">
@@ -226,6 +226,18 @@ details.sec{padding:0 24px}details.sec>summary{font-size:13px;letter-spacing:.2e
 .tdy .vs2{font-size:min(1.18em,24px)!important}.tdy .sm2{font-size:min(.82em,15px)!important}.tdy .sc{font-size:min(.76em,13px)!important}
 .hero .ht{font-size:min(1.5em,26px)!important}
 .jx .jm b{font-size:min(1em,17px)}.jx .jm small{font-size:min(.85em,14px)}
+.pab{display:block;margin:6px auto 14px;font:inherit;font-size:.82em;letter-spacing:.15em;color:var(--acc);background:linear-gradient(145deg,var(--hi),var(--sf));border:1px solid var(--line);border-radius:999px;padding:5px 18px;cursor:pointer;box-shadow:0 1px 0 var(--hi) inset,0 6px 14px -10px var(--sh)}
+.pab.on{color:var(--sf);background:var(--acc);border-color:var(--acc)}
+.pln{border-radius:6px;padding:0 4px;transition:background .2s}
+.pln.on{background:color-mix(in srgb,var(--acc) 14%,transparent);color:var(--acc);font-style:normal}
+.pas{display:flex;flex-direction:column;gap:12px;padding:6px 0 14px}
+.pas .pr{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.pas .pt{font-size:.8em;color:var(--mut);letter-spacing:.1em;min-width:3em}
+.pas input[type=range]{flex:1;min-width:0;accent-color:var(--acc)}
+.pas .fzb button{padding:8px 14px;white-space:nowrap}
+.pas .pv{font-size:.82em;color:var(--mut);font-variant-numeric:tabular-nums;width:2.6em;text-align:right}
+.pas .pn{font-size:.8em;color:var(--mut);line-height:1.7;margin:0}
+@media (prefers-reduced-motion:reduce){.pln{transition:none}}
 </style>
 </head>
 <body>
@@ -706,7 +718,7 @@ function renderLearn(){
   u.k.forEach(function(k,ki){h+=sec(vLabel(b,k),(k.h?'<p class="vs">'+k.h.join("<br>")+'</p><div class="hw">'+heart(k.h.join(""),b.n+" "+kLab(b,k))+'</div>':'<p class="hn">'+k.hn+'</p>')+(k.hm?'<p class="hn">'+k.hm+'</p>':'')+'<p>'+k.d+'</p>'+srcH(b,k,ki==u.k.length-1))});
   h+=sec("想一想",'<p>'+u.q.q+'</p>'+u.q.o.map(function(o,i){return '<button class="opt" data-q="'+i+'">'+o[0]+'</button><div class="fb" id="fb'+i+'"></div>'}).join(""));
  }else if(rd==1){
-  u.k.forEach(function(k){h+=sec((k.pl||"巴利原文")+"・偈 "+k.n,(k.p?'<p class="pali">'+k.p.join("<br>")+'</p>':'<p class="hn">'+(k.pn||"")+'</p>')+srcP(b,k))});h+=srcPN(b,u);
+  u.k.forEach(function(k){h+=sec((k.pl||"巴利原文")+"・偈 "+k.n,(k.p?'<p class="pali">'+k.p.map(function(l){return '<span class="pln">'+l+'</span>'}).join("<br>")+'</p>'+paBtn(k):'<p class="hn">'+(k.pn||"")+'</p>')+srcP(b,k))});h+=srcPN(b,u);
   if(u.g.length)h+=sec("逐字對照",'<table>'+u.g.map(function(g){return '<tr><td class="it">'+g[0]+'</td><td>'+g[1]+'</td></tr>'}).join("")+'</table>');
   if(u.w.length)h+=sec("古文字詞",'<table>'+u.w.map(function(g){return '<tr><td>'+g[0]+'</td><td>'+g[1]+'</td></tr>'}).join("")+'</table>');
  }else if(rd==2){
@@ -1045,7 +1057,7 @@ function renderSet(){
  h+=installH();h+='</details>';
  h+='<details class="grpd"><summary class="grp">使用說明<small>怎麼用這個學習頁</small></summary><p class="src">本工具可以安裝到手機主畫面，像 App 一樣一點就開，之後自動更新。步驟見上方「安裝到手機」。</p>';
  h+='<details class="help" open><summary>學習方式：四圈螺旋</summary><ul><li><b>用途</b>　用故事對照偈頌，熏習《法句經》，每日讀一則，慢慢把經文用在生活裡。</li><li><b>設計</b>　一則故事配一首偈；同一則可以回來多次，每次多一圈。</li><li><b>四圈</b>　<span class="tag">讀</span>故事、原文、白話　<span class="tag">詞</span>字詞與巴利對照　<span class="tag">義</span>義理連結　<span class="tag">行</span>實踐與回顧。點上方圓圈切換，不必依序。</li></ul></details>';
- h+='<details class="help"><summary>各頁功能</summary><ul><li><b>學習</b>　目錄每一品都可讀全文；有導讀（四圈）的是無常品、雙要品、放逸品、心意品、華香品、愚闇品、明哲品、羅漢品、述千品、惡行品、刀杖品、老耗品、愛身品，其他品先提供全文，之後一批一批補上。在學習頁左右滑動，可換上一則、下一則。</li><li><b>今日</b>　依日期顯示當日經文與圖卡。</li><li><b>金句</b>　精選十句、你收藏的句子，以及「日行一問」（每一則「行」的小練習，配上對應的經句）；選風格與比例後下載圖卡。</li><li><b>影音</b>　收錄《法句經》講法。</li></ul></details>';
+ h+='<details class="help"><summary>各頁功能</summary><ul><li><b>學習</b>　目錄每一品都可讀全文；有導讀（四圈）的是無常品、雙要品、放逸品、心意品、華香品、愚闇品、明哲品、羅漢品、述千品、惡行品、刀杖品、老耗品、愛身品，其他品先提供全文，之後一批一批補上。在學習頁左右滑動，可換上一則、下一則。</li><li><b>今日</b>　依日期顯示當日經文與圖卡。</li><li><b>金句</b>　精選十句、你收藏的句子，以及「日行一問」（每一則「行」的小練習，配上對應的經句）；選風格與比例後下載圖卡。</li><li><b>影音</b>　收錄《法句經》講法，以及巴利誦讀試聽與真人誦讀比對。</li></ul></details>';
  h+='<details class="help"><summary>搜尋與收藏</summary><ul><li><b>搜尋</b>　首頁搜尋欄可找經文、故事、品名與巴利字詞，不必打符號。</li><li><b>收藏</b>　在閱讀、學習、今日、金句頁，句子旁按 ♡，就收進「金句 → 我的收藏」。</li><li><b>資料存放</b>　進度、收藏與心得只存在這支手機的瀏覽器；清除瀏覽資料或刪除主畫面圖示，可能會一併清掉。</li></ul></details>';
  h+='</details>';
  h+='<div class="grp">意見回饋<small>告訴我哪裡可以更好</small></div><button class="lnk" id="fbset">寫意見給製作者</button>';
@@ -1128,13 +1140,51 @@ function renderMedia(){
  var h='<h2 class="ut">延伸</h2><div class="ref">《法句經》講法影音</div>';
  MEDIA.forEach(function(m,i){h+='<div class="sec"><div class="lb">'+m.t+'</div><div class="vp" data-v="'+i+'"><img src="https://i.ytimg.com/vi/'+m.id+'/hqdefault.jpg" alt="" loading="lazy" onerror="this.hidden=true"><span class="pl">▶</span></div><a class="ext" href="https://www.youtube.com/watch?v='+m.id+'" target="_blank" rel="noopener">在 YouTube 開啟 ↗</a></div>'});
  h+='<p class="src" style="text-align:center">點縮圖即可在這裡播放；若無法播放，請按「在 YouTube 開啟」。影音內容與版權屬原作者。</p>';
+ h+=paSettings();
  h+='<div class="ref" style="margin-top:22px">相關文獻</div>';
  var LIT=[["經文原典",[["《法句經》大正藏 T0210（漢譯全文）","https://deerpark.app/cbeta/T0210/1","本 app 偈文所依的漢譯本，可連續閱讀。"],["CBETA 電子佛典集成","https://cbetaonline.dila.edu.tw/","官方線上閱讀，可搜尋、查校勘與註腳。"],["巴利《法句經》整部多譯本對讀（蘇錦坤）","https://nanda.online-dhamma.net/tipitaka/sutta/khuddaka/dhammapada/dhp-contrast-reading/dhp-contrast-reading-full/","整部巴利文與漢譯、英譯逐段對讀，各品都在同一頁。"]]],["法鼓山",[["法鼓山全球資訊網","https://www.ddm.org.tw/","聖嚴法師開示、活動與線上資源的入口。"],["法鼓文化","https://www.ddc.com.tw/","聖嚴法師著作（如《智慧100》）的出版社。"],["法鼓文理學院","https://www.dila.edu.tw/","佛學研究與課程資訊。"]]],["台大佛學數位圖書館（補充）",[["台大佛學數位圖書館暨博物館","https://buddhism.lib.ntu.edu.tw/","可檢索佛學期刊、論文與電子書，查《法句經》研究。"]]],["其他正信道場",[["佛光山","https://www.fgs.org.tw/","星雲大師與佛光山的佛學資源入口。"],["香光尼眾佛學院","https://www.gaya.org.tw/","《香光莊嚴》等佛學刊物。"]]]];
  LIT.forEach(function(g){h+='<div class="lb sgl" style="margin:16px 0 4px">'+g[0]+'</div>';g[1].forEach(function(l){h+='<div class="sec"><a class="ext" href="'+l[1]+'" target="_blank" rel="noopener"><b>'+l[0]+' ↗</b></a><p class="src" style="margin:4px 0 0">'+l[2]+'</p></div>'})});
  h+='<p class="src" style="text-align:center">外部網站的入口連結，內容與版權屬各站所有；之後會逐篇補上具體文章。</p>';
  $("pg-media").innerHTML=h}
-$("pg-media").onclick=function(e){var v=e.target.closest(".vp");if(!v||v.querySelector("iframe"))return;var m=MEDIA[+v.getAttribute("data-v")];
+$("pg-media").onclick=function(e){var v=e.target.closest(".vp");if(!v||!v.hasAttribute("data-v")||v.querySelector("iframe"))return;paStop();var m=MEDIA[+v.getAttribute("data-v")];
  v.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+m.id+'?autoplay=1&rel=0&playsinline=1" title="'+m.t+'" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe>'};
+/* 巴利誦讀（手機內建語音） */
+var PA_CMP=[["MNR50IxGxFk","第一、二偈誦唱","只唱這兩偈，附印尼語譯。頻道 Saputra Sakyaputra，未註明誦者。"],["Sg6xhYpSCFg","第一品〈雙品〉全品誦讀","標示為 Ven. Ñānabodhi 誦，附英譯。頻道來源尚待查證，暫不當作標準。"]];
+var PA_SAMPLE=["Manopubbaṅgamā dhammā, manoseṭṭhā manomayā;","manasā ce paduṭṭhena, bhāsati vā karoti vā;","tato naṃ dukkham anveti, cakkaṃ va vahato padaṃ."];
+function paBtn(k){return '<button class="pab" data-pa="1" aria-label="聽偈 '+k.n+' 的巴利誦讀">▶ 聽巴利</button>'}
+function paID(t){return t.replace(/ā/g,"aa").replace(/ī/g,"ii").replace(/ū/g,"uu").replace(/ṃ|ṅ/g,"ng").replace(/ñ/g,"ny").replace(/ṭ/g,"t").replace(/ḍ/g,"d").replace(/ṇ/g,"n").replace(/ḷ/g,"l").replace(/[;,.]/g,", ").toLowerCase()}
+var PA_C=[["kh","ख"],["gh","घ"],["ch","छ"],["jh","झ"],["ṭh","ठ"],["ḍh","ढ"],["th","थ"],["dh","ध"],["ph","फ"],["bh","भ"],["k","क"],["g","ग"],["ṅ","ङ"],["c","च"],["j","ज"],["ñ","ञ"],["ṭ","ट"],["ḍ","ड"],["ṇ","ण"],["t","त"],["d","द"],["n","न"],["p","प"],["b","ब"],["m","म"],["y","य"],["r","र"],["l","ल"],["ḷ","ळ"],["v","व"],["s","स"],["h","ह"],["ś","श"],["ṣ","ष"]];
+var PA_V={"a":["अ",""],"ā":["आ","ा"],"i":["इ","ि"],"ī":["ई","ी"],"u":["उ","ु"],"ū":["ऊ","ू"],"e":["ए","े"],"o":["ओ","ो"],"ṛ":["ऋ","ृ"]};
+function paDeva(t){t=t.toLowerCase();var o="",i=0,pd=false;while(i<t.length){var hit=null;for(var k=0;k<PA_C.length;k++){if(t.substr(i,PA_C[k][0].length)===PA_C[k][0]){hit=PA_C[k];break}}
+ if(hit){if(pd)o+="्";o+=hit[1];pd=true;i+=hit[0].length;continue}var c=t[i];
+ if(PA_V[c]){o+=pd?PA_V[c][1]:PA_V[c][0];pd=false;i++;continue}if(pd){o+="्";pd=false}
+ o+=c==="ṃ"?"ं":(/[;,.]/.test(c)?"। ":c);i++}if(pd)o+="्";return o}
+var paRun=0,paCur=null;
+function paVoice(m){var S=window.speechSynthesis;if(!S)return null;return S.getVoices().find(function(v){return (v.lang||"").toLowerCase().indexOf(m)===0})||null}
+function paStop(){paRun++;try{speechSynthesis.cancel()}catch(x){}[].forEach.call(document.querySelectorAll(".pln.on"),function(e){e.classList.remove("on")});if(paCur){paCur.classList.remove("on");paCur.textContent=paCur._t||"▶ 聽巴利"}paCur=null}
+function paPlay(btn,lines){var S=window.speechSynthesis;if(!S){toast("這個瀏覽器不能朗讀，請到「延伸」聽真人誦讀。");return}
+ var same=paCur===btn;paStop();if(same)return;
+ var m=SET.pv||"id",v=paVoice(m),run=++paRun;paCur=btn;btn._t=btn._t||btn.textContent;btn.textContent="■ 停止";btn.classList.add("on");
+ if(!v)toast(m=="id"?"手機上找不到印尼語音，先用預設語音，發音會較不準。":"手機上找不到印地語音，先用預設語音，發音會較不準。");
+ (function go(i){if(run!==paRun)return;if(i>=lines.length||!lines[i].el.isConnected){paStop();return}
+  lines.forEach(function(l){l.el.classList.remove("on")});lines[i].el.classList.add("on");
+  var u=new SpeechSynthesisUtterance(m=="id"?paID(lines[i].t):paDeva(lines[i].t));u.lang=m=="id"?"id-ID":"hi-IN";if(v)u.voice=v;u.rate=SET.pr||0.65;
+  u.onend=function(){setTimeout(function(){go(i+1)},350)};u.onerror=function(){if(run===paRun)paStop()};S.speak(u)})(0)}
+function paSettings(){var m=SET.pv||"id",r=SET.pr||0.65;
+ return '<div class="ref" style="margin-top:22px">巴利誦讀</div><div class="sec"><div class="pas">'+
+ '<div class="pr"><span class="pt">發音</span><div class="fzb"><button data-pv="id" class="'+(m=="id"?"on":"")+'">印尼語音</button><button data-pv="hi" class="'+(m=="hi"?"on":"")+'">印地語音</button></div></div>'+
+ '<div class="pr"><span class="pt">語速</span><input type="range" id="pa-rate" min="0.4" max="1" step="0.05" value="'+r+'" aria-label="語速"><span class="pv" id="pa-rv">'+r.toFixed(2)+'</span></div>'+
+ '<p class="pali" style="margin:4px 0 0">'+PA_SAMPLE.map(function(l){return '<span class="pln">'+l+'</span>'}).join("<br>")+'</p><button class="pab" data-pa="1" data-pa-lb="▶ 試聽第一偈">▶ 試聽第一偈</button>'+
+ '<p class="pn">用手機內建的機器語音誦讀，只能近似。印尼語音每個音節都唸出，但不分長短音與送氣音；印地語音有送氣與捲舌，卻常吞掉字中的 a。設定會套用到每一偈「研讀」頁的「聽巴利」。</p></div></div>'+
+ '<div class="ref" style="margin-top:18px">真人誦讀比對</div>'+PA_CMP.map(function(c){return '<div class="sec"><div class="lb">'+c[1]+'</div><div class="vp" data-pv-yt="'+c[0]+'"><img src="https://i.ytimg.com/vi/'+c[0]+'/hqdefault.jpg" alt="" loading="lazy" onerror="this.hidden=true"><span class="pl">▶</span></div><a class="ext" href="https://www.youtube.com/watch?v='+c[0]+'" target="_blank" rel="noopener">在 YouTube 開啟 ↗</a><p class="src" style="margin:0 0 12px">'+c[2]+'</p></div>'}).join("")+
+ '<p class="src" style="text-align:center">另可參考斯里蘭卡 Weragoda Sarada 長老誦的全本（'+lk("https://www.buddhanet.net/e-learning/buddhism/dhammapada","BuddhaNet")+'）。</p>'}
+document.addEventListener("click",function(e){
+ var b=e.target.closest&&e.target.closest("[data-pa]");if(b){var box=b.previousElementSibling;if(!box||!box.classList.contains("pali"))return;
+  paPlay(b,[].map.call(box.querySelectorAll(".pln"),function(el){return {el:el,t:el.textContent}}));return}
+ var pv=e.target.closest&&e.target.closest("[data-pv]");if(pv){SET.pv=pv.getAttribute("data-pv");W_("dhp2-set",SET);[].forEach.call(document.querySelectorAll("[data-pv]"),function(x){x.classList.toggle("on",x===pv)});return}
+ var yt=e.target.closest&&e.target.closest("[data-pv-yt]");if(yt&&!yt.querySelector("iframe")){paStop();var id=yt.getAttribute("data-pv-yt");yt.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1&rel=0&playsinline=1" title="巴利誦讀" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>'}});
+document.addEventListener("input",function(e){if(e.target.id!="pa-rate")return;SET.pr=+e.target.value;W_("dhp2-set",SET);var o=document.getElementById("pa-rv");if(o)o.textContent=SET.pr.toFixed(2)});
+document.addEventListener("visibilitychange",function(){if(document.hidden)paStop()});
 /* 出處 */
 var PNO={y:1,z:2,c:3,p:4,b:5,m:6,r:7,s:8,e:9,f:10,j:11,t:12};
 function lk(u,t){return '<a href="'+u+'" target="_blank" rel="noopener">'+t+'</a>'}
@@ -1226,8 +1276,8 @@ function openFb(ctx){if(FB_URL){window.open(FB_URL,"_blank","noopener");return}v
   fetch("https://api.web3forms.com/submit",{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify({access_key:FB_KEY,subject:sub,from_name:c||"法句經使用者",message:body})}).then(function(r){return r.json()}).then(function(j){if(j.success){d.querySelector(".fbc").innerHTML='<h3>謝謝你</h3><p class="fs">已收到，會慢慢看、慢慢改。</p><div class="fx"><button data-f="x">關閉</button></div>'}else throw 0}).catch(function(){t.disabled=false;st.textContent="沒有送成功，改用郵件寄出。";viaMail()})};
  document.body.appendChild(d)}
 function fbCtx(){var b=BOOKS[cb],u=b&&b.u[cu];return u?b.n+" 第 "+(cu+1)+" 則（"+u.t+"）":""}
-var APPV="V-4.901";
-var CHG=[{"v":"V-4.901","d":"2026-11-02","t":"版次格式改為 V-4.903"},{"v":"V-4.900","d":"2026-11-02","t":"新增版本號與版本記錄；更新通知會說明新版內容；手機第一次開啟時建議安裝到桌面"},{"v":"V-4.800","d":"2026-11-02","t":"設定頁整理：備份與還原改為大按鈕，還原前先預覽、可復原；字級改三顆按鈕"},{"v":"V-4.700","d":"2026-11-02","t":"意見回饋：每則可回報、設定頁與說明頁有入口"},{"v":"V-4.600","d":"2026-11-01","t":"圖卡底圖可選單色或彩色；說明頁標題換色、加安裝提示"},{"v":"V-4.500","d":"2026-11-01","t":"古文字詞逐句補註古義與通假（老耗品、愛身品，其後擴及八品）"},{"v":"V-4.400","d":"2026-10-31","t":"新增愛身品導讀（巴利第 157–166 偈）與叮嚀","a":"新增 13 偈"},{"v":"V-4.300","d":"2026-10-31","t":"新增老耗品導讀（巴利第 146–156 偈）與叮嚀","a":"新增 15 偈"},{"v":"V-4.200","d":"2026-10-31","t":"設定：備份碼匯出與還原；延伸：相關文獻區"},{"v":"V-4.100","d":"2026-10-31","t":"偈文與白話以大正藏原文逐則核對，標註 6 則說法不同者"},{"v":"V-4.000","d":"2026-10-30","t":"大修：導覽重整為 首頁／學習／金句／延伸／設定，首頁改為今日經文與今日叮嚀"},{"v":"V-3.400","d":"2026-10-30","t":"法句叮嚀新增 8 類，共 64 則"},{"v":"V-3.300","d":"2026-10-30","t":"圖卡新增 10 款墨彩底圖"},{"v":"V-3.200","d":"2026-10-30","t":"各品加入「故事與偈的連結」，依註釋補正故事"},{"v":"V-3.100","d":"2026-10-29","t":"圖卡色輪：自選色與文字自動配色"},{"v":"V-3.000","d":"2026-10-29","t":"大修：新增「法句叮嚀」，心中默想、選數字讀一句提醒"},{"v":"V-2.600","d":"2026-10-29","t":"偈序校正：全文頁改為官方偈序並標示巴利偈號"},{"v":"V-2.500","d":"2026-10-29","t":"新增刀杖品導讀","a":"新增 19 偈"},{"v":"V-2.400","d":"2026-10-29","t":"新增惡行品導讀","a":"新增 22 偈"},{"v":"V-2.300","d":"2026-10-29","t":"日行一問圖卡、左右滑動換則"},{"v":"V-2.200","d":"2026-10-29","t":"新增明哲品、羅漢品、述千品導讀","a":"新增 46 偈"},{"v":"V-2.100","d":"2026-10-29","t":"金句圖卡：署名寄語、桌布尺寸、背誦字卡；開啟提醒"},{"v":"V-2.000","d":"2026-10-29","t":"大修：可安裝到手機主畫面，自動更新並提示新版"},{"v":"V-1.400","d":"2026-10-29","t":"標誌：圓相加朱印"},{"v":"V-1.300","d":"2026-10-28","t":"搜尋與收藏"},{"v":"V-1.200","d":"2026-10-28","t":"新增心意品、華香品、愚闇品導讀","a":"新增 52 偈"},{"v":"V-1.100","d":"2026-10-28","t":"加入全部 39 品全文與延伸影音"},{"v":"V-1.000","d":"2026-10-28","t":"初版：故事與偈的四圈學習"}];
+var APPV="V-5.000";
+var CHG=[{"v":"V-5.000","d":"2026-11-02","t":"加入巴利誦讀：研讀頁每偈可聽巴利，延伸頁有發音設定與真人誦讀比對"},{"v":"V-4.901","d":"2026-11-02","t":"版次格式改為 V-4.903"},{"v":"V-4.900","d":"2026-11-02","t":"新增版本號與版本記錄；更新通知會說明新版內容；手機第一次開啟時建議安裝到桌面"},{"v":"V-4.800","d":"2026-11-02","t":"設定頁整理：備份與還原改為大按鈕，還原前先預覽、可復原；字級改三顆按鈕"},{"v":"V-4.700","d":"2026-11-02","t":"意見回饋：每則可回報、設定頁與說明頁有入口"},{"v":"V-4.600","d":"2026-11-01","t":"圖卡底圖可選單色或彩色；說明頁標題換色、加安裝提示"},{"v":"V-4.500","d":"2026-11-01","t":"古文字詞逐句補註古義與通假（老耗品、愛身品，其後擴及八品）"},{"v":"V-4.400","d":"2026-10-31","t":"新增愛身品導讀（巴利第 157–166 偈）與叮嚀","a":"新增 13 偈"},{"v":"V-4.300","d":"2026-10-31","t":"新增老耗品導讀（巴利第 146–156 偈）與叮嚀","a":"新增 15 偈"},{"v":"V-4.200","d":"2026-10-31","t":"設定：備份碼匯出與還原；延伸：相關文獻區"},{"v":"V-4.100","d":"2026-10-31","t":"偈文與白話以大正藏原文逐則核對，標註 6 則說法不同者"},{"v":"V-4.000","d":"2026-10-30","t":"大修：導覽重整為 首頁／學習／金句／延伸／設定，首頁改為今日經文與今日叮嚀"},{"v":"V-3.400","d":"2026-10-30","t":"法句叮嚀新增 8 類，共 64 則"},{"v":"V-3.300","d":"2026-10-30","t":"圖卡新增 10 款墨彩底圖"},{"v":"V-3.200","d":"2026-10-30","t":"各品加入「故事與偈的連結」，依註釋補正故事"},{"v":"V-3.100","d":"2026-10-29","t":"圖卡色輪：自選色與文字自動配色"},{"v":"V-3.000","d":"2026-10-29","t":"大修：新增「法句叮嚀」，心中默想、選數字讀一句提醒"},{"v":"V-2.600","d":"2026-10-29","t":"偈序校正：全文頁改為官方偈序並標示巴利偈號"},{"v":"V-2.500","d":"2026-10-29","t":"新增刀杖品導讀","a":"新增 19 偈"},{"v":"V-2.400","d":"2026-10-29","t":"新增惡行品導讀","a":"新增 22 偈"},{"v":"V-2.300","d":"2026-10-29","t":"日行一問圖卡、左右滑動換則"},{"v":"V-2.200","d":"2026-10-29","t":"新增明哲品、羅漢品、述千品導讀","a":"新增 46 偈"},{"v":"V-2.100","d":"2026-10-29","t":"金句圖卡：署名寄語、桌布尺寸、背誦字卡；開啟提醒"},{"v":"V-2.000","d":"2026-10-29","t":"大修：可安裝到手機主畫面，自動更新並提示新版"},{"v":"V-1.400","d":"2026-10-29","t":"標誌：圓相加朱印"},{"v":"V-1.300","d":"2026-10-28","t":"搜尋與收藏"},{"v":"V-1.200","d":"2026-10-28","t":"新增心意品、華香品、愚闇品導讀","a":"新增 52 偈"},{"v":"V-1.100","d":"2026-10-28","t":"加入全部 39 品全文與延伸影音"},{"v":"V-1.000","d":"2026-10-28","t":"初版：故事與偈的四圈學習"}];
 function doneStat(){var hv=0,gu=0,gv=0;BOOKS.forEach(function(b){b.u.forEach(function(x){gu++;x.k.forEach(function(k){if(k.h&&!k.nc)hv++})})});return {n:BOOKS.length,hv:hv,pc:Math.round(hv*100/758)}}
 function openHelp(){var d=document.createElement("div");d.className="hlp";var DS=doneStat();d.innerHTML='<div class="hlc"><h3>使用說明</h3>'+
   '<p><b>先安裝，再使用</b>　請先把本工具加到手機主畫面（設定頁有圖解步驟）。從主畫面開啟才像 App，進度只記在同一個入口；用瀏覽器分頁開，和從主畫面開，記錄是分開的。</p>'+
