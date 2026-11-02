@@ -11,7 +11,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="法句經">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="app-ver" content="20261102-2109">
+<meta name="app-ver" content="20261102-2111">
 <title>法句經・故事與偈</title>
 <meta name="description" content="看叮嚀，學法句經。每天一則叮嚀、一句偈、一件今天就能做的小事。">
 <meta property="og:title" content="法句經・看叮嚀，學法句經">
@@ -236,6 +236,17 @@ details.sec{padding:0 24px}details.sec>summary{font-size:13px;letter-spacing:.2e
 .pmk.on{color:var(--sf);background:var(--hd);opacity:1}
 .pmk-lg{font-size:.8em;color:var(--mut);text-align:center;margin:2px 0 10px}
 .pmk-lg .pmk{margin:0 .3em 0 0}
+.sy{position:relative;margin:22px 0 10px;padding:22px 20px 18px;border-radius:18px;background:linear-gradient(160deg,color-mix(in srgb,var(--sf) 92%,var(--hd) 8%),var(--sf));border:1px solid color-mix(in srgb,var(--hd) 28%,var(--line));box-shadow:0 1px 0 var(--hi) inset,0 10px 24px -14px var(--sh)}
+.sy-hd{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.sy-seal{display:inline-flex;align-items:center;justify-content:center;width:2.4em;height:2.4em;font-size:.72em;font-weight:700;line-height:1.05;letter-spacing:0;color:var(--sf);background:var(--hd);border-radius:5px;transform:rotate(-4deg);writing-mode:vertical-rl}
+.sy-lb{font-size:.8em;letter-spacing:.25em;color:var(--hd)}
+.sy-t{margin:8px 0 10px;text-align:center;font-size:1.15em;letter-spacing:.3em;font-weight:700;color:var(--ink)}
+.sy-g{text-align:center;font-size:1.02em;line-height:2;letter-spacing:.12em;color:var(--ink);margin:0}
+.sy-dv{width:40px;height:2px;margin:14px auto;border-radius:2px;background:color-mix(in srgb,var(--hd) 55%,transparent)}
+.sy-s{font-size:.95em;line-height:2;margin:0 0 12px}
+.sy-k{margin:0 0 16px;padding:10px 14px;border-left:3px solid var(--hd);background:color-mix(in srgb,var(--hd) 7%,transparent);border-radius:0 10px 10px 0;font-size:.95em;color:var(--ink)}
+.sy-go{display:block;text-align:center;padding:13px 10px;border-radius:999px;background:var(--hd);color:var(--sf)!important;text-decoration:none;font-size:.95em;letter-spacing:.15em;box-shadow:0 8px 18px -12px var(--sh)}
+.sy-src{font-size:.74em;color:var(--mut);line-height:1.7;margin:12px 0 0}
 .pmk-lg .tk-d{color:var(--ink);margin-right:.3em}.pmk-lg .tk-l{color:var(--mut);opacity:.55;margin-right:.3em}.pmk-lg{line-height:2}
 .pvw{margin:4px 0 12px;padding:12px 12px 10px;border:1px solid var(--line);border-radius:14px;background:color-mix(in srgb,var(--sf) 70%,transparent)}
 .pvl{font-size:.82em;letter-spacing:.15em;color:var(--acc);text-align:center;margin-bottom:8px}
@@ -719,6 +730,23 @@ function sec(l,b){return '<div class="sec"><div class="lb">'+l+'</div>'+b+'</div
 function flat(){var a=[];ordIdx().forEach(function(bi){BOOKS[bi].u.forEach(function(u,ui){a.push([bi,ui])})});return a}
 function go(bi,ui,r){cb=bi;cu=ui;rd=r||0;ST.last=[bi,ui];W_("dhp2",ST);show("learn")}
 function step(d){var f=flat(),i=-1;f.forEach(function(p,k){if(p[0]==cb&&p[1]==cu)i=k});if(i<0){go(f[0][0],f[0][1]);return}i+=d;if(i<0||i>=f.length)return;go(f[i][0],f[i][1])}
+/* 聖嚴法師這樣說：《智慧100》（法鼓全集 2020 紀念版 07-05）引用《法句經》的篇章；摘要為編者整理，全文以法鼓全集為準 */
+var SY=[
+ {m:"千千為敵",d:"010",t:"戰勝自己",g:["千千為敵，一夫勝之，","未若自勝，為戰中上。"],s:"法師說，能打敗千萬敵人的將軍，內心未必平安；最頑強的對手，是不聽自己指揮的心。得意時不忘形、失意時不自棄，觀念上明白事情是許多因緣湊成、自己只是其中之一，方法上隨時收攝身心，才算真正戰勝自己。",k:"最難打贏的仗，在自己心裡。"},
+ {m:"雖多誦經",d:"029",t:"知不如行",g:["雖多誦經，不解何益；","解一法句，行可得道。"],s:"法師提醒：誦經的功德不在部數多寡；懂得經義比多誦重要，照著做又比懂得更重要，哪怕只實踐一句。他舉《六祖壇經》裡誦了三千部《法華經》卻起慢心的法達為例，也說明這不是叫人別誦經，而是誦了要懂、懂了要用。",k:"經典不只是拿來誦的，更是拿來用的。"},
+ {m:"不怒如地",d:"032",t:"真人無垢",g:["不怒如地，不動如山；","真人無垢，生死世絕。"],s:"法師分辨：佛經裡的「真人」，不是道家修煉成仙、長生不老的真人，而是沒有煩惱、不被人我是非與得失成敗牽動的解脫者；面對生死，也能不貪生、不畏死。",k:"像大地一樣承受，像山一樣安住。"},
+ {m:"出言以善",d:"063",t:"善言淑世",g:["出言以善，如叩鐘磬；","身無論議，度世則易。"],s:"法師說，鐘磬的聲音宏亮卻能安定人心，賢者的話也該如此：柔軟、慈悲，用欣賞與勉勵待人。相反地，在背後議論別人的長短，最容易引起是非、製造敵人。",k:"說一句像鐘聲的話：讓人安定，不讓人受傷。"},
+ {m:"有子有財",d:"065",t:"有子有財",g:["有子有財，愚惟汲汲；","我且非我，何憂子財。"],s:"法師對照「養兒防老、積穀防饑」的傳統想法指出：子孫和財富都不是永遠可靠的倚靠，連「我」都不是永久屬於自己的，又何必整天為子財憂慮。財產留得太多，有時反而讓後代養成揮霍放逸的習性。",k:"連自己都留不住，別讓子財占滿整顆心。"},
+ {m:"是日已過",d:"076",t:"生命有限",g:["是日已過，命則隨減；","如少水魚，斯有何樂。"],s:"法師說，這首偈常被讀得悲觀、無奈，其實佛法講無常是為了警醒：讓人心存危機感、珍惜光陰，用有限的生命去成就無限的慧命與功德。",k:"每過一天，問一句：今天有沒有好好用？"},
+ {m:"戒為甘露道",d:"079",t:"不死之藥",g:["戒為甘露道，放逸為死徑，","不貪則不死，失道為自喪。"],s:"法師解釋：「甘露」就是不死之藥。持戒是生路，肉身終會死去，功德與精神的生命卻能一直延續、成長到成佛。不放逸就是持戒：利人的事去做、害人的事不做；放縱與貪得無厭，像喝海水解渴，越喝越渴。",k:"守戒不是綁住生命，而是讓生命走在生路上。"},
+ {m:"輕躁難持",d:"080",t:"制意調心",g:["輕躁難持，唯欲是從；","制意為善，自調則寧。"],s:"法師為現代社會把脈：輕率浮躁、一切跟著欲望走，是普遍的毛病。其實身體真正需要的很有限，欲望卻沒有止境，是虛榮與貪心在推動。佛法講調心，把向外追逐的心收回來，放下貪欲，就能活得自在。",k:"需要的不多，想要的太多——先分清楚。"},
+ {m:"諸惡莫作",d:"028",t:"七佛通誡",g:["諸惡莫作，諸善奉行；","自淨其意，是諸佛教。"],s:"法師引唐代鳥窠禪師的意思：這四句三歲孩子都說得出，八十歲老人卻未必做得到。它是過去七佛共同的教誡，涵蓋了全部佛法：「諸惡莫作」是消極的持戒，「諸善奉行」是積極的持戒，「自淨其意」是定慧雙修。",k:"簡單到孩子會說，深到一生要做。"},
+ {m:"得生人道難",d:"078",t:"珍重人生",g:["得生人道難，生壽亦難得，","世間有佛難，佛法難得聞。"],s:"法師說，生而為人、又能長壽、遇到佛、聽聞佛法，四種難得同時具備，是極大的幸運。人生不該厭世，也不該玩世；在一切眾生中，人的身心最適合修福修慧，長壽是用來培福，不只是用來享福。",k:"難得的已經得到了，別讓它白白過去。"}
+];
+function syN(t){return String(t).replace(/[，。；、？！：「」\s]/g,"")}
+function syOf(k){if(!k.h)return null;var t=syN(k.h.join(""));for(var i=0;i<SY.length;i++)if(t.indexOf(SY[i].m)>=0)return SY[i];return null}
+function syCards(u){var seen={},o="";u.k.forEach(function(k){var c=syOf(k);if(!c||seen[c.d])return;seen[c.d]=1;
+ o+='<article class="sy"><div class="sy-hd"><span class="sy-seal">聖嚴</span><span class="sy-lb">聖嚴法師這樣說</span></div><h3 class="sy-t">〈'+c.t+'〉</h3><p class="sy-g">'+c.g.join("<br>")+'</p><div class="sy-dv"></div><p class="sy-s">'+c.s+'</p><p class="sy-k">'+c.k+'</p><a class="sy-go" href="https://ddc.shengyen.org/?doc=07-05-'+c.d+'" target="_blank" rel="noopener">讀聖嚴法師全文 ↗</a><p class="sy-src">出自聖嚴法師《智慧100》（法鼓全集 2020 紀念版 07-05）。上方摘要是編者依原文整理的大意，最後一句是編者的提醒，都不是原文；全文請到法鼓全集閱讀。</p></article>'});return o}
 /* 學習 */
 function renderLearn(){
  var b=BOOKS[cb],u=BU(),h="",f=flat(),pos=-1;
@@ -735,7 +763,7 @@ function renderLearn(){
   if(u.g.length)h+=sec("逐字對照",'<table>'+u.g.map(function(g){return '<tr><td class="it">'+g[0]+'</td><td>'+g[1]+'</td></tr>'}).join("")+'</table>');
   if(u.w.length)h+=sec("古文字詞",'<table>'+u.w.map(function(g){return '<tr><td>'+g[0]+'</td><td>'+g[1]+'</td></tr>'}).join("")+'</table>');
  }else if(rd==2){
-  h+=u.i.map(function(x){return sec(x[0],'<p>'+x[1]+'</p>')}).join("")+'<p class="src in">「義理連結」是編者的整理與說明，不是經文原文。</p>';
+  h+=u.i.map(function(x){return sec(x[0],'<p>'+x[1]+'</p>')}).join("")+'<p class="src in">「義理連結」是編者的整理與說明，不是經文原文。</p>'+syCards(u);
  }else{
   h+=sec("今天試試",'<p>'+u.x+'</p><p class="src in">這是編者設計的練習，不是經文內容。</p>');
   h+=sec("我的心得",'<textarea id="ref" placeholder="寫下你的觀察…"></textarea>');
@@ -1305,8 +1333,8 @@ function openFb(ctx){if(FB_URL){window.open(FB_URL,"_blank","noopener");return}v
   fetch("https://api.web3forms.com/submit",{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify({access_key:FB_KEY,subject:sub,from_name:c||"法句經使用者",message:body})}).then(function(r){return r.json()}).then(function(j){if(j.success){d.querySelector(".fbc").innerHTML='<h3>謝謝你</h3><p class="fs">已收到，會慢慢看、慢慢改。</p><div class="fx"><button data-f="x">關閉</button></div>'}else throw 0}).catch(function(){t.disabled=false;st.textContent="沒有送成功，改用郵件寄出。";viaMail()})};
  document.body.appendChild(d)}
 function fbCtx(){var b=BOOKS[cb],u=b&&b.u[cu];return u?b.n+" 第 "+(cu+1)+" 則（"+u.t+"）":""}
-var APPV="V-5.300";
-var CHG=[{"v":"V-5.300","d":"2026-11-02","t":"使用說明依目前進度改寫，新增「巴利文與梵文怎麼分」；梵文偈按鈕改為「聽梵文」；首頁各品列表恢復精簡；目錄已完成導讀深色、未完成淺色；延伸頁拿掉巴利誦讀區"},{"v":"V-5.201","d":"2026-11-02","t":"設定頁底部只顯示版本號"},{"v":"V-5.200","d":"2026-11-02","t":"目錄加「巴」字印記：可聽巴利的則；朱底表示另有真人誦讀影片。調整圖卡顏色時收合區不再自己收起。預設字級加大"},{"v":"V-5.101","d":"2026-11-02","t":"真人誦讀說明用語統一、帕奧禪林出處更正"},{"v":"V-5.100","d":"2026-11-02","t":"重要偈加真人巴利誦讀：研讀頁「聽巴利」下方直接放影片（偈 1–2、5–6、21–22、33、54、62、64–65、153–154）"},{"v":"V-5.000","d":"2026-11-02","t":"加入巴利誦讀：研讀頁每偈可聽巴利，延伸頁有發音設定與真人誦讀比對"},{"v":"V-4.901","d":"2026-11-02","t":"版次格式改為 V-4.903"},{"v":"V-4.900","d":"2026-11-02","t":"新增版本號與版本記錄；更新通知會說明新版內容；手機第一次開啟時建議安裝到桌面"},{"v":"V-4.800","d":"2026-11-02","t":"設定頁整理：備份與還原改為大按鈕，還原前先預覽、可復原；字級改三顆按鈕"},{"v":"V-4.700","d":"2026-11-02","t":"意見回饋：每則可回報、設定頁與說明頁有入口"},{"v":"V-4.600","d":"2026-11-01","t":"圖卡底圖可選單色或彩色；說明頁標題換色、加安裝提示"},{"v":"V-4.500","d":"2026-11-01","t":"古文字詞逐句補註古義與通假（老耗品、愛身品，其後擴及八品）"},{"v":"V-4.400","d":"2026-10-31","t":"新增愛身品導讀（巴利第 157–166 偈）與叮嚀","a":"新增 13 偈"},{"v":"V-4.300","d":"2026-10-31","t":"新增老耗品導讀（巴利第 146–156 偈）與叮嚀","a":"新增 15 偈"},{"v":"V-4.200","d":"2026-10-31","t":"設定：備份碼匯出與還原；延伸：相關文獻區"},{"v":"V-4.100","d":"2026-10-31","t":"偈文與白話以大正藏原文逐則核對，標註 6 則說法不同者"},{"v":"V-4.000","d":"2026-10-30","t":"大修：導覽重整為 首頁／學習／金句／延伸／設定，首頁改為今日經文與今日叮嚀"},{"v":"V-3.400","d":"2026-10-30","t":"法句叮嚀新增 8 類，共 64 則"},{"v":"V-3.300","d":"2026-10-30","t":"圖卡新增 10 款墨彩底圖"},{"v":"V-3.200","d":"2026-10-30","t":"各品加入「故事與偈的連結」，依註釋補正故事"},{"v":"V-3.100","d":"2026-10-29","t":"圖卡色輪：自選色與文字自動配色"},{"v":"V-3.000","d":"2026-10-29","t":"大修：新增「法句叮嚀」，心中默想、選數字讀一句提醒"},{"v":"V-2.600","d":"2026-10-29","t":"偈序校正：全文頁改為官方偈序並標示巴利偈號"},{"v":"V-2.500","d":"2026-10-29","t":"新增刀杖品導讀","a":"新增 19 偈"},{"v":"V-2.400","d":"2026-10-29","t":"新增惡行品導讀","a":"新增 22 偈"},{"v":"V-2.300","d":"2026-10-29","t":"日行一問圖卡、左右滑動換則"},{"v":"V-2.200","d":"2026-10-29","t":"新增明哲品、羅漢品、述千品導讀","a":"新增 46 偈"},{"v":"V-2.100","d":"2026-10-29","t":"金句圖卡：署名寄語、桌布尺寸、背誦字卡；開啟提醒"},{"v":"V-2.000","d":"2026-10-29","t":"大修：可安裝到手機主畫面，自動更新並提示新版"},{"v":"V-1.400","d":"2026-10-29","t":"標誌：圓相加朱印"},{"v":"V-1.300","d":"2026-10-28","t":"搜尋與收藏"},{"v":"V-1.200","d":"2026-10-28","t":"新增心意品、華香品、愚闇品導讀","a":"新增 52 偈"},{"v":"V-1.100","d":"2026-10-28","t":"加入全部 39 品全文與延伸影音"},{"v":"V-1.000","d":"2026-10-28","t":"初版：故事與偈的四圈學習"}];
+var APPV="V-5.400";
+var CHG=[{"v":"V-5.400","d":"2026-11-02","t":"「義」圈新增「聖嚴法師這樣說」閱讀卡：依《智慧100》對應 8 則（放逸、無常、心意、愚闇、羅漢、述千、刀杖），附法鼓全集全文連結"},{"v":"V-5.300","d":"2026-11-02","t":"使用說明依目前進度改寫，新增「巴利文與梵文怎麼分」；梵文偈按鈕改為「聽梵文」；首頁各品列表恢復精簡；目錄已完成導讀深色、未完成淺色；延伸頁拿掉巴利誦讀區"},{"v":"V-5.201","d":"2026-11-02","t":"設定頁底部只顯示版本號"},{"v":"V-5.200","d":"2026-11-02","t":"目錄加「巴」字印記：可聽巴利的則；朱底表示另有真人誦讀影片。調整圖卡顏色時收合區不再自己收起。預設字級加大"},{"v":"V-5.101","d":"2026-11-02","t":"真人誦讀說明用語統一、帕奧禪林出處更正"},{"v":"V-5.100","d":"2026-11-02","t":"重要偈加真人巴利誦讀：研讀頁「聽巴利」下方直接放影片（偈 1–2、5–6、21–22、33、54、62、64–65、153–154）"},{"v":"V-5.000","d":"2026-11-02","t":"加入巴利誦讀：研讀頁每偈可聽巴利，延伸頁有發音設定與真人誦讀比對"},{"v":"V-4.901","d":"2026-11-02","t":"版次格式改為 V-4.903"},{"v":"V-4.900","d":"2026-11-02","t":"新增版本號與版本記錄；更新通知會說明新版內容；手機第一次開啟時建議安裝到桌面"},{"v":"V-4.800","d":"2026-11-02","t":"設定頁整理：備份與還原改為大按鈕，還原前先預覽、可復原；字級改三顆按鈕"},{"v":"V-4.700","d":"2026-11-02","t":"意見回饋：每則可回報、設定頁與說明頁有入口"},{"v":"V-4.600","d":"2026-11-01","t":"圖卡底圖可選單色或彩色；說明頁標題換色、加安裝提示"},{"v":"V-4.500","d":"2026-11-01","t":"古文字詞逐句補註古義與通假（老耗品、愛身品，其後擴及八品）"},{"v":"V-4.400","d":"2026-10-31","t":"新增愛身品導讀（巴利第 157–166 偈）與叮嚀","a":"新增 13 偈"},{"v":"V-4.300","d":"2026-10-31","t":"新增老耗品導讀（巴利第 146–156 偈）與叮嚀","a":"新增 15 偈"},{"v":"V-4.200","d":"2026-10-31","t":"設定：備份碼匯出與還原；延伸：相關文獻區"},{"v":"V-4.100","d":"2026-10-31","t":"偈文與白話以大正藏原文逐則核對，標註 6 則說法不同者"},{"v":"V-4.000","d":"2026-10-30","t":"大修：導覽重整為 首頁／學習／金句／延伸／設定，首頁改為今日經文與今日叮嚀"},{"v":"V-3.400","d":"2026-10-30","t":"法句叮嚀新增 8 類，共 64 則"},{"v":"V-3.300","d":"2026-10-30","t":"圖卡新增 10 款墨彩底圖"},{"v":"V-3.200","d":"2026-10-30","t":"各品加入「故事與偈的連結」，依註釋補正故事"},{"v":"V-3.100","d":"2026-10-29","t":"圖卡色輪：自選色與文字自動配色"},{"v":"V-3.000","d":"2026-10-29","t":"大修：新增「法句叮嚀」，心中默想、選數字讀一句提醒"},{"v":"V-2.600","d":"2026-10-29","t":"偈序校正：全文頁改為官方偈序並標示巴利偈號"},{"v":"V-2.500","d":"2026-10-29","t":"新增刀杖品導讀","a":"新增 19 偈"},{"v":"V-2.400","d":"2026-10-29","t":"新增惡行品導讀","a":"新增 22 偈"},{"v":"V-2.300","d":"2026-10-29","t":"日行一問圖卡、左右滑動換則"},{"v":"V-2.200","d":"2026-10-29","t":"新增明哲品、羅漢品、述千品導讀","a":"新增 46 偈"},{"v":"V-2.100","d":"2026-10-29","t":"金句圖卡：署名寄語、桌布尺寸、背誦字卡；開啟提醒"},{"v":"V-2.000","d":"2026-10-29","t":"大修：可安裝到手機主畫面，自動更新並提示新版"},{"v":"V-1.400","d":"2026-10-29","t":"標誌：圓相加朱印"},{"v":"V-1.300","d":"2026-10-28","t":"搜尋與收藏"},{"v":"V-1.200","d":"2026-10-28","t":"新增心意品、華香品、愚闇品導讀","a":"新增 52 偈"},{"v":"V-1.100","d":"2026-10-28","t":"加入全部 39 品全文與延伸影音"},{"v":"V-1.000","d":"2026-10-28","t":"初版：故事與偈的四圈學習"}];
 function doneStat(){var hv=0,gu=0,gv=0;BOOKS.forEach(function(b){b.u.forEach(function(x){gu++;x.k.forEach(function(k){if(k.h&&!k.nc)hv++})})});return {n:BOOKS.length,hv:hv,pc:Math.round(hv*100/758)}}
 function openHelp(){var d=document.createElement("div");d.className="hlp";var DS=doneStat();d.innerHTML='<div class="hlc"><h3>使用說明</h3>'+
   '<p><b>先安裝，再使用</b>　請先把本工具加到手機主畫面（設定頁有圖解步驟）。從主畫面開啟才像 App，進度只記在同一個入口；用瀏覽器分頁開，和從主畫面開，記錄是分開的。</p>'+
