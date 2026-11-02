@@ -11,7 +11,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="法句經">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="app-ver" content="20261102-1252">
+<meta name="app-ver" content="20261102-1329">
 <title>法句經・故事與偈</title>
 <meta name="description" content="看叮嚀，學法句經。每天一則叮嚀、一句偈、一件今天就能做的小事。">
 <meta property="og:title" content="法句經・看叮嚀，學法句經">
@@ -1190,7 +1190,7 @@ function openHelp(){var d=document.createElement("div");d.className="hlp";var DS
  '<p><b>搜尋</b>　可搜經文、故事、品名，也可輸入巴利字（不必打符號）。</p>'+
  '<p><b>延伸</b>　講法影音。</p>'+
  '<p><b>備份</b>　進度與設定只存在這支手機裡；清除瀏覽器資料或換手機，會重新開始。換手機或清除資料前，請到「設定」→「備份與搬移」複製備份碼，存到備忘錄或傳給自己；新手機開啟後貼上，就能還原。建議偶爾備份一次。</p>'+
- '<p><b>意見回饋</b>　發現錯字、看不懂、想要新功能，請到學習頁底部的「回報這一則」或設定頁的「意見回饋」告訴我。</p><button data-hc="1">關閉</button></div>';d.onclick=function(e){if(e.target==d||e.target.hasAttribute("data-hc"))d.remove()};document.body.appendChild(d)}
+ '<p><b>意見回饋</b>　發現錯字、看不懂、想要新功能，請到學習頁底部的「回報這一則」或設定頁的「意見回饋」告訴我。</p><button data-fbo="1">寫意見給製作者</button><button data-hc="1">關閉</button></div>';d.onclick=function(e){if(e.target.hasAttribute("data-fbo")){d.remove();openFb("");return}if(e.target==d||e.target.hasAttribute("data-hc"))d.remove()};document.body.appendChild(d)}
 function renderHome(){
  var u=BU(),tot=0,dd=0,h="";
  BOOKS.forEach(function(b){b.u.forEach(function(x){tot++;if(dcount(x)==4)dd++})});
