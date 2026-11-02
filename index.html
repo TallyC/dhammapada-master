@@ -11,13 +11,13 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="法句經">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="app-ver" content="20261102-1943">
+<meta name="app-ver" content="20261102-1957">
 <title>法句經・故事與偈</title>
 <meta name="description" content="看叮嚀，學法句經。每天一則叮嚀、一句偈、一件今天就能做的小事。">
 <meta property="og:title" content="法句經・看叮嚀，學法句經">
 <meta property="og:description" content="每天一則叮嚀、一句偈、一件今天就能做的小事。">
 <style>
-:root{--bg:#e2e2df;--sf:#eeeeeb;--ink:#2a2a2a;--mut:#6c6c67;--acc:#454545;--line:#cdcdc9;--hi:rgba(255,255,255,.9);--sh:rgba(0,0,0,.16);--br:#8c8c87;--fs:17px;--lh:1.9;--gap:18px;--ff:"Noto Serif TC","Songti TC","PMingLiU",serif}
+:root{--bg:#e2e2df;--sf:#eeeeeb;--ink:#2a2a2a;--mut:#6c6c67;--acc:#454545;--line:#cdcdc9;--hi:rgba(255,255,255,.9);--sh:rgba(0,0,0,.16);--br:#8c8c87;--fs:19px;--lh:1.9;--gap:18px;--ff:"Noto Serif TC","Songti TC","PMingLiU",serif}
 html{background:var(--bg);min-height:100%}
 input[type=range]{accent-color:var(--acc)}
 *{box-sizing:border-box}
@@ -230,6 +230,10 @@ details.sec{padding:0 24px}details.sec>summary{font-size:13px;letter-spacing:.2e
 .pab.on{color:var(--sf);background:var(--acc);border-color:var(--acc)}
 .pln{border-radius:6px;padding:0 4px;transition:background .2s}
 .pln.on{background:color-mix(in srgb,var(--acc) 14%,transparent);color:var(--acc);font-style:normal}
+.pmk{display:inline-flex;align-items:center;justify-content:center;width:1.35em;height:1.35em;margin-left:.45em;vertical-align:.12em;font-size:.72em;font-weight:700;font-style:normal;line-height:1;color:var(--hd);border:1.5px solid var(--hd);border-radius:4px;transform:rotate(-4deg);opacity:.85}
+.pmk.on{color:var(--sf);background:var(--hd);opacity:1}
+.pmk-lg{font-size:.8em;color:var(--mut);text-align:center;margin:2px 0 10px}
+.pmk-lg .pmk{margin:0 .3em 0 0}
 .pvw{margin:4px 0 12px;padding:12px 12px 10px;border:1px solid var(--line);border-radius:14px;background:color-mix(in srgb,var(--sf) 70%,transparent)}
 .pvl{font-size:.82em;letter-spacing:.15em;color:var(--acc);text-align:center;margin-bottom:8px}
 .pvw .vp{margin-bottom:8px}
@@ -612,11 +616,14 @@ function wheel(){var h0=SET.hue==null?30:SET.hue,sm=SET.sm!=null?SET.sm:(SET.mu?
  return o+'</div><p class="cmn">由上到下：鮮明、柔和、淡雅、灰調；左右是不同色相。</p>'}
 var FC='"Noto Serif TC","Songti TC","PMingLiU","Noto Serif CJK TC",serif';
 var RN=["讀","詞","義","行"],RT=["讀懂","字詞與巴利","義理連結","實踐與回顧"];
-var SET={ordv:2,ord:"wu",ff:"m",fs:17,lh:1.9,gap:14,pal:"gray",mode:"auto",cs:0},ST={},mem={};
+var SET={ordv:2,fsv:1,ord:"wu",ff:"m",fs:19,lh:1.9,gap:14,pal:"gray",mode:"auto",cs:0},ST={},mem={};
 var cb=0,cu=0,rd=0,di=0,gi=0,cvD,cvG,page="learn",readW=1;
+/* 重畫頁面時保留已展開的收合區（例如調整圖卡顏色時不會自己收起來） */
+function setPg(id,h){var el=$(id);if(!el)return;var op={};[].forEach.call(el.querySelectorAll("details"),function(d){var sm=d.querySelector("summary");if(sm)op[sm.textContent]=d.open});el.innerHTML=h;[].forEach.call(el.querySelectorAll("details"),function(d){var sm=d.querySelector("summary");if(sm&&op.hasOwnProperty(sm.textContent))d.open=op[sm.textContent]})}
+
 function R_(k,d){try{return JSON.parse(localStorage.getItem(k)||"null")||d}catch(e){return mem[k]||d}}
 function W_(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){mem[k]=v}}
-ST=R_("dhp2",{});var s0=R_("dhp2-set",{});if(s0.ordv!=2){delete s0.ord;delete s0.cs}for(var q in s0)SET[q]=s0[q];SET.ordv=2;
+ST=R_("dhp2",{});var s0=R_("dhp2-set",{});if(s0.ordv!=2){delete s0.ord;delete s0.cs}if(s0.fsv!=1){if(s0.fs==null||s0.fs<=17)s0.fs=19;s0.fsv=1}for(var q in s0)SET[q]=s0[q];SET.ordv=2;
 BOOKS.forEach(function(b){b.u.forEach(function(u,i){u.id=b.id+(i+1)})});
 function dark(){return SET.mode=="dark"||(SET.mode=="auto"&&window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches)}
 function apply(){
@@ -734,7 +741,7 @@ function renderLearn(){
  if(rd==3&&pos<f.length-1)h+='<button class="lnk" data-a="next">下一則 →</button>';
  if(SHOWFULL)h+='<button class="lnk" data-a="read">讀本品全文</button>';
  h+='<button class="lnk fbl" data-a="fb">回報這一則・意見回饋</button>';
- $("pg-learn").innerHTML=h;
+ setPg("pg-learn",h);
  var t=$("ref");if(t){t.value=(ST[u.id]&&ST[u.id].note)||"";t.oninput=function(){(ST[u.id]=ST[u.id]||{}).note=t.value;W_("dhp2",ST)}}
 }
 $("pg-learn").onclick=function(e){
@@ -756,15 +763,17 @@ $("pg-learn").onclick=function(e){
    if(els.length>1&&ni>=0&&ni<els.length){var y=els[ni].getBoundingClientRect().top+window.pageYOffset-70;window.scrollTo({top:y,behavior:"smooth"});return}}
   var sel=page=="learn"?(fw?'[data-a="next"]':'[data-a="prev"]'):page=="read"?(fw?'[data-a="rnext"]':'[data-a="rprev"]'):null;if(!sel)return;var b=document.querySelector("#pg-"+page+" "+sel);if(b&&!b.disabled)b.click()},{passive:true})})();
 /* 目錄 */
+function isPa(k){return !!(k.p&&!(k.pl&&k.pl.indexOf("梵文")===0))}
+function paMark(u){if(!u.k.some(isPa))return "";var v=u.k.some(function(k){return isPa(k)&&pvOf(k)});return '<span class="pmk'+(v?" on":"")+'" title="'+(v?"可聽巴利，另有真人誦讀影片":"可聽巴利")+'" aria-label="'+(v?"可聽巴利，另有真人誦讀影片":"可聽巴利")+'">巴</span>'}
 function openToc(){
  var h='<div class="tocin"><div class="tochd"><span>目錄</span><button data-a="x" aria-label="關閉">×</button></div>'+ordSeg();
- h+='<button class="ti" data-r="0"><span class="no">序</span><span class="tt">法句經序</span><span class="pg">全文</span></button>';
+ h+='<p class="pmk-lg"><span class="pmk">巴</span>可聽巴利　<span class="pmk on">巴</span>另有真人誦讀影片</p>';h+='<button class="ti" data-r="0"><span class="no">序</span><span class="tt">法句經序</span><span class="pg">全文</span></button>';
  ordList().forEach(function(r){
   var bi=bookOf(r),no=(SET.ord=="wu"?r.w:r.p);
   if(bi<0){h+='<button class="ti soonb" data-r="'+r.w+'"><span class="no">'+no+'</span><span class="tt">'+r.n+(SET.ord!="wu"&&r.pn?'<small> '+r.pn+'</small>':'')+'</span><span class="pg">全文</span></button>';return}
   var b=BOOKS[bi],dd=b.u.filter(function(u){return dcount(u)==4}).length;
   h+='<details'+(bi==cb?" open":"")+'><summary><b>'+no+'　'+b.n+'</b>　<span class="mut">'+b.p+'・導讀 '+dd+'/'+b.u.length+'</span></summary><p class="mut sm">'+b.d+'<br>'+b.note+'</p>';
-  b.u.forEach(function(u,ui){h+='<button class="ti'+(bi==cb&&ui==cu?" cur":"")+'" data-b="'+bi+'" data-u="'+ui+'"><span class="no">'+(ui+1)+'</span><span class="tt">'+u.t+'</span><span class="pg">'+(dcount(u)==4?"✓":dcount(u)+"/4")+'</span></button>'});
+  b.u.forEach(function(u,ui){h+='<button class="ti'+(bi==cb&&ui==cu?" cur":"")+'" data-b="'+bi+'" data-u="'+ui+'"><span class="no">'+(ui+1)+'</span><span class="tt">'+u.t+paMark(u)+'</span><span class="pg">'+(dcount(u)==4?"✓":dcount(u)+"/4")+'</span></button>'});
   h+='<button class="ti" data-r="'+r.w+'"><span class="no">文</span><span class="tt">本品全文</span><span class="pg">›</span></button></details>'});
  if(SET.ord!="wu")h+='<p class="mut sm" style="margin-top:14px">《法句經》另有 13 品在巴利本中沒有對應，切換到「漢譯」可看到。全文為維祇難等譯《法句經》。</p>';
  h+='</div>';var el=$("toc");el.innerHTML=h;el.hidden=false;document.body.style.overflow="hidden"}
@@ -934,12 +943,12 @@ function slidHtml(){var n=TPN.length,i=tpIdx(),t="";if(n<2)return "";for(var j=0
  return '<div class="sl-lb"><span class="sl-p">'+(i>0?TPN[i-1][1]:"")+'</span><b class="sl-c">'+TPN[i][1]+'</b><span class="sl-p">'+(i<n-1?TPN[i+1][1]:"")+'</span></div><div class="sl-tr"><div class="sl-tk">'+t+'</div><input type="range" class="sdr" id="dslide" min="0" max="'+(n-1)+'" step="1" value="'+i+'" aria-label="選擇主題"></div>'}
 function renderDing(keep){syncGrp();var h='<h2 class="ut">法句叮嚀</h2><p class="ref">心中默想一件事，讀一句經中的提醒</p>'+grpHtml()+'<div class="slid" id="slid">'+slidHtml()+"</div>";
  var it=dsel==-1?(window._hf||null):(dsel?dingPick(dtp,dsel):null);window._dn=it;
- if(!it){h+='<div class="sec ask"><p class="dl">心中默想你想問的事，<br>不必說出口。</p><p class="ref">想好了，再選一個數字</p><div class="nums">'+[1,2,3,4,5,6,7,8,9].map(function(n){return '<button data-n="'+n+'">'+n+'</button>'}).join("")+'</div><button class="rnd" data-n="0">隨順因緣</button></div><p class="src">每個數字會對應不同的一段經文提醒；同一天選同一個數字，會是同一張。這是因緣，不是占卜預言。</p>';$("pg-ding").innerHTML=h;return}
+ if(!it){h+='<div class="sec ask"><p class="dl">心中默想你想問的事，<br>不必說出口。</p><p class="ref">想好了，再選一個數字</p><div class="nums">'+[1,2,3,4,5,6,7,8,9].map(function(n){return '<button data-n="'+n+'">'+n+'</button>'}).join("")+'</div><button class="rnd" data-n="0">隨順因緣</button></div><p class="src">每個數字會對應不同的一段經文提醒；同一天選同一個數字，會是同一張。這是因緣，不是占卜預言。</p>';setPg("pg-ding",h);return}
  cvN=dingCard(it);var lb=it.b.n+" "+kLab(it.b,it.k);
  h+='<img class="cimg stk" id="dingimg" alt="法句叮嚀圖卡" src="'+cvN.toDataURL("image/png")+'"><div class="acts"><button data-a="nmore">換一句</button><button data-a="nsave">儲存圖卡</button><button data-a="nshare">分享</button>'+heart(it.k.h.join(""),lb,1)+'</div><details class="help"'+(SET.cs==styList().length-1?' open':'')+'><summary>調整圖卡：顏色與尺寸</summary>'+styles("st3")+'</details>';
  h+='<div class="sec"><div class="lb">叮嚀</div><p class="dl">'+esc(it.line)+'</p><div class="dv"></div><div class="lb">經文白話</div><p>'+it.k.d+'</p><p class="vs">'+it.k.h.join("<br>")+'</p><div class="ref">'+lb+'</div><div class="dv"></div><div class="lb">今天怎麼做</div><p>'+esc(it.act)+'</p></div>';
  h+='<p class="src">「叮嚀」是依經意寫的生活白話，經文與出處在下方；不是預言。</p>'+care()+'<button class="lnk" data-a="nstory">讀這一則的故事 →</button>';
- var y0=window.scrollY;$("pg-ding").innerHTML=h;window.scrollTo(0,keep?y0:0)}
+ var y0=window.scrollY;setPg("pg-ding",h);window.scrollTo(0,keep?y0:0)}
 var cvN=null;
 $("pg-ding").addEventListener("input",function(e){if(e.target.id!="dslide")return;var i=+e.target.value;dtp=TPN[i][0];var b=$("slid");if(b){b.querySelector(".sl-c").textContent=TPN[i][1];var ps=b.querySelectorAll(".sl-p");ps[0].textContent=i>0?TPN[i-1][1]:"";ps[1].textContent=i<TPN.length-1?TPN[i+1][1]:""}});
 $("pg-ding").addEventListener("change",function(e){if(e.target.id!="dslide")return;if(dsel){dsel=0;renderDing()}});
@@ -978,19 +987,19 @@ function renderToday(){
  var h='<h2 class="ut">金句圖卡</h2><div class="seg"><button data-gt="t" class="on">今日經文</button><button data-gt="x">日行一問</button><button data-gt="d">精選</button><button data-gt="f">我的收藏 '+FAV.length+'</button></div><div class="ref">今日經文　'+t.getFullYear()+" 年 "+(t.getMonth()+1)+" 月 "+t.getDate()+" 日・"+lb+'</div>';
  h+='<div class="sec"><div class="lb">原文</div><p class="vs">'+it.k.h.join("<br>")+'</p><div class="dv"></div><div class="lb">白話</div><p>'+it.k.d+'</p>'+(it.k.p?'<details class="pl"><summary>看巴利原文 ▾</summary><p class="pali sm">'+it.k.p.join("<br>")+'</p></details>':"")+'</div>';
  h+='<img class="cimg stk" id="cardimg" alt="今日經文圖卡" src="'+cvD.toDataURL("image/png")+'">'+styles("st1")+'<div class="acts"><button data-a="save">儲存圖卡</button><button data-a="share">分享</button><button data-a="other">換一句</button>'+heart(it.k.h.join(""),lb,1)+'</div>'+care()+'<button class="lnk" data-a="story">讀這一則的故事 →</button>';
- $("pg-today").innerHTML=h;window._it=it}
+ setPg("pg-today",h);window._it=it}
 function GL(){return gt=="f"?FAV.map(function(f){return [f.s,f.t]}):gt=="x"?xList():DAILY}
 function xCount(c){var o=xc;xc=c;var n=xList().length;xc=o;return n}
 function renderGold(){
  var L=GL();if(gi>=L.length)gi=Math.max(0,L.length-1);
  var h='<h2 class="ut">金句圖卡</h2><div class="seg"><button data-gt="t">今日經文</button><button data-gt="x" class="'+(gt=="x"?"on":"")+'">日行一問</button><button data-gt="d" class="'+(gt=="d"?"on":"")+'">精選</button><button data-gt="f" class="'+(gt=="f"?"on":"")+'">我的收藏 '+FAV.length+'</button></div>';
  if(gt=="x")h+='<div class="cnt"><select class="slt" id="xcs" aria-label="分類"><option value=""'+(!xc?" selected":"")+'>全部分類（'+xCount("")+'）</option>'+Object.keys(XCN).map(function(c){return '<option value="'+c+'"'+(xc==c?" selected":"")+'>'+XCN[c]+'（'+xCount(c)+'）</option>'}).join("")+'</select></div>';
- if(!L.length){h+='<p class="ref">還沒有收藏的句子。<br>在閱讀、學習、今日經文或精選金句按 ♡，就會收到這裡。</p>';$("pg-gold").innerHTML=h;return}
+ if(!L.length){h+='<p class="ref">還沒有收藏的句子。<br>在閱讀、學習、今日經文或精選金句按 ♡，就會收到這裡。</p>';setPg("pg-gold",h);return}
  var g=L[gi];cvG=makeCard(g[0],g[1],g[2]);
  h+='<img class="cimg stk" id="goldimg" alt="金句圖卡" src="'+cvG.toDataURL("image/png")+'">'+styles("st2");
  h+='<div class="nav2"><button data-gn="-1" aria-label="上一則">‹</button><select class="slt" id="gsel" aria-label="選一則">'+L.map(function(d,i){return '<option value="'+i+'"'+(i==gi?" selected":"")+'>'+(i+1)+'／'+L.length+'　'+(gt=="x"?d[1]:d[1].split(/[，。；、？！]/)[0])+'</option>'}).join("")+'</select><button data-gn="1" aria-label="下一則">›</button></div>';
  h+='<div class="acts"><button data-a="gsave">儲存圖卡</button><button data-a="gshare">分享</button>'+(gt=="x"?"":heart(g[1],g[0],1))+'</div><p class="ref" id="unfavtip" hidden>已取消收藏，離開此頁後會從清單移除；再按一次 ♥ 可恢復。</p>'+(gt=="x"?"":care())+'<p class="src" style="text-align:center">按「儲存圖卡」會放大預覽，長按圖片即可存入相簿。</p>'+(gt=="x"?"":pdfPanel());
- $("pg-gold").innerHTML=h}
+ setPg("pg-gold",h)}
 function fname(cv){var n=(cv&&cv._nm)||"";n=n.replace(/[\\\/:*?"<>|\s]+/g,"");return "法句經"+(n?"_"+n:"")+"_"+new Date().toISOString().slice(0,10)+".png"}
 function dl(cv){cv.toBlob(function(b){if(!b)return;var u=URL.createObjectURL(b),el=document.createElement("a");el.href=u;el.download=fname(cv);document.body.appendChild(el);el.click();el.remove()},"image/png")}
 function appUrl(){return location.protocol=="file:"?"https://tallyc.github.io/dhammapada-master/":location.origin+location.pathname}
@@ -1079,7 +1088,7 @@ function renderSet(){
  h+='</details>';
  h+='<p class="src" style="text-align:center;margin-top:22px">版本 '+APPV+'　<button class="vlk" data-vh="1">版本記錄</button></p>';
  h+='<p class="src" style="text-align:center;margin-top:6px">製作者　Tally.C</p>';
- $("pg-set").innerHTML=h;var fbb=$("fbset");if(fbb)fbb.onclick=function(){openFb("")};
+ setPg("pg-set",h);var fbb=$("fbset");if(fbb)fbb.onclick=function(){openFb("")};
  [["s_rem","rem"],["s_ord","ord"],["s_pal","pal"],["s_mode","mode"],["s_ff","ff"],["s_fs","fs"],["s_lh","lh"],["s_gap","gap"]].forEach(function(p){var el=$(p[0]);el.oninput=function(){SET[p[1]]=(p[1]=="pal"||p[1]=="mode"||p[1]=="ff"||p[1]=="ord"||p[1]=="rem")?this.value:+this.value;apply()}})}
 /* 全文閱讀 */
 var readBack=null;
@@ -1089,7 +1098,7 @@ function renderRead(){
  else{var b=null;BOOKS.forEach(function(x){if(x.wno==readW)b=x});
   h+='<h2 class="ut">'+d.n+'</h2><div class="ref">《法句經》第 '+readW+' 品・共 '+(d.t.length)+' 偈'+(b?'・<a href="#" data-a="gostudy">有導讀</a>':'')+'</div><p class="sm" style="text-align:center">'+d.s+'</p>'+d.t.map(function(t,i){var tx=t.split("|").join(""),n=d.vn[i],q=d.pn[i];return '<p class="rs" id="rs'+i+'"><span class="vn">第 '+n+' 偈'+(q?'・巴利偈 '+pnS(q):'')+'</span><br>'+t.split("|").join("<br>")+'<br><span class="hw">'+heart(tx,d.n+" 第"+n+"偈")+'<a class="cbl" href="'+cbU(tx)+'" target="_blank" rel="noopener">查 CBETA ↗</a></span></p>'}).join("")+storyBox(readW)}
  h+='<div class="rnav"><button data-a="rprev"'+(prev<0?" disabled":"")+'>‹ '+(prev>=0?FULL[prev].n:"")+'</button><button data-a="rtoc">目錄</button><button data-a="rnext"'+(next<0?" disabled":"")+'>'+(next>=0?FULL[next].n:"")+' ›</button></div><p class="src" style="text-align:center">經文依 CBETA 電子佛典集成。「第 N 偈」是大正藏《法句經》（T210）本品的偈序；「巴利偈」依蘇錦坤〈法句經偈頌對照表〉，沒標巴利偈的，是對照表未列出巴利對應。</p>';
- $("pg-read").innerHTML=h;
+ setPg("pg-read",h);
  if(window._seg!=null){var sg=window._seg;window._seg=null;setTimeout(function(){var el=$("rs"+sg);if(el){el.classList.add("hit");el.scrollIntoView({block:"center"})}},60)}}
 $("pg-read").onclick=function(e){var t=e.target.closest("[data-a]");if(!t)return;var a=t.getAttribute("data-a");
  if(a=="rback"){var rb=readBack;readBack=null;cb=rb.b;cu=rb.u;rd=rb.r;show("learn");window.scrollTo(0,rb.y);return}
@@ -1104,7 +1113,7 @@ function bkStat(o){var s=o["dhp2"]||{},n=0,nt=0;BOOKS.forEach(function(b){b.u.fo
 function bkLine(o){var s=bkStat(o);return "已完成 "+s.n+" 則・收藏 "+s.fav+" 句・心得 "+s.nt+" 則"}
 function bkCard(){var last=SET.bkt,u=R_("dhp2-undo",null);
  return '<div class="bkc"><b>備份與還原</b><p>'+(last?'上次備份：'+last+'。':'還沒備份過，建議現在備份一次。')+'<br>進度只存在這支手機；換手機前請先備份。</p><div class="bkr"><button class="bkb" data-bk2="b">備份</button><button class="bkb" data-bk2="r">還原</button></div>'+(u?'<button class="lnk" data-bk2="u">復原上一次還原</button>':"")+'</div>'}
-function fzRow(){var F=[["小",15],["中",17],["大",21]];return '<div class="row"><span>字級</span><div class="fzb">'+F.map(function(f){return '<button data-fz="'+f[1]+'" class="'+(Math.abs(SET.fs-f[1])<=1?"on":"")+'">'+f[0]+'</button>'}).join("")+'</div></div>'}
+function fzRow(){var F=[["小",17],["中",19],["大",22]];return '<div class="row"><span>字級</span><div class="fzb">'+F.map(function(f){return '<button data-fz="'+f[1]+'" class="'+(Math.abs(SET.fs-f[1])<=1?"on":"")+'">'+f[0]+'</button>'}).join("")+'</div></div>'}
 function sheet(inner,onclick){var d=document.createElement("div");d.className="hlp";d.innerHTML='<div class="fbc">'+inner+'</div>';d.onclick=function(e){if(e.target==d){d.remove();return}onclick(e,d)};document.body.appendChild(d);return d}
 function openBk(){var o=bkObj(),fn="法句經備份_"+o.t+".txt",c=bkCode(o);
  sheet('<h3>備份我的進度</h3><p class="fs">目前有：'+bkLine(o)+'。<br>三種方式選一種就好，最簡單的是第一種。</p>'+
@@ -1148,7 +1157,7 @@ function renderMedia(){
  var LIT=[["經文原典",[["《法句經》大正藏 T0210（漢譯全文）","https://deerpark.app/cbeta/T0210/1","本 app 偈文所依的漢譯本，可連續閱讀。"],["CBETA 電子佛典集成","https://cbetaonline.dila.edu.tw/","官方線上閱讀，可搜尋、查校勘與註腳。"],["巴利《法句經》整部多譯本對讀（蘇錦坤）","https://nanda.online-dhamma.net/tipitaka/sutta/khuddaka/dhammapada/dhp-contrast-reading/dhp-contrast-reading-full/","整部巴利文與漢譯、英譯逐段對讀，各品都在同一頁。"]]],["法鼓山",[["法鼓山全球資訊網","https://www.ddm.org.tw/","聖嚴法師開示、活動與線上資源的入口。"],["法鼓文化","https://www.ddc.com.tw/","聖嚴法師著作（如《智慧100》）的出版社。"],["法鼓文理學院","https://www.dila.edu.tw/","佛學研究與課程資訊。"]]],["台大佛學數位圖書館（補充）",[["台大佛學數位圖書館暨博物館","https://buddhism.lib.ntu.edu.tw/","可檢索佛學期刊、論文與電子書，查《法句經》研究。"]]],["其他正信道場",[["佛光山","https://www.fgs.org.tw/","星雲大師與佛光山的佛學資源入口。"],["香光尼眾佛學院","https://www.gaya.org.tw/","《香光莊嚴》等佛學刊物。"]]]];
  LIT.forEach(function(g){h+='<div class="lb sgl" style="margin:16px 0 4px">'+g[0]+'</div>';g[1].forEach(function(l){h+='<div class="sec"><a class="ext" href="'+l[1]+'" target="_blank" rel="noopener"><b>'+l[0]+' ↗</b></a><p class="src" style="margin:4px 0 0">'+l[2]+'</p></div>'})});
  h+='<p class="src" style="text-align:center">外部網站的入口連結，內容與版權屬各站所有；之後會逐篇補上具體文章。</p>';
- $("pg-media").innerHTML=h}
+ setPg("pg-media",h)}
 $("pg-media").onclick=function(e){var v=e.target.closest(".vp");if(!v||!v.hasAttribute("data-v")||v.querySelector("iframe"))return;paStop();var m=MEDIA[+v.getAttribute("data-v")];
  v.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+m.id+'?autoplay=1&rel=0&playsinline=1" title="'+m.t+'" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe>'};
 /* 巴利誦讀（手機內建語音） */
@@ -1293,8 +1302,8 @@ function openFb(ctx){if(FB_URL){window.open(FB_URL,"_blank","noopener");return}v
   fetch("https://api.web3forms.com/submit",{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify({access_key:FB_KEY,subject:sub,from_name:c||"法句經使用者",message:body})}).then(function(r){return r.json()}).then(function(j){if(j.success){d.querySelector(".fbc").innerHTML='<h3>謝謝你</h3><p class="fs">已收到，會慢慢看、慢慢改。</p><div class="fx"><button data-f="x">關閉</button></div>'}else throw 0}).catch(function(){t.disabled=false;st.textContent="沒有送成功，改用郵件寄出。";viaMail()})};
  document.body.appendChild(d)}
 function fbCtx(){var b=BOOKS[cb],u=b&&b.u[cu];return u?b.n+" 第 "+(cu+1)+" 則（"+u.t+"）":""}
-var APPV="V-5.101";
-var CHG=[{"v":"V-5.101","d":"2026-11-02","t":"真人誦讀說明用語統一、帕奧禪林出處更正"},{"v":"V-5.100","d":"2026-11-02","t":"重要偈加真人巴利誦讀：研讀頁「聽巴利」下方直接放影片（偈 1–2、5–6、21–22、33、54、62、64–65、153–154）"},{"v":"V-5.000","d":"2026-11-02","t":"加入巴利誦讀：研讀頁每偈可聽巴利，延伸頁有發音設定與真人誦讀比對"},{"v":"V-4.901","d":"2026-11-02","t":"版次格式改為 V-4.903"},{"v":"V-4.900","d":"2026-11-02","t":"新增版本號與版本記錄；更新通知會說明新版內容；手機第一次開啟時建議安裝到桌面"},{"v":"V-4.800","d":"2026-11-02","t":"設定頁整理：備份與還原改為大按鈕，還原前先預覽、可復原；字級改三顆按鈕"},{"v":"V-4.700","d":"2026-11-02","t":"意見回饋：每則可回報、設定頁與說明頁有入口"},{"v":"V-4.600","d":"2026-11-01","t":"圖卡底圖可選單色或彩色；說明頁標題換色、加安裝提示"},{"v":"V-4.500","d":"2026-11-01","t":"古文字詞逐句補註古義與通假（老耗品、愛身品，其後擴及八品）"},{"v":"V-4.400","d":"2026-10-31","t":"新增愛身品導讀（巴利第 157–166 偈）與叮嚀","a":"新增 13 偈"},{"v":"V-4.300","d":"2026-10-31","t":"新增老耗品導讀（巴利第 146–156 偈）與叮嚀","a":"新增 15 偈"},{"v":"V-4.200","d":"2026-10-31","t":"設定：備份碼匯出與還原；延伸：相關文獻區"},{"v":"V-4.100","d":"2026-10-31","t":"偈文與白話以大正藏原文逐則核對，標註 6 則說法不同者"},{"v":"V-4.000","d":"2026-10-30","t":"大修：導覽重整為 首頁／學習／金句／延伸／設定，首頁改為今日經文與今日叮嚀"},{"v":"V-3.400","d":"2026-10-30","t":"法句叮嚀新增 8 類，共 64 則"},{"v":"V-3.300","d":"2026-10-30","t":"圖卡新增 10 款墨彩底圖"},{"v":"V-3.200","d":"2026-10-30","t":"各品加入「故事與偈的連結」，依註釋補正故事"},{"v":"V-3.100","d":"2026-10-29","t":"圖卡色輪：自選色與文字自動配色"},{"v":"V-3.000","d":"2026-10-29","t":"大修：新增「法句叮嚀」，心中默想、選數字讀一句提醒"},{"v":"V-2.600","d":"2026-10-29","t":"偈序校正：全文頁改為官方偈序並標示巴利偈號"},{"v":"V-2.500","d":"2026-10-29","t":"新增刀杖品導讀","a":"新增 19 偈"},{"v":"V-2.400","d":"2026-10-29","t":"新增惡行品導讀","a":"新增 22 偈"},{"v":"V-2.300","d":"2026-10-29","t":"日行一問圖卡、左右滑動換則"},{"v":"V-2.200","d":"2026-10-29","t":"新增明哲品、羅漢品、述千品導讀","a":"新增 46 偈"},{"v":"V-2.100","d":"2026-10-29","t":"金句圖卡：署名寄語、桌布尺寸、背誦字卡；開啟提醒"},{"v":"V-2.000","d":"2026-10-29","t":"大修：可安裝到手機主畫面，自動更新並提示新版"},{"v":"V-1.400","d":"2026-10-29","t":"標誌：圓相加朱印"},{"v":"V-1.300","d":"2026-10-28","t":"搜尋與收藏"},{"v":"V-1.200","d":"2026-10-28","t":"新增心意品、華香品、愚闇品導讀","a":"新增 52 偈"},{"v":"V-1.100","d":"2026-10-28","t":"加入全部 39 品全文與延伸影音"},{"v":"V-1.000","d":"2026-10-28","t":"初版：故事與偈的四圈學習"}];
+var APPV="V-5.200";
+var CHG=[{"v":"V-5.200","d":"2026-11-02","t":"目錄加「巴」字印記：可聽巴利的則；朱底表示另有真人誦讀影片。調整圖卡顏色時收合區不再自己收起。預設字級加大"},{"v":"V-5.101","d":"2026-11-02","t":"真人誦讀說明用語統一、帕奧禪林出處更正"},{"v":"V-5.100","d":"2026-11-02","t":"重要偈加真人巴利誦讀：研讀頁「聽巴利」下方直接放影片（偈 1–2、5–6、21–22、33、54、62、64–65、153–154）"},{"v":"V-5.000","d":"2026-11-02","t":"加入巴利誦讀：研讀頁每偈可聽巴利，延伸頁有發音設定與真人誦讀比對"},{"v":"V-4.901","d":"2026-11-02","t":"版次格式改為 V-4.903"},{"v":"V-4.900","d":"2026-11-02","t":"新增版本號與版本記錄；更新通知會說明新版內容；手機第一次開啟時建議安裝到桌面"},{"v":"V-4.800","d":"2026-11-02","t":"設定頁整理：備份與還原改為大按鈕，還原前先預覽、可復原；字級改三顆按鈕"},{"v":"V-4.700","d":"2026-11-02","t":"意見回饋：每則可回報、設定頁與說明頁有入口"},{"v":"V-4.600","d":"2026-11-01","t":"圖卡底圖可選單色或彩色；說明頁標題換色、加安裝提示"},{"v":"V-4.500","d":"2026-11-01","t":"古文字詞逐句補註古義與通假（老耗品、愛身品，其後擴及八品）"},{"v":"V-4.400","d":"2026-10-31","t":"新增愛身品導讀（巴利第 157–166 偈）與叮嚀","a":"新增 13 偈"},{"v":"V-4.300","d":"2026-10-31","t":"新增老耗品導讀（巴利第 146–156 偈）與叮嚀","a":"新增 15 偈"},{"v":"V-4.200","d":"2026-10-31","t":"設定：備份碼匯出與還原；延伸：相關文獻區"},{"v":"V-4.100","d":"2026-10-31","t":"偈文與白話以大正藏原文逐則核對，標註 6 則說法不同者"},{"v":"V-4.000","d":"2026-10-30","t":"大修：導覽重整為 首頁／學習／金句／延伸／設定，首頁改為今日經文與今日叮嚀"},{"v":"V-3.400","d":"2026-10-30","t":"法句叮嚀新增 8 類，共 64 則"},{"v":"V-3.300","d":"2026-10-30","t":"圖卡新增 10 款墨彩底圖"},{"v":"V-3.200","d":"2026-10-30","t":"各品加入「故事與偈的連結」，依註釋補正故事"},{"v":"V-3.100","d":"2026-10-29","t":"圖卡色輪：自選色與文字自動配色"},{"v":"V-3.000","d":"2026-10-29","t":"大修：新增「法句叮嚀」，心中默想、選數字讀一句提醒"},{"v":"V-2.600","d":"2026-10-29","t":"偈序校正：全文頁改為官方偈序並標示巴利偈號"},{"v":"V-2.500","d":"2026-10-29","t":"新增刀杖品導讀","a":"新增 19 偈"},{"v":"V-2.400","d":"2026-10-29","t":"新增惡行品導讀","a":"新增 22 偈"},{"v":"V-2.300","d":"2026-10-29","t":"日行一問圖卡、左右滑動換則"},{"v":"V-2.200","d":"2026-10-29","t":"新增明哲品、羅漢品、述千品導讀","a":"新增 46 偈"},{"v":"V-2.100","d":"2026-10-29","t":"金句圖卡：署名寄語、桌布尺寸、背誦字卡；開啟提醒"},{"v":"V-2.000","d":"2026-10-29","t":"大修：可安裝到手機主畫面，自動更新並提示新版"},{"v":"V-1.400","d":"2026-10-29","t":"標誌：圓相加朱印"},{"v":"V-1.300","d":"2026-10-28","t":"搜尋與收藏"},{"v":"V-1.200","d":"2026-10-28","t":"新增心意品、華香品、愚闇品導讀","a":"新增 52 偈"},{"v":"V-1.100","d":"2026-10-28","t":"加入全部 39 品全文與延伸影音"},{"v":"V-1.000","d":"2026-10-28","t":"初版：故事與偈的四圈學習"}];
 function doneStat(){var hv=0,gu=0,gv=0;BOOKS.forEach(function(b){b.u.forEach(function(x){gu++;x.k.forEach(function(k){if(k.h&&!k.nc)hv++})})});return {n:BOOKS.length,hv:hv,pc:Math.round(hv*100/758)}}
 function openHelp(){var d=document.createElement("div");d.className="hlp";var DS=doneStat();d.innerHTML='<div class="hlc"><h3>使用說明</h3>'+
   '<p><b>先安裝，再使用</b>　請先把本工具加到手機主畫面（設定頁有圖解步驟）。從主畫面開啟才像 App，進度只記在同一個入口；用瀏覽器分頁開，和從主畫面開，記錄是分開的。</p>'+
@@ -1317,7 +1326,7 @@ function renderHome(){
  h+='<button class="jx" data-a="cont"><span class="jg"><i class="jd '+jc+'"></i>精進</span><span class="jm"><b>'+jt+'</b><small>'+(typeof jx2!=="undefined"?jx2:"")+'已完成 '+dd+'/'+tot+' 則</small></span><span class="jc">›</span></button>';
  h+=tdyHtml();h+='<button class="sec ding row" data-dt="*">'+ensoSvg("叮","dz2")+'<span class="dtx"><b>法句叮嚀</b><small>心中默想，讀一句經中的提醒</small></span><span class="dc">›</span></button>';
  h+='<details class="sec bks"><summary>看看法句經</summary>'+ordSeg()+ordIdx().map(function(i){var b=BOOKS[i],d1=0,pc=0;b.u.forEach(function(x){if(dcount(x)==4)d1++;pc+=dcount(x)});pc=Math.round(pc*100/(4*b.u.length));return '<button class="bk" data-bk="'+i+'"><span class="bkn">'+b.n+'<small>'+bkLabel(b)+'</small></span><span class="pb"><i style="width:'+pc+'%"></i></span><span class="bkc">'+d1+'/'+b.u.length+'</span></button>'}).join("")+'</details>';
-  $("pg-home").innerHTML=h;tdyInit()}
+  setPg("pg-home",h);tdyInit()}
 $("pg-home").onclick=function(e){var t=e.target.closest("[data-a],[data-bk],[data-o],[data-dt],[data-hs]");if(!t)return;
  if(t.hasAttribute("data-hs")){homeTab(+t.getAttribute("data-hs"));return}
  if(t.getAttribute("data-a")=="tdy2"){if(window._hfi){window._hf=window._hfi;dtp=window._hf.t;dsel=-1;show("ding")}return}
