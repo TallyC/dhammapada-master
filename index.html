@@ -11,7 +11,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="法句經">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="app-ver" content="20261102-1338">
+<meta name="app-ver" content="20261102-1411">
 <title>法句經・故事與偈</title>
 <meta name="description" content="看叮嚀，學法句經。每天一則叮嚀、一句偈、一件今天就能做的小事。">
 <meta property="og:title" content="法句經・看叮嚀，學法句經">
@@ -184,6 +184,12 @@ details.sec{padding:0 24px}details.sec>summary{font-size:13px;letter-spacing:.2e
 .fbc input,.fbc textarea{width:100%;box-sizing:border-box;border:1px solid var(--line);border-radius:12px;background:var(--hi);color:var(--ink);padding:9px 12px;font:inherit;font-size:.9em}.fbc textarea{min-height:110px;resize:vertical;line-height:1.7}
 .fbc .fx{display:flex;gap:10px;margin-top:16px}.fbc .fx button{flex:1;border:1px solid var(--line);border-radius:18px;padding:9px 0;background:linear-gradient(145deg,var(--hi),var(--sf));color:var(--mut)}.fbc .fx .go{background:var(--hd,var(--acc));border-color:var(--hd,var(--acc));color:#fff;font-weight:700;letter-spacing:.2em}
 .fbc .fm{margin-top:10px;font-size:.8em;line-height:1.7;color:var(--hd,var(--ink));min-height:1.2em}.fbc .fa{margin-top:8px;font-size:.76em;color:var(--mut);text-align:center}.fbc .fa a{color:var(--mut)}
+.bkc{border:1px solid var(--line);border-radius:16px;padding:16px 18px;background:var(--sf);margin:14px 0}.bkc>b{color:var(--hd,var(--ink));font-size:1.05em;letter-spacing:.25em}.bkc p{margin:6px 0 12px;font-size:.86em;color:var(--mut);line-height:1.8}.bkr{display:flex;gap:12px}
+.bkb{flex:1;min-height:54px;border:1px solid var(--hd,var(--acc));border-radius:14px;background:linear-gradient(145deg,var(--hi),var(--sf));color:var(--hd,var(--acc));font-size:1.05em;letter-spacing:.2em;box-shadow:0 1px 3px var(--sh);padding:8px 12px}.bkb b{font-weight:700}.bkb small{display:block;font-size:.72em;letter-spacing:.04em;color:var(--mut);margin-top:2px;font-weight:400}
+.fbc .bkb{display:block;width:100%;margin:10px 0 0;text-align:center}.bkb.pri{background:var(--hd,var(--acc));color:#fff;border-color:var(--hd,var(--acc))}
+.rbox{margin:12px 0 0;padding:10px 14px;border-radius:12px;background:var(--hi);border:1px solid var(--line);font-size:.88em;line-height:1.8}
+.fzb{display:flex;gap:8px}.fzb button{border:1px solid var(--line);background:linear-gradient(145deg,var(--hi),var(--sf));border-radius:14px;min-width:54px;padding:8px 0;color:var(--mut);font-size:1em}.fzb .on{border-color:var(--hd,var(--acc));color:var(--hd,var(--acc));font-weight:700;box-shadow:inset 0 2px 5px var(--sh)}
+.bkc{text-align:left}.grpd{margin:0}.grpd>summary.grp{cursor:pointer;list-style:none;margin:2px 0;padding:10px 0}.grpd[open]>summary.grp{margin-bottom:6px}.grpd>summary.grp::-webkit-details-marker{display:none}.grpd>summary.grp::after{content:"›";margin-left:auto;font-size:1.3em;transition:transform .2s}.grpd[open]>summary.grp::after{transform:rotate(90deg)}
 .hlp{position:fixed;inset:0;z-index:99;background:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;padding:18px}
 .hlc{background:var(--sf);border:1px solid var(--br);border-radius:18px;padding:18px 18px 14px;width:min(100%,380px);max-height:86vh;overflow:auto;box-shadow:0 16px 40px rgba(0,0,0,.35);color:var(--ink)}
 .hlc h3{margin:0 0 8px;letter-spacing:.3em;font-size:1.1em;font-weight:700;color:var(--hd,var(--ink))}.hlc p b{color:var(--hd,var(--ink))}.hlc p{margin:8px 0;font-size:.86em;line-height:1.8}.hlc .hn{color:var(--mut);font-size:.78em}.hlc button{display:block;margin:10px auto 2px;border:1px solid var(--line);border-radius:18px;padding:7px 26px;background:linear-gradient(145deg,var(--hi),var(--sf));color:var(--mut)}
@@ -1021,7 +1027,10 @@ function installH(){
 function renderSet(){
  function sel(id,opts,v){return '<select id="'+id+'">'+opts.map(function(o){return '<option value="'+o[0]+'"'+(o[0]==v?" selected":"")+'>'+o[1]+'</option>'}).join("")+'</select>'}
  var h='<h2 class="ut">設定</h2>';
- h+='<div class="grp">外觀與文字<small>即時生效</small></div><div class="lb sgl">外觀</div>';
+ h+=bkCard();
+ h+='<div class="grp">常用<small>字級與提醒</small></div>'+fzRow();
+ h+='<label class="row"><span>提醒</span>'+sel("s_rem",[["day","每天第一次開啟"],["every","每次開啟"],["off","不提醒"]],SET.rem||"day")+'</label><p class="src">開啟 App 時，跳出今日一句。網頁無法像一般 App 在手機上定時推播，所以提醒在開啟時出現。</p>';
+ h+='<details class="grpd"><summary class="grp">更多外觀與文字<small>色系、明暗、字體、行距</small></summary><div class="lb sgl">外觀</div>';
  h+='<label class="row"><span>色系</span>'+sel("s_pal",Object.keys(PAL).map(function(k){return [k,PAL[k][0]]}),SET.pal)+'</label>';
  h+='<label class="row"><span>明暗</span>'+sel("s_mode",[["auto","跟隨系統"],["light","淺色"],["dark","深色"]],SET.mode)+'</label>';
  h+='<div class="lb sgl">文字</div>';
@@ -1029,19 +1038,18 @@ function renderSet(){
  h+='<label class="row"><span>字級</span><input type="range" id="s_fs" min="14" max="24" step="1" value="'+SET.fs+'"></label>';
  h+='<label class="row"><span>行距</span><input type="range" id="s_lh" min="1.5" max="2.5" step="0.1" value="'+SET.lh+'"></label>';
  h+='<label class="row"><span>段距</span><input type="range" id="s_gap" min="6" max="28" step="2" value="'+SET.gap+'"></label>';
- h+='<div class="lb sgl">提醒</div>';
- h+='<label class="row"><span>開啟</span>'+sel("s_rem",[["day","每天第一次開啟"],["every","每次開啟"],["off","不提醒"]],SET.rem||"day")+'</label><p class="src">開啟 App 時，跳出今日一句。網頁無法像一般 App 在手機上定時推播，所以提醒在開啟時出現。</p>';
  h+='<div class="lb sgl">目錄</div>';
  h+='<label class="row"><span>品序</span>'+sel("s_ord",[["pali","巴利"],["wu","漢譯"]],SET.ord)+'</label>';
- h+='<div class="grp">備份與搬移<small>換手機、清除資料前</small></div><div class="sec"><p class="src" style="margin:0 0 8px">學習進度、收藏與設定只存在這支手機的瀏覽器裡。換手機或清除資料前，先複製備份碼，到新手機貼上即可還原。</p><div class="acts"><button id="bk_make">產生備份碼</button><button id="bk_load">貼上還原</button></div><textarea id="bk_ta" rows="4" placeholder="備份碼會出現在這裡；要還原時，把備份碼貼進來" style="width:100%;box-sizing:border-box;margin-top:8px;font-size:12px"></textarea><p class="src" id="bk_msg" style="margin:4px 0 0"></p></div>';
- h+='<div class="grp">安裝到手機<small>一次設定，之後自動更新</small></div>';
- h+=installH();
- h+='<div class="grp">使用說明<small>怎麼用這個學習頁</small></div><p class="src">本工具可以安裝到手機主畫面，像 App 一樣一點就開，之後自動更新。步驟見上方「安裝到手機」。</p>';
+ h+='</details>';
+ h+='<details class="grpd"><summary class="grp">安裝到手機<small>一次設定，之後自動更新</small></summary>';
+ h+=installH();h+='</details>';
+ h+='<details class="grpd"><summary class="grp">使用說明<small>怎麼用這個學習頁</small></summary><p class="src">本工具可以安裝到手機主畫面，像 App 一樣一點就開，之後自動更新。步驟見上方「安裝到手機」。</p>';
  h+='<details class="help" open><summary>學習方式：四圈螺旋</summary><ul><li><b>用途</b>　用故事對照偈頌，熏習《法句經》，每日讀一則，慢慢把經文用在生活裡。</li><li><b>設計</b>　一則故事配一首偈；同一則可以回來多次，每次多一圈。</li><li><b>四圈</b>　<span class="tag">讀</span>故事、原文、白話　<span class="tag">詞</span>字詞與巴利對照　<span class="tag">義</span>義理連結　<span class="tag">行</span>實踐與回顧。點上方圓圈切換，不必依序。</li></ul></details>';
  h+='<details class="help"><summary>各頁功能</summary><ul><li><b>學習</b>　目錄每一品都可讀全文；有導讀（四圈）的是無常品、雙要品、放逸品、心意品、華香品、愚闇品、明哲品、羅漢品、述千品、惡行品、刀杖品、老耗品、愛身品，其他品先提供全文，之後一批一批補上。在學習頁左右滑動，可換上一則、下一則。</li><li><b>今日</b>　依日期顯示當日經文與圖卡。</li><li><b>金句</b>　精選十句、你收藏的句子，以及「日行一問」（每一則「行」的小練習，配上對應的經句）；選風格與比例後下載圖卡。</li><li><b>影音</b>　收錄《法句經》講法。</li></ul></details>';
  h+='<details class="help"><summary>搜尋與收藏</summary><ul><li><b>搜尋</b>　首頁搜尋欄可找經文、故事、品名與巴利字詞，不必打符號。</li><li><b>收藏</b>　在閱讀、學習、今日、金句頁，句子旁按 ♡，就收進「金句 → 我的收藏」。</li><li><b>資料存放</b>　進度、收藏與心得只存在這支手機的瀏覽器；清除瀏覽資料或刪除主畫面圖示，可能會一併清掉。</li></ul></details>';
+ h+='</details>';
  h+='<div class="grp">意見回饋<small>告訴我哪裡可以更好</small></div><button class="lnk" id="fbset">寫意見給製作者</button>';
- h+='<div class="grp">經文與來源<small>版本、譯者、出處</small></div>';
+ h+='<details class="grpd"><summary class="grp">經文與來源<small>版本、譯者、出處</small></summary>';
  h+='<details class="help"><summary>關於這部經文</summary><ul><li><b>本工具的全文</b>　《法句經》，大正藏第 210 號，東吳天竺沙門維祇難等譯，二卷、39 品、758 偈。<span class="tag warn">署名暫定</span>見下一欄。</li><li>這是古代的漢譯本，不是現代人重新翻譯的作品；經文依 CBETA 電子佛典集成。「白話」是編者自己的意譯。</li><li><b>四種漢譯</b>　本工具採用只有短偈的《法句經》；另三種是在譬喻中夾短偈：《法句譬喻經》（西晉法炬、法立譯，四卷、39 品、284 偈）、《出曜經》（姚秦竺佛念譯，三十卷、34 品、934 偈）、《法集要頌經》（北宋天息災譯，四卷、33 品、933 偈）。</li><li>依法鼓講堂課程投影片。</li></ul></details>';
  h+='<details class="help"><summary>譯者署名 <span class="tag warn">暫定・待考訂</span></summary>'
  +'<p><b>【暫定，尚未確定】</b>大正藏署名為「東吳天竺沙門維祇難等譯」，但譯者其實有不同說法，這裡把資料並列，之後考訂有結果再修正。</p>'
@@ -1053,6 +1061,7 @@ function renderSet(){
  +'<a href="https://ntireader.org/taisho/t0210.html" target="_blank" rel="noopener">大正藏第 210 號（CBETA 內容）</a><br><a href="https://tt034.org.tw/index.php?i=1&id=1236&lang=cht&option=module&task=dfile" target="_blank" rel="noopener">蘇錦坤〈法句序〉與《法句經》（PDF）</a><br><a href="https://yifertw.blogspot.com/2014/06/blog-post_13.html" target="_blank" rel="noopener">《法句經》四言偈頌與五言偈頌（蘇錦坤部落格）</a></p></details>';
  h+='<details class="help"><summary>延伸閱讀：聖嚴法師與法句經</summary><ul><li><b>法鼓全集 2020 紀念版</b>　聖嚴法師著作的官方電子版。進去後請用站內搜尋或目錄，找《智慧一○○》與文集文章（書的位置以該站為準）。<br>'+lk("https://ddc.shengyen.org/?doc=main","打開法鼓全集 ↗")+'</li><li><b>《智慧100》有聲書</b>　聖嚴法師把佛經中的偈語轉成簡短易讀的篇章，法鼓山全球資訊網提供有聲書。<br>'+lk("https://www.ddm.org.tw/xmnews/cont?xsmsid=0L161385102037075741&sid=0L181376035449890964","法鼓山網站・智慧100 ↗")+'</li><li><b>《真理的語言：法句經》</b>　淨海法師由巴利文原典譯成中文詩句，法鼓文化 2012 年出版。<br>'+lk("https://www.ddc.com.tw/product/book/prod.php?id=1809&type=b","法鼓文化書店 ↗")+'</li></ul><p class="src">這裡只放連結，不複製書中內容；各連結的書名與內容以對方網站為準。</p></details>';
  h+='<details class="help"><summary>資料來源</summary><ul><li><b>偈頌原文</b>　大正藏第 210 號《法句經》，依 CBETA 電子佛典集成。</li><li><b>巴利文</b>　Dhammapada。</li><li><b>故事</b>　雙要品、放逸品、心意品、華香品、愚闇品、明哲品、羅漢品、述千品、惡行品、刀杖品、老耗品、愛身品依巴利 Dhammapada 註釋（Dhammapada-aṭṭhakathā）的傳統說法概述，參考 Daw Mya Tin 與 ancient-buddhist-texts.net 的英譯；無常品只在有確切出處時附故事。</li><li><b>《法句譬喻經》（T211）</b>　目前只整理了第 1–15 品的目錄與要點，其餘尚未收入。</li><li><b>漢巴對應</b>　心意、華香、愚闇、明哲、羅漢、述千、惡行七品，依蘇錦坤《法句經》對讀表（nanda.online-dhamma.net），其中述千品第 112–115 偈由編者依內容與順序比對；刀杖品對讀表未能完整核對，由編者依內容與順序比對；老耗品、愛身品依對讀表，其中漢譯無對應巴利偈的偈已在頁面標明；其餘由編者依內容比對，供學習參考。對應不到的偈，頁面上都會標明。</li></ul></details>';
+ h+='</details>';
  h+='<p class="src" style="text-align:center;margin-top:22px">製作者　Tally.C</p>';
  $("pg-set").innerHTML=h;var fbb=$("fbset");if(fbb)fbb.onclick=function(){openFb("")};
  [["s_rem","rem"],["s_ord","ord"],["s_pal","pal"],["s_mode","mode"],["s_ff","ff"],["s_fs","fs"],["s_lh","lh"],["s_gap","gap"]].forEach(function(p){var el=$(p[0]);el.oninput=function(){SET[p[1]]=(p[1]=="pal"||p[1]=="mode"||p[1]=="ff"||p[1]=="ord"||p[1]=="rem")?this.value:+this.value;apply()}})}
@@ -1072,10 +1081,43 @@ $("pg-read").onclick=function(e){var t=e.target.closest("[data-a]");if(!t)return
  if(a=="rprev"&&readW>0){readW--;renderRead();window.scrollTo(0,0)}else if(a=="rnext"&&readW<39){readW++;renderRead();window.scrollTo(0,0)}else if(a=="rtoc"){openToc()}};
 /* 影音 */
 var BK=["dhp2","dhp2-fav","dhp2-remd","dhp2-set"];
-document.addEventListener("click",function(e){var t=e.target.closest("button");if(!t||(t.id!="bk_make"&&t.id!="bk_load"))return;var ta=$("bk_ta"),ms=$("bk_msg");
- if(t.id=="bk_make"){var o={v:1,t:new Date().toISOString().slice(0,10)};BK.forEach(function(k){o[k]=R_(k,null)});var c=btoa(unescape(encodeURIComponent(JSON.stringify(o))));ta.value=c;ta.focus();ta.select();var ok=false;try{ok=document.execCommand("copy")}catch(x){}try{if(navigator.clipboard)navigator.clipboard.writeText(c).then(function(){},function(){})}catch(x){}ms.textContent=ok?"已複製備份碼，請貼到備忘錄或傳給自己保存。":"請長按上方備份碼全選、拷貝，貼到備忘錄保存。";return}
- var v=ta.value.trim();if(!v){ms.textContent="請先把備份碼貼進上面的框。";return}
- try{var o=JSON.parse(decodeURIComponent(escape(atob(v))));if(o.v!==1)throw 0;if(!confirm("還原會覆蓋這支手機目前的進度、收藏與設定，確定嗎？"))return;BK.forEach(function(k){if(o[k]!=null)W_(k,o[k])});ms.textContent="已還原，重新載入中…";setTimeout(function(){location.reload()},600)}catch(x){ms.textContent="備份碼無法辨識，請確認完整貼上。"}});
+function bkObj(){var o={v:1,t:new Date().toISOString().slice(0,10)};BK.forEach(function(k){o[k]=R_(k,null)});return o}
+function bkCode(o){return btoa(unescape(encodeURIComponent(JSON.stringify(o))))}
+function bkParse(v){v=(v||"").trim();if(!v)return null;var o=null;try{o=JSON.parse(v)}catch(x){}if(!o){try{o=JSON.parse(decodeURIComponent(escape(atob(v.replace(/\s+/g,"")))))}catch(x){}}return o&&o.v===1?o:null}
+function bkStat(o){var s=o["dhp2"]||{},n=0,nt=0;BOOKS.forEach(function(b){b.u.forEach(function(u){var r=s[u.id];if(r&&r.d0&&r.d1&&r.d2&&r.d3)n++})});Object.keys(s).forEach(function(k){if(s[k]&&s[k].note)nt++});return {n:n,fav:(o["dhp2-fav"]||[]).length,nt:nt,t:o.t||""}}
+function bkLine(o){var s=bkStat(o);return "已完成 "+s.n+" 則・收藏 "+s.fav+" 句・心得 "+s.nt+" 則"}
+function bkCard(){var last=SET.bkt,u=R_("dhp2-undo",null);
+ return '<div class="bkc"><b>備份與還原</b><p>'+(last?'上次備份：'+last+'。':'還沒備份過，建議現在備份一次。')+'<br>進度只存在這支手機；換手機前請先備份。</p><div class="bkr"><button class="bkb" data-bk2="b">備份</button><button class="bkb" data-bk2="r">還原</button></div>'+(u?'<button class="lnk" data-bk2="u">復原上一次還原</button>':"")+'</div>'}
+function fzRow(){var F=[["小",15],["中",17],["大",21]];return '<div class="row"><span>字級</span><div class="fzb">'+F.map(function(f){return '<button data-fz="'+f[1]+'" class="'+(Math.abs(SET.fs-f[1])<=1?"on":"")+'">'+f[0]+'</button>'}).join("")+'</div></div>'}
+function sheet(inner,onclick){var d=document.createElement("div");d.className="hlp";d.innerHTML='<div class="fbc">'+inner+'</div>';d.onclick=function(e){if(e.target==d){d.remove();return}onclick(e,d)};document.body.appendChild(d);return d}
+function openBk(){var o=bkObj(),fn="法句經備份_"+o.t+".txt",c=bkCode(o);
+ sheet('<h3>備份我的進度</h3><p class="fs">目前有：'+bkLine(o)+'。<br>三種方式選一種就好，最簡單的是第一種。</p>'+
+ '<button class="bkb" data-bf="share"><b>傳給自己</b><small>選 LINE 或備忘錄，傳給自己保存</small></button>'+
+ '<button class="bkb" data-bf="file"><b>存成檔案</b><small>下載一個備份檔</small></button>'+
+ '<button class="bkb" data-bf="copy"><b>複製備份碼</b><small>自己貼到任何地方保存</small></button>'+
+ '<div class="fm" id="bkm"></div><textarea id="bkt" readonly hidden style="margin-top:8px;font-size:12px;min-height:70px"></textarea>'+
+ '<p class="fa">換手機後，打開保存的訊息或檔案，回到這裡按「還原」就可以了。</p><div class="fx"><button data-bf="x">關閉</button></div>',
+ function(e,d){var t=e.target.closest("button");if(!t)return;var f=t.getAttribute("data-bf"),m=d.querySelector("#bkm");if(f=="x"){d.remove();return}
+  function ok(x){SET.bkt=o.t;W_("dhp2-set",SET);m.textContent=x;if(page=="set")renderSet()}
+  function manual(){var ta=d.querySelector("#bkt");ta.hidden=false;ta.value=c;ta.focus();ta.select();m.textContent="請長按上面的備份碼，選「全選」再「拷貝」，貼到備忘錄保存。"}
+  if(f=="copy"){var done=false;try{if(navigator.clipboard)navigator.clipboard.writeText(c).then(function(){ok("已複製。請貼到備忘錄或傳給自己保存。")},manual);else manual()}catch(x){manual()}return}
+  if(f=="file"){try{var b=new Blob([c],{type:"text/plain"}),u=URL.createObjectURL(b),a=document.createElement("a");a.href=u;a.download=fn;document.body.appendChild(a);a.click();a.remove();ok("已下載備份檔。若沒有反應，請改用「傳給自己」。")}catch(x){manual()}return}
+  if(f=="share"){try{var file=new File([c],fn,{type:"text/plain"});if(navigator.canShare&&navigator.canShare({files:[file]}))navigator.share({files:[file],title:"法句經備份"}).then(function(){ok("已傳出。請確認對方（自己）有收到。")},function(){});else if(navigator.share)navigator.share({title:"法句經備份",text:c}).then(function(){ok("已傳出。請確認對方（自己）有收到。")},function(){});else manual()}catch(x){manual()}}})}
+function openRs(pre,isUndo){var cur=null;
+ var d=sheet('<h3>'+(isUndo?'復原上一次還原':'還原我的進度')+'</h3><p class="fs">'+(isUndo?'會回到上一次還原之前的資料。':'換手機或重新安裝後使用。會取代這支手機現在的資料，但還原前會自動留一份，之後可以復原。')+'</p>'+
+ (isUndo?'':'<button class="bkb" data-rf="pick"><b>選擇備份檔</b><small>從手機裡選剛才存的檔案</small></button><input type="file" id="rfile" accept=".txt,.json,text/plain" hidden><label>或把備份碼貼在這裡</label><textarea id="rta" placeholder="貼上備份碼" style="min-height:80px"></textarea><button class="bkb" data-rf="chk"><b>檢查備份</b><small>先看看裡面有什麼，還不會還原</small></button>')+
+ '<div class="rpv" id="rpv"></div><div class="fm" id="rfm"></div><div class="fx"><button data-rf="x">取消</button></div>',
+ function(e,d){var t=e.target.closest("button");if(!t)return;var f=t.getAttribute("data-rf");if(f=="x"){d.remove();return}
+  if(f=="pick"){d.querySelector("#rfile").click();return}
+  if(f=="chk"){check(d.querySelector("#rta").value);return}
+  if(f=="go"&&cur){W_("dhp2-undo",isUndo?null:bkObj());if(isUndo)localStorage.removeItem("dhp2-undo");BK.forEach(function(k){if(cur[k]!=null)W_(k,cur[k])});d.querySelector("#rfm").textContent="已還原，重新載入中…";setTimeout(function(){location.reload()},600)}});
+ function check(v){var o=bkParse(v),pv=d.querySelector("#rpv"),m=d.querySelector("#rfm");if(!o){cur=null;pv.innerHTML="";m.textContent="看不懂這份備份，請確認完整複製，或改選備份檔。";return}
+  cur=o;m.textContent="";pv.innerHTML='<div class="rbox">備份日期：'+esc(o.t||"不明")+'<br>'+bkLine(o)+'</div><button class="bkb pri" data-rf="go"><b>確定還原</b></button>'}
+ var fi=d.querySelector("#rfile");if(fi)fi.onchange=function(){var fl=fi.files&&fi.files[0];if(!fl)return;var r=new FileReader();r.onload=function(){d.querySelector("#rta").value=r.result;check(r.result)};r.readAsText(fl)};
+ if(pre)check(JSON.stringify(pre))}
+document.addEventListener("click",function(e){var t=e.target.closest("[data-bk2],[data-fz]");if(!t)return;
+ if(t.hasAttribute("data-fz")){SET.fs=+t.getAttribute("data-fz");W_("dhp2-set",SET);apply();renderSet();return}
+ var a=t.getAttribute("data-bk2");if(a=="b")openBk();else if(a=="r")openRs();else if(a=="u")openRs(R_("dhp2-undo",null),true)});
 function renderMedia(){
  var h='<h2 class="ut">延伸</h2><div class="ref">《法句經》講法影音</div>';
  MEDIA.forEach(function(m,i){h+='<div class="sec"><div class="lb">'+m.t+'</div><div class="vp" data-v="'+i+'"><img src="https://i.ytimg.com/vi/'+m.id+'/hqdefault.jpg" alt="" loading="lazy" onerror="this.hidden=true"><span class="pl">▶</span></div><a class="ext" href="https://www.youtube.com/watch?v='+m.id+'" target="_blank" rel="noopener">在 YouTube 開啟 ↗</a></div>'});
