@@ -11,7 +11,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="法句經">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="app-ver" content="20261102-1329">
+<meta name="app-ver" content="20261102-1338">
 <title>法句經・故事與偈</title>
 <meta name="description" content="看叮嚀，學法句經。每天一則叮嚀、一句偈、一件今天就能做的小事。">
 <meta property="og:title" content="法句經・看叮嚀，學法句經">
@@ -1157,8 +1157,8 @@ function tdyHtml(){var A=items(),it=A[(today()+di)%A.length];if(!it)return "";
 function homeArt(){var el=document.querySelector("#tdy .mo");if(!el||!window._hmn)return;var m=ARTM[window._hmn];if(!m)return;var c=document.createElement("canvas");c.width=m.width;c.height=m.height;var q=c.getContext("2d"),n=2;for(var i=0;i<n;i++)q.drawImage(m,0,0);var u="url("+c.toDataURL()+")";el.style.webkitMaskImage=u;el.style.maskImage=u}
 function homeTab(n){var s=document.querySelectorAll("#tdy .sl"),d=document.querySelectorAll("#tdy .tb button");for(var i=0;i<s.length;i++){s[i].classList.toggle("on",i==n);d[i].classList.toggle("on",i==n)}}
 function tdyInit(){homeArt()}
-var FB_KEY="",FB_MAIL="tally325@gmail.com",FBT=["內容有誤","看不懂","功能建議","其他"];
-function openFb(ctx){var d=document.createElement("div");d.className="hlp";var ty=0;
+var FB_URL="",FB_KEY="",FB_MAIL="tally325@gmail.com",FBT=["內容有誤","看不懂","功能建議","其他"];
+function openFb(ctx){if(FB_URL){window.open(FB_URL,"_blank","noopener");return}var d=document.createElement("div");d.className="hlp";var ty=0;
  d.innerHTML='<div class="fbc"><h3>意見回饋</h3><p class="fs">哪裡看不懂、哪裡有錯、想要什麼，都請告訴我。每一則我都會看。</p>'+
  '<label>類型</label><div class="ft">'+FBT.map(function(t,i){return '<button data-ty="'+i+'" class="'+(i?"":"on")+'">'+t+'</button>'}).join("")+'</div>'+
  '<label>位置</label><input id="fbw" value="'+esc(ctx||"")+'" placeholder="例：放逸品 第 3 則">'+
