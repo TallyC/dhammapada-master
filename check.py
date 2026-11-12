@@ -111,6 +111,14 @@ if have_node:
             node_check("index.html 內嵌程式 #%d" % (i + 1), s)
     node_check("sw.js", sw)
 
+# 版面鎖定：微調版（末兩碼不是 00）只准改資料，區塊尺寸不得變動；大修／小修請先確認再 layout_check.py --update
+_v = re.findall(r'var APPV="V-(\d+)\.(\d)(\d\d)";', html)
+if _v and _v[0][2] != "00" and os.path.exists(os.path.join(os.path.dirname(os.path.abspath(__file__)), "layout", "manifest.json")):
+    r = subprocess.run([sys.executable, os.path.join(os.path.dirname(os.path.abspath(__file__)), "layout_check.py")], capture_output=True, text=True)
+    print(r.stdout.strip())
+    if r.returncode:
+        bad("微調版動到版面（見上）。若是刻意改版面，請升為小修並重建基準。")
+
 print()
 if errs:
     print("未通過（%d 項）：先修正再推出。" % len(errs))
