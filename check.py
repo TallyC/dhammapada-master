@@ -111,6 +111,111 @@ if have_node:
             node_check("index.html 內嵌程式 #%d" % (i + 1), s)
     node_check("sw.js", sw)
 
+# 4. 資料完整性（需要 node）：FULL 偈數與連號、漢譯偈是否都收進導讀、巴利 1–423 號、梵巴欄位標示
+def load_data():
+    lines = html.split("\n")
+    a = next(i for i, l in enumerate(lines) if l.startswith("var BOOKS="))
+    d = next(i for i, l in enumerate(lines) if l.startswith("var DAILY="))
+    parts = lines[a:d] + [l for l in lines if l.startswith("BOOKS.push(") or l.startswith("var FULL=")]
+    with tempfile.TemporaryDirectory() as tmp:
+        out = os.path.join(tmp, "data.json")
+        code = "\n".join(parts) + "\nrequire('fs').writeFileSync(%s,JSON.stringify({BOOKS:BOOKS,FULL:FULL}));" % json.dumps(out)
+        js = os.path.join(tmp, "ext.js")
+        with open(js, "w", encoding="utf8") as f:
+            f.write(code)
+        r = subprocess.run(["node", js], capture_output=True, text=True)
+        if r.returncode:
+            raise RuntimeError(r.stderr.strip().splitlines()[0] if r.stderr.strip() else "node 執行失敗")
+        with open(out, encoding="utf8") as f:
+            return json.load(f)
+
+
+if have_node:
+    try:
+        data = load_data()
+    except Exception as e:
+        data = None
+        bad("無法載入 BOOKS／FULL 資料：%s" % e)
+    if data:
+        BOOKS, FULL = data["BOOKS"], data["FULL"]
+        # 4a. FULL：39 品、758 偈、各品 vn 連號
+        chs = [FULL[str(i)] for i in range(1, 40) if str(i) in FULL]
+        total = sum(len(c["t"]) for c in chs)
+        if len(chs) == 39 and total == 758:
+            ok("FULL：39 品、%d 偈" % total)
+        else:
+            bad("FULL 應為 39 品、758 偈，目前 %d 品、%d 偈" % (len(chs), total))
+        badvn = [c["n"] for c in chs if c.get("vn") and list(c["vn"]) != list(range(1, len(c["t"]) + 1))]
+        if badvn:
+            bad("這些品的 vn 不是 1..N 連號：" + "、".join(badvn))
+        else:
+            ok("FULL 各品 vn 為連號")
+
+        # 4b. 漢譯每一偈的每個分句，都要出現在導讀的 h 欄位（偈可跨單元，故逐分句比對）
+        strip = re.compile(r"[\s，。、；：？！「」『』（）,.;:|]")
+        blob = "".join(strip.sub("", "".join(k.get("h") or [])) for b in BOOKS for u in b["u"] for k in u["k"])
+        miss = []
+        for i in range(1, 40):
+            c = FULL.get(str(i))
+            if not c:
+                continue
+            for n, t in enumerate(c["t"], 1):
+                for seg in re.split(r"[，。、；：？！|]", t):
+                    seg = strip.sub("", seg)
+                    if seg and seg not in blob:
+                        miss.append("%s 第 %d 偈「%s」" % (c["n"], n, seg))
+                        break
+        if miss:
+            bad("導讀漏收漢譯偈（共 %d）：" % len(miss) + "；".join(miss[:8]))
+        else:
+            ok("FULL 758 偈的每個分句都已收進導讀")
+
+        # 4c. 巴利 1–423：只看巴利 26 品；同一巴利號出現在兩則時，後者必須宣告為交叉引用（有 hr）
+        seen = {}
+        dup_bad = []
+        pno = re.search(r"PNO=\{([^}]*)\}", html)
+        pali_ids = set(re.findall(r"(\w+):\d+", pno.group(1))) if pno else set()
+        if len(pali_ids) != 26:
+            bad("找不到 PNO（巴利 26 品對照）或數量不是 26：%d" % len(pali_ids))
+        for b in BOOKS:
+            if b["id"] not in pali_ids:
+                continue
+            for u in b["u"]:
+                for k in u["k"]:
+                    n = str(k.get("n"))
+                    if not n.isdigit():
+                        continue
+                    n = int(n)
+                    if not 1 <= n <= 423:
+                        dup_bad.append("%s %s 偈號 %d 超出 1–423" % (b["n"], u["id"], n))
+                    elif n in seen and not k.get("hr"):
+                        dup_bad.append("巴利 %d 重複（%s 與 %s）且後者未標交叉引用 hr" % (n, seen[n], u["id"]))
+                    seen.setdefault(n, u["id"])
+        lacking = [n for n in range(1, 424) if n not in seen]
+        if lacking:
+            bad("巴利偈缺號：" + "、".join(map(str, lacking[:10])))
+        elif dup_bad:
+            bad("巴利偈號問題：" + "；".join(dup_bad[:6]))
+        else:
+            ok("巴利 1–423 偈完整，號碼唯一（交叉引用者除外）")
+
+        # 4d. k.p／k.pl 一致：含梵文專用字母（ś ṣ ṛ ḥ）的偈，k.pl 必須以「梵文」開頭（有些梵文偈不含這些字母，故反過來不強制）
+        skt = re.compile("[śṣṛḥ]")
+        pl_bad = []
+        for b in BOOKS:
+            for u in b["u"]:
+                for k in u["k"]:
+                    if not k.get("p"):
+                        continue
+                    is_skt_text = bool(skt.search("".join(k["p"])))
+                    is_skt_label = str(k.get("pl", "")).startswith("梵文")
+                    if is_skt_text and not is_skt_label:
+                        pl_bad.append("%s %s 偈 %s" % (b["n"], u["id"], k.get("n")))
+        if pl_bad:
+            bad("k.p 內容與 k.pl 標示（梵文／巴利）不一致：" + "；".join(pl_bad[:6]))
+        else:
+            ok("k.p 與 k.pl 的梵文／巴利標示一致")
+
 # 版面鎖定：微調版（末兩碼不是 00）只准改資料，區塊尺寸不得變動；大修／小修請先確認再 layout_check.py --update
 _v = re.findall(r'var APPV="V-(\d+)\.(\d)(\d\d)";', html)
 if _v and _v[0][2] != "00" and os.path.exists(os.path.join(os.path.dirname(os.path.abspath(__file__)), "layout", "manifest.json")):
