@@ -75,6 +75,26 @@ if chg:
     else:
         ok("最近 5 筆版本記錄欄位完整")
 
+# 1b. version.json（輕量更新檢查）必須與 index.html 同步；README 版號也要一致
+vj_path = os.path.join(here, "version.json")
+if not os.path.exists(vj_path):
+    bad("找不到 version.json，請執行 python3 bump.py 產生")
+else:
+    try:
+        vj = json.loads(read("version.json"))
+        if m and a and vj.get("app-ver") == m[0] and vj.get("APPV") == a[0] and chg and vj.get("CHG") == chg[:3]:
+            ok("version.json 與 index.html 的 app-ver／APPV／CHG 一致")
+        else:
+            bad("version.json 與 index.html 不同步，請執行 python3 bump.py")
+    except Exception as e:
+        bad("version.json 不是合法 JSON：%s" % e)
+readme = read("README.md")
+rv = re.search(r"本文件對應程式 (V-\d+\.\d\d\d)", readme)
+if rv and a and rv.group(1) == a[0]:
+    ok("README 版號與程式一致：" + rv.group(1))
+else:
+    bad("README 的「本文件對應程式」版號（%s）與 APPV（%s）不一致" % (rv.group(1) if rv else "?", a[0] if a else "?"))
+
 # 2. 離線檔：更新檢查的網址帶 ?v=，離線程式必須放行不快取
 if "'?v='" in html or '"?v="' in html or "?v='+" in html:
     if "searchParams.has('v')" in sw:
